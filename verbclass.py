@@ -1,18 +1,66 @@
-"""Detect the Kotus conjugation class of a Finnish verb.
+"""Get the Kotus conjugation class of a Finnish verb.
 Note: A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant"""
 
 import re
 import sys
 
+# a typical verb in each class, in infinitive and 3SG past (from Kotus)
+CLASS_DESCRIPTIONS = {
+    52: ("sanoa", "sanoi"),
+    53: ("muistaa", "muisti"),
+    54: ("huutaa", "huusi"),
+    55: ("soutaa", "souti/sousi"),
+    56: ("kaivaa", "kaivoi"),
+    57: ("saartaa", "saarsi/saartoi"),
+    58: ("laskea", "laski"),
+    59: ("tuntea", "tunsi"),
+    60: ("lähteä", "lähti/(läksi)"),
+    61: ("sallia", "salli"),
+    62: ("voida", "voi"),
+    63: ("saada", "sai"),
+    64: ("juoda", "joi"),
+    65: ("käydä", "kävi"),
+    66: ("rohkaista", "rohkaisi"),
+    67: ("tulla", "tuli"),
+    68: ("tupakoida", "tupakoi/(tupakoitsi)"),
+    69: ("valita", "valitsi"),
+    70: ("juosta", "juoksi"),
+    71: ("nähdä", "näki"),
+    72: ("vanheta", "vanheni"),
+    73: ("salata", "salasi"),
+    74: ("katketa", "katkesi"),
+    75: ("selvitä", "selvisi"),
+    76: ("taitaa", "taisi"),
+}
+
 # verb: tuple with one or more conjugation classes
+# note: we have some regular verbs here too so we can use stricter regexes with the remaining verbs
+# (we don't want to think nonsense words are real verbs)
 EXCEPTIONS = {
     # multiple classes
-    "isota":  (72, 74),
+    #
     "keritä": (69, 75),
+    #
+    "isota":  (72, 74),
     "sietä":  (72, 74),
     "tyvetä": (72, 74),
 
-    # -VtAA
+    # -VtAA (class 53 verbs could be processed as a rule instead)
+    #
+    "hoitaa": (53,),
+    "hyötää": (53,),
+    "itää":   (53,),
+    "joutaa": (53,),
+    "jäytää": (53,),
+    "jäätää": (53,),
+    "noutaa": (53,),
+    "pitää":  (53,),
+    "sietää": (53,),
+    "suotaa": (53,),
+    "syytää": (53,),
+    "säätää": (53,),
+    "vetää":  (53,),
+    "vuotaa": (53,),
     #
     "huutaa": (54,),
     "löytää": (54,),
@@ -84,7 +132,7 @@ EXCEPTIONS = {
     "taittaa": (56,),
     "varttaa": (56,),
 
-    # -CAA excluding -tAA
+    # -CAA excluding -tAA (class 56 verbs could be processed as a rule instead)
     #
     "elää":   (53,),
     "kuivaa": (53,),
@@ -94,6 +142,27 @@ EXCEPTIONS = {
     #
     "lypsää":  (54,),
     "pieksää": (54,),
+    #
+    "ajaa":    (56,),
+    "alkaa":   (56,),
+    "appaa":   (56,),
+    "jakaa":   (56,),
+    "jaksaa":  (56,),
+    "jatkaa":  (56,),
+    "jauhaa":  (56,),
+    "kaivaa":  (56,),
+    "kalvaa":  (56,),
+    "kasvaa":  (56,),
+    "lappaa":  (56,),
+    "laulaa":  (56,),
+    "maksaa":  (56,),
+    "nauraa":  (56,),
+    "painaa":  (56,),
+    "palaa":   (56,),
+    "salvaa":  (56,),
+    "tappaa":  (56,),
+    "valaa":   (56,),
+    "virkkaa": (56,),
 
     # -VA excluding -AA
     #
@@ -157,7 +226,7 @@ EXCEPTIONS = {
     "vihannoida":  (68,),
     "viheriöidä":  (68,),
 
-    # -VdA excluding -idA
+    # -dA excluding -idA
     #
     "jäädä": (63,),
     "myydä": (63,),
@@ -173,10 +242,33 @@ EXCEPTIONS = {
     "viedä": (64,),
     #
     "käydä": (65,),
-
-    # -hdA
+    #
     "nähdä": (71,),
     "tehdä": (71,),
+
+    # -llA (could be processed as a rule instead)
+    "kuolla": (67,),
+    "kuulla": (67,),
+    "luulla": (67,),
+    "nuolla": (67,),
+    "olla":   (67,),
+    "tulla":  (67,),
+    "tuulla": (67,),
+    "vuolla": (67,),
+
+    # -nnA (could be processed as a rule instead)
+    "julkipanna":    (67,),
+    "kokoonpanna":   (67,),
+    "maksuunpanna":  (67,),
+    "mennä":         (67,),
+    "muistiinpanna": (67,),
+    "panna":         (67,),
+    "toimeenpanna":  (67,),
+
+    # -rrA (could be processed as a rule instead)
+    "pierrä": (67,),
+    "purra":  (67,),
+    "surra":  (67,),
 
     # -AtA
     "hapata": (72,),
@@ -229,6 +321,7 @@ EXCEPTIONS = {
     "nimetä": (75,),
 
     # -itA
+    #
     "eritä":   (75,),
     "hellitä": (75,),
     "hirvitä": (75,),
@@ -294,7 +387,7 @@ EXCEPTIONS = {
     "piestä": (70,),
     "syöstä": (70,),
 
-    # incomplete verb (actually present 3SG form)
+    # incomplete verb (actually present 3SG forms)
     "erkanee":  (72,),
     "karkenee": (72,),
     "korkenee": (72,),
@@ -304,20 +397,20 @@ EXCEPTIONS = {
 }
 
 # regex, conjugation class
+# note: the regexes are strict to avoid detecting nonsense words as verbs
 ENDINGS = (
-    ("([aeiouhst]taa|[eiyäöhst]tää)$", 53),  # -VtAA/-htAA/-stAA/-ttAA (~2700 verbs)
-    ("[lnr]t(aa|ää)$", 54),                  # -ltAA/-ntAA/-rtAA       ( ~310 verbs)
-    ("[hjklnprsv](aa|ää)$", 56),             #  -CAA excl. -tAA        (   20 verbs)
-    ("e[aä]$", 58),                          #   -eA                   (   32 verbs)
-    ("i[aä]$", 61),                          #   -iA                   (  400 verbs)
-    ("[ouyö][aä]$", 52),                     #   -OA/-UA               (~2200 verbs)
-    ("([aou]ida|öidä)$", 62),                # -VidA                   ( ~680 verbs)
-    ("(ata|ätä)$", 73),                      #  -AtA                   ( ~910 verbs)
-    ("et[aä]$", 72),                         #  -etA                   ( ~130 verbs)
-    ("it[aä]$", 69),                         #  -itA                   (   48 verbs)
-    ("([ou]ta|[yö]tä)$", 74),                #  -OtA/-UtA              ( ~130 verbs)
-    ("st[aä]$", 66),                         #  -stA                   ( ~270 verbs)
-    ("(ll|nn|rr)[aä]$", 67),                 #   -CA excl. -dA/-tA     (~1300 verbs)
+    ("[hst]t(aa|ää)$",          53),  # -htAA/-stAA/-ttAA (~2700 verbs)
+    ("[lnr]t(aa|ää)$",          54),  # -ltAA/-ntAA/-rtAA ( ~310 verbs)
+    ("[kmpst]e[aä]$",           58),  #   -eA             (   32 verbs)
+    ("i[aä]$",                  61),  #   -iA             (  400 verbs)
+    ("[ouyö][aä]$",             52),  #   -OA/-UA         (~2200 verbs)
+    ("([aou]ida|öidä)$",        62),  #  -idA             ( ~680 verbs)
+    ("([aeiouyäö]i|e)ll[aä]$",  67),  #   -lA             (~1300 verbs)
+    ("(ata|ätä)$",              73),  #  -AtA             ( ~910 verbs)
+    ("et[aä]$",                 72),  #  -etA             ( ~130 verbs)
+    ("[aoudghklmnprtv]it[aä]$", 69),  #  -itA             (   48 verbs)
+    ("([ou]ta|[yö]tä)$",        74),  #  -OtA/-UtA        ( ~130 verbs)
+    ("st[aä]$",                 66),  #  -stA             ( ~270 verbs)
 )
 
 def get_verb_class(verb):
@@ -335,8 +428,19 @@ def get_verb_class(verb):
 
     return ()
 
+assert get_verb_class("hilsehtiä") == (52,)
 assert get_verb_class("sanoa")     == (52,)
-assert get_verb_class("muistaa")   == (53,)
+assert get_verb_class("ärjyä")     == (52,)
+
+assert get_verb_class("elää")    == (53,)
+assert get_verb_class("kyntää")  == (53,)
+assert get_verb_class("muistaa") == (53,)
+assert get_verb_class("nyhtää")  == (53,)
+assert get_verb_class("sortaa")  == (53,)
+assert get_verb_class("vetää")   == (53,)
+assert get_verb_class("voittaa") == (53,)
+
+# TODO: more test cases for these
 assert get_verb_class("huutaa")    == (54,)
 assert get_verb_class("soutaa")    == (55,)
 assert get_verb_class("kaivaa")    == (56,)
@@ -368,13 +472,12 @@ def main():
         )
     verb = sys.argv[1]
 
-    conjugation = get_verb_class(verb)
-    if len(conjugation) == 0:
+    conjugations = get_verb_class(verb)
+    if len(conjugations) == 0:
         sys.exit("Unrecognized verb.")
-    elif len(conjugation) == 1:
-        print(conjugation[0])
-    else:
-        print("/".join(str(c) for c in conjugation))
+    for c in conjugations:
+        (infinitive, past) = CLASS_DESCRIPTIONS[c]
+        print(f"class {c} (like '{infinitive}' (3SG past '{past}'))")
 
 if __name__ == "__main__":
     main()
