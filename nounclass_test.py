@@ -1,8 +1,8 @@
-"""Test verbclass.py. Read Kotus XML file from stdin."""
+"""Test nounclass.py. Read Kotus XML file from stdin."""
 
 import re
 import sys
-import verbclass
+import nounclass
 
 RE_TWO_CLASSES = re.compile(
     r"<s>([^<]+)</s>"
@@ -30,25 +30,27 @@ def get_words():
                 yield (match.group(1), (conjugation,))
 
 def main():
-    verbCount = 0
+    nounCount = 0
+    errorCount = 0
 
     for (word, conjus) in get_words():
-        if 52 <= conjus[0] <= 78:
-            detectedConjus = verbclass.get_verb_class(word)
+        if 1 <= conjus[0] <= 49 and word == word.lower():
+            conjus = tuple(c for c in conjus if 1 <= c <= 49)
+            detectedConjus = nounclass.get_noun_class(word)
             conjusStr = "/".join(str(c) for c in conjus)
             detectedConjusStr = "/".join(str(c) for c in detectedConjus)
 
             if not all(c in detectedConjus for c in conjus):
                 print(
-                    f"*** Error: '{word}': expected {conjusStr}, got {detectedConjusStr}",
-                    file=sys.stderr
+                    f"*** Error: '{word}': expected {conjusStr}, got {detectedConjusStr}"
                 )
+                errorCount += 1
             elif len(conjus) < len(detectedConjus):
                 print(f"Note: '{word}': expected {conjusStr}, got {detectedConjusStr}")
 
-            verbCount += 1
+            nounCount += 1
 
-    print(f"verbclass.py returned (at least) the correct conjugations for all {verbCount} verbs.")
+    print(f"Nouns checked: {nounCount}, errors: {errorCount}")
     print("Inspect the notes above to see if incorrect conjugations were returned too.")
 
 if __name__ == "__main__":
