@@ -4,6 +4,8 @@ Note: A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant"""
 import re
 import sys
 
+# all -CA words conjugate correctly; errors: 10,646/28,774 (37%)
+
 # a typical noun in each class, in nominative/genitive/partitive singular (from Kotus)
 CLASS_DESCRIPTIONS = {
     1:  ("valo",      "valon",        "valoa"),
@@ -61,6 +63,7 @@ CLASS_DESCRIPTIONS = {
 EXCEPTIONS = {
     # multiple conjugation classes, different meaning
     # incomplete list!
+    "kikkara": (11, 12),
     "sini": (5, 7),
     "puola": (9, 10),
 
@@ -357,6 +360,15 @@ EXCEPTIONS = {
     "tina": (9,),
     # -ppa
     "kauppa": (9,),
+    # -ra
+    "hara": (9,),
+    "hera": (9,),
+    "kara": (9,),
+    "para": (9,),
+    "sara": (9,),
+    "siera": (9,),
+    "tiera": (9,),
+    "vara": (9,),
     # -sa
     "aisa": (9,),
     "kiusa": (9,),
@@ -414,6 +426,10 @@ EXCEPTIONS = {
     "paranoia": (10,),
     # -da
     "pomada": (10,),
+    # -hA
+    "kehä": (10,),
+    "mäihä": (10,),
+    "vähä": (10,),
     # -jA
     "ehjä": (10,),
     "neljä": (10,),
@@ -524,6 +540,22 @@ EXCEPTIONS = {
     "yliminä": (10,),
     # -pa
     "aikaansaapa": (10,),
+    # -ra
+    "ankara": (10,),
+    "avara": (10,),
+    "eripura": (10,),
+    "jyrä": (10,),
+    "kehrä": (10,),
+    "koira": (10,),
+    "kumara": (10,),
+    "kura": (10,),
+    "kuura": (10,),
+    "mura": (10,),
+    "peeärrä": (10,),
+    "suura": (10,),
+    "tuura": (10,),
+    "tyrä": (10,),
+    "ura": (10,),
     # -ta
     "halveksunta": (10,),
     "huuhdonta": (10,),
@@ -598,6 +630,20 @@ EXCEPTIONS = {
     "poppana": (11,),
     "sikuna": (11,),
     "täkänä": (11,),
+    # -ra
+    "algebra": (11,),
+    "hapera": (11,),
+    "hatara": (11,),
+    "hattara": (11,),
+    "hutera": (11,),
+    "itara": (11,),
+    "kihara": (11,),
+    "kiverä": (11,),
+    "sikkara": (11,),
+    "tomera": (11,),
+    "vanttera": (11,),
+    "veiterä": (11,),
+    "äpärä": (11,),
     # -Vsa
     "mimoosa": (11,),
     # -va
@@ -646,6 +692,14 @@ EXCEPTIONS = {
     "salama": (12,),
     # -na
     "harppuuna": (12,),
+    # -rA
+    "angora": (12,),
+    "jäkkärä": (12,),
+    "kamera": (12,),
+    "kolera": (12,),
+    "littera": (12,),
+    "ooppera": (12,),
+    "väkkärä": (12,),
 
     # class 13
     # -ea
@@ -749,6 +803,16 @@ EXCEPTIONS = {
     "tuoksina": (13,),
     "ukraina": (13,),
     "vagina": (13,),
+    # -ra
+    "gerbera": (13,),
+    "hetaira": (13,),
+    "ketara": (13,),
+    "kitara": (13,),
+    "madeira": (13,),
+    "matara": (13,),
+    "sikkura": (13,),
+    "tempera": (13,),
+    "vaahtera": (13,),
     # -sa
     "karitsa": (13,),
     "kurmitsa": (13,),
@@ -1090,14 +1154,19 @@ EXCEPTIONS = {
 ENDINGS = (
     # note: each part of each rule must apply to at least three words!
     # (the rest are listed as exceptions)
+    # note: try to make the rules order-independent
 
     # foreign final consonant(s)
     (5,  r"[bcdfghkmpx]$"),    # -C (C != l/n/r/s/t)
     (5,  r"[klnrs][lnrst]$"),  # -CC (2nd C = l/n/r/s/t)
 
     # -bA/-dA/-fA/-gA/-šA/-zA/-žA
-    (9,  "[aei][dfklmntz]?[bdfgšzž]a$"),
-    (10, "[ouy][fglmn]?[bdfg]a$"),
+    (9,  r"[aei][dfklmntz]?[bdfgšzž]a$"),
+    (10, r"[ouy][fglmn]?[bdfg]a$"),
+
+    # -hA
+    (9,  r"[aei]u?[nrs]?h[aä]$"),          # a/e/i + (u)(C)hA
+    (10, r"([oöy]|[ukmnt]u)[lr]?h[aä]$"),  # O/uu/Cu/y + (C)hA
 
     # -jA
     (12, r"[aeklmnprstv]ij[aä]$"),  # a/e/C + ijA
@@ -1154,6 +1223,18 @@ ENDINGS = (
     #
     (9,  r"[aäei]([mr]p|[lmprs])?p[aä]$"),  # A/e/i + (C)(C)pA
     (10, r"[oöuy]([lmr]p|[lmpr])?p[aä]$"),  # O/U   + (C)(C)pA
+
+    # -rA
+    #
+    (11, r"kärä$"),                               # kä            + rä
+    #
+    (9,  r"(aa|au|eu)ra$"),                       # aa/au/eu      + ra
+    (9,  r"[ae]([bhprt]|kt|mb|nt|kst)ra$"),       # a/e + C(C)(C) + ra
+    (9,  r"i[ht]?ra$"),                           # i(C)          + ra
+    (10, r"([äeoö]|ou|[äöy]y)r[aä]$") ,           # ä/e/O/ou/Vy   + rA
+    (10, r"[ouy]([bhkprt]|mb|nd|nt)r[aä]$"),      # o/U + C(C)    + rA
+    (12, r"[kmpstv][auy]r[aä]$"),                 # Ca/Cu/Cy      + rA
+    (13, r"uura$"),                               # uu            + ra
 
     # -sA
     #
