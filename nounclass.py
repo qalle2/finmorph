@@ -293,35 +293,10 @@ EXCEPTIONS = {
     # -la
     "hopeahela": (9,),
     "suola": (9,),
-    # -AmA
+    # -ma
     "dalai-lama": (9,),
-    "draama": (9,),
-    "kama": (9,),
-    "laama": (9,),
-    "lama": (9,),
-    "naama": (9,),
-    "panoraama": (9,),
-    "sama": (9,),
+    "liesma": (9,),
     "talouslama": (9,),
-    # -ema
-    "ekseema": (9,),
-    "skeema": (9,),
-    "teema": (9,),
-    "teoreema": (9,),
-    "treema": (9,),
-    # -uma
-    "auma": (9,),
-    "lauma": (9,),
-    "reuma": (9,),
-    "sauma": (9,),
-    "trauma": (9,),
-    # -Cma
-    "astma": (9,),
-    "halma": (9,),
-    "helma": (9,),
-    "ilma": (9,),
-    "kalma": (9,),
-    "sialma": (9,),
     # -ana
     "kana": (9,),
     "lana": (9,),
@@ -403,24 +378,10 @@ EXCEPTIONS = {
     "vetelä": (10,),
     "vikkelä": (10,),
     "äitelä": (10,),
-    # -imA
-    "emintimä": (10,),
-    "perimä": (10,),
-    "piimä": (10,),
-    "pykimä": (10,),
-    "suuntima": (10,),
-    "äimä": (10,),
-    # -CmA
-    "härmä": (10,),
-    "kuisma": (10,),
-    "käsikähmä": (10,),
-    "lehmä": (10,),
-    "nystermä": (10,),
-    "pengermä": (10,),
-    "rähmä": (10,),
-    "sikermä": (10,),
-    "särmä": (10,),
-    "ämmä": (10,),
+    # -ma
+    "avauma": (10,),
+    "siunaama": (10,),
+    "virtaama": (10,),
     # -nA
     "gallona": (10,),
     "heinä": (10,),
@@ -1057,20 +1018,19 @@ ENDINGS = (
     (10, r"[aeiouyäö][dhklnrst]*k[aä]$"),  # V            + (C)(C)kA
 
     # -lA
-    (10, "(äi|[ou][ou]|[äöy]y)l[aä]$"),    # äi/oo/uo/OU/UU/äy + lA
-    (9,  "[aeiou]{2}la$"),                 # -VVla
-    (12, "...[aäeiouy]l[aä]$"),            # -???VlA
-    (10, "((..[aei]|[ou][hlp]?)la|lä)$"),  # -??ala/-??ela/-??ila/-o(C)la/-u(C)la/-lä
-    (9,  "la$"),                           # -la
+    (10, r"(äi|[ou][ou]|[äöy]y)l[aä]$"),    # äi/oo/uo/OU/UU/äy + lA
+    (9,  r"[aeiou]{2}la$"),                 # -VVla
+    (12, r"...[aäeiouy]l[aä]$"),            # -???VlA
+    (10, r"((..[aei]|[ou][hlp]?)la|lä)$"),  # -??ala/-??ela/-??ila/-o(C)la/-u(C)la/-lä
+    (9,  r"la$"),                           # -la
 
     # -mA
-    #
-    (10, r"[ou]ima$"),                 # o/u + ima
-    (10, r"[aäe]m[aä]$"),              # A/e + mA
-    (10, r"lm[aä]$"),                  # lmA
-    #
-    (9,  r"[aäei][ghkmrs]?m[aä]$"),    # A/e/i + (C)mA
-    (10, r"[oöuy](rs|[hmr])?m[aä]$"),  # O/U   + (C)(C)mA
+    (10, r"...[ae]uma$"),                      # ???au/???eu + ma
+    (9,  r"([ai]a|ee|[aei]i|[ae]u)[lr]?ma$"),  # aa/ia/ee/ai/ei/ii/au/eu + (C)ma
+    (10, r"[aeiouyäö]{2}s?m[aä]$"),            # -VV(C)mA
+    (10, r"(..[aei]l?|[ou][hlmrs]*)ma$"),      # ??a(l)/??e(l)/??i(l)/o(C)(C)/u(C)(C) + ma
+    (10, r"mä$"),                              # -mä
+    (9,  r"ma$"),                              # -ma
 
     # -nA
     (10, r"[ou]ona$"),                   # -oona/-uona

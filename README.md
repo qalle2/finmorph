@@ -6,7 +6,7 @@ I have used [the Finnish wordlist by Kotus](https://kaino.kotus.fi/sanat/nykysuo
 ## nounclass.py
 Get the Kotus conjugation class(es) of a Finnish noun/adjective (class 1&hellip;49). Argument: noun/adjective in nominative singular
 
-Note: This program is still at an early stage (it only gets ~63% of nouns right).
+Note: This program is still at an early stage (it only gets ~67% of nouns right).
 
 Example:
 ```
