@@ -41,8 +41,9 @@ def main():
             detectedConjusStr = "/".join(str(c) for c in detectedConjus)
 
             if not all(c in detectedConjus for c in conjus):
+                w = format(f"'{word}'", "<16s")
                 print(
-                    f"*** Error: '{word}': expected {conjusStr}, got {detectedConjusStr}"
+                    f"*** Error: {w}: expected {conjusStr}, got {detectedConjusStr}"
                 )
                 errorCount += 1
             elif len(conjus) < len(detectedConjus):

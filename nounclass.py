@@ -4,7 +4,8 @@ Note: A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant"""
 import re
 import sys
 
-# all -CA words conjugate correctly; errors: 10,646/28,774 (37%)
+# errors: 9436
+# all -VV and -A words conjugate correctly
 
 # a typical noun in each class, in nominative/genitive/partitive singular (from Kotus)
 CLASS_DESCRIPTIONS = {
@@ -108,28 +109,30 @@ EXCEPTIONS = {
     "tanhua":  (12, 15),
 
     # class 1
-    # -Vo
+    # -o
     "adagio": (1,),
     "duo": (1,),
-    "trio": (1,),
-    # -Co
     "osso buco": (1,),
     "ouzo": (1,),
     "taco": (1,),
+    "trio": (1,),
 
     # class 3
-    # -ie
+    # -Ve
+    "aaloe": (3,),
     "collie": (3,),
     "lassie": (3,),
+    "oboe": (3,),
     "zombie": (3,),
 
     # class 5
-    # -V/-VC (C = l/n/r/s/t)
+    # -V
+    "mansi": (5,),
+    # -Vl
     "becquerel": (5,),
     "cocktail": (5,),
     "gospel": (5,),
     "kennel": (5,),
-    "mansi": (5,),
     "mosel": (5,),
     "soul": (5,),
     # other
@@ -156,9 +159,103 @@ EXCEPTIONS = {
     "gallup": (6,),
 
     # class 8
-    # -ue
+    # native
+    "ale": (8,),
+    "itse": (8,),
+    "jeppe": (8,),
+    "kalle": (8,),
+    "kellokalle": (8,),
+    "kurre": (8,),
+    "lande": (8,),
+    "manne": (8,),
+    "nalle": (8,),
+    "nasse": (8,),
+    "nisse": (8,),
+    "nukke": (8,),
+    "ope": (8,),
+    "pelle": (8,),
+    "polle": (8,),
+    "pose": (8,),
+    "toope": (8,),
+    # English loans
+    "beagle": (8,),
+    "byte": (8,),
+    "chippendale": (8,),
+    "deadline": (8,),
+    "folklore": (8,),
+    "freestyle": (8,),
+    "ginger ale": (8,),
+    "grape": (8,),
+    "hardware": (8,),
+    "house": (8,),
+    "jive": (8,),
+    "ladylike": (8,),
+    "lime": (8,),
+    "mangrove": (8,),
+    "milk shake": (8,),
+    "open house": (8,),
+    "poplore": (8,),
+    "puzzle": (8,),
+    "ragtime": (8,),
+    "single": (8,),
+    "software": (8,),
+    "striptease": (8,),
+    # Romance/Greek loans
+    "agaave": (8,),
+    "akne": (8,),
+    "à la carte": (8,),
+    "andante": (8,),
+    "bavaroise": (8,),
+    "beguine": (8,),
+    "bouillabaisse": (8,),
+    "bourette": (8,),
+    "bourgogne": (8,),
     "boutique": (8,),
+    "chenille": (8,),
+    "crème fraîche": (8,),
+    "crêpe": (8,),
+    "cum laude": (8,),
+    "duchesse": (8,),
+    "empire": (8,),
+    "ensemble": (8,),
+    "entrecôte": (8,),
+    "faksimile": (8,),
+    "force majeure": (8,),
+    "forte": (8,),
+    "genre": (8,),
+    "gruyère": (8,),
+    "jade": (8,),
+    "joule": (8,),
+    "komedienne": (8,),
+    "lasagne": (8,),
+    "madame": (8,),
+    "mezzoforte": (8,),
+    "minestrone": (8,),
+    "mobile": (8,),
+    "mousse": (8,),
+    "penne": (8,),
     "petanque": (8,),
+    "promille": (8,),
+    "psyyke": (8,),
+    "quenelle": (8,),
+    "quiche": (8,),
+    "raclette": (8,),
+    "ratatouille": (8,),
+    "ringette": (8,),
+    "tabbule": (8,),
+    "tagliatelle": (8,),
+    "tele": (8,),
+    "tilde": (8,),
+    "tragedienne": (8,),
+    "vaudeville": (8,),
+    "vinaigrette": (8,),
+    # other loans
+    "karaoke": (8,),
+    "karate": (8,),
+    "kurare": (8,),
+    "saame": (8,),
+    "sake": (8,),
+    "ukulele": (8,),
 
     # class 9
     # -Va
@@ -169,151 +266,33 @@ EXCEPTIONS = {
     "sekunda": (9,),
     # -fa
     "lymfa": (9,),
-    # -aja
-    "alaikäraja": (9,),
-    "alaraja": (9,),
-    "alueraja": (9,),
-    "aluevesiraja": (9,),
-    "enimmäisraja": (9,),
-    "eteläraja": (9,),
-    "haamuraja": (9,),
-    "hiusraja": (9,),
-    "ikäraja": (9,),
-    "itäraja": (9,),
-    "kaakkoisraja": (9,),
-    "kalastusraja": (9,),
-    "karsintaraja": (9,),
-    "katonraja": (9,),
-    "kenkäraja": (9,),
-    "kimmoraja": (9,),
-    "kuuloraja": (9,),
-    "kyllästymisraja": (9,),
-    "laaja": (9,),
-    "lakkoraja": (9,),
-    "lattianraja": (9,),
-    "lumiraja": (9,),
-    "luokkaraja": (9,),
-    "luottoraja": (9,),
-    "länsiraja": (9,),
-    "lääninraja": (9,),
-    "maaliraja": (9,),
-    "maanraja": (9,),
-    "maaraja": (9,),
-    "maja": (9,),
-    "meriraja": (9,),
-    "metsänraja": (9,),
-    "metsäraja": (9,),
-    "murreraja": (9,),
-    "nälkäraja": (9,),
-    "paja": (9,),
-    "pohjoisraja": (9,),
-    "puolueraja": (9,),
-    "puuraja": (9,),
-    "päivämääräraja": (9,),
-    "päätyraja": (9,),
-    "raaja": (9,),
-    "raja": (9,),
-    "raja": (9,),
-    "routaraja": (9,),
-    "sananraja": (9,),
-    "sanaraja": (9,),
-    "sietoraja": (9,),
-    "sivuraja": (9,),
-    "susiraja": (9,),
-    "syöttöraja": (9,),
-    "säätyraja": (9,),
-    "taaja": (9,),
-    "takaraja": (9,),
-    "tavunraja": (9,),
-    "tavuraja": (9,),
-    "tilusraja": (9,),
-    "toleranssiraja": (9,),
-    "tukanraja": (9,),
-    "tulliraja": (9,),
-    "tulvaraja": (9,),
-    "vaihteluraja": (9,),
-    "vaja": (9,),
-    "valtakunnanraja": (9,),
-    "vedenraja": (9,),
-    "vesiraja": (9,),
-    "viljelyraja": (9,),
-    "virheraja": (9,),
-    "vyöhykeraja": (9,),
-    "vähimmäisraja": (9,),
-    "yläikäraja": (9,),
-    "yläraja": (9,),
-    "äänioikeusikäraja": (9,),
-    "ääriraja": (9,),
-    # -ija
+    # -ja
     "akileija": (9,),
     "dreija": (9,),
     "faija": (9,),
     "keija": (9,),
+    "laaja": (9,),
     "leija": (9,),
     "maija": (9,),
+    "maja": (9,),
+    "paja": (9,),
     "papukaija": (9,),
+    "raaja": (9,),
     "sija": (9,),
+    "taaja": (9,),
     "tyyssija": (9,),
-    # -Vka
-    "leuka": (9,),
-    # -akka
-    "almanakka": (9,),
+    "vaja": (9,),
+    # -ka
     "avotakka": (9,),
-    "bitumilakka": (9,),
-    "hartsilakka": (9,),
-    "hiuslakka": (9,),
-    "japaninlakka": (9,),
-    "kangaspakka": (9,),
-    "kirjelakka": (9,),
-    "korjauslakka": (9,),
-    "korttipakka": (9,),
-    "krappilakka": (9,),
-    "kultalakka": (9,),
-    "kynsilakka": (9,),
-    "kyyhkyslakka": (9,),
-    "käsipakka": (9,),
-    "lakka": (9,),
-    "lehtijousipakka": (9,),
-    "metallilakka": (9,),
-    "oksalakka": (9,),
-    "pakka": (9,),
-    "palsternakka": (9,),
-    "polttolakka": (9,),
-    "pronssilakka": (9,),
-    "rakka": (9,),
-    "sakka": (9,),
-    "selluloosalakka": (9,),
-    "sinettilakka": (9,),
-    "suojalakka": (9,),
-    "takka": (9,),
-    "vakka": (9,),
-    "vesivaippatakka": (9,),
-    # -Cikka
     "flikka": (9,),
     "harmonikka": (9,),
-    "hikka": (9,),
-    "likka": (9,),
+    "iskä": (9,),
     "plikka": (9,),
     "prikka": (9,),
-    "rikka": (9,),
-    "tikka": (9,),
-    # -hka
-    "leuhka": (9,),
-    "reuhka": (9,),
-    "tauhka": (9,),
-    "viuhka": (9,),
-    # -skA
-    "haaska": (9,),
-    "iskä": (9,),
-    "paska": (9,),
+    "sekamelska": (9,),
     # -la
-    "ala": (9,),
-    "kala": (9,),
-    "koala": (9,),
-    "pala": (9,),
-    "sala": (9,),
+    "hopeahela": (9,),
     "suola": (9,),
-    "vala": (9,),
     # -AmA
     "dalai-lama": (9,),
     "draama": (9,),
@@ -343,7 +322,6 @@ EXCEPTIONS = {
     "ilma": (9,),
     "kalma": (9,),
     "sialma": (9,),
-    "tatska": (9,),
     # -ana
     "kana": (9,),
     "lana": (9,),
@@ -378,46 +356,21 @@ EXCEPTIONS = {
     "krypta": (9,),
     "valuutta": (9,),
     "ympärystä": (9,),
-    # -ava
+    # -va
     "aava": (9,),
-    "ampumahaava": (9,),
-    "avohaava": (9,),
+    "eeva": (9,),
     "guava": (9,),
-    "haava": (9,),
-    "iskuhaava": (9,),
+    "iva": (9,),
     "kaava": (9,),
+    "kiva": (9,),
     "klaava": (9,),
     "laava": (9,),
     "lava": (9,),
-    "leikkaushaava": (9,),
-    "mahahaava": (9,),
-    "makuuhaava": (9,),
     "naava": (9,),
-    "palohaava": (9,),
-    "pintahaava": (9,),
-    "pistohaava": (9,),
-    "puremahaava": (9,),
-    "puukonhaava": (9,),
-    "säärihaava": (9,),
-    "vatsahaava": (9,),
-    "verihaava": (9,),
-    "viiltohaava": (9,),
-    # -eva
-    "eeva": (9,),
     "neva": (9,),
-    # -iva
-    "diiva": (9,),
-    "hiiva": (9,),
-    "iva": (9,),
-    "kiva": (9,),
-    "laiva": (9,),
     "niva": (9,),
-    "vaiva": (9,),
-    "viiva": (9,),
-    # -uva
-    "hauva": (9,),
-    "sauva": (9,),
-    "vauva": (9,),
+    "pehva": (9,),
+    "terva": (9,),
 
     # class 10
     # -Va
@@ -426,78 +379,30 @@ EXCEPTIONS = {
     "paranoia": (10,),
     # -da
     "pomada": (10,),
-    # -hA
-    "kehä": (10,),
-    "mäihä": (10,),
-    "vähä": (10,),
-    # -jA
-    "ehjä": (10,),
-    "neljä": (10,),
-    "rähjä": (10,),
-    "väljä": (10,),
-    "äijä": (10,),
-    # -oikka/-uikka
-    "hoikka": (10,),
-    "huikka": (10,),
-    "kuikka": (10,),
-    "loikka": (10,),
-    "luikka": (10,),
-    "roikka": (10,),
-    "suikka": (10,),
-    "topparoikka": (10,),
-    "troikka": (10,),
-    "voikka": (10,),
-    # -UkkA
-    "hukka": (10,),
-    "häikkä": (10,),
-    "jukka": (10,),
+    # -ja
+    "nauraja": (10,),
+    # -ka
     "jöröjukka": (10,),
-    "kääkkä": (10,),
-    "läikkä": (10,),
-    "mykkä": (10,),
-    "nukka": (10,),
-    "ruisrääkkä": (10,),
-    "rukka": (10,),
-    "räikkä": (10,),
-    "sukka": (10,),
     "tiskijukka": (10,),
-    "tukka": (10,),
-    # -Cka (C != h/k)
-    "huiska": (10,),
-    "luiska": (10,),
-    "vodka": (10,),
-    # -elA/-ilA
-    "nokkela": (10,),
-    "ovela": (10,),
-    "sukkela": (10,),
-    "säilä": (10,),
-    # -OlA/-UlA
-    "doula": (10,),
+    # -lA
     "gorgonzola": (10,),
-    "hula": (10,),
-    "hyperbola": (10,),
-    "karambola": (10,),
-    "kola": (10,),
-    "kuula": (10,),
-    "kylä": (10,),
-    "pola": (10,),
-    "pula": (10,),
-    "sola": (10,),
-    "sula": (10,),
-    "suula": (10,),
-    "tola": (10,),
-    "ula": (10,),
-    # -AlA
     "hankala": (10,),
+    "hintelä": (10,),
+    "hyperbola": (10,),
     "jumala": (10,),
     "jäkälä": (10,),
     "kamala": (10,),
+    "karambola": (10,),
     "katala": (10,),
     "kavala": (10,),
     "matala": (10,),
+    "nokkela": (10,),
     "pykälä": (10,),
-    "sälä": (10,),
+    "sukkela": (10,),
     "tukala": (10,),
+    "vetelä": (10,),
+    "vikkelä": (10,),
+    "äitelä": (10,),
     # -imA
     "emintimä": (10,),
     "perimä": (10,),
@@ -584,15 +489,8 @@ EXCEPTIONS = {
     "väheksyntä": (10,),
     "vähäläntä": (10,),
     "vähänläntä": (10,),
-    # -vA
-    "kanerva": (10,),
-    "kellervä": (10,),
-    "lehvä": (10,),
-    "mordva": (10,),
-    "punerva": (10,),
-    "selvä": (10,),
-    "sinervä": (10,),
-    "vihervä": (10,),
+    # -va
+    "murhaava": (10,),
     # -n
     "kahdeksan": (10,),
     "seitsemän": (10,),
@@ -651,43 +549,29 @@ EXCEPTIONS = {
     "harava": (11,),
 
     # class 12
-    # -Cja
-    "espanja": (12,),
-    "kampanja": (12,),
+    # -ea
+    "amenorrea": (12,),
+    "apnea": (12,),
+    "aramea": (12,),
+    "bougainvillea": (12,),
+    "gonorrea": (12,),
+    "hebrea": (12,),
+    "heprea": (12,),
+    "idea": (12,),
+    "komitea": (12,),
+    "kommunikea": (12,),
+    "matinea": (12,),
+    "pallea": (12,),
+    "seborrea": (12,),
+    "uniapnea": (12,),
+    "urea": (12,),
+    # -ja
     "kanalja": (12,),
     "kastanja": (12,),
     "persilja": (12,),
-    "samppanja": (12,),
-    # -ua
-    "herttua": (12,),
-    "juolua": (12,),
-    "liettua": (12,),
-    "porstua": (12,),
-    "saippua": (12,),
-    # -iä
-    "hipiä": (12,),
-    "miniä": (12,),
-    "nieriä": (12,),
-    "näsiä": (12,),
-    "päkiä": (12,),
-    # -ika
+    # -ka
     "ekliptika": (12,),
     "paprika": (12,),
-    # -la
-    "anoppila": (12,),
-    "appela": (12,),
-    "huvila": (12,),
-    "kahvila": (12,),
-    "kanala": (12,),
-    "kandela": (12,),
-    "kattila": (12,),
-    "kuppila": (12,),
-    "manala": (12,),
-    "onnela": (12,),
-    "pappila": (12,),
-    "parila": (12,),
-    "tuonela": (12,),
-    "vankila": (12,),
     # -ma
     "salama": (12,),
     # -na
@@ -730,24 +614,6 @@ EXCEPTIONS = {
     # -hka
     "karahka": (13,),
     "revohka": (13,),
-    # -skA
-    "fingelska": (13,),
-    "fingliska": (13,),
-    "haarniska": (13,),
-    "katiska": (13,),
-    "latuska": (13,),
-    "leiviskä": (13,),
-    "läpyskä": (13,),
-    "maatuska": (13,),
-    "mormyska": (13,),
-    "räpiskä": (13,),
-    "rötiskä": (13,),
-    "sakuska": (13,),
-    "sapiska": (13,),
-    "sapuska": (13,),
-    "skandinaaviska": (13,),
-    "säämiskä": (13,),
-    "valmuska": (13,),
     # -lA
     "apila": (13,),
     "artikla": (13,),
@@ -764,7 +630,6 @@ EXCEPTIONS = {
     "takila": (13,),
     "tortilla": (13,),
     "viola": (13,),
-    "vuola": (13,),
     # -ma
     "karisma": (13,),
     "maailma": (13,),
@@ -877,8 +742,10 @@ EXCEPTIONS = {
 
     # class 18
     # -VV
+    "ei-kenenkään-maa": (18,),
     "frisbee": (18,),
     "gnuu": (18,),
+    "homssantuu": (18,),
     "huuhaa": (18,),
     "jää": (18,),
     "jöö": (18,),
@@ -1128,75 +995,73 @@ EXCEPTIONS = {
     "täysinpalvellut": (47,),
 
     # class 48
-    # -Ve
-    "aie": (48,),
-    "hie": (48,),
-    "koe": (48,),
-    "säie": (48,),
-    # other
+    "jäntere": (48,),
     "kiiru": (48,),
+    "tere": (48,),
 
     # class 49
-    # -l
-    "sammal": (49,),
-    "taival": (49,),
-    # -n
+    # -l/-n
     "muren": (49,),
+    "sammal": (49,),
     "säen": (49,),
-    # -e
+    "taival": (49,),
+    # -aCe/-eCe
+    "askare": (49,),
+    "askele": (49,),
     "hepene": (49,),
+    "huhmare": (49,),
+    "kantele": (49,),
+    "kyynele": (49,),
     "murene": (49,),
-    "säkene": (49,),
+    "ompele": (49,),
+    "petkele": (49,),
+    "pientare": (49,),
     "taipale": (49,),
+    "saivare": (49,),
+    "seppele": (49,),
+    "säkene": (49,),
+    "utare": (49,),
+    "vempele": (49,),
 }
 
 # conjugation class, regex
 ENDINGS = (
     # note: each part of each rule must apply to at least three words!
     # (the rest are listed as exceptions)
-    # note: try to make the rules order-independent
 
     # foreign final consonant(s)
     (5,  r"[bcdfghkmpx]$"),    # -C (C != l/n/r/s/t)
     (5,  r"[klnrs][lnrst]$"),  # -CC (2nd C = l/n/r/s/t)
 
     # -bA/-dA/-fA/-gA/-šA/-zA/-žA
-    (9,  r"[aei][dfklmntz]?[bdfgšzž]a$"),
-    (10, r"[ouy][fglmn]?[bdfg]a$"),
+    (9,  r"[aei][dfklmntz]?[bdfgšzž]a$"),  # -a(C)Ca/-e(C)Ca/-i(C)Ca (2nd C is foreign)
+    (10, r"[ouy][fglmn]?[bdfg]a$"),        # -o(C)Ca/-u(C)Ca/-y(C)ca (2nd C is foreign)
 
     # -hA
-    (9,  r"[aei]u?[nrs]?h[aä]$"),          # a/e/i + (u)(C)hA
-    (10, r"([oöy]|[ukmnt]u)[lr]?h[aä]$"),  # O/uu/Cu/y + (C)hA
+    (9,  r"([aei][nrs]?|[ai]u)ha$"),  # a(C)/e(C)/i(C)/au/iu + ha
+    (10, r"h[aä]$"),                  # -hA
 
     # -jA
-    (12, r"[aeklmnprstv]ij[aä]$"),  # a/e/C + ijA
-    (10, r"[oöu]ij[aä]$"),          # O/u + ijA
-    (10, r"[aäe]j[aä]$"),           # A/e + jA
-    (9,  r"[aei][hlnrt]?ja$"),      # a/e/i + (C)ja
-    (10, r"[oöuy][hlnrt]?j[aä]$"),  # O/U   + (C)jA
+    (12, r"panja$"),                # -panja
+    (12, r"[aeklmnprstv]ij[aä]$"),  # a/e/C       + ijA
+    (9,  r"([aei][hlnrt]|ra)ja$"),  # aC/eC/iC/ra + ja
+    (10, r"j[aä]$"),                # -jA
 
     # -kA
-    #
-    (10, r"[äe][lnr]kkä$"),                         # ä/e   + Ckkä
-    (10, r"[äei][hlmnrt]?s?kä$"),                   # ä/e/i + (C)(s)kä
-    (10, r"[oöu]ik[aä]$"),                          # O/u   + ikA
-    (13, r"aska$"),                                 # -aska
-    (14, r"[hjlmnprstv][aiu]kka$"),                 # C + a/i/u + kka
-    (14, r"[äi]kkä$"),                              # -äkkä/-ikkä
-    (14, r"[^äöy]ykkä$"),                           # -Vykkä
-    (9,  r"[ai]u[ks]?ka$"),                         # -Vu(C)ka
-    #
-    (9,  r"[aäei]([lmnr][ks]|[fhklnrst])?k[aä]$"),  # A/e/i + (C)(C)CA
-    (10, r"[oöuy]([lnr][ks]|[hklnrst])?k[aä]$"),    # O/U   + (C)(C)CA
+    (9,  r"[aei][aeiou][hks]?ka$"),        # aV/eV/iV     + (C)ka
+    (10, r"[aeiouyäö]{2}[ks]?k[aä]$"),     # VV           + (C)kA
+    (13, r"....sk[aä]$"),                  # ????         + skA
+    (9,  r"....[lnp]akka$"),               # ???? + l/n/p + akka
+    (14, r"..[aäiuy]kk[aä]$"),             # ??   + A/i/U + kkA
+    (9,  r"[aei][fhklmnrst]*ka$"),         # a/e/i        + (C)(C)ka
+    (10, r"[aeiouyäö][dhklnrst]*k[aä]$"),  # V            + (C)(C)kA
 
     # -lA
-    (9,  r"([ae]u|aa|[ei])la$"),    # -aala/-aula/-eula/-ela/-ila
-    (10, r"[ou]ola$"),              # -oola/-uola
-    (9,  r"[aei][fhlps]la$"),       # -aCla/-eCla/-iCla
-    (10, r"[ou][hlp]la$"),          # -oCla/-uCla
-    (10, r"([ehlp]|[äöy]y)lä$"),    # -elä/Vylä/-Clä
-    (12, r"[ghjkmprstv][aou]la$"),  # -Cala/-Cola/-Cula
-    (12, r"[kmprtv][äiy]lä$"),      # -Cälä/-Cilä/-Cylä
+    (10, "(äi|[ou][ou]|[äöy]y)l[aä]$"),    # äi/oo/uo/OU/UU/äy + lA
+    (9,  "[aeiou]{2}la$"),                 # -VVla
+    (12, "...[aäeiouy]l[aä]$"),            # -???VlA
+    (10, "((..[aei]|[ou][hlp]?)la|lä)$"),  # -??ala/-??ela/-??ila/-o(C)la/-u(C)la/-lä
+    (9,  "la$"),                           # -la
 
     # -mA
     #
@@ -1255,19 +1120,24 @@ ENDINGS = (
     (10, r"[oöuy]([lnr]t|[fhlrt])?t[aä]$"),              # O/U   + (C)(C)tA
 
     # -vA
-    (10, r"[aäei]v[aä]$"),          # A/e/i + vA
-    (9,  r"[aäei][hklrst]v[aä]$"),  # A/e/i + CvA
-    (10, r"[ouy][hlrst]?v[aä]$"),   # o/U   + (C)vA
+    (9,  r"(haa|au|[ai]i|[ai][hklrst])va$"),  # haa/au/ai/ii/aC/iC + va
+    (10, r"v[aä]$"),                          # -vA
 
     # -CCO/-CCU
     (4,  r"kk[oö]$"),                                 # -kkO
     (1,  r"[^aeiouyäö][^aeiouyäö][ouyö]$"),           # -CCO/-CCU
 
-    # -ia
-    (12, "ia$"),
+    # -V (not -CA)
+    (3,  r"([aeiy]o|iö)$"),                     # -ao/-eo/-iO/-yo
+    (8,  "[cg]e$"),                             # -ce/-ge
+    (12, "(i[aä]|ua)$"),                        # -iA/-ua
+    (15, "e[aä]$"),                             # -eA
+    (17, r"(aa|oo|uu)$"),                       # -aa/-oo/-uu
+    (18, "[aeiouä]i$"),                         # -Vi
+    (20, "ee$"),                                # -ee
+    (48, "([aäiouydhjklmnpstv]|[aäiour]r)e$"),  # -Ve/-Ce (not -ee/-ce/-ge/-ere)
+    (49, "ere$"),                               # -ere
 
-    (3,  r"(oe|[aeiy]o|iö)$"),                        # -oe/-ao/-eo/-iO/-yo
-    (17, r"(aa|oo)$"),                                # -aa/-oo
     (21, r"é$"),                                      # -é
     (28, r"[lnr]si$"),                                # -Csi
     (34, r"[aeiouyäö]t[oö]n$"),                       # -VtOn
@@ -1276,7 +1146,6 @@ ENDINGS = (
     (40, r"[eiouyö][uy]s$"),                          # -eUs/-iUs/-OUs/-UUs
     (41, r"[dghjklmnprstv][aä]s$"),                   # -CAs
     (47, r"n[uy]t$"),                                 # -nUt
-    (48, r"ae$"),                                     # -ae
     (49, r"el$"),                                     # -el
 )
 
