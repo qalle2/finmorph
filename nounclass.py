@@ -4,7 +4,7 @@ Note: A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant"""
 import re
 import sys
 
-# conjugated correctly: -VV/-A/-e
+# errors: 3,343/28,774 (12%)
 
 # a typical noun in each class, in nominative/genitive/partitive singular (from Kotus)
 CLASS_DESCRIPTIONS = {
@@ -61,22 +61,23 @@ CLASS_DESCRIPTIONS = {
 
 # noun: tuple with one or more conjugation classes
 EXCEPTIONS = {
-    # multiple conjugation classes, different meaning
-    # incomplete list!
-    "kikkara": (11, 12),
-    "kuusi": (24, 27),
-    "sini": (5, 7),
-    "puola": (9, 10),
-    "vuori": (5, 26),
-
-    # multiple conjugation classes, same meaning
+    # multiple conjugation classes
     #
-    "alpi":   (5, 7),
-    "helpi":  (5, 7),
-    "kaihi":  (5, 7),
-    "karhi":  (5, 7),
-    "kymi":   (5, 7),
+    "alpi": (5, 7),
+    "helpi": (5, 7),
+    "kaihi": (5, 7),
+    "karhi": (5, 7),
+    "kymi": (5, 7),
+    "laki": (5, 7),
+    "palvi": (5, 7),
+    "ripsi": (5, 7),
+    "sini": (5, 7),
     "vyyhti": (5, 7),
+    #
+    "viini": (5, 26),
+    "vuori": (5, 26),
+    #
+    "peitsi": (5, 30),
     #
     "csárdás": (5, 39),
     "kuskus":  (5, 39),
@@ -85,8 +86,13 @@ EXCEPTIONS = {
     "uksi":  (7, 29),
     #
     "aneurysma": (9, 10),
-    "kysta":     (9, 10),
-    "lyyra":     (9, 10),
+    "kysta": (9, 10),
+    "lyyra": (9, 10),
+    "puola": (9, 10),
+    #
+    "kikkara": (11, 12),
+    #
+    "kuusi": (24, 27),
     #
     "merirosvous": (39, 40),
     "rosvous":     (39, 40),
@@ -114,9 +120,6 @@ EXCEPTIONS = {
     "adagio": (1,),
     "duo": (1,),
     "trio": (1,),
-    # -Co
-    "ouzo": (1,),
-    "taco": (1,),
 
     # class 3
     "aaloe": (3,),
@@ -126,6 +129,93 @@ EXCEPTIONS = {
     "zombie": (3,),
 
     # class 5
+    # -ki
+    "sutki": (5,),
+    # -li
+    "amiraali": (5,),
+    "desibeli": (5,),
+    "follikkeli": (5,),
+    "hanttapuli": (5,),
+    "hyperbeli": (5,),
+    "ihomaali": (5,),
+    "kajaali": (5,),
+    "kapituli": (5,),
+    "koraali": (5,),
+    "laventeli": (5,),
+    "lojaali": (5,),
+    "modaali": (5,),
+    "moguli": (5,),
+    "multippeli": (5,),
+    "paraabeli": (5,),
+    "pedaali": (5,),
+    "pendeli": (5,),
+    "permeaabeli": (5,),
+    "pilipali": (5,),
+    "pluraali": (5,),
+    "portugali": (5,),
+    "riskaabeli": (5,),
+    "taranteli": (5,),
+    "tuoli": (5,),
+    "urinaali": (5,),
+    # -mi
+    "monstrumi": (5,),
+    "opossumi": (5,),
+    "palsami": (5,),
+    "praktikumi": (5,),
+    "puomi": (5,),
+    "tupajumi": (5,),
+    "vigvami": (5,),
+    # -ni
+    "afgaani": (5,),
+    "alumiini": (5,),
+    "amoriini": (5,),
+    "aniliini": (5,),
+    "butaani": (5,),
+    "etyleeni": (5,),
+    "fibriini": (5,),
+    "gluteeni": (5,),
+    "humaani": (5,),
+    "igumeeni": (5,),
+    "jasmiini": (5,),
+    "joriini": (5,),
+    "kaimaani": (5,),
+    "kaoliini": (5,),
+    "karbiini": (5,),
+    "kardaani": (5,),
+    "kiniini": (5,),
+    "kosini": (5,),
+    "lantaani": (5,),
+    "laviini": (5,),
+    "ligniini": (5,),
+    "mangaani": (5,),
+    "metaani": (5,),
+    "migreeni": (5,),
+    "morfiini": (5,),
+    "oktaani": (5,),
+    "orgaani": (5,),
+    "patiini": (5,),
+    "pepsiini": (5,),
+    "pineeni": (5,),
+    "porfiini": (5,),
+    "profaani": (5,),
+    "propaani": (5,),
+    "rabbiini": (5,),
+    "retliini": (5,),
+    "risiini": (5,),
+    "rutiini": (5,),
+    "samaani": (5,),
+    "šamaani": (5,),
+    "sampaani": (5,),
+    "seireeni": (5,),
+    "tanniini": (5,),
+    "toksiini": (5,),
+    # -si
+    "desi": (5,),
+    "kreisi": (5,),
+    "kuosi": (5,),
+    "mansi": (5,),
+    "ysi": (5,),
+    # -l
     "becquerel": (5,),
     "cocktail": (5,),
     "gospel": (5,),
@@ -134,16 +224,221 @@ EXCEPTIONS = {
     "soul": (5,),
 
     # class 6
-    # -l
+    # -ki
+    "buzuki": (6,),
+    "kinuski": (6,),
+    "saluki": (6,),
+    "sirtaki": (6,),
+    "tsinuski": (6,),
+    # -li
+    "aioli": (6,),
+    "atolli": (6,),
+    "basilli": (6,),
+    "brokkoli": (6,),
+    "daktyyli": (6,),
+    "debiili": (6,),
+    "flanelli": (6,),
+    "fossiili": (6,),
+    "fraktaali": (6,),
+    "gaselli": (6,),
+    "gondoli": (6,),
+    "hotelli": (6,),
+    "idoli": (6,),
+    "konsoli": (6,),
+    "kupoli": (6,),
+    "linoli": (6,),
+    "manttaali": (6,),
+    "moduuli": (6,),
+    "motelli": (6,),
+    "neutraali": (6,),
+    "paneeli": (6,),
+    "petroli": (6,),
+    "pistooli": (6,),
+    "putelli": (6,),
+    "sardelli": (6,),
+    "seniili": (6,),
+    "siviili": (6,),
+    "skandaali": (6,),
+    "stabiili": (6,),
+    "steriili": (6,),
+    "symboli": (6,),
+    "tekstiili": (6,),
+    "tivoli": (6,),
+    "trioli": (6,),
+    "trotyyli": (6,),
+    "vaskooli": (6,),
+    "venkoli": (6,),
+    "venttiili": (6,),
+    "vinyyli": (6,),
+    # -mi
+    "albumi": (6,),
+    "atomi": (6,),
+    "bitumi": (6,),
+    "entsyymi": (6,),
+    "foneemi": (6,),
+    "keraami": (6,),
+    "kondomi": (6,),
+    "muslimi": (6,),
+    "pogromi": (6,),
+    "postuumi": (6,),
+    "syklaami": (6,),
+    "systeemi": (6,),
+    "toteemi": (6,),
+    "vakuumi": (6,),
+    "volyymi": (6,),
+    # -ni
+    "antenni": (6,),
+    "azerbaidžani": (6,),
+    "betoni": (6,),
+    "biisoni": (6,),
+    "blondiini": (6,),
+    "bosoni": (6,),
+    "brahmaani": (6,),
+    "diakoni": (6,),
+    "fotoni": (6,),
+    "gibboni": (6,),
+    "hälytyssireeni": (6,),
+    "ikoni": (6,),
+    "kanjoni": (6,),
+    "kantoni": (6,),
+    "kanttiini": (6,),
+    "kardoni": (6,),
+    "kommuuni": (6,),
+    "korsteeni": (6,),
+    "koturni": (6,),
+    "kumppani": (6,),
+    "kvitteni": (6,),
+    "leptoni": (6,),
+    "meloni": (6,),
+    "monsuuni": (6,),
+    "muffini": (6,),
+    "palosireeni": (6,),
+    "pekoni": (6,),
+    "pelmeni": (6,),
+    "piisoni": (6,),
+    "pingviini": (6,),
+    "ponttoni": (6,),
+    "prostaglandiini": (6,),
+    "romani": (6,),
+    "sabloni": (6,),
+    "sirkoni": (6,),
+    "spontaani": (6,),
+    "sulttaani": (6,),
+    "sumusireeni": (6,),
+    "taifuuni": (6,),
+    "testosteroni": (6,),
+    "teutoni": (6,),
+    "tribuuni": (6,),
+    "tšetšeeni": (6,),
+    "tulppaani": (6,),
+    "turkmeeni": (6,),
+    "ubikinoni": (6,),
+    "unioni": (6,),
+    "uraani": (6,),
+    "valloni": (6,),
+    "zirkoni": (6,),
+    "zucchini": (6,),
+    # -si
+    "glukoosi": (6,),
+    "hampuusi": (6,),
+    "karpaasi": (6,),
+    "kolhoosi": (6,),
+    "narkoosi": (6,),
+    "neuroosi": (6,),
+    "pakaasi": (6,),
+    "plantaasi": (6,),
+    "poliisi": (6,),
+    "proteesi": (6,),
+    "refleksi": (6,),
+    "serviisi": (6,),
+    "sotiisi": (6,),
+    "sottiisi": (6,),
+    "sovhoosi": (6,),
+    "sypressi": (6,),
+    "trapetsi": (6,),
+    "turkoosi": (6,),
+    "ukaasi": (6,),
+    "viskoosi": (6,),
+    "zoonoosi": (6,),
+    "äksiisi": (6,),
+    # -vi
+    "oliivi": (6,),
+    # -C
     "diesel": (6,),
-    "rial": (6,),
-    # -m
     "edam": (6,),
+    "gallup": (6,),
     "liirumlaarum": (6,),
+    "rial": (6,),
     "tandem": (6,),
     "ångström": (6,),
-    # -p
-    "gallup": (6,),
+
+    # class 7
+    # -ki
+    "hanki": (7,),
+    "hauki": (7,),
+    "henki": (7,),
+    "hiki": (7,),
+    "joki": (7,),
+    "kaikki": (7,),
+    "kallionlaki": (7,),
+    "kanki": (7,),
+    "kaski": (7,),
+    "kiiski": (7,),
+    "kitalaki": (7,),
+    "koski": (7,),
+    "leski": (7,),
+    "noki": (7,),
+    "onki": (7,),
+    "piki": (7,),
+    "poski": (7,),
+    "päälaki": (7,),
+    "reki": (7,),
+    "suulaki": (7,),
+    "sänki": (7,),
+    "sääski": (7,),
+    "taivaanlaki": (7,),
+    "tuki": (7,),
+    "tunturinlaki": (7,),
+    "vaaranlaki": (7,),
+    "vaski": (7,),
+    # -li
+    "veli": (7,),
+    # -mi
+    "helmi": (7,),
+    "korkkitammi": (7,),
+    "nimi": (7,),
+    "nummi": (7,),
+    "nurmi": (7,),
+    "salmi": (7,),
+    "seimi": (7,),
+    "sormi": (7,),
+    "suomi": (7,),
+    "tammi": (7,),
+    # -ni
+    "onni": (7,),
+    "saarni": (7,),
+    # -si
+    "silmäripsi": (7,),
+    "suksi": (7,),
+    "sääksi": (7,),
+    "viiksi": (7,),
+    "vuoksi": (7,),
+    # -vi
+    "hirvi": (7,),
+    "järvi": (7,),
+    "kivi": (7,),
+    "lovi": (7,),
+    "ovi": (7,),
+    "pilvi": (7,),
+    "polvi": (7,),
+    "povi": (7,),
+    "pälvi": (7,),
+    "sarvi": (7,),
+    "savi": (7,),
+    "suvi": (7,),
+    "talvi": (7,),
+    "torvi": (7,),
+    "tyvi": (7,),
 
     # class 8
     # -VV
@@ -670,8 +965,49 @@ EXCEPTIONS = {
     "show": (22,),
     "tournedos": (22,),
 
+    # class 23
+    # -li
+    "tiili": (23,),
+    "tuli": (23,),
+    # -ni
+    "moni": (23,),
+
+    # class 24
+    # -li
+    "hiili": (24,),
+    "huuli": (24,),
+    # -ni
+    "uni": (24,),
+    # -si
+    "kusi": (24,),
+
+    # class 25
+    "lumi": (25,),
+    "taimi": (25,),
+
+    # class 26
+    # -li
+    "tuuli": (26,),
+    # -ni
+    "niini": (26,),
+    "tyyni": (26,),
+    "ääni": (26,),
+    # -si
+    "jousi": (26,),
+
+    # class 27
+    "hiisi": (27,),
+    "hopeakuusi": (27,),
+    "käsi": (27,),
+    "niisi": (27,),
+    "paasi": (27,),
+    "uusi": (27,),
+    "viisi": (27,),
+
+    # class 29
+    "lapsi": (29,),
+
     # class 30
-    "peitsi": (30,),
     "veitsi": (30,),
 
     # class 31
@@ -852,10 +1188,6 @@ ENDINGS = (
     # final consonant cluster or foreign final consonant (not l/n/r/s/t)
     (5,  r"([^aeiouyäö]{2}|[^aeiouyäölnrst])$"),
 
-    # -bA/-dA/-fA/-gA/-šA/-zA/-žA
-    (9,  r"[aei][^aeiouyäö]*[bdfgšzž]a$"),  # a/e/i + (C)(C)Ca (last C is foreign)
-    (10, r"[bdfgšzž]a$"),                   # -Ca              (C is foreign)
-
     # -hA
     (9,  r"([aei][nrs]?|[ai]u)ha$"),  # a(C)/e(C)/i(C)/au/iu + ha
     (10, r"h[aä]$"),                  # -hA
@@ -926,6 +1258,10 @@ ENDINGS = (
     (9,  r"(haa|au|[ai]i|[ai][hklrst])va$"),  # haa/au/ai/ii/aC/iC + va
     (10, r"v[aä]$"),                          # -vA
 
+    # -CA (C is foreign)
+    (9,  r"[aei][^aeiouyäö]+a$"),  # a/e/i + (C)(C)Ca
+    (10, r"[^aeiouyäö][aä]$"),     # -CA
+
     # -VV
     (3,  r"([aeiy]o|iö)$"),                  # -ao/-eo/-iO/-yo
     (21, r"(ou|[aeo]y)$"),                   # -ay/-ey/-oU
@@ -939,31 +1275,85 @@ ENDINGS = (
     (18, r"[aeiouyäö]{2}$"),                 # -VV
 
     # -e
-    (8,  "[cg]e$"),  # -ce/-ge
-    (49, "ere$"),    # -ere
-    (48, "e$"),      # -e
+    (8,  r"[cg]e$"),  # -ce/-ge
+    (49, r"ere$"),    # -ere
+    (48, r"e$"),      # -e
 
-    # -i
-    #
+    # -hi (TODO: fix)
+    (5,  r"hi$"),
+
+    # -ji
+    (6,  r"[^aeiouyäö]ji$"),  # -Cji
+    (5,  r"ji$"),
+
+    # -ki
+    (7,  r"[älrt]ki$"),
+    (5,  r"ki$"),
+
+    # -li
+    (26, r"^.(ie|uo)li$"),             # ?ieli/?uoli
+    (6,  r"^.{1,3}[^aeiouyäö]aali$"),  # ?(?)(?)Caali
+    (6,  r".[^aeiouyäö][aäeuy]li$"),   # -?CAli/-?Celi/-?CUli
+    (5,  r"li$"),                      # -li
+
+    # -mi
+    (25, r"^.(ie|uo|oi)mi$"),          # ?iemi/?uomi/?oimi
+    (6,  r"...[^aeiouyäö][aeuy]mi$"),  # -???Cami/-???Cemi/-???CUmi
+    (5,  r"mi$"),                      # -mi
+
+    # -ni
+    (26, r"(ie|uo)ni$"),                             # -ieni/-uoni
+    (7,  r"sini$"),                                  # -sini
+    (6,  r"^.{2,3}[^aeiouyäö](aa|ää|ee|ii|oo)ni$"),  # ??(?)C + AA/ee/ii/oo + ni
+    (5,  r"ni$"),                                    # -ni
+
+    # -pi (TODO: fix)
+    (5,  r"pi$"),
+
+    # -ri (TODO: fix)
+    (6,  r"ri$"),
+
+    # -si
     (24, r"kuusi$"),
-    (26, r"(kuo|vuo|juu)ri$"),
-    (5,  r"(ba|p|va)ari$"),
-    (5,  r"(ää)ri$"),
-    #
-    (27, r"(ei|au|äy|öy)si$"),  # ei/AU/öy + si
-    (28, r"[lnr]si$"),          # l/n/r + si
-    (6,  r"[aäe]ri$"),
-    (5,  r"i$"),
-    # TODO: continue from here
+    (5,  r"(ee|ii|oo|uu|yy)si$"),
+    (27, r"(e|ei|o|u|y)si$"),
+    (28, r"[lnr]si$"),
+    (5,  r"si$"),
 
-    (21, r"é$"),                                      # -é
-    (34, r"[aeiouyäö]t[oö]n$"),                       # -VtOn
-    (38, r"nen$"),                                    # -nen
-    (39, r"[^eiouyö][uy]s$"),                         # -AUs/-CUs
-    (40, r"[eiouyö][uy]s$"),                          # -eUs/-iUs/-OUs/-UUs
-    (41, r"[dghjklmnprstv][aä]s$"),                   # -CAs
-    (47, r"n[uy]t$"),                                 # -nUt
-    (49, r"el$"),                                     # -el
+    # -ti (TODO: fix)
+    (5,  r"ti$"),
+
+    # -vi
+    (7,  r"parvi$"),
+    (5,  r"vi$"),
+
+    # -O (TODO: fix)
+    (1,  r"[oö]$"),
+
+    # -U (TODO: fix)
+    (1,  r"u$"),
+    (2,  r"y$"),
+
+    # -é (TODO: fix)
+    (21, r"é$"),
+
+    # -l (TODO: fix)
+    (49, r"el$"),
+
+    # -n (TODO: fix)
+    (34, r"[aeiouyäö]t[oö]n$"),  # -VtOn
+    (38, r"nen$"),               # -nen
+
+    # -r (TODO: fix)
+    (32, r"r$"),
+
+    # -s (TODO: fix)
+    (40, r"[eiouyö][uy]s$"),     # -eUs/-iUs/-OUs/-UUs
+    (39, r"[uy]s$"),             # -Us
+    (41, r"[^aeiouyäö][aä]s$"),  # -CAs
+
+    # -t (TODO: fix)
+    (47, r"n[uy]t$"),
 )
 
 def get_noun_class(noun, useExceptions=True):
