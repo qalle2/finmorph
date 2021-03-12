@@ -31,6 +31,7 @@ def get_words():
 
 def main():
     verbCount = 0
+    errorCount = 0
 
     for (word, conjus) in get_words():
         if 52 <= conjus[0] <= 78:
@@ -40,15 +41,16 @@ def main():
 
             if not all(c in detectedConjus for c in conjus):
                 print(
-                    f"*** Error: '{word}': expected {conjusStr}, got {detectedConjusStr}",
+                    f"Error: '{word}': expected conjugation {conjusStr}, got {detectedConjusStr}",
                     file=sys.stderr
                 )
+                errorCount += 1
             elif len(conjus) < len(detectedConjus):
                 print(f"Note: '{word}': expected {conjusStr}, got {detectedConjusStr}")
 
             verbCount += 1
 
-    print(f"verbclass.py returned (at least) the correct conjugations for all {verbCount} verbs.")
+    print(f"Verbs checked: {verbCount}, errors: {errorCount}")
     print("Inspect the notes above to see if incorrect conjugations were returned too.")
 
 if __name__ == "__main__":

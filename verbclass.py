@@ -342,7 +342,7 @@ def main():
         sys.exit("Unrecognized verb.")
     for c in conjugations:
         (infinitive, past) = CLASS_DESCRIPTIONS[c]
-        print(f"class {c} (like '{infinitive}' (3SG past '{past}'))")
+        print(f'conjugation {c} (like "{infinitive}" (3SG past "{past}"))')
 
 if __name__ == "__main__":
     main()

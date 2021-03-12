@@ -4,26 +4,25 @@ Tools regarding the morphology of the Finnish language.
 I have used [the Finnish wordlist by Kotus](https://kaino.kotus.fi/sanat/nykysuomi/) when creating the programs.
 
 ## nounclass.py
-Get the Kotus conjugation class(es) of a Finnish noun/adjective (class 1&hellip;49). Argument: noun/adjective in nominative singular
-
-Note: This program is still at an early stage (it only gets ~81% of nouns right).
+Get the Kotus declension(s) (1&hellip;49) of a Finnish noun/adjective/pronoun/numeral. Argument: word in nominative singular
 
 Example:
 ```
-python3 nounclass.py "sana"
-class 9 (like 'kala' (genitive 'kalan', partitive 'kalaa'))
+$ python3 nounclass.py "kuusi"
+declension 24 (like "un|i, -en, -ien/-ten, -ta, -ia, -een, -iin")
+declension 27 (like "kä|si, -den, -sien/-tten, -ttä, -siä, -teen, -siin")
 ```
 
-TODO: print consonant gradation info
+To do: print consonant gradation info.
 
 ## verbclass.py
-Get the Kotus conjugation class(es) of a Finnish verb (class 52&hellip;78). Argument: verb in infinitive
+Get the Kotus conjugation(s) (52&hellip;78) of a Finnish verb. Argument: verb in infinitive
 
 Example:
 ```
-python3 verbclass.py "isota"
-class 72 (like 'vanheta' (3SG past 'vanheni'))
-class 74 (like 'katketa' (3SG past 'katkesi'))
+$ python3 verbclass.py "isota"
+conjugation 72 (like "vanheta" (3SG past "vanheni"))
+conjugation 74 (like "katketa" (3SG past "katkesi"))
 ```
 
-TODO: print consonant gradation info
+To do: print consonant gradation info.

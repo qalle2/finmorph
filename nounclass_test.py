@@ -41,9 +41,9 @@ def main():
             detectedConjusStr = "/".join(str(c) for c in detectedConjus)
 
             if not all(c in detectedConjus for c in conjus):
-                w = format(f"'{word}'", "<16s")
                 print(
-                    f"*** Error: {w}: expected {conjusStr}, got {detectedConjusStr}"
+                    f"Error: '{word}': expected declension {conjusStr}, got {detectedConjusStr}",
+                    file=sys.stderr
                 )
                 errorCount += 1
             elif len(conjus) < len(detectedConjus):
@@ -52,7 +52,7 @@ def main():
             nounCount += 1
 
     print(f"Nouns checked: {nounCount}, errors: {errorCount}")
-    print("Inspect the notes above to see if incorrect conjugations were returned too.")
+    print("Inspect the notes above to see if incorrect declensions were returned too.")
 
 if __name__ == "__main__":
     main()
