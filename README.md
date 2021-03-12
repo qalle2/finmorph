@@ -4,7 +4,7 @@ Tools regarding the morphology of the Finnish language.
 I have used [the Finnish wordlist by Kotus](https://kaino.kotus.fi/sanat/nykysuomi/) when creating the programs.
 
 ## nounclass.py
-Get the Kotus declension(s) (1&hellip;49) of a Finnish noun/adjective/pronoun/numeral. Argument: word in nominative singular
+Get the Kotus declension(s) (1&hellip;49) of a Finnish noun (including adjectives/pronouns/numerals). Argument: noun in nominative singular
 
 Example:
 ```
