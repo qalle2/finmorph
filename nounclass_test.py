@@ -34,7 +34,7 @@ def main():
     errorCount = 0
 
     for (word, correctDeclensions) in get_nouns():
-        detectedDeclensions = nounclass.get_noun_class(word)
+        detectedDeclensions = nounclass.get_declensions(word)
         correctDeclStr  = "/".join(str(c) for c in sorted(correctDeclensions))
         detectedDeclStr = "/".join(str(c) for c in sorted(detectedDeclensions))
 

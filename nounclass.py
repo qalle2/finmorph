@@ -8,7 +8,7 @@ import sys
 # Forms: nominative sg, genitive sg, genitive pl, partitive sg, partitive pl, illative sg,
 # illative pl.
 # No genitive plurals that end with -in or -itten.
-CLASS_DESCRIPTIONS = {
+DECLENSION_DESCRIPTIONS = {
     1:  "valo, -n, -jen, -a, -ja, -on, -ihin",
     2:  "palvelu, -n, -jen/-iden, -a, -ja/-ita, -un, -ihin",
     3:  "valtio, -n, -iden, -ta, -ita, -on, -ihin",
@@ -1910,7 +1910,7 @@ RULES = (
     (1,  r"[oöuy]t$"),        # -Ot/-Ut
 )
 
-def get_noun_class(noun, useExceptions=True):
+def get_declensions(noun, useExceptions=True):
     """noun: a Finnish noun in nominative singular (or plural if singular isn't used)
     return: set of 0...2 Kotus declensions (each 1...49)"""
 
@@ -1935,7 +1935,7 @@ def check_redundant_exceptions():
     """Are there redundant exceptions (same conjugation class as the rules would indicate)?"""
 
     for noun in EXCEPTIONS:
-        detectedDeclensions = get_noun_class(noun, False)
+        detectedDeclensions = get_declensions(noun, False)
         if detectedDeclensions and EXCEPTIONS[noun] == list(detectedDeclensions)[0]:
             print(f"Redundant exception: '{noun}'")
 
@@ -1949,11 +1949,11 @@ def main():
         )
     noun = sys.argv[1]
 
-    conjugations = get_noun_class(noun)
-    if len(conjugations) == 0:
+    declensions = get_declensions(noun)
+    if not declensions:
         sys.exit("Unrecognized noun.")
-    for c in conjugations:
-        print(f'declension {c} (like "{CLASS_DESCRIPTIONS[c]}")')
+    for d in declensions:
+        print(f'declension {d} (like "{DECLENSION_DESCRIPTIONS[d]}")')
 
 if __name__ == "__main__":
     main()
