@@ -30,8 +30,7 @@ def get_nouns():
                 yield (match1.group(1), {int(match1.group(2))})
 
 def main():
-    nounCount = 0
-    errorCount = 0
+    nounCount = errorCount = 0
 
     for (word, correctDeclensions) in get_nouns():
         detectedDeclensions = nounclass.get_declensions(word)

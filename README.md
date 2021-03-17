@@ -13,7 +13,7 @@ declension 24 (like "un|i, -en, -ien/-ten, -ta, -ia, -een, -iin")
 declension 27 (like "kä|si, -den, -sien/-tten, -ttä, -siä, -teen, -siin")
 ```
 
-To do: print consonant gradation info.
+To do: find more patterns to reduce number of exceptions; print consonant gradation info.
 
 ## verbclass.py
 Get the Kotus conjugation(s) (52&hellip;78) of a Finnish verb. Argument: verb in infinitive
@@ -25,4 +25,4 @@ conjugation 72 (like "vanheta" (3SG past "vanheni"))
 conjugation 74 (like "katketa" (3SG past "katkesi"))
 ```
 
-To do: print consonant gradation info.
+To do: print more verb forms; print consonant gradation info.

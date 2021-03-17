@@ -1,10 +1,10 @@
-"""Get the Kotus conjugation class of a Finnish noun.
+"""Get the Kotus declension of a Finnish noun.
 Note: A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant"""
 
 import re
 import sys
 
-# A typical noun in each class (from Kotus).
+# A typical noun in each declension.
 # Forms: nominative sg, genitive sg, genitive pl, partitive sg, partitive pl, illative sg,
 # illative pl.
 # No genitive plurals that end with -in or -itten.
@@ -1725,10 +1725,9 @@ EXCEPTIONS = {
     "show": 22,
 }
 
-# conjugation class, regex
+# declension, regex
+# note: each regex must apply to at least three words
 RULES = (
-    # note: each regex must apply to at least three words
-
     # === -A ===
 
     (9,  r"([aei][nrs]?|[ai]u)ha$"),  # a(C)/e(C)/i(C)/au/iu + ha
@@ -1929,10 +1928,10 @@ def get_declensions(noun, useExceptions=True):
         if re.search(regex, noun) is not None:
             return {declension}
 
-    return {}
+    return set()
 
 def check_redundant_exceptions():
-    """Are there redundant exceptions (same conjugation class as the rules would indicate)?"""
+    """Are there redundant exceptions (same declension as the rules would indicate)?"""
 
     for noun in EXCEPTIONS:
         detectedDeclensions = get_declensions(noun, False)
@@ -1944,8 +1943,7 @@ def main():
 
     if len(sys.argv) != 2:
         sys.exit(
-            "Get Kotus conjugation class(es) of a Finnish noun. "
-            "Argument: noun in nominative singular"
+            "Get Kotus declension(s) of a Finnish noun. Argument: noun in nominative singular"
         )
     noun = sys.argv[1]
 
