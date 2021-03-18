@@ -1,0 +1,49 @@
+"""Test nounclass.py or verbclass.py using a list of words created with extract_words.sh."""
+
+import sys
+
+def format_list(list_):
+    return "/".join(str(item) for item in sorted(list_))
+
+# validate argument count
+if len(sys.argv) != 2:
+    sys.exit("Test nounclass.py (argument 'n') or verbclass.py (argument 'v').")
+
+# import module to test
+if sys.argv[1] == "n":
+    from nounclass import get_declensions as detect_conjugation
+    filename = "nouns.txt"
+elif sys.argv[1] == "v":
+    from verbclass import get_conjugations as detect_conjugation
+    filename = "verbs.txt"
+else:
+    sys.exit("Invalid command line argument.")
+
+wordCount = errorCount = warnCount = 0
+
+with open(filename, "rt", encoding="utf8") as handle:
+    handle.seek(0)
+    for line in handle:
+        # parse line to get word and correct declensions/conjugations
+        (word, conjugations) = line.rstrip().split(";")
+        conjugations = {int(c) for c in conjugations.split(",")}
+        # also detect declensions/conjugations using module
+        detectedConjugations = detect_conjugation(word)
+        # print error/warning
+        if not detectedConjugations.issuperset(conjugations):
+            print(
+                f"ERROR: '{word}': expected conjugation(s) {format_list(conjugations)}, "
+                f"got {format_list(detectedConjugations)}",
+                file=sys.stderr
+            )
+            errorCount += 1
+        elif detectedConjugations != conjugations:
+            print(
+                f"Warning: '{word}': expected conjugation(s) {format_list(conjugations)}, "
+                f"got {format_list(detectedConjugations)}",
+                file=sys.stderr
+            )
+            warnCount += 1
+        wordCount += 1
+
+print(f"Words: {wordCount}, errors: {errorCount}, warnings: {warnCount}")
