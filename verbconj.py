@@ -4,33 +4,34 @@ Note: A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant"""
 import re
 import sys
 
-# a typical verb in each conjugation, in infinitive and 3SG past (from Kotus)
+# a typical verb in each conjugation; forms: infinitive, 1SG present, 3SG past, 3SG conditional,
+# 3SG imperative, singular perfect, passive past
 CONJUGATION_DESCRIPTIONS = {
-    52: ("sanoa",     "sanoi"),
-    53: ("muistaa",   "muisti"),
-    54: ("huutaa",    "huusi"),
-    55: ("soutaa",    "souti/sousi"),
-    56: ("kaivaa",    "kaivoi"),
-    57: ("saartaa",   "saarsi/saartoi"),
-    58: ("laskea",    "laski"),
-    59: ("tuntea",    "tunsi"),
-    60: ("lähteä",    "lähti/(läksi)"),
-    61: ("sallia",    "salli"),
-    62: ("voida",     "voi"),
-    63: ("saada",     "sai"),
-    64: ("juoda",     "joi"),
-    65: ("käydä",     "kävi"),
-    66: ("rohkaista", "rohkaisi"),
-    67: ("tulla",     "tuli"),
-    68: ("tupakoida", "tupakoi/(tupakoitsi)"),
-    69: ("valita",    "valitsi"),
-    70: ("juosta",    "juoksi"),
-    71: ("nähdä",     "näki"),
-    72: ("vanheta",   "vanheni"),
-    73: ("salata",    "salasi"),
-    74: ("katketa",   "katkesi"),
-    75: ("selvitä",   "selvisi"),
-    76: ("taitaa",    "taisi"),
+    52: "sano|a, -n, -i, -isi, -koon, -nut, -ttiin",
+    53: "muist|aa, -an, -i, -aisi, -akoon, -anut, -ettiin",
+    54: "huu|taa, -dan, -si, -taisi, -takoon, -tanut, -dettiin",
+    55: "sou|taa, -dan, -ti/-si, -taisi, -takoon, -tanut, -dettiin",
+    56: "kaiv|aa, -an, -oi, -aisi, -akoon, -anut, -ettiin",
+    57: "saar|taa, -ran, -si/-toi, -taisi, -takoon, -tanut, -rettiin",
+    58: "lask|ea, -en, -i, -isi, -ekoon, -enut, -ettiin",
+    59: "tun|tea, -nen, -si, -tisi, -tekoon, -tenut, -nettiin",
+    60: "lä|hteä, -hden, -hti/-ksi, -htisi, -hteköön, -htenyt, -hdettiin",
+    61: "sall|ia, -in, -i, -isi, -ikoon, -inut, -ittiin",
+    62: "vo|ida, -in, -i, -isi, -ikoon, -inut, -itiin",
+    63: "sa|ada, -an, -i, -isi, -akoon, -anut, -atiin",
+    64: "j|uoda, -uon, -oi, -oisi, -uokoon, -uonut, -uotiin",
+    65: "kä|ydä, -yn, -vi, -visi, -yköön, -ynyt, -ytiin",
+    66: "rohkais|ta, -en, -i, -isi, -koon, -sut, -tiin",
+    67: "tul|la, -en, -i, -isi, -koon, -lut, -tiin",
+    68: "tupakoi|da, -(tse)n, -(tsi), -(tsi)si, -koon, -nut, -tiin",
+    69: "vali|ta, -tsen, -tsi, -tsisi, -tkoon, -nnut, -ttiin",
+    70: "juo|sta, -ksen, -ksi, -ksisi, -skoon, -ssut, -stiin",
+    71: "nä|hdä, -en, -ki, -kisi, -hköön, -hnyt, -htiin",
+    72: "vanhe|ta, -nen, -ni, -nisi, -tkoon, -nnut, -ttiin",
+    73: "sala|ta, -an, -si, -isi, -tkoon, -nnut, -ttiin",
+    74: "katke|ta, -an, -si, -(a)isi, -tkoon, -nnut, -ttiin",
+    75: "selvi|tä, -än, -si, -äisi, -tköön, -nnyt, -ttiin",
+    76: "tai|taa, -dan, -si, -taisi, -takoon, -nnut/-tanut, -dettiin",
 }
 
 # key = verb, value = set of conjugations
@@ -343,8 +344,7 @@ def main():
     if not conjugations:
         sys.exit("Unrecognized verb.")
     for c in conjugations:
-        (infinitive, past) = CONJUGATION_DESCRIPTIONS[c]
-        print(f'conjugation {c} (like "{infinitive}" (3SG past "{past}"))')
+        print(f'conjugation {c} (like "{CONJUGATION_DESCRIPTIONS[c]}")')
 
 if __name__ == "__main__":
     main()

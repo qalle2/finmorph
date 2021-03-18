@@ -23,13 +23,13 @@ Get the Kotus conjugation(s) (52&hellip;78) of a Finnish verb. Argument: verb in
 Example:
 ```
 $ python3 verbconj.py "isota"
-conjugation 72 (like "vanheta" (3SG past "vanheni"))
-conjugation 74 (like "katketa" (3SG past "katkesi"))
+conjugation 72 (like "vanhe|ta, -nen, -ni, -nisi, -tkoon, -nnut, -ttiin")
+conjugation 74 (like "katke|ta, -an, -si, -(a)isi, -tkoon, -nnut, -ttiin")
 ```
 
 See also `test.py`.
 
-To do: print more verb forms; print consonant gradation info.
+To do: print consonant gradation info.
 
 ## test.py
 Test whether `noundecl.py` and `verbconj.py` work correctly. You need to create the input files
