@@ -1,5 +1,4 @@
-"""Read Kotus XML file from stdin, print words in specified declensions/conjugations.
-(For creating quick-to-parse test files for nounclass_test.py and verbclass_test.py.)"""
+"""Read Kotus XML file from stdin, print words in specified declensions/conjugations."""
 
 import re
 import sys

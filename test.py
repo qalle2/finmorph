@@ -1,4 +1,4 @@
-"""Test nounclass.py or verbclass.py using a list of words created with extract_words.sh."""
+"""Test noundecl.py or verbconj.py using a list of words created with extract_words.sh."""
 
 import sys
 
@@ -7,14 +7,14 @@ def format_list(list_):
 
 # validate argument count
 if len(sys.argv) != 2:
-    sys.exit("Test nounclass.py (argument 'n') or verbclass.py (argument 'v').")
+    sys.exit("Test noundecl.py (argument 'n') or verbconj.py (argument 'v').")
 
 # import module to test
 if sys.argv[1] == "n":
-    from nounclass import get_declensions as detect_conjugation
+    from noundecl import get_declensions as detect_conjugation
     filename = "nouns.txt"
 elif sys.argv[1] == "v":
-    from verbclass import get_conjugations as detect_conjugation
+    from verbconj import get_conjugations as detect_conjugation
     filename = "verbs.txt"
 else:
     sys.exit("Invalid command line argument.")
