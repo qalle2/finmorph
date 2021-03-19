@@ -131,41 +131,185 @@ MULTI_DECLENSION_NOUNS = {
 }
 
 # exceptions to rules (key = noun, value = declension)
-# order: first by ending, then by declension, then alphabetically
 EXCEPTIONS = {
-    # -AA/-ee/-OO/-UU
-    "ei-kenenkään-maa": 18,
-    "frisbee": 18,
-    "gnuu": 18,
-    "homssantuu": 18,
-    "huuhaa": 18,
-    "jöö": 18,
-    "kanapee": 18,
-    "köö": 18,
-    "munaskuu": 18,
-    "pee": 18,
-    "peeaa": 18,
-    "pelakuu": 18,
-    "puusee": 18,
-    "rokokoo": 18,
-    "tee": 18,
-    "tenkkapoo": 18,
-    #
-    "miljöö": 20,
-    "nugaa": 20,
-    "politbyroo": 20,
-    "raguu": 20,
-    "sampoo": 20,
-    "trikoo": 20,
-    "voodoo": 20,
-    #
-    "tax-free": 21,
+    # === Unique combinations of *two-letter* ending and declension ===
 
-    # -VA (not -AA)
-    "dia": 9,
+    # For example, "nugaa" is the only word that both ends with -aa and is in declension 20.
+    # a/ä, o/ö, u/y, uppercase/lowercase distinguished. Order: ending backwards, declension.
+
+    "nugaa": 20,
+    "reseda": 13,
+    "cha-cha-cha": 21,
+    "media": 13,
+    "paranoia": 10,
+    "judoka": 11,
+    "salama": 12,
+    "ainoa": 15,
+    "ulappa": 14,
+    "mimoosa": 11,
+    "hänenlaisensa": 38,
     "maya": 9,
-    "odysseia": 9,
+    "pizza": 9,
+
+    "kebab": 5,
+
+    "armagnac": 5,
+
+    "skinhead": 5,
+    "LED": 5,
+    "apartheid": 5,
+    "talmud": 5,
+
+    "reggae": 21,
+    "bébé": 21,
+    "tax-free": 21,
+    "tie": 19,
+    "koe": 48,
+    "coupé": 21,
+    "moiré": 21,
+    "rosé": 21,
+    "fondue": 21,
+    "säe": 48,
+
+    "golf": 5,
+
+    "ajatollah": 5,
+    "squash": 5,
+
+    "ruuhi": 24,
+    "LYHKI": 5,
+    "veli": 7,
+    "uni": 24,
+    "moni": 23,
+    "minunlaiseni": 38,
+    "jousi": 26,
+    "lapsi": 29,
+    "sinunlaisesi": 38,
+    "paaši": 5,
+    "tienesti": 6,
+    "ratatui": 18,
+    "oliivi": 6,
+    "kiwi": 5,
+    "paparazzi": 5,
+    "täi": 18,
+
+    "telemark": 5,
+    "tomahawk": 5,
+
+    "rial": 6,
+    "diesel": 6,
+    "cocktail": 5,
+    "soul": 5,
+
+    "edam": 6,
+    "tandem": 6,
+    "requiem": 5,
+    "simsalabim": 5,
+    "napalm": 5,
+    "CD-ROM": 5,
+    "liirumlaarum": 6,
+    "ångström": 6,
+
+    "donjuan": 6,
+    "kahdeksan": 10,
+    "kumpikaan": 16,
+    "kumpainenkaan": 38,
+    "vasen": 37,
+    "design": 5,
+    "lämmin": 35,
+    "kumpikin": 16,
+    "laidun": 33,
+    "sydän": 33,
+
+    "plasebo": 2,
+    "go-go": 18,
+    "navaho": 2,
+    "navajo": 2,
+    "duo": 1,
+    "angervo": 2,
+    "embryo": 3,
+
+    "quickstep": 5,
+    "gallup": 6,
+
+    "AIDS": 5,
+    "mies": 42,
+    "jiddiš": 5,
+    "calvados": 5,
+    "tournedos": 22,
+    "chips": 5,
+    "slivovits": 5,
+    "borštš": 5,
+    "vantus": 41,
+    "couscous": 5,
+
+    "tuhat": 46,
+    "nougat": 22,
+    "oltavat": 10,
+    "aktiivat": 13,
+    "molemmat": 16,
+    "rintsikat": 14,
+    "bileet": 20,
+    "liittoutuneet": 47,
+    "copyright": 5,
+    "parfait": 22,
+    "tarot": 5,
+    "kapiot": 3,
+    "pippalot": 2,
+    "talkoot": 17,
+    "illatsut": 2,
+    "port salut": 22,
+    "passepartout": 22,
+    "ragoût": 22,
+    "rynttyyt": 41,
+    "hynttyyt": 17,
+    "häät": 18,
+
+    "tau": 18,
+    "ecu": 1,
+    "kakadu": 2,
+    "tofu": 1,
+    "kung-fu": 21,
+    "spurgu": 1,
+    "tiu": 18,
+    "kikuju": 2,
+    "clou": 21,
+    "kiiru": 48,
+    "kenguru": 2,
+    "raguu": 20,
+
+    "stroganov": 5,
+    "bungalow": 5,
+
+    "thorax": 5,
+    "lux": 5,
+    "bordeaux": 22,
+
+    "jazz": 5,
+
+    "iskä": 9,
+    "käpälä": 11,
+    "siivilä": 13,
+    "kärhämä": 11,
+    "päällystä": 13,
+
+    "dödö": 1,
+    "kylvö": 1,
+    "miljöö": 20,
+
+    # === Other: -A ===
+
+    # -aa
+    "ei-kenenkään-maa": 18,
+    "huuhaa": 18,
+    "peeaa": 18,
+
+    # -da
+    "sekunda": 9,
     #
+    "pomada": 10,
+
+    # -ea
     "aramea": 12,
     "bougainvillea": 12,
     "idea": 12,
@@ -177,138 +321,343 @@ EXCEPTIONS = {
     #
     "atsalea": 13,
     "attasea": 13,
-    "media": 13,
     "orkidea": 13,
-    #
-    "ainoa": 15,
 
-    # -Ve (not -ee)
-    "aaloe": 3,
-    "collie": 3,
-    "lassie": 3,
-    "oboe": 3,
-    "zombie": 3,
-    #
-    "boutique": 8,
-    "petanque": 8,
-    #
-    "tie": 19,
-    #
-    "brasserie": 21,
-    "brie": 21,
-    "fondue": 21,
-    "reggae": 21,
+    # -fa
+    "lymfa": 9,
 
-    # -VO (not -OO)
-    "adagio": 1,
-    "duo": 1,
-    "trio": 1,
+    # -ga
+    "kollega": 13,
+    "malaga": 13,
+    "oomega": 13,
 
-    # -hV
-    "navaho": 2,
-    #
-    "crème fraîche": 8,
-    "quiche": 8,
-    #
-    "cha-cha-cha": 21,
-    #
-    "ruuhi": 24,
+    # -ia
+    "dia": 9,
+    "odysseia": 9,
 
-    # -jA
-    "akileija": 9,
-    "dreija": 9,
-    "faija": 9,
-    "keija": 9,
+    # -aja
     "laaja": 9,
-    "leija": 9,
-    "maija": 9,
     "maja": 9,
     "paja": 9,
-    "papukaija": 9,
     "raaja": 9,
-    "sija": 9,
     "taaja": 9,
-    "tyyssija": 9,
     "vaja": 9,
     #
     "nauraja": 10,
     #
     "apaja": 11,
+
+    # -ija
+    "akileija": 9,
+    "dreija": 9,
+    "faija": 9,
+    "keija": 9,
+    "leija": 9,
+    "maija": 9,
+    "papukaija": 9,
+    "sija": 9,
+    "tyyssija": 9,
+    #
     "leukoija": 11,
+    #
+    "papaija": 13,
+
+    # -lja
     #
     "kanalja": 12,
     "persilja": 12,
     #
     "mantilja": 13,
-    "papaija": 13,
     "vanilja": 13,
 
-    # -jV (not -jA)
-    "navajo": 2,
-    "kikuju": 2,
-
-    # -kkA
-    "avotakka": 9,
-    "flikka": 9,
-    "harmonikka": 9,
-    "plikka": 9,
-    "prikka": 9,
-    "vesivaippatakka": 9,
+    # -kka
+    "hiuslakka": 9,
+    "nautiikka": 9,
+    "yövilkka": 9,
     #
-    "jöröjukka": 10,
-    "tiskijukka": 10,
+    "maankolkka": 10,
     #
-    "epiikka": 14,
-    "estetiikka": 14,
-    "etiikka": 14,
-    "fysiikka": 14,
-    "gotiikka": 14,
-    "grafiikka": 14,
-    "kämmekkä": 14,
-    "karonkka": 14,
-    "komiikka": 14,
-    "kopeekka": 14,
-    "lahokka": 14,
-    "logiikka": 14,
-    "lyriikka": 14,
-    "magiikka": 14,
-    "mahorkka": 14,
-    "marsalkka": 14,
-    "masurkka": 14,
-    "metriikka": 14,
-    "mimiikka": 14,
-    "mystiikka": 14,
-    "optiikka": 14,
-    "ötökkä": 14,
-    "plastiikka": 14,
-    "praktiikka": 14,
+    "estetiikka": 14,  # really? "estetiikoiden" sounds wrong
+    "jalkapatikka": 14,
+    "korvatillikka": 14,
+    "poliklinikka": 14,
     "psykometriikka": 14,
-    "rustiikka": 14,
-    "rytmiikka": 14,
-    "statiikka": 14,
-    "taktiikka": 14,
-    "tekniikka": 14,
-    "tragiikka": 14,
 
-    # -kA (not -kkA)
-    "iskä": 9,
-    "sekamelska": 9,
-    #
-    "judoka": 11,
+    # -ka (not -kka)
+    "seljanka": 9,
     #
     "ekliptika": 12,
     "paprika": 12,
     #
-    "heteka": 13,
-    "karahka": 13,
     "karakteristika": 13,
     "majolika": 13,
-    "musaka": 13,
     "psykofarmaka": 13,
-    "replika": 13,
-    "revohka": 13,
-    "toonika": 13,
-    "tunika": 13,
+    "skandinaaviska": 13,
+
+    # -AlA
+    "hankala": 10,
+    #
+    "kanala": 12,
+    "manala": 12,
+    "räkälä": 12,
+    #
+    "sairaala": 13,
+    "sikala": 13,
+
+    # -elA
+    "hopeahela": 9,
+    #
+    "hintelä": 10,
+    "nokkela": 10,
+    "ovela": 10,
+    "sukkela": 10,
+    "vikkelä": 10,
+    "äitelä": 10,
+    #
+    "kampela": 13,
+
+    # -ila
+    "apila": 13,
+    "manila": 13,
+    "takila": 13,
+
+    # -ola
+    "suola": 9,
+    #
+    "gorgonzola": 10,
+    "hyperbola": 10,
+    "karambola": 10,
+    #
+    "viola": 13,
+
+    # -llA
+    "papilla": 9,
+    "sinsilla": 9,
+    "tonsilla": 9,
+    #
+    "paella": 13,
+
+    # -mA
+    "auma": 9,
+    "dalai-lama": 9,
+    "kama": 9,
+    "lama": 9,
+    "lauma": 9,
+    "reuma": 9,
+    "sama": 9,
+    "sauma": 9,
+    "sialma": 9,
+    "talouslama": 9,
+    "trauma": 9,
+    #
+    "siunaama": 10,
+    "suuntima": 10,
+    "virtaama": 10,
+    #
+    "hekuma": 11,
+    "mahatma": 11,
+    "paatsama": 11,
+    "probleema": 11,
+    "ödeema": 11,
+    #
+    "karisma": 13,
+    "maailma": 13,
+    "suurima": 13,
+
+    # -nA
+    "ballerina": 9,
+    "ikebana": 9,
+    "lapsenkina": 9,
+    "medisiina": 9,
+    "okariina": 9,
+    #
+    "ihana": 10,
+    "kruuna": 10,
+    "kränä": 10,
+    "yliminä": 10,
+    #
+    "jellona": 11,
+    "korona": 11,
+    "lattana": 11,
+    "lättänä": 11,
+    "mammona": 11,
+    "marihuana": 11,
+    "maruna": 11,
+    "murena": 11,
+    "ohrana": 11,
+    "omena": 11,
+    "orpana": 11,
+    "papana": 11,
+    "pipana": 11,
+    "poppana": 11,
+    "sikuna": 11,
+    "täkänä": 11,
+    #
+    "harppuuna": 12,
+    #
+    "aivina": 13,
+    "aluna": 13,
+    "arina": 13,
+    "ipana": 13,
+    "kahina": 13,
+    "kohina": 13,
+    "kopina": 13,
+    "kuhina": 13,
+    "kärinä": 13,
+    "marina": 13,
+    "maukuna": 13,
+    "määkinä": 13,
+    "mölinä": 13,
+    "mörinä": 13,
+    "möyrinä": 13,
+    "paukkina": 13,
+    "perenna": 13,
+    "piekana": 13,
+    "porina": 13,
+    "rahina": 13,
+    "ramina": 13,
+    "reppana": 13,
+    "retsina": 13,
+    "ruutana": 13,
+    "smetana": 13,
+    "taverna": 13,
+    "tuoksina": 13,
+    "ukraina": 13,
+    "vagina": 13,
+
+    # -pA
+    "kauppa": 9,
+    #
+    "aikaansaapa": 10,
+
+    # -rA
+    "ahkera": 10,
+    "ankara": 10,
+    "avara": 10,
+    "eripura": 10,
+    "katkera": 10,
+    "koira": 10,
+    "kovera": 10,
+    "kumara": 10,
+    "kupera": 10,
+    "uuttera": 10,
+    #
+    "algebra": 11,
+    "äpärä": 11,
+    "hapera": 11,
+    "hatara": 11,
+    "hattara": 11,
+    "hutera": 11,
+    "itara": 11,
+    "käkkärä": 11,
+    "kihara": 11,
+    "kiverä": 11,
+    "mäkärä": 11,
+    "sikkara": 11,
+    "säkkärä": 11,
+    "tomera": 11,
+    "vanttera": 11,
+    "veiterä": 11,
+    #
+    "angora": 12,
+    "jäkkärä": 12,
+    "kamera": 12,
+    "kolera": 12,
+    "littera": 12,
+    "ooppera": 12,
+    "väkkärä": 12,
+    #
+    "gerbera": 13,
+    "hetaira": 13,
+    "ketara": 13,
+    "kitara": 13,
+    "madeira": 13,
+    "matara": 13,
+    "sikkura": 13,
+    "tempera": 13,
+    "vaahtera": 13,
+
+    # -sA
+    "mykorritsa": 9,
+    #
+    "meduusa": 13,
+    "vernissa": 13,
+
+    # -tA
+    "aortta": 9,
+    "kajuutta": 9,
+    "krypta": 9,
+    "valuutta": 9,
+    "ympärystä": 9,
+    #
+    "emäntä": 10,
+    "halveksunta": 10,
+    "huuhdonta": 10,
+    "hyväksyntä": 10,
+    "isäntä": 10,
+    "lyhyenläntä": 10,
+    "noita": 10,
+    "suunta": 10,
+    "väheksyntä": 10,
+    "vähäläntä": 10,
+    "vähänläntä": 10,
+    #
+    "lolita": 13,
+    "peseta": 13,
+    "sofista": 13,
+    #
+    "navetta": 14,
+    "ometta": 14,
+    "pohatta": 14,
+    "savotta": 14,
+
+    # -vA
+    "aava": 9,
+    "eeva": 9,
+    "guava": 9,
+    "iva": 9,
+    "kaava": 9,
+    "kiva": 9,
+    "klaava": 9,
+    "laava": 9,
+    "lava": 9,
+    "naava": 9,
+    "neva": 9,
+    "niva": 9,
+    "pehva": 9,
+    "terva": 9,
+    #
+    "murhaava": 10,
+    #
+    "ahava": 11,
+    "harava": 11,
+
+    # === Other: -e ===
+
+    # -de
+    "cum laude": 8,
+    "jade": 8,
+    "lande": 8,
+    "tilde": 8,
+
+    # -ee
+    "frisbee": 18,
+    "kanapee": 18,
+    "pee": 18,
+    "puusee": 18,
+    "tee": 18,
+
+    # -he
+    "crème fraîche": 8,
+    "quiche": 8,
+
+    # -ie
+    "collie": 3,
+    "lassie": 3,
+    "zombie": 3,
+    #
+    "brasserie": 21,
+    "brie": 21,
 
     # -ke
     "karaoke": 8,
@@ -317,6 +666,137 @@ EXCEPTIONS = {
     "nukke": 8,
     "psyyke": 8,
     "sake": 8,
+
+    # -le
+    "ale": 8,
+    "beagle": 8,
+    "chenille": 8,
+    "chippendale": 8,
+    "ensemble": 8,
+    "faksimile": 8,
+    "freestyle": 8,
+    "ginger ale": 8,
+    "joule": 8,
+    "kalle": 8,
+    "kellokalle": 8,
+    "mobile": 8,
+    "nalle": 8,
+    "pelle": 8,
+    "polle": 8,
+    "promille": 8,
+    "puzzle": 8,
+    "quenelle": 8,
+    "ratatouille": 8,
+    "single": 8,
+    "tabbule": 8,
+    "tagliatelle": 8,
+    "tele": 8,
+    "ukulele": 8,
+    "vaudeville": 8,
+    #
+    "askele": 49,
+    "kantele": 49,
+    "kyynele": 49,
+    "ompele": 49,
+    "petkele": 49,
+    "taipale": 49,
+    "seppele": 49,
+    "vempele": 49,
+
+    # -me
+    "lime": 8,
+    "madame": 8,
+    "ragtime": 8,
+    "saame": 8,
+
+    # -ne
+    "akne": 8,
+    "beguine": 8,
+    "deadline": 8,
+    "komedienne": 8,
+    "manne": 8,
+    "minestrone": 8,
+    "penne": 8,
+    "tragedienne": 8,
+    #
+    "hepene": 49,
+    "murene": 49,
+    "säkene": 49,
+
+    # -oe
+    "aaloe": 3,
+    "oboe": 3,
+
+    # -pe
+    "crêpe": 8,
+    "grape": 8,
+    "jeppe": 8,
+    "ope": 8,
+    "toope": 8,
+
+    # -re
+    "empire": 8,
+    "folklore": 8,
+    "force majeure": 8,
+    "genre": 8,
+    "gruyère": 8,
+    "hardware": 8,
+    "kurare": 8,
+    "kurre": 8,
+    "poplore": 8,
+    "software": 8,
+    #
+    "jäntere": 48,
+    "tere": 48,
+    #
+    "askare": 49,
+    "huhmare": 49,
+    "pientare": 49,
+    "saivare": 49,
+    "utare": 49,
+
+    # -se
+    "bavaroise": 8,
+    "bouillabaisse": 8,
+    "charlotte russe": 8,
+    "duchesse": 8,
+    "house": 8,
+    "itse": 8,
+    "mousse": 8,
+    "nasse": 8,
+    "nisse": 8,
+    "open house": 8,
+    "pose": 8,
+    "striptease": 8,
+
+    # -te
+    "à la carte": 8,
+    "andante": 8,
+    "bourette": 8,
+    "byte": 8,
+    "entrecôte": 8,
+    "forte": 8,
+    "karate": 8,
+    "mezzoforte": 8,
+    "poste restante": 8,
+    "raclette": 8,
+    "ringette": 8,
+    "vinaigrette": 8,
+
+    # -ue
+    "boutique": 8,
+    "petanque": 8,
+
+    # -ve
+    "agaave": 8,
+    "jive": 8,
+    "mangrove": 8,
+
+    # === Other: -i ===
+
+    # -di
+    "biljardi": 6,
+    "standardi": 6,
 
     # -ki
     "sutki": 5,
@@ -354,109 +834,6 @@ EXCEPTIONS = {
     "tunturinlaki": 7,
     "vaaranlaki": 7,
     "vaski": 7,
-
-    # -kkO
-    "baarimikko": 1,
-    "haaksirikko": 1,
-    "juhannuskokko": 1,
-    "keliaakikko": 1,
-    "koneikko": 1,
-    "kumpareikko": 1,
-    "laiskajaakko": 1,
-    "miljoonikko": 1,
-    "pantomiimikko": 1,
-    "papurikko": 1,
-    "paranooikko": 1,
-    "pateetikko": 1,
-    "petäjikkö": 1,
-    "poleemikko": 1,
-    "poliitikko": 1,
-    "pragmaatikko": 1,
-    "praktikko": 1,
-    "romantikko": 1,
-    "saraikko": 1,
-    "sarvijaakko": 1,
-    "semiootikko": 1,
-    "untuvikko": 1,
-    "uskalikko": 1,
-
-    # -lA
-    "hopeahela": 9,
-    "suola": 9,
-    #
-    "gorgonzola": 10,
-    "hankala": 10,
-    "hintelä": 10,
-    "hyperbola": 10,
-    "jumala": 10,
-    "jäkälä": 10,
-    "kamala": 10,
-    "karambola": 10,
-    "katala": 10,
-    "kavala": 10,
-    "matala": 10,
-    "nokkela": 10,
-    "ovela": 10,
-    "pykälä": 10,
-    "sukkela": 10,
-    "tukala": 10,
-    "vetelä": 10,
-    "vikkelä": 10,
-    "äitelä": 10,
-    #
-    "käpälä": 11,
-    #
-    "apila": 13,
-    "artikla": 13,
-    "gorilla": 13,
-    "kampela": 13,
-    "manila": 13,
-    "manilla": 13,
-    "mitella": 13,
-    "paella": 13,
-    "postilla": 13,
-    "sairaala": 13,
-    "siivilä": 13,
-    "sikala": 13,
-    "takila": 13,
-    "tortilla": 13,
-    "viola": 13,
-
-    # -le
-    "ale": 8,
-    "beagle": 8,
-    "chenille": 8,
-    "chippendale": 8,
-    "ensemble": 8,
-    "faksimile": 8,
-    "freestyle": 8,
-    "ginger ale": 8,
-    "joule": 8,
-    "kalle": 8,
-    "kellokalle": 8,
-    "mobile": 8,
-    "nalle": 8,
-    "pelle": 8,
-    "polle": 8,
-    "promille": 8,
-    "puzzle": 8,
-    "quenelle": 8,
-    "ratatouille": 8,
-    "single": 8,
-    "tabbule": 8,
-    "tagliatelle": 8,
-    "tele": 8,
-    "ukulele": 8,
-    "vaudeville": 8,
-    #
-    "askele": 49,
-    "kantele": 49,
-    "kyynele": 49,
-    "ompele": 49,
-    "petkele": 49,
-    "taipale": 49,
-    "seppele": 49,
-    "vempele": 49,
 
     # -li
     "amiraali": 5,
@@ -525,8 +902,6 @@ EXCEPTIONS = {
     "venttiili": 6,
     "vinyyli": 6,
     #
-    "veli": 7,
-    #
     "tiili": 23,
     "tuli": 23,
     #
@@ -534,59 +909,6 @@ EXCEPTIONS = {
     "huuli": 24,
     #
     "tuuli": 26,
-
-    # -lO
-    "alakulo": 1,
-    "auringonkilo": 1,
-    "neljänneskilo": 1,
-    "painokilo": 1,
-    "sigarillo": 1,
-    "staalo": 1,
-    "varttikilo": 1,
-
-    # -lU
-    "elostelu": 1,
-    "istuskelu": 1,
-    "kyhäily": 1,
-    #
-    "ajelu": 2,
-    "utelu": 2,
-
-    # -mA
-    "auma": 9,
-    "dalai-lama": 9,
-    "kama": 9,
-    "lama": 9,
-    "lauma": 9,
-    "reuma": 9,
-    "sama": 9,
-    "sauma": 9,
-    "sialma": 9,
-    "talouslama": 9,
-    "trauma": 9,
-    #
-    "siunaama": 10,
-    "suuntima": 10,
-    "virtaama": 10,
-    #
-    "hekuma": 11,
-    "kärhämä": 11,
-    "mahatma": 11,
-    "paatsama": 11,
-    "probleema": 11,
-    "ödeema": 11,
-    #
-    "salama": 12,
-    #
-    "karisma": 13,
-    "maailma": 13,
-    "suurima": 13,
-
-    # -me
-    "lime": 8,
-    "madame": 8,
-    "ragtime": 8,
-    "saame": 8,
 
     # -mi
     "monstrumi": 5,
@@ -626,91 +948,6 @@ EXCEPTIONS = {
     #
     "lumi": 25,
     "taimi": 25,
-
-    # -mO
-    "karkaisimo": 1,
-    "koksittamo": 1,
-    "lainaamo": 1,
-    "maammo": 1,
-    #
-    "asemo": 2,
-    "hiomo": 2,
-    "ohimo": 2,
-
-    # -nA
-    "ballerina": 9,
-    "ikebana": 9,
-    "lapsenkina": 9,
-    "medisiina": 9,
-    "okariina": 9,
-    #
-    "ihana": 10,
-    "kruuna": 10,
-    "kränä": 10,
-    "yliminä": 10,
-    #
-    "jellona": 11,
-    "korona": 11,
-    "lattana": 11,
-    "lättänä": 11,
-    "mammona": 11,
-    "marihuana": 11,
-    "maruna": 11,
-    "murena": 11,
-    "ohrana": 11,
-    "omena": 11,
-    "orpana": 11,
-    "papana": 11,
-    "pipana": 11,
-    "poppana": 11,
-    "sikuna": 11,
-    "täkänä": 11,
-    #
-    "harppuuna": 12,
-    #
-    "aivina": 13,
-    "aluna": 13,
-    "arina": 13,
-    "ipana": 13,
-    "kahina": 13,
-    "kohina": 13,
-    "kopina": 13,
-    "kuhina": 13,
-    "kärinä": 13,
-    "marina": 13,
-    "maukuna": 13,
-    "määkinä": 13,
-    "mölinä": 13,
-    "mörinä": 13,
-    "möyrinä": 13,
-    "paukkina": 13,
-    "perenna": 13,
-    "piekana": 13,
-    "porina": 13,
-    "rahina": 13,
-    "ramina": 13,
-    "reppana": 13,
-    "retsina": 13,
-    "ruutana": 13,
-    "smetana": 13,
-    "taverna": 13,
-    "tuoksina": 13,
-    "ukraina": 13,
-    "vagina": 13,
-
-    # -ne
-    "akne": 8,
-    "beguine": 8,
-    "deadline": 8,
-    "komedienne": 8,
-    "manne": 8,
-    "minestrone": 8,
-    "penne": 8,
-    "tragedienne": 8,
-    #
-    "hepene": 49,
-    "murene": 49,
-    "säkene": 49,
 
     # -ni
     "afgaani": 5,
@@ -813,38 +1050,9 @@ EXCEPTIONS = {
     "onni": 7,
     "saarni": 7,
     #
-    "moni": 23,
-    #
-    "uni": 24,
-    #
     "niini": 26,
     "tyyni": 26,
     "ääni": 26,
-    #
-    "minunlaiseni": 38,
-
-    # -nO
-    "andantino": 1,
-    "cappuccino": 1,
-    #
-    "kartano": 2,
-    "keltano": 2,
-    "kimono": 2,
-    "sopraano": 2,
-
-    # -pA
-    "kauppa": 9,
-    #
-    "aikaansaapa": 10,
-    #
-    "ulappa": 14,
-
-    # -pe
-    "crêpe": 8,
-    "grape": 8,
-    "jeppe": 8,
-    "ope": 8,
-    "toope": 8,
 
     # -pi
     "appi": 7,
@@ -857,74 +1065,6 @@ EXCEPTIONS = {
     "typpi": 7,
     #
     "kumpi": 16,
-
-    # -rA
-    "ahkera": 10,
-    "ankara": 10,
-    "avara": 10,
-    "eripura": 10,
-    "katkera": 10,
-    "koira": 10,
-    "kovera": 10,
-    "kumara": 10,
-    "kupera": 10,
-    "uuttera": 10,
-    #
-    "algebra": 11,
-    "äpärä": 11,
-    "hapera": 11,
-    "hatara": 11,
-    "hattara": 11,
-    "hutera": 11,
-    "itara": 11,
-    "käkkärä": 11,
-    "kihara": 11,
-    "kiverä": 11,
-    "mäkärä": 11,
-    "sikkara": 11,
-    "säkkärä": 11,
-    "tomera": 11,
-    "vanttera": 11,
-    "veiterä": 11,
-    #
-    "angora": 12,
-    "jäkkärä": 12,
-    "kamera": 12,
-    "kolera": 12,
-    "littera": 12,
-    "ooppera": 12,
-    "väkkärä": 12,
-    #
-    "gerbera": 13,
-    "hetaira": 13,
-    "ketara": 13,
-    "kitara": 13,
-    "madeira": 13,
-    "matara": 13,
-    "sikkura": 13,
-    "tempera": 13,
-    "vaahtera": 13,
-
-    # -re
-    "empire": 8,
-    "folklore": 8,
-    "force majeure": 8,
-    "genre": 8,
-    "gruyère": 8,
-    "hardware": 8,
-    "kurare": 8,
-    "kurre": 8,
-    "poplore": 8,
-    "software": 8,
-    #
-    "jäntere": 48,
-    "tere": 48,
-    #
-    "askare": 49,
-    "huhmare": 49,
-    "pientare": 49,
-    "saivare": 49,
-    "utare": 49,
 
     # -ri
     "editori": 5,
@@ -1015,42 +1155,6 @@ EXCEPTIONS = {
     "vieri": 26,
     "ääri": 26,
 
-    # -rO
-    "allegro": 1,
-    "autogiro": 1,
-    "bistro": 1,
-    "korohoro": 1,
-    "sombrero": 1,
-
-    # -rU
-    "kenguru": 2,
-    #
-    "kiiru": 48,
-
-    # -sA
-    "mykorritsa": 9,
-    #
-    "mimoosa": 11,
-    #
-    "meduusa": 13,
-    "vernissa": 13,
-    #
-    "hänenlaisensa": 38,
-
-    # -se
-    "bavaroise": 8,
-    "bouillabaisse": 8,
-    "charlotte russe": 8,
-    "duchesse": 8,
-    "house": 8,
-    "itse": 8,
-    "mousse": 8,
-    "nasse": 8,
-    "nisse": 8,
-    "open house": 8,
-    "pose": 8,
-    "striptease": 8,
-
     # -si
     "desi": 5,
     "kreisi": 5,
@@ -1089,8 +1193,6 @@ EXCEPTIONS = {
     #
     "kusi": 24,
     #
-    "jousi": 26,
-    #
     "hiisi": 27,
     "hopeakuusi": 27,
     "käsi": 27,
@@ -1099,77 +1201,129 @@ EXCEPTIONS = {
     "uusi": 27,
     "viisi": 27,
     #
-    "lapsi": 29,
-    #
     "veitsi": 30,
     #
     "haaksi": 31,
     "kaksi": 31,
     "yksi": 31,
+
+    # -ti
+    "haahti": 7,
+    "lehti": 7,
+    "lintulahti": 7,
+    "merenlahti": 7,
+    "tähti": 7,
+
+    # -vi
+    "hirvi": 7,
+    "järvi": 7,
+    "kivi": 7,
+    "lovi": 7,
+    "ovi": 7,
+    "pälvi": 7,
+    "pilvi": 7,
+    "polvi": 7,
+    "povi": 7,
+    "sarvi": 7,
+    "savi": 7,
+    "suvi": 7,
+    "talvi": 7,
+    "torvi": 7,
+    "tyvi": 7,
+
+    # === Other: -O ===
+
+    # -do
+    "aikido": 2,
+    "tornado": 2,
+    "torpedo": 2,
+
+    # -go
+    "hidalgo": 2,
+    "imago": 2,
+    "indigo": 2,
+    "origo": 2,
+
+    # -io
+    "adagio": 1,
+    "trio": 1,
+
+    # -kkO
+    "baarimikko": 1,
+    "haaksirikko": 1,
+    "juhannuskokko": 1,
+    "keliaakikko": 1,
+    "koneikko": 1,
+    "kumpareikko": 1,
+    "laiskajaakko": 1,
+    "miljoonikko": 1,
+    "pantomiimikko": 1,
+    "papurikko": 1,
+    "paranooikko": 1,
+    "pateetikko": 1,
+    "petäjikkö": 1,
+    "poleemikko": 1,
+    "poliitikko": 1,
+    "pragmaatikko": 1,
+    "praktikko": 1,
+    "romantikko": 1,
+    "saraikko": 1,
+    "sarvijaakko": 1,
+    "semiootikko": 1,
+    "untuvikko": 1,
+    "uskalikko": 1,
+
+    # -lO
+    "alakulo": 1,
+    "auringonkilo": 1,
+    "neljänneskilo": 1,
+    "painokilo": 1,
+    "sigarillo": 1,
+    "staalo": 1,
+    "varttikilo": 1,
+
+    # -mo
+    "karkaisimo": 1,
+    "koksittamo": 1,
+    "lainaamo": 1,
+    "maammo": 1,
     #
-    "sinunlaisesi": 38,
+    "asemo": 2,
+    "hiomo": 2,
+    "ohimo": 2,
+
+    # -nO
+    "andantino": 1,
+    "cappuccino": 1,
+    #
+    "kartano": 2,
+    "keltano": 2,
+    "kimono": 2,
+    "sopraano": 2,
+
+    # -OO
+    "jöö": 18,
+    "köö": 18,
+    "rokokoo": 18,
+    "tenkkapoo": 18,
+    #
+    "politbyroo": 20,
+    "sampoo": 20,
+    "trikoo": 20,
+    "voodoo": 20,
+
+    # -ro
+    "allegro": 1,
+    "autogiro": 1,
+    "bistro": 1,
+    "korohoro": 1,
+    "sombrero": 1,
 
     # -sO
     "calypso": 2,
     "espresso": 2,
     "pajatso": 2,
     "parnasso": 2,
-
-    # -sU
-    "huitaisu": 1,
-    "pliisu": 1,
-
-    # -tA
-    "aortta": 9,
-    "kajuutta": 9,
-    "krypta": 9,
-    "valuutta": 9,
-    "ympärystä": 9,
-    #
-    "emäntä": 10,
-    "halveksunta": 10,
-    "huuhdonta": 10,
-    "hyväksyntä": 10,
-    "isäntä": 10,
-    "lyhyenläntä": 10,
-    "noita": 10,
-    "suunta": 10,
-    "väheksyntä": 10,
-    "vähäläntä": 10,
-    "vähänläntä": 10,
-    #
-    "lolita": 13,
-    "peseta": 13,
-    "päällystä": 13,
-    "sofista": 13,
-    #
-    "navetta": 14,
-    "ometta": 14,
-    "pohatta": 14,
-    "savotta": 14,
-
-    # -te
-    "à la carte": 8,
-    "andante": 8,
-    "bourette": 8,
-    "byte": 8,
-    "entrecôte": 8,
-    "forte": 8,
-    "karate": 8,
-    "mezzoforte": 8,
-    "poste restante": 8,
-    "raclette": 8,
-    "ringette": 8,
-    "vinaigrette": 8,
-
-    # -ti
-    "tienesti": 6,
-    #
-    "haahti": 7,
-    "lehti": 7,
-    "lintulahti": 7,
-    "merenlahti": 7,
-    "tähti": 7,
 
     # -stO
     "astiasto": 1,
@@ -1218,157 +1372,77 @@ EXCEPTIONS = {
     "spiccato": 2,
     "transito": 2,
 
-    # -vA
-    "aava": 9,
-    "eeva": 9,
-    "guava": 9,
-    "iva": 9,
-    "kaava": 9,
-    "kiva": 9,
-    "klaava": 9,
-    "laava": 9,
-    "lava": 9,
-    "naava": 9,
-    "neva": 9,
-    "niva": 9,
-    "pehva": 9,
-    "terva": 9,
-    #
-    "murhaava": 10,
-    #
-    "ahava": 11,
-    "harava": 11,
+    # === Other: -U ===
 
-    # -ve
-    "agaave": 8,
-    "jive": 8,
-    "mangrove": 8,
+    # -lU
+    "elostelu": 1,
+    "istuskelu": 1,
+    "kyhäily": 1,
+    #
+    "ajelu": 2,
+    "utelu": 2,
 
-    # -vi
-    "oliivi": 6,
-    #
-    "hirvi": 7,
-    "järvi": 7,
-    "kivi": 7,
-    "lovi": 7,
-    "ovi": 7,
-    "pälvi": 7,
-    "pilvi": 7,
-    "polvi": 7,
-    "povi": 7,
-    "sarvi": 7,
-    "savi": 7,
-    "suvi": 7,
-    "talvi": 7,
-    "torvi": 7,
-    "tyvi": 7,
+    # -sU
+    "huitaisu": 1,
+    "pliisu": 1,
 
-    # -vO
-    "angervo": 2,
+    # -uu
+    "gnuu": 18,
+    "homssantuu": 18,
+    "munaskuu": 18,
+    "pelakuu": 18,
 
-    # -CV (C != h/j/k/l/m/n/p/r/s/t/v)
-    "aikido": 2,
-    "hidalgo": 2,
-    "imago": 2,
-    "indigo": 2,
-    "kakadu": 2,
-    "origo": 2,
-    "plasebo": 2,
-    "tornado": 2,
-    "torpedo": 2,
-    #
-    "biljardi": 6,
-    "standardi": 6,
-    #
-    "cum laude": 8,
-    "jade": 8,
-    "lande": 8,
-    "tilde": 8,
-    #
-    "lymfa": 9,
-    "sekunda": 9,
-    #
-    "pomada": 10,
-    #
-    "kollega": 13,
-    "malaga": 13,
-    "oomega": 13,
-    "reseda": 13,
-    #
-    "go-go": 18,
-    #
-    "kung-fu": 21,
+    # === Other: -C ===
 
-    # === -C ===
-
-    # -l
-    "becquerel": 5,
-    "cocktail": 5,
+    # -al
     "emmental": 5,
-    "gospel": 5,
     "kajal": 5,
-    "kennel": 5,
-    "mosel": 5,
     "pascal": 5,
     "sial": 5,
     "sisal": 5,
-    "soul": 5,
     "trial": 5,
-    #
-    "diesel": 6,
-    "rial": 6,
-    #
-    "nivel": 32,
-    "sävel": 32,
     #
     "sammal": 49,
     "taival": 49,
 
-    # -n
-    "drive-in": 5,
-    "eeden": 5,
-    "evergreen": 5,
-    "hymen": 5,
-    "kelvin": 5,
-    "loden": 5,
-    "maraton": 5,
-    "non-woven": 5,
-    "pinyin": 5,
-    "röntgen": 5,
-    "zen": 5,
+    # -el
+    "becquerel": 5,
+    "gospel": 5,
+    "kennel": 5,
+    "mosel": 5,
     #
-    "backgammon": 6,
-    "bourbon": 6,
-    "chanson": 6,
-    "donjuan": 6,
-    "kaanon": 6,
-    "lumen": 6,
-    "luumen": 6,
-    "nailon": 6,
-    "nelson": 6,
-    "nylon": 6,
-    "pyton": 6,
-    "stadion": 6,
-    "stilleben": 6,
-    "triatlon": 6,
-    #
-    "kahdeksan": 10,
+    "nivel": 32,
+    "sävel": 32,
+
+    # -An
     "seitsemän": 10,
     "yhdeksän": 10,
     #
-    "kumpikaan": 16,
-    "kumpikin": 16,
+    "hapan": 33,
+    "morsian": 33,
+
+    # -en
+    "eeden": 5,
+    "evergreen": 5,
+    "hymen": 5,
+    "loden": 5,
+    "non-woven": 5,
+    "röntgen": 5,
+    "zen": 5,
+    #
+    "lumen": 6,
+    "luumen": 6,
+    "stilleben": 6,
     #
     "kymmenen": 32,
     #
-    "hapan": 33,
-    "laidun": 33,
-    "morsian": 33,
-    "sydän": 33,
-    #
-    "alaston": 34,
-    #
-    "lämmin": 35,
+    "muren": 49,
+    "säen": 49,
+
+    # -in
+    "drive-in": 5,
+    "kelvin": 5,
+    "pinyin": 5,
     #
     "alin": 36,
     "enin": 36,
@@ -1382,39 +1456,46 @@ EXCEPTIONS = {
     "uloin": 36,
     "vanhin": 36,
     "ylin": 36,
-    #
-    "vasen": 37,
-    #
-    "kumpainenkaan": 38,
-    #
-    "muren": 49,
-    "säen": 49,
 
-    # -r
+    # -on
+    "maraton": 5,
+    #
+    "backgammon": 6,
+    "bourbon": 6,
+    "chanson": 6,
+    "kaanon": 6,
+    "nailon": 6,
+    "nelson": 6,
+    "nylon": 6,
+    "pyton": 6,
+    "stadion": 6,
+    "triatlon": 6,
+    #
+    "alaston": 34,
+
+    # -ar
     "cheddar": 5,
-    "cheerleader": 5,
-    "denier": 5,
-    "designer": 5,
-    "geisir": 5,
-    "genever": 5,
-    "geysir": 5,
-    "glamour": 5,
-    "helibor": 5,
-    "junior": 5,
-    "kašmir": 5,
-    "khmer": 5,
-    "košer": 5,
-    "mohair": 5,
     "par": 5,
-    "primus motor": 5,
-    "romadur": 5,
-    "senior": 5,
     #
     "agar": 6,
     "agar-agar": 6,
+    "sitar": 6,
+    #
+    "askar": 49,
+    "huhmar": 49,
+    "piennar": 49,
+    "saivar": 49,
+    "udar": 49,
+
+    # -er
+    "cheerleader": 5,
+    "denier": 5,
+    "designer": 5,
+    "genever": 5,
+    "khmer": 5,
+    "košer": 5,
+    #
     "appenzeller": 6,
-    "approbatur": 6,
-    "art director": 6,
     "babysitter": 6,
     "besserwisser": 6,
     "bestseller": 6,
@@ -1424,34 +1505,48 @@ EXCEPTIONS = {
     "copywriter": 6,
     "dealer": 6,
     "freelancer": 6,
-    "improbatur": 6,
     "kassler": 6,
     "laser": 6,
-    "laudatur": 6,
     "loafer": 6,
-    "nestor": 6,
     "outsider": 6,
     "rottweiler": 6,
     "schäfer": 6,
-    "sitar": 6,
     "snooker": 6,
     "tonic water": 6,
-    "tšador": 6,
-    "tutor": 6,
     "weber": 6,
     "vesper": 6,
     "voucher": 6,
     #
-    "askar": 49,
     "auer": 49,
-    "huhmar": 49,
     "kinner": 49,
     "manner": 49,
     "penger": 49,
-    "piennar": 49,
-    "saivar": 49,
     "tanner": 49,
-    "udar": 49,
+
+    # -ir
+    "geisir": 5,
+    "geysir": 5,
+    "kašmir": 5,
+    "mohair": 5,
+
+    # -or
+    "helibor": 5,
+    "junior": 5,
+    "primus motor": 5,
+    "senior": 5,
+    #
+    "art director": 6,
+    "nestor": 6,
+    "tšador": 6,
+    "tutor": 6,
+
+    # -ur
+    "glamour": 5,
+    "romadur": 5,
+    #
+    "approbatur": 6,
+    "improbatur": 6,
+    "laudatur": 6,
 
     # -VAs
     "iskias": 39,
@@ -1503,8 +1598,6 @@ EXCEPTIONS = {
     "kirves": 41,
     "äes": 41,
     #
-    "mies": 42,
-    #
     "kahdeksaskymmenes": 45,
     "kahdes": 45,
     "kahdeskymmenes": 45,
@@ -1534,11 +1627,6 @@ EXCEPTIONS = {
     "tiivis": 41,
     "tyyris": 41,
     "valmis": 41,
-
-    # -Os
-    "calvados": 5,
-    #
-    "tournedos": 22,
 
     # -AUs
     "ahnaus": 40,
@@ -1594,6 +1682,10 @@ EXCEPTIONS = {
     "saveus": 39,
     "tyveys": 39,
 
+    # -ius
+    "hius": 39,
+    "stradivarius": 39,
+
     # -OUs
     "holhous": 39,
     "ilmarosvous": 39,
@@ -1608,20 +1700,55 @@ EXCEPTIONS = {
     "rukous": 39,
     "tarjous": 39,
     "verhous": 39,
-    #
-    "couscous": 5,
 
-    # -Us (not -AUs/-eUs/-OUs)
-    "hius": 39,
+    # -uus
     "makuus": 39,
-    "stradivarius": 39,
+
+    # -At
+    "beat": 5,
+    "hi-hat": 5,
+    "trenchcoat": 5,
     #
-    "vantus": 41,
+    "bermudat": 9,
+    #
+    "atulat": 12,
+    "orgiat": 12,
+    #
+    "kevät": 44,
+    "venät": 44,
+
+    # -et
+    "debet": 5,
+    "ekstranet": 5,
+    "jet set": 5,
+    "knesset": 5,
+    "market": 5,
+    "offset": 5,
+    "skeet": 5,
+    "tiibet": 5,
+    "whippet": 5,
+    #
+    "sakset": 7,
+    #
+    "bänet": 8,
+    "ravet": 8,
+    #
+    "beignet": 22,
+    "bouquet": 22,
+    "buffet": 22,
+    "gourmet": 22,
+
+    # -it
+    #
+    "kutrit": 5,
+    "paarit": 5,
+    "sanskrit": 5,
+    #
+    "bikinit": 6,
+    "henkselit": 6,
 
     # -Ut
     "vällyt": 1,
-    #
-    "illatsut": 2,
     #
     "burnout": 5,
     "input": 5,
@@ -1629,11 +1756,6 @@ EXCEPTIONS = {
     "layout": 5,
     "output": 5,
     "stout": 5,
-    #
-    "hynttyyt": 17,
-    #
-    "passepartout": 22,
-    "port salut": 22,
     #
     "airut": 43,
     "ehyt": 43,
@@ -1648,79 +1770,7 @@ EXCEPTIONS = {
     "pehmyt": 43,
     "tiehyt": 43,
 
-    # -t (not -Ut)
-    #
-    "pippalot": 2,
-    #
-    "kapiot": 3,
-    #
-    "beat": 5,
-    "debet": 5,
-    "ekstranet": 5,
-    "hi-hat": 5,
-    "jet set": 5,
-    "knesset": 5,
-    "kutrit": 5,
-    "market": 5,
-    "offset": 5,
-    "paarit": 5,
-    "sanskrit": 5,
-    "skeet": 5,
-    "tarot": 5,
-    "tiibet": 5,
-    "trenchcoat": 5,
-    "whippet": 5,
-    #
-    "bikinit": 6,
-    "henkselit": 6,
-    #
-    "sakset": 7,
-    #
-    "bänet": 8,
-    "ravet": 8,
-    #
-    "bermudat": 9,
-    #
-    "oltavat": 10,
-    #
-    "atulat": 12,
-    "orgiat": 12,
-    #
-    "aktiivat": 13,
-    #
-    "rintsikat": 14,
-    #
-    "molemmat": 16,
-    #
-    "talkoot": 17,
-    #
-    "häät": 18,
-    #
-    "bileet": 20,
-    #
-    "beignet": 22,
-    "bouquet": 22,
-    "buffet": 22,
-    "gourmet": 22,
-    "nougat": 22,
-    "parfait": 22,
-    "ragoût": 22,
-    #
-    "kevät": 44,
-    "venät": 44,
-    #
-    "tuhat": 46,
-    #
-    "liittoutuneet": 47,
-
-    # -C (C != l/n/r/s/t)
-    "edam": 6,
-    "gallup": 6,
-    "liirumlaarum": 6,
-    "tandem": 6,
-    "ångström": 6,
-    #
-    "bordeaux": 22,
+    # -w
     "know-how": 22,
     "show": 22,
 }
@@ -1736,17 +1786,23 @@ RULES = (
     (12, r"(i|...n)j[aä]$"),        # -ijA/-???njA
     (9,  r"([aei][hlnrt]|ra)ja$"),  # -aC/-eC/-iC/-ra + ja
 
-    (9,  r"[aei][aeiu][^aeiouyäö]*ka$"),       # a/e/i + a/e/i/u + (C)(C)ka
-    (10, r"[aeiouyäö]{2}[^aeiouyäö]*k[aä]$"),  # VV              + (C)(C)kA
-    (13, r"....sk[aä]$"),                      # ????            + skA
-    (9,  r"....[lnp]akka$"),                   # ???? + la/na/pa + kka
-    (14, r"..[aäiuy]kk[aä]$"),                 # ??   + A/i/U    + kkA
-    (9,  r"[aei][^aeiouyäö]*ka$"),             # a/e/i           + (C)(C)ka
+    (
+        14,
+        r"^[^aeiouyäö]*([aeiouyäö][iu]?|aa|ää|ie|uo|yö)[^aeiouyäö]+"
+        r"([aeiouyäö]|ee|ii)[^aeiouyäö]?kk[aä]$"
+    ),  # trisyllabic -kkA
+    (
+        13, r"^[^aeiouyäö]*([aeiouyäö]|aa|ää|ei|oo)[^aeiouyäö]+[aeiouyäö][^aeiouyäö]*k[aä]$"
+    ),  # trisyllabic -kA
+    (10, r"[ou]i[^aeiouyäö]*ka$"),    # oi/ui + (C)(C)ka
+    (9,  r"[aei]u?[^aeiouyäö]*ka$"),  # a/e/i/au/eu/iu + (C)(C)ka
 
-    (10, r"(äi|[ou][ou]|[äöy]y)l[aä]$"),    # äi/oo/uo/OU/UU/äy + lA
-    (9,  r"[aeiou]{2}la$"),                 # -VVla
-    (12, r"...[aäeiouy]l[aä]$"),            # -???VlA
-    (9,  r"[aei][^aeiouyäö]*la$"),          # -a/-e/-i + (C)(C)la
+    (9,  r"([aeiou][ai]|[ae]u)la$"),                        # -Va/-Vi/-au/-eu + la
+    (10, r"[aeiouyäö]{2}l[aä]$"),                           # -VVlA
+    (10, r"^[^aeiouyäö][aeiouyäö][^aeiouyäö][aäe]l[aä]$"),  # CVC + Ala/elA
+    (12, r"...[aeiouyäö]l[aä]$"),                           # -???VlA
+    (13, r"^[^aeiouyäö]?[aeiouyäö][^aeiouyäö]+[aeiouyäö][^aeiouyäö]l[aä]$"),  # -ClA (trisyllabic)
+    (9,  r"[aei][^aeiouyäö]?la$"),                          # -a/-e/-i + (C)la
 
     (10, r"(...l|(ui|o|u)[^aeiouyäö]*)ma$"),  # -???lma/-ui(C)(C)ma/-o(C)(C)ma/-u(C)(C)ma
     (9,  r"(aa|ee|[^ou]i|[^aeiouyäö])ma$"),   # -aama/-eema/-ima/-Cma (not -oima/-uima)
@@ -1775,9 +1831,9 @@ RULES = (
 
     (9,  r"(haa|au|[ai]i|[ai][^aeiouyäö])va$"),  # haa/au/ai/ii/aC/iC + va
 
-    (9,  r"[aei][^aeiouyäö]*[bdfgšzž]a$"),  # a/e/i + (C)(C) + ba/da/fa/ga/ša/za/ža
+    (9,  r"[aei][^aeiouyäö]*[bdfgšž]a$"),  # a/e/i + (C)(C) + ba/da/fa/ga/ša/ža
 
-    (10, r"oi?a$"),                          # -oa/-oia
+    (10, r"oa$"),                            # -oa
     (12, r"(i[aä]|ua|[^aeiouyäö][nr]ea)$"),  # -iA/-ua/-Cnea/-Crea
     (15, r"e[aä]$"),                         # -eA
     (17, r"..aa$"),                          # -??aa
@@ -1787,10 +1843,10 @@ RULES = (
 
     # === -e ===
 
-    (20, r"..ee$"),       # -ee
-    (8,  r"(c|g|gn)e$"),  # -ce/-ge/-gne
-    (49, r"ere$"),        # -ere
-    (48, r"e$"),          # -e
+    (20, r"..ee$"),                 # -ee
+    (8,  r"(c|g|gn)e$"),            # -ce/-ge/-gne
+    (49, r"ere$"),                  # -ere
+    (48, r"[aiuydhjklmnprstv]e$"),  # -e
 
     # === -i ===
 
@@ -1827,8 +1883,8 @@ RULES = (
 
     (7,  r"parvi$"),  # -parvi
 
-    (18, r"[aeiouyäö]i$"),  # -Vi
-    (5,  r"i$"),            # -i
+    (18, r"[aeio]i$"),             # -ai/-ei/-ii/-oi
+    (5,  r"[bdfghjklmnprstv]i$"),  # -Ci
 
     # === -O ===
 
@@ -1841,72 +1897,68 @@ RULES = (
     (2,  r"^.{4,5}st[oö]$"),                           # ????(?)stO
     (2,  r"^[aeiouyäö][^aeiouyäö][aeiouyäö]st[oö]$"),  # VCVstO
 
-    (2,  r"...(.[lmr]|i[ns])[oö]$"),  # -??? + ?lO/?mO/?rO/inO/isO
+    (2,  r"...(.[lmr]|in|is)o$"),  # -??? + ?lo/?mo/?ro/ino/iso
+    (2,  r"...[äei][lmrs]ö$"),     # -??? + ä/e/i + lö/mö/rö/sö
 
-    (17, r"oo$"),              # -oo
-    (19, r"(uo|yö)$"),         # -UO
-    (3,  r"[aeiouyäö][oö]$"),  # -VO
-    (1,  r"[oö]$"),            # -O
+    (17, r"oo$"),                 # -oo
+    (19, r"(uo|yö)$"),            # -UO
+    (3,  r"([aei]o|iö)$"),        # -ao/-eo/-iO
+    (1,  r"(o|[hjklmnprst]ö)$"),  # -o/-Cö
 
     # === -U ===
 
-    (17, r"..uu$"),            # -??uu
-    (20, r"..yy$"),            # -??yy
-    (18, r"([aiu]u|yy)$"),     # -au/-iu/-UU
-    (21, r"[aeiouyäö][uy]$"),  # -VU
+    (17, r"..uu$"),     # -??uu
+    (20, r"..yy$"),     # -??yy
+    (18, r"(uu|yy)$"),  # -UU
+    (21, r"[aeo]y$"),   # -ay/-ey/-oy
 
-    (2,  r"...[ei][ls][uy]$"),  # -??? + e/i + lU/sU
+    (2,  r"...(el|il|is)[uy]$"),    # -??? + elU/ilU/isU
+    (1,  r"[bdhjklmnprstv][uy]$"),  # -CU
 
-    (1,  r"[uy]$"),  # -U
+    # === -C ===
 
-    # === other ===
-
-    # -é
-    (21, r"é$"),
-
-    # final consonant cluster or foreign final consonant (not l/n/r/s/t)
-    (5,  r"([^aeiouyäö]{2}|[^aeiouyäölnrst])$"),
-
-    # -l
+    # -Vl
     (49, r"el$"),
 
-    # -n
-    (34, r"[aeiouyäö]t[oö]n$"),  # -VtOn
-    (18, r".ilmeinen$"),         # -?ilmeinen
-    (38, r"nen(kin)?$"),         # -nen(kin)
-    (32, r"en$"),                # -en
-    (33, r"in$"),                # -in
-    (5,  r"n$"),                 # -n
+    # -Vn
+    (34, r"[aeiouyäö]t[oö]n$"),    # -VtOn
+    (18, r".ilmeinen$"),           # -?ilmeinen
+    (38, r"[aäioöuy]nen(kin)?$"),  # -A/-i/-O/-U + nen(kin)
+    (32, r"[himsv]en$"),           # -en
+    (33, r"in$"),                  # -in
+    (5,  r"[ao]n$"),               # -an/-on
 
-    # -r
-    (32, r"r$"),
+    # -Vr
+    (32, r"[st][aä]r$"),  # -sAr/-tAr
 
-    # -s
+    # -Vs
     (39, r"siivous$"),        # -siivous
     (40, r"[eioöuy][uy]s$"),  # -eUs/-iUs/-OUs/-UUs
     (41, r"[aä]s$"),          # -As
-    (39, r"[aeiouyäö]s$"),    # -Vs
-    (5,  r"s$"),              # -s
+    (39, r"[eioöuy]s$"),      # -es/-is/-Os/-Us
 
-    # -t (incl. plurals)
+    # -Vt (incl. plurals)
     #
     (41, r"aat$"),     # -aat
     (12, r".{6}at$"),  # -??????at
     (10, r"ät$"),      # -ät
     (9,  r"at$"),      # -t
     #
-    (48, r"eet$"),            # -eet
-    (38, r"[aeiouyäö]set$"),  # -Vset
-    (39, r"kset$"),           # -kset
-    (33, r"met$"),            # -met
-    (7,  r"et$"),             # -et
+    (48, r"eet$"),        # -eet
+    (38, r"[iouy]set$"),  # -iset/-oset/-Uset
+    (39, r"kset$"),       # -kset
+    (33, r"imet$"),       # -imet
+    (7,  r"et$"),         # -et
     #
-    (6,  r"rit$"),            # -rit
-    (5,  r"it$"),             # -it
+    (6,  r"[aäeu]rit$"),     # -Arit/-erit/-urit
+    (5,  r"[dfglmstv]it$"),  # -Cit
     #
-    (41, r"yyt$"),            # -yyt
     (47, r"(ll|n)[uy]t$"),    # -llUt/-nUt (participles)
     (1,  r"[oöuy]t$"),        # -Ot/-Ut
+
+    # -C
+    (5,  r"(ag|ak|am|ap|ec|ed|ek|ic|od|og|ok|om|op|ox|ub|um|up)$"),  # -VC (C != l/n/r/s/t)
+    (5,  r"(ch|ck|ff|ks|lk|ll|nd|ng|nk|ns|nt|rd|rn|rt|ss|st)$"),     # -CC
 )
 
 def get_declensions(noun, useExceptions=True):
