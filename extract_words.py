@@ -1,5 +1,8 @@
 """Read Kotus XML file from stdin, print words in specified declensions/conjugations."""
 
+# TODO: split this program into something like 'xml2csv.py' and 'filter_by_conjugation.py';
+# perhaps combine the latter with 'filter_by_syllable_count.py'
+
 import re
 import sys
 

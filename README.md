@@ -57,3 +57,7 @@ Words: 9499, errors: 0, warnings: 8
 Read the Kotus XML file from stdin. Print words in declensions/conjugations specified by command
 line arguments. For an example, see `extract_words.sh`. Its output files can be used as
 quick-to-parse input files for `test.py`.
+
+## filter_by_syllable_count.py
+Read input from `extract_words.py` from stdin. Print lines that contain a word with the specified
+number of syllables. Argument: number of syllables (1&hellip;3).
