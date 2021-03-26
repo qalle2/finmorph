@@ -19,7 +19,7 @@ elif sys.argv[1] == "v":
 else:
     sys.exit("Invalid command line argument.")
 
-wordCount = errorCount = warnCount = 0
+wordCount = errorCount = 0
 
 with open(filename, "rt", encoding="utf8") as handle:
     handle.seek(0)
@@ -30,20 +30,13 @@ with open(filename, "rt", encoding="utf8") as handle:
         # also detect declensions/conjugations using module
         detectedConjugations = detect_conjugation(word)
         # print error/warning
-        if not detectedConjugations.issuperset(conjugations):
+        if detectedConjugations != conjugations:
             print(
-                f"ERROR: '{word}': expected conjugation(s) {format_list(conjugations)}, "
+                f"'{word}': expected declension(s)/conjugation(s) {format_list(conjugations)}, "
                 f"got {format_list(detectedConjugations)}",
                 file=sys.stderr
             )
             errorCount += 1
-        elif detectedConjugations != conjugations:
-            print(
-                f"Warning: '{word}': expected conjugation(s) {format_list(conjugations)}, "
-                f"got {format_list(detectedConjugations)}",
-                file=sys.stderr
-            )
-            warnCount += 1
         wordCount += 1
 
-print(f"Words: {wordCount}, errors: {errorCount}, warnings: {warnCount}")
+print(f"Words: {wordCount}, errors: {errorCount}")
