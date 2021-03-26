@@ -12,10 +12,10 @@ if len(sys.argv) != 2:
 # import module to test
 if sys.argv[1] == "n":
     from noundecl import get_declensions as detect_conjugation
-    filename = "nouns.txt"
+    filename = "nouns.csv"
 elif sys.argv[1] == "v":
     from verbconj import get_conjugations as detect_conjugation
-    filename = "verbs.txt"
+    filename = "verbs.csv"
 else:
     sys.exit("Invalid command line argument.")
 
