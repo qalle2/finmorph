@@ -1,2 +1,198 @@
 # finmorph
-Finnish morphology tools
+Tools regarding the morphology of the Finnish language.
+
+I have used [the Finnish wordlist by Kotus](https://kaino.kotus.fi/sanat/nykysuomi/) when creating the programs.
+
+## Table of contents
+
+* [File formats](#file-formats)
+* [Programs interesting to the end user](#programs-interesting-to-the-end-user)
+* [Programs less interesting to the end user](#programs-less-interesting-to-the-end-user)
+* [Programs even less interesting to the end user](#programs-even-less-interesting-to-the-end-user)
+* [Text files](#text-files)
+
+## File formats
+
+All files in this project use UTF-8 character encoding and Unix newlines.
+
+CSV file format used in this project:
+* field separator: comma (`,`)
+* no fields are quoted
+* no empty fields
+* types of fields: words (strings), declensions/conjugations (integers)
+* lines in `plurals.csv`: two words (e.g. `häät,hää`)
+* lines in all other CSV files: one word and zero or more declensions/conjugations (e.g. `ahtaus,39,40`)
+
+## Programs interesting to the end user
+
+### noundecl.py
+Get the Kotus declension(s) (1-49) of a Finnish noun (including adjectives/pronouns/numerals, excluding compounds). Argument: noun in nominative singular
+
+Example (from command line):
+```
+$ python3 noundecl.py "kuusi"
+Declension 24 (like "un|i, -en, -ien/-ten, -ta, -ia, -een, -iin")
+Declension 27 (like "käsi, käden, -en/kätten, kättä, -ä, käteen, -in")
+```
+Example (from another Python program):
+```
+import noundecl
+print(noundecl.get_declensions("kuusi"))  # {24, 27}
+```
+
+See also `test.py`.
+
+To do: print consonant gradation info.
+
+### verbconj.py
+Get the Kotus conjugation(s) (52-78) of a Finnish verb (not a compound). Argument: verb in infinitive
+
+Example (from command line):
+```
+$ python3 verbconj.py "isota"
+Conjugation 72 (like "vanhe|ta, -nen, -ni, -nisi, -tkoon, -nnut, -ttiin")
+Conjugation 74 (like "katke|ta, -an, -si, -(a)isi, -tkoon, -nnut, -ttiin")
+```
+Example (from another Python program):
+```
+import verbconj
+print(verbconj.get_conjugations("isota"))  # {72, 74}
+```
+
+See also `test.py`.
+
+To do: print consonant gradation info.
+
+### countsyll.py
+Count the number of syllables in a Finnish word. Argument: word
+
+Example (from command line):
+```
+$ python3 countsyll.py "liioitella"
+Syllables: 4 or more, or the word is invalid
+```
+Example (from another Python program):
+```
+import countsyll
+print(countsyll.count_syllables("liioitella"))  # 4
+```
+
+### splitcomp.py
+Split a Finnish compound. Argument: compound to split.
+
+TODO: this program is totally under construction
+
+TODO: examples
+
+## Programs less interesting to the end user
+
+### extract.sh
+Converts the Kotus XML file (link above) into CSV files that are needed by the other programs.
+Warning: overwrites the files listed below.
+
+Note: before running this script, extract the Kotus XML file to the same directory as this project.
+
+Creates the subdirectory `generated-lists/` and generates these files under it:
+* `words-orig.csv`: the original words (no leading/trailing apostrophes/hyphens/spaces) (~94,000 words)
+* `words.csv`: words without plurals or compounds but with singular forms of plurals and finals of compounds (~41,000 words)
+  * `nouns.csv`: nouns (Kotus declensions 1&ndash;49) from `words.csv` (~26,000 words)
+    * `nouns-1syll.csv`: monosyllabic nouns
+    * `nouns-2syll.csv`: disyllabic nouns
+    * `nouns-3syll.csv`: trisyllabic nouns
+    * `nouns-4syll.csv`: quadrisyllabic and longer nouns
+  * `verbs.csv`: verbs (Kotus conjugations 52&ndash;78) from `words.csv` (~9,400 words)
+    * `verbs-1syll.csv`: monosyllabic verbs
+    * `verbs-2syll.csv`: disyllabic verbs
+    * `verbs-3syll.csv`: trisyllabic verbs
+    * `verbs-4syll.csv`: quadrisyllabic and longer verbs
+* `nonfinals.txt`: words that only occur as non-final parts of compounds, not finally or alone (~2,900 words)
+
+Also generates this file under the same directory as the project:
+* `stats.txt`: a table of noun/verb counts by declension/conjugation, syllable count and ending
+
+### test.py
+Argument: which program to test ('n'=noundecl.py, 'v'=verbconj.py).
+
+Requires `generated-lists/nouns.csv` and `generated-lists/verbs.csv` which can be generated with `extract.sh`.
+
+### test_splitcomp.py
+Test splitcomp.py. Argument: number of individual words per compound (0-5; 0=any). splitcomp.py will be tested against known single words and compounds with that many individual words.
+
+Requires `generated-lists/words.csv` which can be generated with `extract.sh`.
+
+### validate_compounds.py
+Validate `compounds.txt` and `generated-lists/words.csv`.
+
+### short_compound_parts.py
+Print distinct short parts in `compounds.txt` and one word they occur in.
+
+### polysemous_compounds.py
+Find compounds that can be split to many parts or in many ways.
+
+## Programs even less interesting to the end user
+
+These are only meant to be used by `extract.sh` and other programs.
+
+### xml2csv.py
+Read Kotus XML file, print distinct words and their declensions/conjugations (0-2) in CSV format. Argument: XML file
+
+### finals.py
+Get words that only occur as finals of compounds. Print them and their declensions/conjugations in CSV format. Arguments: wordCsvFile compoundListFile
+
+### csv_combine.py
+Arguments: one or more CSV files. For each distinct word, print a CSV line with all declensions/conjugations occurring with that word in the files.
+
+### replace_plurals.py
+Arguments: CSV file with words and declensions/conjugations, CSV file with plurals and singulars. Print words and declensions/conjugations in CSV format, with plurals replaced with singulars.
+
+### strip_compounds.py
+Arguments: CSV file with words and declensions/conjugations, list file with compounds. Print CSV lines without those that contain a compound.
+
+### filter_by_conjugation.py
+Arguments: CSV file with words and declensions/conjugations, first declension/conjugation, last declension/conjugation. Print lines that contain declensions/conjugations within that range.
+
+### filter_by_syllcnt.py
+Arguments: CSV file, syllable count (1-4; 4=4 or more). Print lines containing a word with that many syllables.
+
+### nonfinals.py
+Print words that only occur as non-final parts of compounds (not final or alone). Arguments: wordCsvFile compoundListFile
+
+### stats_table.py
+Print a table of noun/verb counts by declension/conjugation, syllable count and ending. Argument: CSV file with words (no compounds).
+
+### util.py
+Simple helper functions.
+
+## Text files
+
+### compounds.txt
+A list of compounds on the Kotus word list.
+
+Notes:
+* One compound per line.
+* The individual words of each compound have been separated by underscores (`_`), e.g. `yli_oppilas_tutkinto_lauta_kunta`.
+* No other character denotes a word boundary inside a compound; for example, these compounds are only two individual words each:
+  * `jok'_ainoa`
+  * `valo-_oppi`
+  * `suomen _kieli`
+  * `vaa'an_kieli`
+  * `tax-free-_myynti`
+  * `all stars -_joukkue`
+* Includes "plural only" words (e.g. `hopea_häät`).
+* Examples of words/prefixes/suffixes of Latin/Greek origin I didn't consider separate words:
+  * prefixes: a-, di-, dis-, in-, inter-, iso-, multi-, poly-, post-, pre-, re-, sub-, syn-, tri-
+  * suffixes: -grafi(nen/a), -grammi, -kroninen, -logi(nen/a), -metri(nen/a) ("metri" as a device, not as a unit), -paatti(nen)/-patia, -skooppi(nen)/-skopia
+* Tip: to restore a compound to its original form, simply delete all underscores.
+* Tip: to split a compound properly:
+  * first split by underscores&hellip;
+  * &hellip;then strip leading/trailing apostrophes/hyphens/spaces (`'- `) from each individual word
+  * e.g. `all stars -_joukkue` becomes `all stars` and `joukkue`
+* The GPLv3 license does not apply to this file (I think) because it is largely based on the Kotus wordlist.
+
+### plurals.csv
+A list of "plural only" words on the Kotus list.
+
+Notes:
+* Two fields on each line: a word in plural and its singular form (e.g. `sakset,saksi`).
+* No compounds (e.g. `seppeleensitojaiset`).
+* Includes words that only occur as the final part of a compound, not alone (e.g. `sitojaiset`).

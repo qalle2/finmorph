@@ -1,0 +1,97 @@
+A table of noun/verb counts by declension/conjugation, syllable count and ending.
+This file was generated automatically.
+
+Columns:
+    Conj  = Kotus declension/conjugation
+    Word  = a representative noun/verb in the declension/conjugation
+    1syll = number of monosyllabic words
+    2syll = number of disyllabic words
+    3syll = number of trisyllabic words
+    4syll = number of quadrisyllabic and longer words
+    -VV   = number of words that end with two vowels
+    -CV   = number of words that end with a consonant and a vowel
+    -C    = number of words that end with a consonant
+    Total = total number of words (= 1syll + 2syll + 3syll + 4syll = -VV + -CV + -C)
+
+The last row (TOTAL) has the number of words for all declensions/conjugations combined.
+
+Conj Word        1syll 2syll 3syll 4syll     -VV   -CV    -C   Total
+---- ---------   ----- ----- ----- -----   ----- ----- -----   -----
+   0 (other)       138   734  1717  2617     153  3433  1620    5206
+   1 valo            0  1415   182   147       3  1741     0    1744
+   2 palvelu         0     0   783   407       0  1190     0    1190
+   3 valtio          0     0   187   289     476     0     0     476
+   4 laatikko        0     0   196    74       0   270     0     270
+   5 risti          42  1272  1149  2165       0  4340   288    4628
+   6 paperi          0    31   988   156       0  1123    52    1175
+   7 ovi             0   116     0     0       0   116     0     116
+   8 nalle           4    58    36    10       3   105     0     108
+   9 kala            0   657   296   161       3  1111     0    1114
+  10 koira           0   600   873   742       3  2209     3    2215
+  11 omena           0     0    46     1       0    47     0      47
+  12 kulkija         0     0   484   620     405   699     0    1104
+  13 katiska         0     0   146     8       4   150     0     154
+  14 solakka         0     0   238     3       0   241     0     241
+  15 korkea          0     0   169     0     169     0     0     169
+  16 vanhempi        0     1    21     0       0    20     2      22
+  17 vapaa           0    38     0     0      38     0     0      38
+  18 maa            32     9    15     0      55     1     0      56
+  19 suo             6     0     0     0       6     0     0       6
+  20 filee           0    37     7     2      45     1     0      46
+  21 rosé            5    15     2     0      15     7     0      22
+  22 parfait         1    10     3     0       0     0    14      14
+  23 tiili           0    10     0     0       0    10     0      10
+  24 uni             0     8     0     0       0     8     0       8
+  25 toimi           0     8     0     0       0     8     0       8
+  26 pieni           0    30     0     0       0    30     0      30
+  27 käsi            0    20     0     0       0    20     0      20
+  28 kynsi           0    14     0     0       0    14     0      14
+  29 lapsi           0     3     0     0       0     3     0       3
+  30 veitsi          0     2     0     0       0     2     0       2
+  31 kaksi           0     3     0     0       0     3     0       3
+  32 sisar           1    21    20    31       0     0    73      73
+  33 kytkin          2   147   186     1       0     0   336     336
+  34 onneton         0    12   234   316       0     0   562     562
+  35 lämmin          0     1     0     0       0     0     1       1
+  36 sisin           1    10     1     0       0     0    12      12
+  37 vasen           0     1     0     0       0     0     1       1
+  38 nainen          0    20  1197  2808       0     3  4022    4025
+  39 vastaus         2   905  1710    47       0     0  2664    2664
+  40 kalleus         0   404   737  1240       0     0  2381    2381
+  41 vieras          2   137   239    66       0     0   444     444
+  42 mies            1     0     0     0       0     0     1       1
+  43 ohut            0    12     0     0       0     0    12      12
+  44 kevät           0     2     0     0       0     0     2       2
+  45 kahdeksas       0     9     6     0       0     0    15      15
+  46 tuhat           0     1     0     0       0     0     1       1
+  47 kuollut         0     7    11    25       0     0    43      43
+  48 hame            1   367   443     1      32   780     0     812
+  49 askel(e)        0    21    21     0       0    21    21      42
+  52 sanoa           0     0   490  1723    2213     0     0    2213
+  53 muistaa         0   104  2174   409    2687     0     0    2687
+  54 huutaa          0    42   273     5     320     0     0     320
+  55 soutaa          0     7     0     0       7     0     0       7
+  56 kaivaa          0    50     0     0      50     0     0      50
+  57 saartaa         0     3     0     0       3     0     0       3
+  58 laskea          0     0    32     0      32     0     0      32
+  59 tuntea          0     0     1     0       1     0     0       1
+  60 lähteä          0     0     1     0       1     0     0       1
+  61 sallia          0     0   327    74     401     0     0     401
+  62 voida           0     5     6   670       0   681     0     681
+  63 saada           0     3     0     0       0     3     0       3
+  64 juoda           0     8     0     0       0     8     0       8
+  65 käydä           0     1     0     0       0     1     0       1
+  66 rohkaista       0     8   263     0       0   271     0     271
+  67 tulla           0    15   519   799       0  1333     0    1333
+  68 tupakoida       0     0     0    49       0    49     0      49
+  69 valita          0     1    47     0       0    48     0      48
+  70 juosta          0     3     0     0       0     3     0       3
+  71 nähdä           0     2     0     0       0     2     0       2
+  72 vanheta         0     1   147     0       6   142     0     148
+  73 salata          0     4   792    79       0   875     0     875
+  74 katketa         0     3   171     0       0   174     0     174
+  75 selvitä         0     1    47     0       0    48     0      48
+  76 taitaa          0     2     0     0       2     0     0       2
+  77 kumajaa         0     0     3     0       3     0     0       3
+  78 kaikaa          0    32     0     0      32     0     0      32
+     TOTAL         238  7463 17636 15745    7168 21344 12570   41082
