@@ -26947,7 +26947,6 @@ näytös_kappale
 näytös_laji
 näytös_ottelu
 näärän_näppy
-näät_sen
 näätä_eläin
 näön_tarkastus
 näön_tarkkuus
@@ -31755,7 +31754,6 @@ psyko_dynamiikka
 psyko_fyysinen
 psyko_historiallinen
 psyko_kineettinen
-psyko_kinesia
 psyko_lingvistiikka
 psyko_motoriikka
 psyko_motorinen

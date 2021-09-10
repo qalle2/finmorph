@@ -17,7 +17,7 @@ The last row (TOTAL) has the number of words for all declensions/conjugations co
 
 Conj Word        1syll 2syll 3syll 4syll     -VV   -CV    -C   Total
 ---- ---------   ----- ----- ----- -----   ----- ----- -----   -----
-   0 (other)       138   732  1717  2617     153  3431  1620    5204
+   0 (other)       138   733  1717  2617     153  3431  1621    5205
    1 valo            0  1416   182   147       3  1742     0    1745
    2 palvelu         0     0   783   407       0  1190     0    1190
    3 valtio          0     0   187   289     476     0     0     476
@@ -94,4 +94,4 @@ Conj Word        1syll 2syll 3syll 4syll     -VV   -CV    -C   Total
   76 taitaa          0     2     0     0       2     0     0       2
   77 kumajaa         0     0     3     0       3     0     0       3
   78 kaikaa          0    32     0     0      32     0     0      32
-     TOTAL         238  7464 17638 15745    7169 21345 12571   41085
+     TOTAL         238  7465 17638 15745    7169 21345 12572   41086

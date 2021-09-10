@@ -24,7 +24,7 @@ if partCount <= 1:
         word = line.split(",")[0]
         detectedParts = splitcomp.split_compound(word)
         if len(detectedParts) != 1:
-            print(f"'{word}': expected single word but got", "_".join(detectedParts))
+            print(f'"{word}": expected "{word}", got "{"_".join(detectedParts)}"')
             errorCount += 1
         wordCount += 1
 
@@ -37,7 +37,7 @@ if partCount != 1:
             detectedParts = splitcomp.split_compound(origComp)
             if detectedParts != parts:
                 print(
-                    f"'{origComp}': expected", "_".join(parts), "but got", "_".join(detectedParts)
+                    f'"{origComp}": expected "{"_".join(parts)}", got "{"_".join(detectedParts)}"'
                 )
                 errorCount += 1
             wordCount += 1
