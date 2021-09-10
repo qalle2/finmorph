@@ -119,8 +119,9 @@ Creates the subdirectory `generated-lists/` and generates these files under it:
 * `finals.csv`: words that occur as final parts of compounds (and possibly non-finally or alone) (~8,400 words)
 * `nonfinals.txt`: words that occur as non-final parts of compounds (not finally) (~5,300 words)
 
-Also generates this file under the same directory as the project:
-* `stats.txt`: a table of noun/verb counts by declension/conjugation, syllable count and ending
+Also generates these files under the same directory as the project:
+* `stats-nounverb.txt`: a table of noun/verb counts by declension/conjugation, syllable count and ending
+* `stats-compound.txt`: a table of compound counts by number of parts and number of letters
 
 ### test.py
 Argument: which program to test ('n'=noundecl.py, 'v'=verbconj.py).
@@ -169,8 +170,11 @@ Arguments: CSV file, syllable count (1-4; 4=4 or more). Print lines containing a
 ### nonfinals.py
 Print words that only occur as non-final parts of compounds (not final). Argument: compound list file
 
-### stats_table.py
+### stats_nounverb.py
 Print a table of noun/verb counts by declension/conjugation, syllable count and ending. Argument: CSV file with words (no compounds).
+
+### stats_compound.py
+Print a table of compound counts by number of parts and number of letters.
 
 ### util.py
 Simple helper functions.

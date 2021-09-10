@@ -1,0 +1,32 @@
+Number of compounds without spaces/hyphens by number of parts and number of letters:
+
+            2part 3part 4part 5part Total
+            ----- ----- ----- ----- -----
+ 4 letters:     1     0     0     0     1
+ 5 letters:     5     0     0     0     5
+ 6 letters:    88     0     0     0    88
+ 7 letters:   565     0     0     0   565
+ 8 letters:  2124     0     0     0  2124
+ 9 letters:  5054     1     0     0  5055
+10 letters:  7473    14     0     0  7487
+11 letters:  7323    66     0     0  7389
+12 letters:  6584   160     0     0  6744
+13 letters:  5871   374     0     0  6245
+14 letters:  4859   540     0     0  5399
+15 letters:  3298   634     2     0  3934
+16 letters:  1958   635     1     0  2594
+17 letters:  1261   585     6     0  1852
+18 letters:   721   426    12     0  1159
+19 letters:   392   370    13     0   775
+20 letters:   213   219    14     0   446
+21 letters:   105   170    20     0   295
+22 letters:    47    83    12     0   142
+23 letters:    20    40     8     0    68
+24 letters:    12    21    13     0    46
+25 letters:     5    14     1     0    20
+26 letters:     1     6     4     0    11
+27 letters:     0     3     2     0     5
+28 letters:     0     1     2     1     4
+29 letters:     0     1     0     0     1
+30 letters:     0     1     0     0     1
+     TOTAL: 47980  4364   110     1 52455
