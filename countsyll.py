@@ -127,7 +127,7 @@ _EXCEPTIONS = {
 _RE_1SYLL = re.compile(
     r"""^
     [b-df-hj-np-tv-xzšž]*
-    ( [aäeioöuy][iuy]? | aa | ää | ee | oo | öö | ie | uo | yö )
+    ( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö | ie | uo | yö )
     [b-df-hj-np-tv-xzšž]*
     $""",
     re.IGNORECASE | re.VERBOSE
@@ -139,9 +139,9 @@ _RE_2SYLL = re.compile(
     r"""^
     [b-df-hj-np-tv-xzšž]*
     (
-        ( [aäeioöuy][iuy]? | aa | ää | ee | oo | öö | ie | uo | yö )
+        ( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö | ie | uo | yö )
         [b-df-hj-np-tv-xzšž]+
-        ( [aäeioöuy][iuy]? | aa | ää | ee | oo | öö )
+        ( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö )
         |
         (
             [äeioöuy]a
@@ -149,7 +149,7 @@ _RE_2SYLL = re.compile(
             | [aäoöuy]e
             | [aäeiöy]o
             | [aäeiou]ö
-            | [aeiouyäö']{3,4}
+            | [aeiouyäö]{3,4}
         )
     )
     [b-df-hj-np-tv-xzšž]*
@@ -157,18 +157,19 @@ _RE_2SYLL = re.compile(
     re.IGNORECASE | re.VERBOSE
 )
 
-# regex for trisyllabic words, e.g. "alue", "ioni", "hioa", "vauhdikkuus"
+# regex for trisyllabic words, e.g. "alue", "ioni", "liu'uttaa"
 # (C)VCVCV(C), (C)VCV'V(C) or (C)V'VCV(C)
+# note: "hioa" is handled as an exception
 _RE_3SYLL = re.compile(
     r"""^
     [b-df-hj-np-tv-xzšž]*
     (
-        ( [aäeioöuy][iuy]? | aa | ää | ee | oo | öö | ie | uo | yö )
+        ( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö | ie | uo | yö )
         [b-df-hj-np-tv-xzšž]+
         (
-            ( [aäeioöuy][iuy]? | aa | ää | ee | oo | öö )
+            ( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö )
             [b-df-hj-np-tv-xzšž]+
-            ( [aäeioöuy][iuy]? | aa | ää | ee | oo | öö )
+            ( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö )
             |
             (
                 | [äeioöuy]a
@@ -176,7 +177,7 @@ _RE_3SYLL = re.compile(
                 | [aäioöuy]e
                 | [aäeiöuy]o
                 | [aäeiouy]ö
-                | [aeiouyäö']{3,4}
+                | [aeiouyäö]{3,4}
             )
         )
         |
@@ -186,10 +187,11 @@ _RE_3SYLL = re.compile(
             | [aäoöuy]e
             | [aäeiöy]o
             | [aäeiou]ö
-            | [aeiouyäö']{3,4}
+            | [aeiouyäö]{3,4}
+            | [aeiou](a'a|i'i|u'u)
         )
         [b-df-hj-np-tv-xzšž]+
-        ( [aäeioöuy][iuy]? | aa | ää | ee | oo | öö )
+        ( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö )
     )
     [b-df-hj-np-tv-xzšž]*
     $""",
