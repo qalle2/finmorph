@@ -80,7 +80,9 @@ print(countsyll.count_syllables("liioitella"))  # 4
 ### splitcomp.py
 Split a Finnish compound. Argument: compound to split.
 
-Note: under construction (makes lots of mistakes).
+Requires `generated-lists/nonfinals.txt` and `generated-lists/finals.csv` which can be generated with `extract.sh`.
+
+TODO: make `splitcomp.py` more space efficient (those word lists are more than a hundred kilobytes together).
 
 Example (from command line):
 ```
@@ -126,7 +128,7 @@ Argument: which program to test ('n'=noundecl.py, 'v'=verbconj.py).
 Requires `generated-lists/nouns.csv` and `generated-lists/verbs.csv` which can be generated with `extract.sh`.
 
 ### test_splitcomp.py
-Test splitcomp.py. Argument: number of individual words per compound (0-5; 0=any). splitcomp.py will be tested against known single words and compounds with that many individual words.
+Test `splitcomp.py` against known single words and compounds.
 
 Requires `generated-lists/words.csv` which can be generated with `extract.sh`.
 

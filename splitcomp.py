@@ -1,32 +1,127 @@
 """Split a Finnish compound."""
 
-# TODO: handle spaces/apostrophes/hyphens better
-# TODO: try to reduce the length of word lists required
+# TODO: reduce the number of exceptions needed (handle spaces/hyphens better)
+# TODO: reduce the length of word lists needed
 
 import itertools, sys
 import util
 
 SINGLE_WORDS = {
+    # spaces/hyphens
+    "à la",
+    "à la carte",
+    "a priori",
+    "agar-agar",
+    "alter ego",
+    "angina pectoris",
+    "art director",
+    "beauty box",
+    "bed and breakfast",
+    "best man",
+    "big band",
+    "body stocking",
+    "bossa nova",
+    "CD-ROM",
+    "cha-cha-cha",
+    "charlotte russe",
+    "come-back",
+    "crème fraîche",
+    "cum laude",
+    "cum laude approbatur",
+    "dalai-lama",
+    "desktop publishing",
+    "director cantus",
+    "director musices",
+    "disc jockey",
+    "drag racing",
+    "drag show",
+    "drive-in",
+    "eau de Cologne",
+    "ex tempore",
+    "eximia cum laude approbatur",
+    "fan club",
+    "fast food",
+    "fifty-fifty",
+    "floor show",
+    "force majeure",
+    "ginger ale",
+    "go-go",
+    "happy hour",
+    "hi-hat",
+    "hi-tec",
+    "hi-tech",
+    "high tech",
+    "honoris causa",
+    "hot dog",
+    "jam session",
+    "jet lag",
+    "jet set",
+    "junk food",
+    "knock-out",
+    "know-how",
+    "kung-fu",
+    "long drink",
+    "lubenter approbatur",
+    "magna cum laude approbatur",
+    "make-up",
+    "milk shake",
+    "non-food",
+    "non-iron",
+    "non-woven",
+    "open house",
+    "osso buco",
+    "par avion",
+    "pick-up",
+    "port salut",
+    "poste restante",
+    "prima ballerina",
+    "prima vista",
+    "primus motor",
+    "pro gradu",
+    "rock and roll",
+    "roll-on",
+    "science fiction",
+    "self-made man",
+    "small talk",
+    "soft ice",
+    "still drink",
+    "talk show",
+    "tax-free",
+    "tie-break",
+    "tonic water",
+    "vol-au-vent",
+    # no spaces/hyphens
     "aasialainen",
     "aasialaisuus",
     "aatelisto",
     "aktivointi",
     "aleneva",
+    "antibioottinen",
+    "antigeeni",
     "arabialainen",
     "asteriski",
     "aukinainen",
     "avonainen",
     "avosetti",
+    "bikarbonaatti",
+    "bilanssi",
+    "biogeeninen",
+    "biometrinen",
     "desimaali",
+    "erogeeninen",
     "fileerata",
+    "geometrinen",
     "haikara",
     "hailakka",
     "haipakka",
     "hajanainen",
     "halkinainen",
+    "halogeeni",
     "harakiri",
     "haravointi",
+    "heterogeeninen",
     "hienosto",
+    "homogeeninen",
     "hyötyisä",
     "irtonainen",
     "isobaari",
@@ -34,8 +129,12 @@ SINGLE_WORDS = {
     "isotermi",
     "jäähyväinen",
     "kaavamaistaa",
+    "kaikkialla",
+    "kaikkialle",
+    "kaikkialta",
     "kaikkinainen",
     "kaksinainen",
+    "kalorimetri",
     "kamalasti",
     "kanavointi",
     "karriääri",
@@ -47,12 +146,15 @@ SINGLE_WORDS = {
     "kiintonainen",
     "kikkara",
     "kikkeli",
+    "kiliastinen",
+    "kiropraktiikka",
     "kitaristi",
     "kohtalainen",
     "koisata",
     "kokonainen",
     "kolminainen",
     "koloristi",
+    "kronometri",
     "kukintoinen",
     "kuulakka",
     "kuuloinen",
@@ -64,6 +166,7 @@ SINGLE_WORDS = {
     "kyyryssä",
     "lihavointi",
     "liikanainen",
+    "loiskina",
     "loiskunta",
     "luuloinen",
     "luurata",
@@ -74,13 +177,25 @@ SINGLE_WORDS = {
     "maatuska",
     "mainostaja",
     "menopaussi",
+    "metastaattinen",
+    "mezzopiano",
     "moninainen",
+    "monitori",
     "mutageeni",
     "mutageeninen",
     "myrskyisä",
+    "mysteeri",
     "palaveri",
+    "panostaja",
     "papurikko",
+    "parametri",
+    "parataksi",
+    "parataktinen",
+    "patogeeninen",
+    "peesata",
+    "peeveli",
     "pensastoinen",
+    "perätyksin",
     "piilevä",  # can be a compound or not
     "piinata",
     "piipari",
@@ -91,6 +206,9 @@ SINGLE_WORDS = {
     "poikkinainen",
     "poppari",
     "poppeli",
+    "portfolio",
+    "psykogeeninen",
+    "psykometrinen",
     "puheilta",
     "pulloveri",
     "punkero",
@@ -123,6 +241,7 @@ SINGLE_WORDS = {
     "suoranainen",
     "suorasti",
     "suosija",
+    "superoksidi",
     "suulaasti",
     "suunnata",
     "suuntaus",
@@ -160,13 +279,35 @@ SINGLE_WORDS = {
 }
 
 EXCEPTIONS = {
-    # 2 parts
+    # spaces/hyphens - 2 parts
+    "à la carte -annos": ("à la carte", "annos"),
+    "all stars -joukkue": ("all stars", "joukkue"),
+    "au pair -tyttö": ("au pair", "tyttö"),
+    "CD-ROM-asema": ("CD-ROM", "asema"),
+    "CD-ROM-levy": ("CD-ROM", "levy"),
+    "cum laude -tentti": ("cum laude", "tentti"),
+    "go-go-tyttö": ("go-go", "tyttö"),
+    "joint venture -yritys": ("joint venture", "yritys"),
+    "open house -kutsut": ("open house", "kutsut"),
+    "pin-up-tyttö": ("pin-up", "tyttö"),
+    "poste restante -lähetys": ("poste restante", "lähetys"),
+    "ro-ro-alus": ("ro-ro", "alus"),
+    "stand up -komedia": ("stand up", "komedia"),
+    "stand up -koomikko": ("stand up", "koomikko"),
+    "tax-free-myymälä": ("tax-free", "myymälä"),
+    "tax-free-myynti": ("tax-free", "myynti"),
+    # spaces/hyphens - 3+ parts
+    "cum laude -arvosana": ("cum laude", "arvo", "sana"),
+    "drive-in-elokuvateatteri": ("drive-in", "elo", "kuva", "teatteri"),
+    # no spaces/hyphens - 2 parts
     "alamaisesti": ("ala", "maisesti"),
     "eioo": ("ei", "oo"),
     "epätasa": ("epä", "tasa"),  # in "epätasa-arvo"
     "erämainen": ("erä", "mainen"),
     "etelämainen": ("etelä", "mainen"),
     "itämainen": ("itä", "mainen"),
+    "jok'ainoa": ("jok", "ainoa"),
+    "jok'ikinen": ("jok", "ikinen"),
     "kapsäkki": ("kap", "säkki"),
     "kenties": ("ken", "ties"),
     "kotimainen": ("koti", "mainen"),
@@ -186,7 +327,7 @@ EXCEPTIONS = {
     "ulkomaisuus": ("ulko", "maisuus"),
     "vaivihkaa": ("vai", "vihkaa"),
     "valkovenäjän": ("valko", "venäjän"),  # in "valkovenäjän kieli"
-    # 3+ parts
+    # no spaces/hyphens - 3+ parts
     "kotimaisuusaste": ("koti", "maisuus", "aste"),
     "peruselintarvike": ("perus", "elin", "tarvike"),
     "yhteispohjoismainen": ("yhteis", "pohjois", "mainen"),
@@ -218,19 +359,21 @@ def split_compound(comp):
     return: a tuple of parts without leading/trailing apostrophes/hyphens/spaces; e.g.
     ('all stars', 'joukkue')"""
 
-    if "'" in comp or "-" in comp or " " in comp:
-        # recursion
-        comp = comp.replace("'", "-").replace(" ", "-").replace("--", "-").split("-")
-        return tuple(itertools.chain.from_iterable(split_compound(p) for p in comp))
-
+    # handle exceptions
     if comp in SINGLE_WORDS:
         return (comp,)
-    if comp in EXCEPTIONS:
+    try:
         return EXCEPTIONS[comp]
+    except KeyError:
+        pass
+
+    # if there are spaces or hyphens, recursively handle words between them
+    if " " in comp or "-" in comp:
+        comp = comp.replace(" ", "-").replace("--", "-").split("-")
+        return tuple(itertools.chain.from_iterable(split_compound(p) for p in comp))
 
     # try to split in two
     for pos in range(2, len(comp) - 2 + 1):
-    #for pos in range(len(comp) - 2, 2 - 1, -1):
         (part1, part2) = (comp[:pos], comp[pos:])
         #
         if (part1 in FINALS or part1 in NON_FINALS) and part2 in FINALS \
