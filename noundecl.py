@@ -71,6 +71,8 @@ _MULTI_DECLENSION_NOUNS = {
 
     "caddie": {3, 8},
 
+    "finaali": {5, 6},
+
     "alpi": {5, 7},
     "helpi": {5, 7},
     "kaihi": {5, 7},
@@ -116,6 +118,8 @@ _MULTI_DECLENSION_NOUNS = {
     "kikkara": {11, 12},
 
     "tanhua": {12, 15},
+
+    "ilmeinen": {18, 38},
 
     "kuusi": {24, 27},
 

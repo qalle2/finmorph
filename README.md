@@ -80,9 +80,18 @@ print(countsyll.count_syllables("liioitella"))  # 4
 ### splitcomp.py
 Split a Finnish compound. Argument: compound to split.
 
-TODO: this program is totally under construction
+Note: under construction (makes lots of mistakes).
 
-TODO: examples
+Example (from command line):
+```
+$ python3 splitcomp.py "ylivoimamaali"
+yli_voima_maali
+```
+Example (from another Python program):
+```
+import splitcomp
+print(splitcomp.split_compound("ylivoimamaali"))  # ('yli', 'voima', 'maali')
+```
 
 ## Programs less interesting to the end user
 
@@ -105,7 +114,8 @@ Creates the subdirectory `generated-lists/` and generates these files under it:
     * `verbs-2syll.csv`: disyllabic verbs
     * `verbs-3syll.csv`: trisyllabic verbs
     * `verbs-4syll.csv`: quadrisyllabic and longer verbs
-* `nonfinals.txt`: words that only occur as non-final parts of compounds, not finally or alone (~2,900 words)
+* `finals.csv`: words that occur as final parts of compounds (and possibly non-finally or alone) (~8,400 words)
+* `nonfinals.txt`: words that occur as non-final parts of compounds (not finally) (~5,300 words)
 
 Also generates this file under the same directory as the project:
 * `stats.txt`: a table of noun/verb counts by declension/conjugation, syllable count and ending
@@ -137,7 +147,7 @@ These are only meant to be used by `extract.sh` and other programs.
 Read Kotus XML file, print distinct words and their declensions/conjugations (0-2) in CSV format. Argument: XML file
 
 ### finals.py
-Get words that only occur as finals of compounds. Print them and their declensions/conjugations in CSV format. Arguments: wordCsvFile compoundListFile
+Get words that occur as finals of compounds. Print them and their declensions/conjugations in CSV format. Arguments: wordCsvFile compoundListFile
 
 ### csv_combine.py
 Arguments: one or more CSV files. For each distinct word, print a CSV line with all declensions/conjugations occurring with that word in the files.
@@ -155,7 +165,7 @@ Arguments: CSV file with words and declensions/conjugations, first declension/co
 Arguments: CSV file, syllable count (1-4; 4=4 or more). Print lines containing a word with that many syllables.
 
 ### nonfinals.py
-Print words that only occur as non-final parts of compounds (not final or alone). Arguments: wordCsvFile compoundListFile
+Print words that only occur as non-final parts of compounds (not final). Argument: compound list file
 
 ### stats_table.py
 Print a table of noun/verb counts by declension/conjugation, syllable count and ending. Argument: CSV file with words (no compounds).

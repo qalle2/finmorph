@@ -41,6 +41,8 @@ CONJUGATION_DESCRIPTIONS = {
 # key = verb, value = set of conjugations
 _MULTI_CONJUGATION_VERBS = {
     # different meanings
+    "maistaa": {53, 56},
+    #
     "keritä": {69, 75},
     #
     "isota": {72, 74},

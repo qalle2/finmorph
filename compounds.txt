@@ -51274,7 +51274,6 @@ votiivi_laiva
 votiivi_taulu
 votka_turisti
 vulgaari_latina
-vuo_hissukka
 vuo_kaavio
 vuode_hoito
 vuode_katos
@@ -51303,6 +51302,7 @@ vuohen_putki
 vuohen_villa
 vuohi_lauma
 vuohi_pukki
+vuohis_sukka
 vuoka_leipä
 vuoka_leivonnainen
 vuoka_leivos
