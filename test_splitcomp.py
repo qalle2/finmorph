@@ -19,9 +19,7 @@ for comp in util.read_lines("compounds.txt"):
     origComp = comp.replace("_", "")
     detectedParts = splitcomp.split_compound(origComp)
     if detectedParts != parts:
-        print(
-            f'"{origComp}": expected "{"_".join(parts)}", got "{"_".join(detectedParts)}"'
-        )
+        print(f'"{origComp}": expected "{"_".join(parts)}", got "{"_".join(detectedParts)}"')
         errorCount += 1
     wordCount += 1
 

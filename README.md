@@ -40,7 +40,7 @@ import noundecl
 print(noundecl.get_declensions("kuusi"))  # {24, 27}
 ```
 
-See also `test.py`.
+See also `test_nounverb.py`.
 
 To do: print consonant gradation info.
 
@@ -59,7 +59,7 @@ import verbconj
 print(verbconj.get_conjugations("isota"))  # {72, 74}
 ```
 
-See also `test.py`.
+See also `test_nounverb.py`.
 
 To do: print consonant gradation info.
 
@@ -119,11 +119,9 @@ Creates the subdirectory `generated-lists/` and generates these files under it:
 * `finals.csv`: words that occur as final parts of compounds (and possibly non-finally or alone) (~8,400 words)
 * `nonfinals.txt`: words that occur as non-final parts of compounds (not finally) (~5,300 words)
 
-Also generates these files under the same directory as the project:
-* `stats-nounverb.txt`: a table of noun/verb counts by declension/conjugation, syllable count and ending
-* `stats-compound.txt`: a table of compound counts by number of parts and number of letters
+Also generates `stats-compound.txt` and `stats-nounverb.txt` under the current directory (see [text files](#text-files)).
 
-### test.py
+### test_nounverb.py
 Argument: which program to test ('n'=noundecl.py, 'v'=verbconj.py).
 
 Requires `generated-lists/nouns.csv` and `generated-lists/verbs.csv` which can be generated with `extract.sh`.
@@ -144,7 +142,7 @@ Find compounds that can be split to many parts or in many ways.
 
 ## Programs even less interesting to the end user
 
-These are only meant to be used by `extract.sh` and other programs.
+These are only meant to be used by `extract.sh`.
 
 ### xml2csv.py
 Read Kotus XML file, print distinct words and their declensions/conjugations (0-2) in CSV format. Argument: XML file
@@ -170,11 +168,11 @@ Arguments: CSV file, syllable count (1-4; 4=4 or more). Print lines containing a
 ### nonfinals.py
 Print words that only occur as non-final parts of compounds (not final). Argument: compound list file
 
+### stats_compound.py
+Print a table of compound counts by number of parts and number of letters. Argument: compound list file.
+
 ### stats_nounverb.py
 Print a table of noun/verb counts by declension/conjugation, syllable count and ending. Argument: CSV file with words (no compounds).
-
-### stats_compound.py
-Print a table of compound counts by number of parts and number of letters.
 
 ### util.py
 Simple helper functions.
@@ -212,3 +210,11 @@ Notes:
 * Two fields on each line: a word in plural and its singular form (e.g. `sakset,saksi`).
 * No compounds (e.g. `seppeleensitojaiset`).
 * Includes words that only occur as the final part of a compound, not alone (e.g. `sitojaiset`).
+
+### stats-compound.txt
+A table of compound counts by number of parts and number of letters.
+Automatically generated.
+
+### stats-nounverb.txt
+A table of noun/verb counts by declension/conjugation, syllable count and ending.
+Automatically generated.

@@ -31,6 +31,6 @@ python3 nonfinals.py compounds.txt | sort > generated-lists/nonfinals.txt
 echo "generated-lists/:"
 ls -l generated-lists/
 
-echo "Writing stats-nounverb.txt and stats-compound.txt..."
+echo "Writing stats-compound.txt and stats-nounverb.txt..."
+python3 stats_compound.py compounds.txt > stats-compound.txt
 python3 stats_nounverb.py generated-lists/words.csv > stats-nounverb.txt
-python3 stats_compound.py > stats-compound.txt

@@ -1,4 +1,5 @@
-Number of compounds without spaces/hyphens by number of parts and number of letters:
+Number of compounds without spaces/hyphens by number of parts and number of letters.
+This file was generated automatically.
 
             2part 3part 4part 5part Total
             ----- ----- ----- ----- -----
