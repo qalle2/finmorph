@@ -1,33 +1,33 @@
-Number of compounds without spaces/hyphens by number of parts and number of letters.
+Compound counts by number of parts and number of letters.
 This file was generated automatically.
 
             2part 3part 4part 5part Total
             ----- ----- ----- ----- -----
  4 letters:     1     0     0     0     1
- 5 letters:     5     0     0     0     5
- 6 letters:    88     0     0     0    88
- 7 letters:   565     0     0     0   565
- 8 letters:  2124     0     0     0  2124
- 9 letters:  5054     1     0     0  5055
-10 letters:  7473    14     0     0  7487
-11 letters:  7323    66     0     0  7389
-12 letters:  6584   160     0     0  6744
-13 letters:  5871   374     0     0  6245
-14 letters:  4859   540     0     0  5399
-15 letters:  3298   634     2     0  3934
-16 letters:  1958   635     1     0  2594
-17 letters:  1261   585     6     0  1852
-18 letters:   721   426    12     0  1159
-19 letters:   392   370    13     0   775
-20 letters:   213   219    14     0   446
-21 letters:   105   170    20     0   295
-22 letters:    47    83    12     0   142
-23 letters:    20    40     8     0    68
-24 letters:    12    21    13     0    46
+ 5 letters:     7     0     0     0     7
+ 6 letters:   111     0     0     0   111
+ 7 letters:   608     0     0     0   608
+ 8 letters:  2215     1     0     0  2216
+ 9 letters:  5177     2     0     0  5179
+10 letters:  7611    17     0     0  7628
+11 letters:  7461    67     0     0  7528
+12 letters:  6724   174     0     0  6898
+13 letters:  5960   389     0     0  6349
+14 letters:  4918   571     0     0  5489
+15 letters:  3338   663     2     0  4003
+16 letters:  1996   656     2     0  2654
+17 letters:  1274   604     7     0  1885
+18 letters:   736   435    15     0  1186
+19 letters:   396   375    14     0   785
+20 letters:   217   226    14     0   457
+21 letters:   109   172    20     0   301
+22 letters:    49    88    12     0   149
+23 letters:    20    41    10     0    71
+24 letters:    12    23    13     0    48
 25 letters:     5    14     1     0    20
-26 letters:     1     6     4     0    11
-27 letters:     0     3     2     0     5
+26 letters:     1     6     4     1    12
+27 letters:     0     3     4     0     7
 28 letters:     0     1     2     1     4
 29 letters:     0     1     0     0     1
 30 letters:     0     1     0     0     1
-     TOTAL: 47980  4364   110     1 52455
+     TOTAL: 48946  4530   120     2 53598

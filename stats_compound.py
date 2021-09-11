@@ -2,7 +2,7 @@ import collections, sys
 import util
 
 INTRO = """\
-Number of compounds without spaces/hyphens by number of parts and number of letters.
+Compound counts by number of parts and number of letters.
 This file was generated automatically.
 
             2part 3part 4part 5part Total
@@ -15,7 +15,7 @@ if len(sys.argv) != 2:
     )
 
 compounds = {
-    tuple(c.split("_")) for c in util.read_lines(sys.argv[1]) if " " not in c and "-" not in c
+    tuple(p.strip("'- ") for p in c.split("_")) for c in util.read_lines(sys.argv[1])
 }
 
 twoPartCompsByLen = collections.Counter()
