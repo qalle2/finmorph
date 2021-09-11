@@ -1,6 +1,12 @@
 """Get the Kotus conjugation of a Finnish verb."""
 
-# note: A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant
+# Notes:
+# - A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant
+# - We merge some conjugations:
+#   - conjugation 68 ("tupakoida") to 62 ("voida"); 68 allows some additional forms
+#     (e.g. "tupakoitsen" in addition to "tupakoin")
+#   - conjugation 74 ("katketa") to 75 ("selvitä"); 74 allows some additional forms
+#     (e.g. "katkeisi" in addition to "katkeaisi")
 
 import re, sys
 import countsyll
@@ -25,13 +31,11 @@ CONJUGATION_DESCRIPTIONS = {
     65: "käy|dä, -n, kävi, kävisi, -köön, -nyt, -tiin",
     66: "rohkais|ta, -en, -i, -isi, -koon, -sut, -tiin",
     67: "tul|la, -en, -i, -isi, -koon, -lut, -tiin",
-    68: "tupakoi|da, -(tse)n, -(tsi), -(tsi)si, -koon, -nut, -tiin",
     69: "valit|a, -sen, -si, -sisi, -koon, valinnut, -tiin",
     70: "juo|sta, -ksen, -ksi, -ksisi, -skoon, -ssut, -stiin",
     71: "näh|dä, näen, näki, näkisi, -köön, -nyt, -tiin",
     72: "vanhe|ta, -nen, -ni, -nisi, -tkoon, -nnut, -ttiin",
     73: "sala|ta, -an, -si, -isi, -tkoon, -nnut, -ttiin",
-    74: "katke|ta, -an, -si, -(a)isi, -tkoon, -nnut, -ttiin",
     75: "selvi|tä, -än, -si, -äisi, -tköön, -nnyt, -ttiin",
     76: "tai|taa, -dan, -si, -taisi, -takoon, -nnut/-tanut, -dettiin",
     77: "kumajaa, kumaji, kumajaisi",
@@ -45,20 +49,20 @@ _MULTI_CONJUGATION_VERBS = {
     #
     "keritä": {69, 75},
     #
-    "isota": {72, 74},
-    "sietä": {72, 74},
-    "tyvetä": {72, 74},
+    "isota": {72, 75},
+    "sietä": {72, 75},
+    "tyvetä": {72, 75},
 
     # same meanings
     "sortaa": {53, 54},
     "vuotaa": {53, 54},
     #
-    "aueta": {72, 74},
-    "iljetä": {72, 74},
-    "juljeta": {72, 74},
-    "oieta": {72, 74},
-    "raueta": {72, 74},
-    "sueta": {72, 74},
+    "aueta": {72, 75},
+    "iljetä": {72, 75},
+    "juljeta": {72, 75},
+    "oieta": {72, 75},
+    "raueta": {72, 75},
+    "sueta": {72, 75},
 }
 
 # exceptions to rules (key = noun, value = conjugation)
@@ -92,8 +96,7 @@ _EXCEPTIONS = {
     "käydä": 65,
     "kaita": 69,
     "nähdä": 71, "tehdä": 71,
-    "koota": 74, "pietä": 74,
-    "siitä": 75,
+    "koota": 75, "pietä": 75, "siitä": 75,
 
     # === trisyllabic ===
 
@@ -106,14 +109,12 @@ _EXCEPTIONS = {
     "hapata": 72, "mädätä": 72, "parata": 72,
 
     # -etA
-    "haljeta": 74, "herjetä": 74, "hirvetä": 74, "hävetä": 74, "kammeta": 74, "kangeta": 74,
-    "kasketa": 74, "katketa": 74, "kehjetä": 74, "keretä": 74, "kerjetä": 74, "kiivetä": 74,
-    "kivetä": 74, "korveta": 74, "langeta": 74, "laueta": 74, "livetä": 74, "lohjeta": 74,
-    "loveta": 74, "lumeta": 74, "noeta": 74, "poiketa": 74, "puhjeta": 74, "ratketa": 74,
-    "revetä": 74, "ristetä": 74, "ruveta": 74, "saveta": 74, "teljetä": 74, "todeta": 74,
-    "tuketa": 74, "vyyhdetä": 74, "ängetä": 74,
-    #
-    "nimetä": 75,
+    "haljeta": 75, "herjetä": 75, "hirvetä": 75, "hävetä": 75, "kammeta": 75, "kangeta": 75,
+    "kasketa": 75, "katketa": 75, "kehjetä": 75, "keretä": 75, "kerjetä": 75, "kiivetä": 75,
+    "kivetä": 75, "korveta": 75, "langeta": 75, "laueta": 75, "livetä": 75, "lohjeta": 75,
+    "loveta": 75, "lumeta": 75, "nimetä": 75, "noeta": 75, "poiketa": 75, "puhjeta": 75,
+    "ratketa": 75, "revetä": 75, "ristetä": 75, "ruveta": 75, "saveta": 75, "teljetä": 75,
+    "todeta": 75, "tuketa": 75, "vyyhdetä": 75, "ängetä": 75,
 
     # -ita
     "solmita": 75,
@@ -124,36 +125,15 @@ _EXCEPTIONS = {
     # -ota
     "heikota": 72, "helpota": 72, "hienota": 72, "huonota": 72, "kehnota": 72, "leudota": 72,
     "loitota": 72, "ulota": 72,
-    #
-    "aallota": 75, "bingota": 75, "diskota": 75, "lassota": 75, "muodota": 75, "peitota": 75,
 
     # -uta
     "paksuta": 72,
-    #
-    "haluta": 75, "hamuta": 75, "hulmuta": 75, "kohuta": 75,  "lastuta": 75, "liesuta": 75,
-    "lietsuta": 75, "loimuta": 75, "loiskuta": 75, "meluta": 75,  "nujuta": 75, "piiluta": 75,
-
-    # -ytä
-    "hymytä": 74, "hyrskytä": 74, "höyrytä": 74, "könytä": 74, "syyhytä": 74, "tähytä": 74,
-    "älytä": 74, "öljytä": 74,
 
     # === quadrisyllabic and longer ===
 
     # -VA
     "hilsehtiä": 52,
     "pörhistyä": 61,
-
-    # -OidA
-    "ahkeroida": 68, "aprikoida": 68, "aterioida": 68, "emännöidä": 68, "haravoida": 68,
-    "heilimöidä": 68, "hekumoida": 68, "hihhuloida": 68, "ikävöidä": 68, "ilakoida": 68,
-    "ilkamoida": 68, "isännöidä": 68, "kapaloida": 68, "kapinoida": 68, "karkeloida": 68,
-    "keikaroida": 68, "kekkaloida": 68, "kekkuloida": 68, "kihelmöidä": 68, "kipenöidä": 68,
-    "kipinöidä": 68, "kipunoida": 68, "koheloida": 68, "kuutioida": 68, "kyynelöidä": 68,
-    "käpälöidä": 68, "kärhämöidä": 68, "käräjöidä": 68, "liehakoida": 68, "liikennöidä": 68,
-    "luennoida": 68, "mankeloida": 68, "mellakoida": 68, "metelöidä": 68, "murkinoida": 68,
-    "pakinoida": 68, "patikoida": 68, "pokkuroida": 68, "pomiloida": 68, "pullikoida": 68,
-    "rettelöidä": 68, "rähinöidä": 68, "seppelöidä": 68, "sukuloida": 68, "teikaroida": 68,
-    "tupakoida": 68, "urakoida": 68, "vihannoida": 68, "viheriöidä": 68,
 }
 
 # note: rules in _RULES_2SYLL etc.:
@@ -192,14 +172,13 @@ _RULES_3SYLL = (
     (72, r"nee$"),                # -nee
 
     # -CV
-    (62, r"[oö]id[aä]$"),      # -OidA
-    (67, r"[ei]ll[aä]$"),      # -ellA/-illA
-    (73, r"[aä]t[aä]$"),       # -AtA
-    (72, r"et[aä]$"),          # -etA (many exceptions)
-    (69, r"( ita | kitä )$"),  # -ita/-kitä
-    (75, r"[iy]tä$"),          # -itä/-ytä
-    (74, r"[oöu]t[aä]$"),      # -OtA/-uta (many exceptions)
-    (66, r"ist[aä]$"),         # -istA
+    (62, r"[oö]id[aä]$"),             # -OidA
+    (67, r"[ei]ll[aä]$"),             # -ellA/-illA
+    (73, r"[aä]t[aä]$"),              # -AtA
+    (72, r"et[aä]$"),                 # -etA (many are 75 instead)
+    (69, r"( ita | kitä )$"),         # -ita/-kitä
+    (75, r"( itä | [oöuy]t[aä] )$"),  # -itä/-OtA/-UtA
+    (66, r"ist[aä]$"),                # -istA
 )
 
 # rules for quadrisyllabic and longer verbs (conjugation, regex)
@@ -211,7 +190,7 @@ _RULES_4SYLL = (
     (52, r"( ks | t )( ua | yä )$"),        # -ksUA/-tUA
 
     # -CV
-    (62, r"[oö]id[aä]$"),        # -OidA (many exceptions)
+    (62, r"[oö]id[aä]$"),        # -OidA
     (67, r"( e | ai )ll[aä]$"),  # -ellA/-ailla
     (73, r"[aä]t[aä]$"),         # -AtA
 )

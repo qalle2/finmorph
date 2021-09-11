@@ -1,10 +1,12 @@
 """Get the Kotus declension of a Finnish noun."""
 
-# notes:
+# Notes:
 # - A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant
-# - words with capital or foreign letters (c/é/q/w/x/z/ž) within the last two letters are best
-#   handled as exceptions (those letters' phonetic value could be better represented with other
-#   letters)
+# - Words with capital or foreign letters (c/é/q/w/x/z/ž) within the last two letters are handled
+#   as exceptions.
+# - It wouldn't be a good idea to merge declension 2 to 1 or 3 (e.g. "julkimojen" and
+#   "romuttamoiden" sound wrong).
+# - It wouldn't be a good idea to merge declension 6 to 5 (e.g. "ajureja" sounds wrong).
 
 import re, sys
 import countsyll
@@ -67,76 +69,83 @@ DECLENSION_DESCRIPTIONS = {
 
 # nouns with more than one declension (key = noun, value = set of declensions)
 _MULTI_DECLENSION_NOUNS = {
+    # different meanings
+    #
+    "lahti": {5, 7},
+    "laki": {5, 7},
+    "palvi": {5, 7},
+    "ripsi": {5, 7},
+    "saksi": {5, 7},  # "sakset" vs. "anglosaksi"
+    "sini": {5, 7},
+    #
+    "kuori": {5, 26},
+    "viini": {5, 26},
+    "vuori": {5, 26},
+    #
+    "peitsi": {5, 30},
+    #
+    "puola": {9, 10},
+    #
+    "kikkara": {11, 12},
+    #
+    "ilmeinen": {18, 38},  # 18 (e.g. "vähäilmeinen") is probably an error
+    #
+    "kuusi": {24, 27},
+    #
+    "ahtaus": {39, 40,},
+    "karvaus": {39, 40,},
+    "vakaus":  {39, 40},
+    #
+    "kymmenes": {39, 45},
+
+    # same meanings
+    #
     "menu": {1, 21},
-
+    #
     "caddie": {3, 8},
-
-    "finaali": {5, 6},
-
+    #
+    "finaali": {5, 6},  # "finaali" vs. "semifinaali"
+    #
     "alpi": {5, 7},
     "helpi": {5, 7},
     "kaihi": {5, 7},
     "karhi": {5, 7},
     "kymi": {5, 7},
-    "lahti": {5, 7},
-    "laki": {5, 7},
-    "palvi": {5, 7},
-    "ripsi": {5, 7},
-    "saksi": {5, 7},
-    "sini": {5, 7},
     "vyyhti": {5, 7},
-
+    #
     "sioux": {5, 22},
-
+    #
     "syli": {5, 23},
-
-    "kuori": {5, 26},
-    "viini": {5, 26},
-    "vuori": {5, 26},
-
-    "peitsi": {5, 30},
-
+    #
     "csárdás": {5, 39},
     "kuskus":  {5, 39},
-
+    #
     "ori": {5, 48},
-
-    "kolme": {7, 8},
-
+    #
+    "kolme": {7, 8},  # 8 in singular, 7 in plural
+    #
     "hapsi": {7, 29},
     "uksi":  {7, 29},
-
+    #
     "siitake": {8, 48},
-
+    #
     "aneurysma": {9, 10},
     "kysta": {9, 10},
     "lyyra": {9, 10},
-    "puola": {9, 10},
-
+    #
     "humala": {10, 11},
-
-    "kikkara": {11, 12},
-
+    #
     "tanhua": {12, 15},
-
-    "ilmeinen": {18, 38},
-
-    "kuusi": {24, 27},
-
-    "ahtaus": {39, 40,},
-    "karvaus": {39, 40,},
+    #
     "rosvous": {39, 40},
     "siivous":  {39, 40},
-    "vakaus":  {39, 40},
-
+    #
     "havas":  {39, 41},
     "kallas": {39, 41},
     "koiras": {39, 41},
     "olas": {39, 41},
     "pallas": {39, 41},
     "uros": {39, 41},
-
-    "kymmenes": {39, 45},
 }
 
 # exceptions to rules (key = noun, value = declension)
@@ -151,14 +160,16 @@ _EXCEPTIONS = {
     #
     "house": 8, "jive": 8, "quiche": 8, "rave": 8,
     "brie": 21, "clou": 21,
-    "show": 22,  # the only monosyllabic noun in declension
-    "ien": 32,  # the only monosyllabic noun in declension
-    "näin": 33, "puin": 33,  # the only monosyllabic nouns in declension
-    "tain": 36,  # the only monosyllabic noun in declension
-    "hius": 39, "taus": 39,  # the only monosyllabic nouns in declension
-    "ies": 41, "ruis": 41,  # the only monosyllabic nouns in declension
-    "mies": 42,  # the only noun in declension
-    "hie": 48,  # the only monosyllabic noun in declension
+
+    # less than three monosyllabic nouns in these declensions
+    "show": 22,
+    "ien": 32,
+    "näin": 33, "puin": 33,
+    "tain": 36,
+    "hius": 39, "taus": 39,
+    "ies": 41, "ruis": 41,
+    "mies": 42,
+    "hie": 48,
 
     # === disyllabic ===
 

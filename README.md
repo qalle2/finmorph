@@ -51,12 +51,12 @@ Example (from command line):
 ```
 $ python3 verbconj.py "isota"
 Conjugation 72 (like "vanhe|ta, -nen, -ni, -nisi, -tkoon, -nnut, -ttiin")
-Conjugation 74 (like "katke|ta, -an, -si, -(a)isi, -tkoon, -nnut, -ttiin")
+Conjugation 75 (like "selvi|tä, -än, -si, -äisi, -tköön, -nnyt, -ttiin")
 ```
 Example (from another Python program):
 ```
 import verbconj
-print(verbconj.get_conjugations("isota"))  # {72, 74}
+print(verbconj.get_conjugations("isota"))  # {72, 75}
 ```
 
 See also `test_nounverb.py`.

@@ -19,8 +19,8 @@ Columns:
 
 The last row (TOTAL) has the number of words for all declensions/conjugations combined.
 
-Conj Word        1syll 2syll 3syll 4syll     -VV   -CV    -C   Total
----- ---------   ----- ----- ----- -----   ----- ----- -----   -----"""
+Conj Word      1syll 2syll 3syll 4syll   -VV   -CV    -C Total
+---- --------- ----- ----- ----- ----- ----- ----- ----- -----"""
 
 # regexes for word endings
 RE_TWO_VOWEL = re.compile(
@@ -98,30 +98,18 @@ for line in util.read_lines(sys.argv[1]):
     else:
         cnsEndCnts.update(conjugations)
 
-print(INTRO)
-
-for conj in CONJUGATIONS:
-    print(
-        f"{conj:4} "
-        f"{CONJUGATIONS[conj]:9}   "
-        f"{monoSyllCnts[conj]:5} "
-        f"{diSyllCnts[conj]:5} "
-        f"{triSyllCnts[conj]:5} "
-        f"{quadSyllCnts[conj]:5}   "
-        f"{twoVwlEndCnts[conj]:5} "
-        f"{cnsVwlEndCnts[conj]:5} "
-        f"{cnsEndCnts[conj]:5}   "
-        f"{totalCnts[conj]:5}"
-    )
-
-print(
-    "     TOTAL       "
-    f"{sum(monoSyllCnts.values()):5} "
-    f"{sum(diSyllCnts.values()):5} "
-    f"{sum(triSyllCnts.values()):5} "
-    f"{sum(quadSyllCnts.values()):5}   "
-    f"{sum(twoVwlEndCnts.values()):5} "
-    f"{sum(cnsVwlEndCnts.values()):5} "
-    f"{sum(cnsEndCnts.values()):5}   "
-    f"{sum(totalCnts.values()):5}"
+counters = (
+    monoSyllCnts,
+    diSyllCnts,
+    triSyllCnts,
+    quadSyllCnts,
+    twoVwlEndCnts,
+    cnsVwlEndCnts,
+    cnsEndCnts,
+    totalCnts,
 )
+
+print(INTRO)
+for conj in CONJUGATIONS:
+    print(f"{conj:4} {CONJUGATIONS[conj]:9}", " ".join(f"{c[conj]:5}" for c in counters))
+print("     TOTAL    ", " ".join(f"{sum(c.values()):5}" for c in counters))
