@@ -14,9 +14,7 @@ if len(sys.argv) != 2:
         "compound list file."
     )
 
-compounds = {
-    tuple(p.strip("'- ") for p in c.split("_")) for c in util.read_lines(sys.argv[1])
-}
+compounds = {tuple(p.strip("'- ") for p in c.split("_")) for c in util.read_lines(sys.argv[1])}
 
 twoPartCompsByLen = collections.Counter()
 threePartCompsByLen = collections.Counter()
