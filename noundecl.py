@@ -64,7 +64,6 @@ DECLENSION_DESCRIPTIONS = {
 # nouns with more than one declension (key = noun, value = set of declensions)
 _MULTI_DECLENSION_NOUNS = {
     # different meanings
-    #
     "lahti": {5, 7},
     "laki": {5, 7},
     "palvi": {5, 7},
@@ -93,7 +92,6 @@ _MULTI_DECLENSION_NOUNS = {
     "kymmenes": {39, 45},
 
     # same meanings
-    #
     "menu": {1, 21},
     #
     "caddie": {3, 8},
@@ -185,7 +183,6 @@ _EXCEPTIONS = {
 
     # -CA
     "iskä": 9, "krypta": 9, "lymfa": 9, "nyintä": 9, "ryintä": 9, "suola": 9,
-    #
     "saaja": 10, "saapa": 10, "saava": 10,
 
     # -VCe
@@ -333,38 +330,36 @@ _EXCEPTIONS = {
     "ainoa": 15,
     "homssantuu": 18, "kanapee": 18, "munaskuu": 18, "pelakuu": 18, "rokokoo": 18, "tenkkapoo": 18,
 
-    # -VVCA
-    "ekseema": 9, "guava": 9, "kimaira": 9, "koala": 9, "tequila": 9, "tiaara": 9,
-    "leukoija": 11, "mimoosa": 11, "probleema": 11, "ödeema": 11,
-    "harppuuna": 12, "passiiva": 12,
+    # -VlA
+    "koala": 9, "tequila": 9,
     #
-    "aktiiva": 13, "hetaira": 13, "madeira": 13, "meduusa": 13, "papaija": 13, "sairaala": 13,
-    "ukraina": 13, "viola": 13,
-
-    # -CVlA
     "hankala": 10, "jumala": 10, "jäkälä": 10, "kamala": 10, "katala": 10, "kavala": 10,
     "matala": 10, "nokkela": 10, "ovela": 10, "pykälä": 10, "sukkela": 10, "tukala": 10,
     #
-    "apila": 13, "kampela": 13, "manila": 13, "siivilä": 13, "sikala": 13, "takila": 13,
+    "apila": 13, "kampela": 13, "manila": 13, "sairaala": 13, "siivilä": 13, "sikala": 13,
+    "takila": 13, "viola": 13,
 
-    # -CVmA
-    "hekuma": 11, "kärhämä": 11, "paatsama": 11,
+    # -VmA
+    "ekseema": 9,
+    "hekuma": 11, "kärhämä": 11, "paatsama": 11, "probleema": 11, "ödeema": 11,
     "salama": 12,
     "suurima": 13,
 
-    # -CVnA
+    # -VnA
     "gallona": 10, "ihana": 10, "leijona": 10,
     #
     "lattana": 11, "lättänä": 11, "maruna": 11, "murena": 11, "ohrana": 11, "omena": 11,
     "orpana": 11, "papana": 11, "pipana": 11, "poppana": 11, "sikuna": 11, "täkänä": 11,
     #
-    "aivina": 13, "aluna": 13, "arina": 13, "ipana": 13, "kahina": 13, "kohina": 13, "kopina": 13,
-    "kuhina": 13, "kärinä": 13, "marina": 13, "maukuna": 13, "määkinä": 13, "mölinä": 13,
-    "mörinä": 13, "möyrinä": 13, "paukkina": 13, "piekana": 13, "porina": 13, "rahina": 13,
-    "ramina": 13, "reppana": 13, "retsina": 13, "ruutana": 13, "smetana": 13, "tuoksina": 13,
-    "vagina": 13,
+    "harppuuna": 12,
+    #
+    "aivina": 13, "arina": 13, "ipana": 13, "kahina": 13, "kohina": 13, "kopina": 13, "kuhina": 13,
+    "kärinä": 13, "marina": 13, "maukuna": 13, "määkinä": 13, "mölinä": 13, "mörinä": 13,
+    "möyrinä": 13, "paukkina": 13, "piekana": 13, "porina": 13, "rahina": 13, "ramina": 13,
+    "reppana": 13, "retsina": 13, "ruutana": 13, "smetana": 13, "tuoksina": 13,
 
-    # -CVrA
+    # -VrA
+    "kimaira": 9, "tiaara": 9,
     "amfora": 10, "ankara": 10, "avara": 10, "kumara": 10,
     #
     "hapera": 11, "hatara": 11, "hattara": 11, "hutera": 11, "itara": 11, "kihara": 11,
@@ -373,15 +368,18 @@ _EXCEPTIONS = {
     #
     "jäkkärä": 12, "kamera": 12, "kolera": 12, "littera": 12, "ooppera": 12, "väkkärä": 12,
     #
-    "gerbera": 13, "ketara": 13, "kitara": 13, "matara": 13, "sikkura": 13, "tempera": 13,
-    "vaahtera": 13,
+    "gerbera": 13, "hetaira": 13, "ketara": 13, "kitara": 13, "madeira": 13, "matara": 13,
+    "sikkura": 13, "tempera": 13, "vaahtera": 13,
 
-    # -CVCA (not -CVlA/-CVmA/-CVnA/-CVrA)
-    "ameba": 9, "prostata": 9, "toccata": 9,
+    # -VCA (not -VlA/-VmA/-VnA/-VrA)
+    "ameba": 9, "guava": 9, "prostata": 9, "toccata": 9,
     "pomada": 10,
-    "ahava": 11, "apaja": 11, "harava": 11, "judoka": 11, "käpälä": 11,
-    "paprika": 12,
-    "reseda": 13,
+    #
+    "ahava": 11, "apaja": 11, "harava": 11, "judoka": 11, "käpälä": 11, "leukoija": 11,
+    "mimoosa": 11,
+    #
+    "paprika": 12, "passiiva": 12,
+    "aktiiva": 13, "meduusa": 13, "papaija": 13, "reseda": 13,
 
     # -CCA
     "alfalfa": 9, "antiikva": 9, "aortta": 9, "canasta": 9, "chinchilla": 9, "dilemma": 9,
@@ -527,8 +525,7 @@ _EXCEPTIONS = {
     "tuhannes": 45,
 
     # -C (not -n/-r/-s)
-    "CD-ROM": 5,  # ends with capital letter
-    #
+    "CD-ROM": 5,
     "passepartout": 22, "port salut": 22,
 
     # === quadrisyllabic and longer ===
@@ -553,13 +550,11 @@ _EXCEPTIONS = {
     "karateka": 9, "propaganda": 9,
     #
     "gorgonzola": 10, "hyperbola": 10, "karambola": 10,
-    #
     "ekliptika": 12,
     "karakteristika": 13, "majolika": 13, "psykofarmaka": 13,
 
     # -CCA
     "abrakadabra": 9, "hoosianna": 9, "mykorritsa": 9, "paradigma": 9, "praasniekka": 9,
-    #
     "halveksunta": 10, "hyväksyntä": 10, "protokolla": 10, "terrakotta": 10, "väheksyntä": 10,
     "skandinaaviska": 13,
     "estetiikka": 14, "poliklinikka": 14, "psykometriikka": 14,
@@ -572,12 +567,12 @@ _EXCEPTIONS = {
     "eau de Cologne": 8, "komedienne": 8, "mezzoforte": 8, "tagliatelle": 8, "tragedienne": 8,
 
     # -VCi
-    "diakoni": 6, "follikkeli": 5, "kateederi": 5, "kollektori": 5, "kompostori": 5,
-    "multippeli": 5, "varistori": 5,
+    "follikkeli": 5, "kateederi": 5, "kollektori": 5, "kompostori": 5, "multippeli": 5,
+    "varistori": 5,
     #
-    "akupunktuuri": 6, "azerbaidžani": 6, "firaabeli": 6, "inspehtori": 6, "prostaglandiini": 6,
-    "reversiibeli": 6, "revolveri": 6, "testosteroni": 6, "ubikinoni": 6, "unioni": 6,
-    "universumi": 6, "variaabeli": 6,
+    "akupunktuuri": 6, "azerbaidžani": 6, "diakoni": 6, "firaabeli": 6, "inspehtori": 6,
+    "prostaglandiini": 6, "reversiibeli": 6, "revolveri": 6, "testosteroni": 6, "ubikinoni": 6,
+    "unioni": 6, "universumi": 6, "variaabeli": 6,
     #
     "minunlaiseni": 38, "sinunlaisesi": 38,
 
@@ -588,7 +583,6 @@ _EXCEPTIONS = {
 
     # -CO (not -kO)
     "karkaisimo": 1, "koksittamo": 1,
-    #
     "katajisto": 2, "koordinaatisto": 2, "luettelo": 2,
 
     # -CU
@@ -600,7 +594,6 @@ _EXCEPTIONS = {
 
     # -C (not -r)
     "director musices": 5,
-    #
     "backgammon": 6, "liirumlaarum": 6,
     "säteilytin": 33,
     "kumpainenkaan": 38,
@@ -702,8 +695,8 @@ _RULES_3SYLL = (
     (11, r"ona$"),
     # -kkA/-ttA except those in declension 9
     (14, r"(kk|tt)[aä]$"),
-    # -gA/-kA/-llA/-eenA/-iinA/-uuna/-uura/-tsA/-tA except those in declension 14
-    (13, r"( [gkt] | ll | (ee|ii|uu)n | uur | ts )[aä]$"),
+    # some of -gA/-kA/-lA/-nA/-rA/-sA/-tA except those in declension 14
+    (13, r"( [gkt] | ll | (ee|ii|[lu]u|[ag]i)n | uur | ts )[aä]$"),
     # -jA/-lA/-nA/-rA except those in declensions 10, 11, 13
     (12, r"[jlnr][aä]$"),
 
