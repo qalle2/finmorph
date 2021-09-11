@@ -1,9 +1,6 @@
 """Get the Kotus declension of a Finnish noun."""
 
-# Notes:
-# - A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant
-# - Words with capital or foreign letters (c/é/q/w/x/z/ž) within the last two letters are handled
-#   as exceptions.
+# Note: A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant.
 
 import re, sys
 import countsyll
@@ -152,12 +149,6 @@ _MULTI_DECLENSION_NOUNS = {
 _EXCEPTIONS = {
     # === monosyllabic ===
 
-    "AIDS": 5, "LED": 5,  # ends with capital letter
-    "chic": 5, "jazz": 5, "lux": 5, "tic": 5,  # ends with foreign letter
-    #
-    "house": 8, "jive": 8, "quiche": 8, "rave": 8,
-    "brie": 21, "clou": 21,
-
     # less than three monosyllabic nouns in these declensions
     "show": 22,
     "ien": 32,
@@ -168,7 +159,18 @@ _EXCEPTIONS = {
     "mies": 42,
     "hie": 48,
 
+    "AIDS": 5, "LED": 5,
+    "brie": 21, "clou": 21,
+
     # === disyllabic ===
+
+    # less than three disyllabic nouns in these declensions
+    "kumpi": 16,
+    "veitsi": 30,
+    "lämmin": 35,
+    "vasen": 37,
+    "kevät": 44, "venät": 44,
+    "tuhat": 46,
 
     # -VV
     "duo": 1, "trio": 1,
@@ -182,32 +184,25 @@ _EXCEPTIONS = {
     "aie": 48, "säie": 48,
 
     # -CA
-    "pizza": 9, "radža": 9,  # 2nd-to-last letter is foreign
     "iskä": 9, "krypta": 9, "lymfa": 9, "nyintä": 9, "ryintä": 9, "suola": 9,
     #
     "saaja": 10, "saapa": 10, "saava": 10,
 
     # -VCe
-    "soft ice": 8,  # 2nd-to-last letter is foreign
-    "ale": 8, "beige": 8, "bridge": 8, "byte": 8, "bäne": 8, "crêpe": 8, "deadline": 8,
-    "folklore": 8, "freestyle": 8, "grape": 8, "gruyère": 8, "hardware": 8, "jade": 8, "joule": 8,
-    "lime": 8, "madame": 8, "mangrove": 8, "milk shake": 8, "ope": 8, "poplore": 8, "pose": 8,
-    "psyyke": 8, "ragtime": 8, "saame": 8, "sake": 8, "software": 8, "striptease": 8, "tele": 8,
-    "toope": 8,
+    "ale": 8, "beige": 8, "bäne": 8, "crêpe": 8, "deadline": 8, "folklore": 8, "freestyle": 8,
+    "gruyère": 8, "hardware": 8, "jade": 8, "joule": 8, "lime": 8, "madame": 8, "mangrove": 8,
+    "milk shake": 8, "ope": 8, "poplore": 8, "pose": 8, "psyyke": 8, "ragtime": 8, "saame": 8,
+    "sake": 8, "soft ice": 8, "software": 8, "striptease": 8, "tele": 8, "toope": 8,
     #
     "bile": 20,
-    #
-    "bébé": 21, "coupé": 21, "moiré": 21, "rosé": 21,  # ends with foreign letter
 
     # -CCe
-    "trance": 8,  # 2nd-to-last letter is foreign
     "akne": 8, "crème fraîche": 8, "duchesse": 8, "forte": 8, "genre": 8, "itse": 8, "jeppe": 8,
     "kalle": 8, "kurre": 8, "lande": 8, "manne": 8, "mousse": 8, "nalle": 8, "nasse": 8,
     "nisse": 8, "nukke": 8, "pelle": 8, "penne": 8, "polle": 8, "puzzle": 8, "quenelle": 8,
     "single": 8, "tilde": 8, "vaudeville": 8,
 
     # -VCi
-    "kiwi": 5,  # 2nd-to-last letter is foreign
     "tuoli": 5,
     #
     "hauki": 7, "hiki": 7, "joki": 7, "kivi": 7, "koipi": 7, "käki": 7, "lovi": 7, "läpi": 7,
@@ -228,8 +223,7 @@ _EXCEPTIONS = {
     "täysi": 27, "uusi": 27, "vesi": 27, "viisi": 27, "vuosi": 27,
 
     # -CCi
-    "LYHKI": 5,  # ends with capital letter
-    "mansi": 5, "sutki": 5,
+    "LYHKI": 5, "mansi": 5, "sutki": 5,
     #
     "appi": 7, "haahti": 7, "hanhi": 7, "hanki": 7, "happi": 7, "helmi": 7, "henki": 7, "hirvi": 7,
     "järvi": 7, "kaikki": 7, "kanki": 7, "kaski": 7, "kiiski": 7, "koski": 7, "kärhi": 7,
@@ -239,25 +233,21 @@ _EXCEPTIONS = {
     "suksi": 7, "sänki": 7, "sääksi": 7, "sääski": 7, "talvi": 7, "tammi": 7, "tilhi": 7,
     "torvi": 7, "tuppi": 7, "typpi": 7, "tähti": 7, "vaski": 7, "viiksi": 7, "vuoksi": 7,
     #
-    "kumpi": 16,  # the only disyllabic noun in declension
     "lapsi": 29,
-    "veitsi": 30,  # the only noun *only* in this declension ("peitsi" is 5/30)
     "haaksi": 31, "kaksi": 31, "yksi": 31,
 
     # -CO
-    "ouzo": 1, "scherzo": 1, "taco": 1,  # 2nd-to-last letter is foreign
     "go-go": 18,
 
     # -CU
-    "ecu": 1,  # 2nd-to-last letter is foreign
     "kung-fu": 21,
     "kiiru": 48,
 
     # -Vl
-    "gospel": 5, "kennel": 5,
+    "kennel": 5,
     "diesel": 6, "rial": 6,
     "nivel": 32, "sävel": 32,
-    "sammal": 49, "taival": 49,
+    "seppel": 49, "udar": 49,
 
     # -Vn
     "drive-in": 5, "hymen": 5, "kelvin": 5, "pinyin": 5,
@@ -266,17 +256,11 @@ _EXCEPTIONS = {
     "nylon": 6, "pyton": 6,
     #
     "hapan": 33, "laidun": 33, "sydän": 33,
-    "lämmin": 35,  # the only noun in declension
     #
     "alin": 36, "enin": 36, "likin": 36, "lähin": 36, "parhain": 36, "sisin": 36, "taain": 36,
     "uloin": 36, "vanhin": 36, "ylin": 36,
-    #
-    "vasen": 37,  # the only noun in declension
-    "muren": 49, "säen": 49,
 
     # -Vr
-    "cheddar": 5,
-    #
     "agar": 6, "bitter": 6, "blazer": 6, "dealer": 6, "kassler": 6, "laser": 6, "loafer": 6,
     "schäfer": 6, "sitar": 6, "snooker": 6, "weber": 6, "vesper": 6, "voucher": 6,
     #
@@ -326,18 +310,20 @@ _EXCEPTIONS = {
     "ryntys": 41, "vantus": 41,
 
     # -Vt
+    "input": 5, "output": 5,
+    #
     "beignet": 22, "bouquet": 22, "buffet": 22, "gourmet": 22, "nougat": 22, "parfait": 22,
     "ragoût": 22,
-    #
-    "kevät": 44, "venät": 44,  # the only nouns in declension
-    "tuhat": 46,  # the only noun in declension
 
     # -C (not -l/-n/-r/-s/-t)
-    "avec": 5, "hi-tec": 5, "jukebox": 5, "picnic": 5, "thorax": 5,  # ends with foreign letter
-    "edam": 6, "gallup": 6, "tandem": 6, "ångström": 6,
-    "bordeaux": 22, "know-how": 22,  # ends with foreign letter
+    "edam": 6, "gallup": 6,
+    "bordeaux": 22, "know-how": 22,
 
     # === trisyllabic ===
+
+    # less than three trisyllabic nouns in these declensions
+    "brasserie": 21, "cha-cha-cha": 21,
+    "parahin": 36,
 
     # -VV
     "aaloe": 3, "collie": 3, "embryo": 3, "lassie": 3, "oboe": 3, "zombie": 3,
@@ -346,11 +332,9 @@ _EXCEPTIONS = {
     "media": 13,
     "ainoa": 15,
     "homssantuu": 18, "kanapee": 18, "munaskuu": 18, "pelakuu": 18, "rokokoo": 18, "tenkkapoo": 18,
-    "brasserie": 21,  # one of only two trisyllabic nouns in declension
 
     # -VVCA
     "ekseema": 9, "guava": 9, "kimaira": 9, "koala": 9, "tequila": 9, "tiaara": 9,
-    "hioja": 10,
     "leukoija": 11, "mimoosa": 11, "probleema": 11, "ödeema": 11,
     "harppuuna": 12, "passiiva": 12,
     #
@@ -387,18 +371,17 @@ _EXCEPTIONS = {
     "kiverä": 11, "käkkärä": 11, "mäkärä": 11, "sikkara": 11, "säkkärä": 11, "tomera": 11,
     "vanttera": 11, "veiterä": 11, "äpärä": 11,
     #
-    "angora": 12, "jäkkärä": 12, "kamera": 12, "kolera": 12, "littera": 12, "ooppera": 12,
-    "väkkärä": 12,
+    "jäkkärä": 12, "kamera": 12, "kolera": 12, "littera": 12, "ooppera": 12, "väkkärä": 12,
     #
     "gerbera": 13, "ketara": 13, "kitara": 13, "matara": 13, "sikkura": 13, "tempera": 13,
     "vaahtera": 13,
 
     # -CVCA (not -CVlA/-CVmA/-CVnA/-CVrA)
     "ameba": 9, "prostata": 9, "toccata": 9,
-    "pomada": 10, "leikkisä": 10,
+    "pomada": 10,
     "ahava": 11, "apaja": 11, "harava": 11, "judoka": 11, "käpälä": 11,
     "paprika": 12,
-    "lolita": 13, "peseta": 13, "reseda": 13,
+    "reseda": 13,
 
     # -CCA
     "alfalfa": 9, "antiikva": 9, "aortta": 9, "canasta": 9, "chinchilla": 9, "dilemma": 9,
@@ -414,7 +397,6 @@ _EXCEPTIONS = {
     "taverna": 13, "vanilja": 13, "vernissa": 13,
     #
     "ulappa": 14,
-    "cha-cha-cha": 21,  # one of only two trisyllabic nouns in declension
 
     # -VCe
     "agaave": 8, "beguine": 8, "chippendale": 8, "college": 8, "cum laude": 8, "empire": 8,
@@ -431,67 +413,78 @@ _EXCEPTIONS = {
     "charlotte russe": 8, "chenille": 8, "ensemble": 8, "freelance": 8, "lasagne": 8,
     "poste restante": 8, "promille": 8, "ratatouille": 8,
 
-    # -VVli
+    # -Vki
+    "buzuki": 6, "saluki": 6, "sirtaki": 6,
+
+    # -ali
     "biennaali": 5, "kajaali": 5, "koraali": 5, "korpraali": 5, "lojaali": 5, "modaali": 5,
     "pedaali": 5, "pluraali": 5, "triennaali": 5,
+
+    # -eli
+    "alleeli": 5, "gaeli": 5, "pendeli": 5,
+
+    # -ili
+    "fertiili": 5, "gerbiili": 5, "koktaili": 5, "konsiili": 5, "labiili": 5, "profiili": 5,
+    "viriili": 5,
+
+    # -oli
+    "dipoli": 5, "fenkoli": 5, "fenoli": 5, "kreoli": 5, "lysoli": 5, "mentoli": 5, "mongoli": 5,
+    "podsoli": 5,
+
+    # -uli
+    "klausuuli": 5, "moguli": 5, "noduuli": 5,
+
+    # -yli
+    "daktyyli": 6, "trotyyli": 6, "vinyyli": 6,
+
+    # -Vmi
+    "aatami": 5, "imaami": 5, "matami": 5, "monstrumi": 5, "oopiumi": 5, "palsami": 5, "salami": 5,
+    "tatami": 5, "vigvami": 5,
     #
-    "aioli": 6, "daktyyli": 6, "debiili": 6, "fossiili": 6, "moduuli": 6, "paneeli": 6,
-    "seniili": 6, "siviili": 6, "stabiili": 6, "steriili": 6, "tekstiili": 6, "trioli": 6,
-    "trotyyli": 6, "venttiili": 6, "vinyyli": 6,
+    "atomi": 6, "entsyymi": 6, "foneemi": 6, "haaremi": 6, "kondomi": 6, "muslimi": 6,
+    "pogromi": 6, "systeemi": 6, "toteemi": 6, "volyymi": 6,
 
-    # -VVmi
-    "entsyymi": 6, "foneemi": 6, "keraami": 6, "syklaami": 6, "systeemi": 6, "toteemi": 6,
-    "volyymi": 6,
+    # -ani
+    "afgaani": 5, "butaani": 5, "etaani": 5, "humaani": 5, "japani": 5, "kaimaani": 5,
+    "kardaani": 5, "Koraani": 5, "lantaani": 5, "liaani": 5, "mangaani": 5, "membraani": 5,
+    "metaani": 5, "oktaani": 5, "orgaani": 5, "profaani": 5, "propaani": 5, "samaani": 5,
+    "šamaani": 5, "sampaani": 5, "syaani": 5, "tapani": 5,
 
-    # -VVni
-    "afgaani": 5, "butaani": 5, "doktriini": 5, "etaani": 5, "eteeni": 5, "fibriini": 5,
-    "gluteeni": 5, "humaani": 5, "jasmiini": 5, "joriini": 5, "kaimaani": 5, "karbiini": 5,
-    "kardaani": 5, "kiniini": 5, "Koraani": 5, "kretliini": 5, "lantaani": 5, "laviini": 5,
-    "ligniini": 5, "mangaani": 5, "membraani": 5, "metaani": 5, "migreeni": 5, "morfiini": 5,
-    "oktaani": 5, "orgaani": 5, "patiini": 5, "pepsiini": 5, "pineeni": 5, "porfiini": 5,
-    "profaani": 5, "propaani": 5, "rabbiini": 5, "retliini": 5, "risiini": 5, "rutiini": 5,
-    "samaani": 5, "šamaani": 5, "sampaani": 5, "seireeni": 5, "strykniini": 5, "sykliini": 5,
-    "tanniini": 5, "toksiini": 5,
+    # -eni
+    "eteeni": 5, "gluteeni": 5, "guldeni": 5, "migreeni": 5, "pineeni": 5, "seireeni": 5,
+
+    # -ini
+    "doktriini": 5, "fibriini": 5, "jasmiini": 5, "joriini": 5, "karbiini": 5, "kiniini": 5,
+    "kosini": 5, "kretliini": 5, "laviini": 5, "ligniini": 5, "martini": 5, "morfiini": 5,
+    "nomini": 5, "panini": 5, "patiini": 5, "pepsiini": 5, "porfiini": 5, "rabbiini": 5,
+    "retliini": 5, "risiini": 5, "rutiini": 5, "strykniini": 5, "sykliini": 5, "tanniini": 5,
+    "teiini": 5, "toksiini": 5,
+
+    # -oni
+    "betoni": 6, "biisoni": 6, "bosoni": 6, "fotoni": 6, "gibboni": 6, "ikoni": 6, "kanjoni": 6,
+    "kantoni": 6, "kardoni": 6, "leptoni": 6, "meloni": 6, "peijooni": 6, "pekoni": 6,
+    "piisoni": 6, "ponttoni": 6, "sabloni": 6, "sirkoni": 6, "teutoni": 6, "valloni": 6,
+    "zirkoni": 6,
+
+    # -uni
+    "kommuuni": 6, "monsuuni": 6, "taifuuni": 6, "tribuuni": 6,
+
+    # -Vri
+    "afääri": 5, "bordyyri": 5, "brodyyri": 5, "brosyyri": 5, "fosfori": 5, "kašmiri": 5,
+    "kefiiri": 5, "kvartääri": 5, "kvasaari": 5, "likvori": 5, "paapuuri": 5, "porfyyri": 5,
+    "primaari": 5, "primääri": 5, "reviiri": 5, "satyyri": 5, "tyyrpuuri": 5, "vulgaari": 5,
+    "vulgääri": 5,
     #
-    "kommuuni": 6, "monsuuni": 6, "peijooni": 6, "syrjääni": 6, "taifuuni": 6, "tribuuni": 6,
+    "likööri": 6, "monttööri": 6, "valööri": 6,
 
-    # -VVri
-    "kefiiri": 5, "kvasaari": 5, "paapuuri": 5, "primaari": 5, "reviiri": 5, "tyyrpuuri": 5,
-    "vulgaari": 5,
-    #
-    "diaari": 6, "frisyyri": 6, "kentauri": 6, "kivääri": 6, "likööri": 6, "marttyyri": 6,
-    "misääri": 6, "monttööri": 6, "turnyyri": 6, "valööri": 6, "vampyyri": 6,
-
-    # -VVsi
+    # -Vsi
     "glukoosi": 6, "hampuusi": 6, "karpaasi": 6, "kolhoosi": 6, "narkoosi": 6, "neuroosi": 6,
     "pakaasi": 6, "plantaasi": 6, "poliisi": 6, "proteesi": 6, "serviisi": 6, "sotiisi": 6,
     "sottiisi": 6, "sovhoosi": 6, "turkoosi": 6, "ukaasi": 6, "viskoosi": 6, "zoonoosi": 6,
     "äksiisi": 6,
 
-    # -VVvi
+    # -Vvi
     "oliivi": 6,
-
-    # -CVki
-    "buzuki": 6, "saluki": 6, "sirtaki": 6,
-
-    # -CVli
-    "moguli": 5, "pendeli": 5,
-    #
-    "brokkoli": 6, "gondoli": 6, "idoli": 6, "konsoli": 6, "kupoli": 6, "linoli": 6, "petroli": 6,
-    "räätäli": 6, "symboli": 6, "tivoli": 6, "venkoli": 6,
-
-    # -CVmi
-    "aatami": 5, "matami": 5, "monstrumi": 5, "palsami": 5, "salami": 5, "tatami": 5, "vigvami": 5,
-    "atomi": 6, "haaremi": 6, "kondomi": 6, "muslimi": 6, "pogromi": 6,
-
-    # -CVni
-    "betoni": 6, "biisoni": 6, "bikini": 6, "bosoni": 6, "fotoni": 6, "gibboni": 6, "ikoni": 6,
-    "kanjoni": 6, "kantoni": 6, "kardoni": 6, "kumppani": 6, "kvitteni": 6, "leptoni": 6,
-    "meloni": 6, "muffini": 6, "pekoni": 6, "pelmeni": 6, "piisoni": 6, "ponttoni": 6, "romani": 6,
-    "sabloni": 6, "sirkoni": 6, "teutoni": 6, "valloni": 6, "zirkoni": 6, "zucchini": 6,
-
-    # -CVri
-    "fosfori": 5, "likvori": 5,
 
     # -CCi
     "antenni": 6, "atolli": 6, "basenji": 6, "basilli": 6, "biljardi": 6, "bisarri": 6,
@@ -521,7 +514,6 @@ _EXCEPTIONS = {
     "kumpikaan": 16, "kumpikin": 16,
     "kymmenen": 32,
     "morsian": 33,
-    "parahin": 36,  # the only trisyllabic noun in declension
 
     # -r
     "bestseller": 6, "freelancer": 6, "laudatur": 6, "outsider": 6, "rottweiler": 6,
@@ -536,37 +528,37 @@ _EXCEPTIONS = {
 
     # -C (not -n/-r/-s)
     "CD-ROM": 5,  # ends with capital letter
-    "aerobic": 5, "armagnac": 5, "beauty box": 5, "bungalow": 5,  # ends with foreign letter
     #
     "passepartout": 22, "port salut": 22,
 
     # === quadrisyllabic and longer ===
+
+    # less than three quadrisyllabic or longer nouns in these declensions
+    "marihuana": 11,
+    "politbyroo": 20, "varietee": 20,
+    "väkevöite": 48,
 
     # -VV
     "adagio": 1,
     "odysseia": 9,
     "paranoia": 10,
     "atsalea": 13, "attasea": 13, "orkidea": 13,
-    "politbyroo": 20, "varietee": 20,  # the only quadrisyllabic+ nouns in declension
 
     # -VVCA
     "akileija": 9, "panoraama": 9, "teoreema": 9, "valeriaana": 9,
-    "marihuana": 11,  # the only quadrisyllabic+ noun in declension
     "nomenklatuura": 13,
 
     # -CVCA
-    "ballerina": 9, "basilika": 9, "dalai-lama": 9, "emerita": 9, "enchilada": 9, "ikebana": 9,
-    "jakaranda": 9, "karateka": 9, "propaganda": 9,
+    "ballerina": 9, "basilika": 9, "dalai-lama": 9, "enchilada": 9, "ikebana": 9, "jakaranda": 9,
+    "karateka": 9, "propaganda": 9,
     #
     "gorgonzola": 10, "hyperbola": 10, "karambola": 10,
     #
-    "anoppila": 12, "ekliptika": 12,
+    "ekliptika": 12,
     "karakteristika": 13, "majolika": 13, "psykofarmaka": 13,
 
     # -CCA
-    "maharadža": 9,  # 2nd-to-last letter is foreign
     "abrakadabra": 9, "hoosianna": 9, "mykorritsa": 9, "paradigma": 9, "praasniekka": 9,
-    "ympärystä": 9,
     #
     "halveksunta": 10, "hyväksyntä": 10, "protokolla": 10, "terrakotta": 10, "väheksyntä": 10,
     "skandinaaviska": 13,
@@ -575,23 +567,18 @@ _EXCEPTIONS = {
 
     # -VCe
     "bavaroise": 8, "faksimile": 8, "karaoke": 8, "minestrone": 8, "ukulele": 8,
-    "väkevöite": 48,  # the only quadrisyllabic+ noun in declension
 
     # -CCe
     "eau de Cologne": 8, "komedienne": 8, "mezzoforte": 8, "tagliatelle": 8, "tragedienne": 8,
 
-    # -VVCi
-    "akupunktuuri": 6, "juniori": 6, "prostaglandiini": 6, "seniori": 6, "unioni": 6,
-
-    # -CVCi
-    "desibeli": 5, "diakoni": 6, "editori": 5, "follikkeli": 5, "hyperbeli": 5, "kaliiberi": 5,
-    "kaliiperi": 5, "kateederi": 5, "kollektori": 5, "kompostori": 5, "laventeli": 5,
-    "makaaberi": 5, "manööveri": 5, "monitori": 5, "multippeli": 5, "paraabeli": 5, "opossumi": 5,
-    "palaveri": 5, "permeaabeli": 5, "praktikumi": 5, "pulloveri": 5, "raparperi": 5,
-    "reseptori": 5, "riskaabeli": 5, "sinooberi": 5, "sinooperi": 5, "slipoveri": 5,
-    "taranteli": 5, "varistori": 5,
+    # -VCi
+    "diakoni": 6, "follikkeli": 5, "kateederi": 5, "kollektori": 5, "kompostori": 5,
+    "multippeli": 5, "varistori": 5,
     #
-    "azerbaidžani": 6, "testosteroni": 6, "trikolori": 6, "ubikinoni": 6,
+    "akupunktuuri": 6, "azerbaidžani": 6, "firaabeli": 6, "inspehtori": 6, "prostaglandiini": 6,
+    "reversiibeli": 6, "revolveri": 6, "testosteroni": 6, "ubikinoni": 6, "unioni": 6,
+    "universumi": 6, "variaabeli": 6,
+    #
     "minunlaiseni": 38, "sinunlaisesi": 38,
 
     # -ikkO
@@ -600,7 +587,6 @@ _EXCEPTIONS = {
     "untuvikko": 1, "uskalikko": 1,
 
     # -CO (not -kO)
-    "intermezzo": 1, "osso buco": 1,  # 2nd-to-last letter is foreign
     "karkaisimo": 1, "koksittamo": 1,
     #
     "katajisto": 2, "koordinaatisto": 2, "luettelo": 2,
@@ -609,13 +595,10 @@ _EXCEPTIONS = {
     "elostelu": 1, "istuskelu": 1,
 
     # -r
-    "primus motor": 5,  # the only quadrisyllabic+ -r noun in declension
-    #
     "agar-agar": 6, "appenzeller": 6, "approbatur": 6, "art director": 6, "babysitter": 6,
     "besserwisser": 6, "biedermeier": 6, "copywriter": 6, "improbatur": 6, "tonic water": 6,
 
     # -C (not -r)
-    "paparazzi": 5,  # 2nd-to-last letter is foreign
     "director musices": 5,
     #
     "backgammon": 6, "liirumlaarum": 6,
@@ -624,42 +607,50 @@ _EXCEPTIONS = {
     "stradivarius": 39, "trikomoonas": 39,
 }
 
-# note: rules in _RULES_1SYLL etc.:
-# - sort by declension (except when a rule depends on another)
-# - each regex should match at least three words
+# Note: rules in _RULES_1SYLL etc.:
+# - Handle as many words as possible with rules instead of exceptions.
+# - Make rules as short as possible (feel free to reorder them if needed).
+# - One rule per declension. Exception: when the declension contains very different kinds of words
+#   (e.g. -VV and -C), use one rule per declension per section.
+# - When rules don't depend on each other, sort them by declension.
+# - If a rule depends on another, always mention it.
+# - Each regex should match at least three words.
+# - Use this as the list of all consonants: bcdfghjklmnpqrsštvwxzž (a-z minus vowels plus š/ž).
+# - No capital letters in rules; handle those words as exceptions.
 
 # rules for monosyllabic nouns (declension, regex)
 _RULES_1SYLL = (
-    # -C
-    (5, r"[bdfghklnprsšt]$"),
-    # -ie/-UO
-    (19, r"( ie | uo | yö )$"),
-    # -ay
-    (21, r"ay$"),
-    # -VV
-    (18, r"( aa | ää | ee | öö | [aäeio]i | [aiu]u | yy )$"),
+    ( 5, r"[bcdfghjklmnpqrsštvwxzž]$"),  # -C
+    (19, r"( ie | uo | yö )$"),          # -ie/-UO
+    (21, r"ay$"),                        # -ay
+    (18, r"[aeiouyäö]{2}$"),             # -VV except those in decl. 19, 21
+    ( 8, r"e$"),                         # -e except those in decl. 18, 19
 )
 
 # rules for disyllabic nouns (declension, regex)
 _RULES_2SYLL = (
+    # === -VV ===
+
+    (17, r"( aa | oo | uu )$"),  # -aa/-oo/-uu
+    (18, r"[ai]i$"),             # -ai/-ii
+    (20, r"( ee | öö | yy )$"),  # -ee/-öö/-yy
+    (21, r"[aeo]y$"),            # -ay/-ey/-oy
+    (48, r"[aäou]e$"),           # -Ae/-oe/-ue
+
+    # === -CV ===
+
     # -CO/-CU
-    (1, r"[bdfghjklmnprstv][oöuy]$"),
-    # -or
-    (6, r"or$"),
+    ( 1, r"[bcdfghjklmnpqrsštvwxzž][oöuy]$"),
     # -lki/-rki/-tki/-lpi/-mpi/-rpi
-    (7, r"( [lrt]k | [lmr]p )i$"),
-    # -a/-e/-ai/-ei/-ii/-au/-eu/-iu/-Ci/i + (C)Ca
-    (9, r"( [ae] | [aei][iu] | [bfghklmnprstv]i | ^i )[bdfghjklmnprsštv]+a$"),
-    # -o/-oi/-ui/-ou/-uu/-Cu/u/-y + (C)Ca; -Cä
-    (10, r"( ( oi? | ui | [oubdhjklmnprstv]u | ^u | y )[bdfghjklmnprstv]+a | [hjklmnprstv]ä )$"),
-    # -aa/-oo/-uu
-    (17, r"( aa | oo | uu )$"),
-    # -ai/-ii
-    (18, r"[ai]i$"),
-    # -ee/-öö/-yy
-    (20, r"( ee | öö | yy )$"),
-    # -ay/-ey/-oy
-    (21, r"[aeo]y$"),
+    ( 7, r"( [lrt]k | [lmr]p )i$"),
+    # -a/-e/-ai/-ei/-ii/-au/-eu/-iu/-Ci/i + (C)(C)Ca
+    ( 9, r"( [ae] | [aei][iu] | [bcdfghjklmnpqrsštvwxzž]i | ^i )[bcdfghjklmnpqrsštvwxzž]+a$"),
+    # -o/-y/-oi/-ui/-ou/-uu/-Cu/u + (C)(C)Ca
+    (10, r"( [oy] | [ou][iu] | [bcdfghjklmnpqrsštvwxzž]u | ^u )[bcdfghjklmnpqrsštvwxzž]+a$"),
+    # -Cä
+    (10, r"[bcdfghjklmnpqrsštvwxzž]ä$"),
+    # -Cé
+    (21, r"[bcdfghjklmnpqrsštvwxzž]é$"),
     # -ohi/-uhi
     (23, r"[ou]hi$"),
     # -iemi/-oimi
@@ -669,145 +660,123 @@ _RULES_2SYLL = (
     # -lsi/-nsi/-rsi
     (28, r"[lnr]si$"),
     # -Ci except those in declensions 7, 23, 25-26, 28 (many exceptions)
-    (5, r"[bdfghjklmnprsštv]i$"),
+    ( 5, r"[bcdfghjklmnpqrsštvwxzž]i$"),
 
-    # -hen/-men/-sen/-ven
-    (32, r"[hmsv]en$"),
-    # -in
-    (33, r"in$"),
-    # -VVtOn
-    (34, r"( aa | ää | ai | ie | yö | [au]u | yy )t[oö]n$"),
-    # -Vinen
-    (38, r"[aäeoöuy]inen$"),
-    # -es/-is/-Os/-AUs/-CUs (many exceptions)
-    (39, r"( [eioö] | [aädfhjklmnprstv][uy] )s$"),
-    # -eUs/-iUs/-OUs/-UUs
-    (40, r"[eioöuy][uy]s$"),
-    # -oas/-uas/-CAs (many exceptions)
-    (41, r"[oudghjklmnprstv][aä]s$"),
-    # -llUt/-nUt
-    (47, r"( ll | n )[uy]t$"),
-    # -CUt except those in declension 47
-    (43, r"[hklmrsv][uy]t$"),
+    # -Ce
+    (48, r"[bcdfghjklmnpqrsštvwxzž]e$"),
 
-    # -Ae/-oe/-ue/-Ce
-    (48, r"[aäoudhjklmnprstv]e$"),
-    # -Cel/-Car/-Cer
-    (49, r"[dgkmnpv]( el | [ae]r )$"),
-    # -C except those in declensions 6, 32-34, 38-41, 49 (many exceptions)
-    (5, r"[bdfghklmnprsšt]$"),
+    # === -C ===
+
+    ( 6, r"( [eö]m | or )$"),                # -em/-öm/-or
+    (32, r"[hmsv]en$"),                      # -hen/-men/-sen/-ven
+    (33, r"in$"),                            # -in
+    (34, r"[aeiouyäö]t[oö]n$"),              # -VtOn
+    (38, r"nen$"),                           # -nen
+    (40, r"[eioöuy][uy]s$"),                 # -eUs/-iUs/-OUs/-UUs
+    (39, r"[eioöuy]s$"),                     # -es/-is/-Os/-Us except those in decl. 40 (many exc.)
+    (41, r"[aä]s$"),                         # -As (many exceptions)
+    (47, r"( ll | n )[uy]t$"),               # -llUt/-nUt
+    (43, r"[bcdfghjklmnpqrsštvwxzž][uy]t$"), # -CUt except those in declension 47
+    (49, r"( [mv]al | [kmn]el | [är]en | [kmnv]ar | [gn]er )$"),  # some of -C + a/e + l/n/r
+    ( 5, r"[bcdfghjklmnpqrsštvwxzž]$"),  # -C except those in decl. 6, 32-34, 38-41, 49 (many exc.)
 )
 
 # rules for trisyllabic nouns (declension, regex)
 _RULES_3SYLL = (
-    # -nkO/-ntO/-aisto/-ttO/-tU
-    (1, r"( ( nk | [nt]t )[oö] | aisto | t[uy] )$"),
-    # -CO/-CU except those in declension 1
-    (2, r"( [bdghjlmnrstv][oöuy] | sk[oö] )$"),
+    # === -VV ===
 
-    # -Cao/-Ceo/-CiO
-    (3, r"[dghjklmnprstv]( [aei]o | iö )$"),
-    # -VkkO
-    (4, r"[aäiouy]kk[oö]$"),
-    # -Caali/-Cooli/-Cuumi/-Caani/-Ceeni/-Ciini/-Caari/-Ceeri/-Ciiri/-Cuuri
-    (6, r"[bdfgjklmnprsštv]( (aa|oo)l | uum | (aa|ee|ii)n | (aa|ee|ii|uu)r )i$"),
-    # -Cali/-Celi/-Culi/-Cami/-Cumi/-CAri/-Ceri/-Cori/-CUri
-    (6, r"[bdfghjklmnprstvz]( [aeu]l | [au]m | [aäeouy]r )i$"),
+    ( 3, r"[aäei][oö]$"),   # -AO/-eO/-iO
+    (12, r"[iuy][aä]$"),    # -iA/-UA
+    (15, r"e[aä]$"),        # -eA
+    (18, r"[aeiouyäö]i$"),  # -Vi
+    (20, r"ee$"),           # -ee
+    (48, r"[uy]e$"),        # -Ue
 
-    # -tte
-    (8, r"tte$"),
+    # === -CA ===
+
     # -dA/-nkA/-ssA/-ntA/-VVttA
-    (9, r"( d | nk | ss | nt | (ee|ii|uu)tt )[aä]$"),
-    # -AAjA/-ooja/-Vama/-Voma/-VUmA/-oona/-ouna/-VisA/-AAvA
-    (10, r"( (aa|ää|oo)j | [aeiouyäö][aouy]m | o[ou]n | [aeiouyäö]is | (aa|ää)v )[aä]$"),
-    # -CAjA/-Coja/-CUjA/-Celä/-CVmA/-Cärä/-CerA/-CVvA
-    (10, r"[hjklmnprstv]( [aäuy]j[aä] | oja | elä | [aeiouyäö][mv][aä] | ärä | er[aä] )$"),
-    # -elmA/-ermA/-ervA
-    (10, r"e( lm | rm | rv )[aä]$"),
-    # -Cona
-    (11, r"[lmr]ona$"),
-    # -CiA/-Cua/-Cja/-Vija
-    (12, r"( [bfgklmnprstv]( [iuj]a | iä ) | [aeiouyäö]ija )$"),
-    # -CijA/-CAlA/-Cela/-CilA/-Cola/-CUlA/-CAnA/-CinA/-CUnA/-Cara/-CUrA
-    (12, r"[dghjklmnprstv]( ij[aä] | [aäiuy][ln][aä] | [eo]la | ara | ura | yrä )$"),
-    # -eena/-iina/-uuna/-uura
-    (13, r"( (ee|ii|uu)n | uur )a$"),
-    # -CVga/-CVka
-    (13, r"[lmnst][aeiouyäö][gk]a$"),
-    # -hkA/-skA/-llA/-itsA/-stA
-    (13, r"( [hs]k | ll | its | st )[aä]$"),
-    # -kkA/-CVttA
-    (14, r"( kk | [hmv][aeo]tt )[aä]$"),
-    # -CeA
-    (15, r"[hklmprstv]e[aä]$"),
-    # -empi/-ompi
-    (16, r"[eo]mpi$"),
-    # -Vi
-    (18, r"[aeu]i$"),
-    # -ee
-    (20, r"ee$"),
-    # -VtAr
-    (32, r"[aäeio]t[aä]r$"),
-    # -Ain/-Cin
-    (33, r"[aälnrst]in$"),
-    # -VtOn/-stOn
-    (34, r"[aeiouyäös]t[oö]n$"),
-    # -Vnen
-    (38, r"[aäioöuy]nen$"),
-    # -ies/-Ces/-Cis/-COs/-aus/-eus/-CUs
-    (39, r"( [bdklmnprstv][eioöuy] | ie | [ae]u )s$"),
-    # -CiUs/-COUs/-CUUs
-    (40, r"[djklmnrstv][ioöuy][uy]s$"),
-    # -iAs/-uas/-CAs
-    (41, r"[iugkln][aä]s$"),
-    # -llUt/-nUt
-    (47, r"( ll | n )[uy]t$"),
-    # -Ci/-C except those in declensions 6, 32-34, 38-41, 47
-    (5, r"[bdfgjklmnprstv]i?$"),
+    ( 9, r"( d | nk | ss | nt | (ee|ii|uu)tt )[aä]$"),
+    # -AjA/-OjA/-UjA/-elä/-mA/-oona/-ouna/-ärä/-erA/-isA/-vA
+    (10, r"( [aäoöuy]j[aä] | elä | m[aä] | o[ou]na | ärä | er[aä] | is[aä] | v[aä] )$"),
+    # -ona except those in declension 10
+    (11, r"ona$"),
+    # -kkA/-ttA except those in declension 9
+    (14, r"(kk|tt)[aä]$"),
+    # -gA/-kA/-llA/-eenA/-iinA/-uuna/-uura/-tsA/-tA except those in declension 14
+    (13, r"( [gkt] | ll | (ee|ii|uu)n | uur | ts )[aä]$"),
+    # -jA/-lA/-nA/-rA except those in declensions 10, 11, 13
+    (12, r"[jlnr][aä]$"),
 
-    # -pele/-ene/-ere
-    (49, r"( pel | en | er )e$"),
-    # -Ue/-Ce except those in declension 49
-    (48, r"[uydklnrt]e$"),
+    # === -Ce ===
+
+    (8, r"tte$"),                         # -tte
+    (49, r"( pel | en | er )e$"),         # -pele/-ene/-ere
+    (48, r"[bcdfghjklmnpqrsštvwxzž]e$"),  # -Ce except those in declension 49
+
+    # === -Ci ===
+
+    (6, r"( [aäeiou]l | [au]m | [aäei]n | [aäeiouy]r )i$"),  # some of -Vli/-Vmi/-Vni/-Vri
+    (16, r"[eo]mpi$"),                                       # -empi/-ompi
+    (5, r"[bcdfghjklmnpqrsštvwxzž]i$"),                      # -Ci except those in decl. 6, 16
+
+    # === -CO/-CU ===
+
+    (1, r"( (nk|nt|tt)[oö] | aisto | t[uy] )$"),  # -nkO/-ntO/-aisto/-ttO/-tU
+    (4, r"kk[oö]$"),                              # -kkO
+    (2, r"[bcdfghjklmnpqrsštvwxzž][oöuy]$"),      # -CO/-CU except those in declensions 1, 4
+
+    # === -C ===
+
+    (32, r"t[aä]r$"),                    # -tAr
+    (33, r"in$"),                        # -in
+    (34, r"t[oö]n$"),                    # -tOn
+    (38, r"nen$"),                       # -nen
+    (40, r"[ioöuy][uy]s$"),              # -iUs/-OUs/-UUs
+    (39, r"[eioöuy]s$"),                 # -es/-is/-Os/-Us except those in decl. 40
+    (41, r"[aä]s$"),                     # -As
+    (47, r"[ln][uy]t$"),                 # -lUt/-nUt
+    ( 5, r"[bcdfghjklmnpqrsštvwxzž]$"),  # -C except those in decl. 32-34, 38-41, 47
 )
 
 # rules for quadrisyllabic and longer nouns (declension, regex)
 _RULES_4SYLL = (
-    # -dO/-lO/-nO/-rO/-sO/-tO/-hko/-eikko/-oikko/-kikko/-mU/-tU
-    (1, r"( [dlnrst][oö] | ( h | [eok]ik )ko | [mt][uy] )$"),
-    # -AmO/-imO/-elU
-    (2, r"( [aäi]m[oö] | el[uy] )$"),
-    # -CiO
-    (3, r"[ghlnrstv]i[oö]$"),
-    # -CikkO
-    (4, r"[dgjlmnprstv]ikk[oö]$"),
+    # === -VV ===
 
-    # -Celi/-Cumi/-Cari/-Ceri/-sori/-tori
-    (6, r"( [bdgklnprstv](el|um|ar|er) | [st]or )i$"),
-    # -Ci/-C except those in declension 6
-    (5, r"( [bdfgklmnprstv]i | [dghkm] | [ir]on | [nr]t )$"),
+    ( 3, r"[bcdfghjklmnpqrsštvwxzž]i[oö]$"),  # -CiO
+    (12, r"[bcdfghjklmnpqrsštvwxzž][ei]a$"),  # -Cea/-Cia
 
-    # -akka/-ikka/-rkka/-lla/-iina/-inna/-ssa/-ntA/-sta/-tta
-    (9, r"( [air]kka | lla | i[in]na | ssa | nt[aä] | [st]ta )$"),
-    # -CA except those in declension 9
-    (10, r"( [dgkmnrsv] | [aäuy]j | [oö]ij )[aä]$"),
+    # === -CA ===
 
-    # -Cea/-Cia/-lijA/-nijA/-sijA/-tijA/-tola
-    (12, r"( [bdfgklmnprst][ei]a | [lnst]ij[aä] | tola )$"),
-    # -VtAr
-    (32, r"[aeiouyäö]t[aä]r$"),
-    # -VtOn
-    (34, r"[aeiouyäö]t[oö]n$"),
-    # -inen(kin)
-    (38, r"inen(kin)?$"),
-    # -Ces/-Cis/-COs/-aus/-CUs
-    (39, r"( [klmnrst][eioöuy] | au )s$"),
-    # -CiUs/-CUUs
-    (40, r"[djklmnrstv][iuy][uy]s$"),
-    # -iAs/-kAs/-lAs
-    (41, r"[ikl][aä]s$"),
-    # -AnUt/-UnUt
-    (47, r"[aäuy]n[uy]t$"),
+    # -akka/-ikka/-rkka/-lla/-iina/-inna/-ssa/-tA/-ža
+    ( 9, r"( [air]kka | lla | i[in]na | ssa | t[aä] | ža )$"),
+    # -lijA/-nijA/-sijA/-tijA/-la
+    (12, r"( [lnst]ij[aä] | la )$"),
+    # -CA except those in declensions 9, 12
+    (10, r"[bcdfghjklmnpqrsštvwxzž][aä]$"),
+
+    # === -Ci ===
+
+    # some of -Vli, -Vmi, -Vri
+    (6, r"( [gkp]el | [drt]um | [klnptv]ar | [dgknt]er | (i|l|s|kt|st|tt)or )i$"),
+    # -Ci except those in declension 6
+    (5, r"[bcdfghjklmnpqrsštvwxzž]i$"),
+
+    # === -CO/-CU ===
+
+    (2, r"( m[oö] | l[uy] )$"),               # -mO/-lU
+    (4, r"[dgjlmnprstv]ikk[oö]$"),            # -CikkO (not -kikko)
+    (1, r"[bcdfghjklmnpqrsštvwxzž][oöuy]$"),  # -CO/-CU excluding those in decl. 2, 4
+
+    # === -C ===
+
+    (32, r"t[aä]r$"),                   # -tAr
+    (34, r"t[oö]n$"),                   # -tOn
+    (38, r"nen(kin)?$"),                # -nen(kin)
+    (40, r"[iuy][uy]s$"),               # -iUs/-UUs
+    (39, r"[eioöuy]s$"),                # -es/-is/-Os/-Us except those in decl. 40
+    (41, r"[aä]s$"),                    # -As
+    (47, r"n[uy]t$"),                   # -nUt
+    (5, r"[bcdfghjklmnpqrsštvwxzž]$"),  # -C except those in decl. 32, 34, 38-41, 47
 )
 
 def get_declensions(noun, useExceptions=True):

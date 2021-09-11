@@ -25,7 +25,7 @@ Conj Word      1syll 2syll 3syll 4syll   -VV   -CV    -C Total
    5 risti        42  1272  1150  2165     0  4341   288  4629
    6 paperi        0    31   988   156     0  1123    52  1175
    7 ovi           0   116     0     0     0   116     0   116
-   8 nalle         4    58    36    10     3   105     0   108
+   8 nalle         8    54    36    10     3   105     0   108
    9 kala          0   657   296   161     3  1111     0  1114
   10 koira         0   601   873   742     3  2210     3  2216
   11 omena         0     0    46     1     0    47     0    47
@@ -94,4 +94,4 @@ Conj Word      1syll 2syll 3syll 4syll   -VV   -CV    -C Total
   76 taitaa        0     2     0     0     2     0     0     2
   77 kumajaa       0     0     3     0     3     0     0     3
   78 kaikaa        0    32     0     0    32     0     0    32
-     TOTAL       238  7465 17638 15745  7169 21345 12572 41086
+     TOTAL       242  7461 17638 15745  7169 21345 12572 41086
