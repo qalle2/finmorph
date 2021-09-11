@@ -4,9 +4,6 @@
 # - A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant
 # - Words with capital or foreign letters (c/é/q/w/x/z/ž) within the last two letters are handled
 #   as exceptions.
-# - It wouldn't be a good idea to merge declension 2 to 1 or 3 (e.g. "julkimojen" and
-#   "romuttamoiden" sound wrong).
-# - It wouldn't be a good idea to merge declension 6 to 5 (e.g. "ajureja" sounds wrong).
 
 import re, sys
 import countsyll

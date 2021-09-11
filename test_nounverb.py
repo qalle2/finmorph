@@ -21,15 +21,6 @@ for line in util.read_lines(inputFile):
     assert len(fields) >= 2
     word = fields[0]
     conjugations = {int(c, 10) for c in fields[1:]}
-    # merge conjugation 68 ("tupakoida") to 62 ("voida")
-    if 68 in conjugations:
-        conjugations.remove(68)
-        conjugations.add(62)
-    # merge conjugation 74 ("katketa") to 75 ("selvitä")
-    if 74 in conjugations:
-        conjugations.remove(74)
-        conjugations.add(75)
-
     detectedConjugations = detect_conjugation(word)
     if detectedConjugations != conjugations:
         print(
