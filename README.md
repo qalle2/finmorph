@@ -116,6 +116,9 @@ Creates the subdirectory `generated-lists/` and generates these files under it:
     * `verbs-2syll.csv`: disyllabic verbs
     * `verbs-3syll.csv`: trisyllabic verbs
     * `verbs-4syll.csv`: quadrisyllabic and longer verbs
+* `consgrad.csv`: like `words-orig.csv` but only words to which consonant gradation applies (~12,000 words)
+* `consgrad-nouns.csv`: nouns from `consgrad.csv` (~6,400 words)
+* `consgrad-verbs.csv`: verbs from `consgrad.csv` (~5,300 words)
 * `finals.csv`: words that occur as final parts of compounds (and possibly non-finally or alone) (~8,400 words)
 * `nonfinals.txt`: words that occur as non-final parts of compounds (not finally) (~5,300 words)
 
@@ -145,7 +148,7 @@ Find compounds that can be split to many parts or in many ways.
 These are only meant to be used by `extract.sh`.
 
 ### xml2csv.py
-Read Kotus XML file, print distinct words and their declensions/conjugations (0-2) in CSV format. Argument: XML file
+Read Kotus XML file, print distinct words and their declensions/conjugations (0-2) in CSV format. Arguments: XML file, which words ('a' = all, 'g' = only those that consonant gradation applies to).
 
 ### finals.py
 Get words that occur as finals of compounds. Print them and their declensions/conjugations in CSV format. Arguments: wordCsvFile compoundListFile

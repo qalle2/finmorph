@@ -4,7 +4,7 @@
 mkdir -p generated-lists
 
 echo "Converting the Kotus XML file into a CSV file..."
-python3 xml2csv.py kotus-sanalista_v1.xml > generated-lists/words-orig.csv
+python3 xml2csv.py kotus-sanalista_v1.xml a > generated-lists/words-orig.csv
 
 echo "Adding words that only occur as finals of compounds..."
 python3 finals.py generated-lists/words-orig.csv compounds.txt | sort > generated-lists/finals.csv
@@ -24,6 +24,11 @@ for ((i = 1; i <= 4; i++)); do
     python3 filter_by_syllcnt.py generated-lists/nouns.csv $i > generated-lists/nouns-${i}syll.csv
     python3 filter_by_syllcnt.py generated-lists/verbs.csv $i > generated-lists/verbs-${i}syll.csv
 done
+
+echo "Writing consgrad*.csv..."
+python3 xml2csv.py kotus-sanalista_v1.xml g > generated-lists/consgrad.csv
+python3 filter_by_conjugation.py generated-lists/consgrad.csv 1 49 > generated-lists/consgrad-nouns.csv
+python3 filter_by_conjugation.py generated-lists/consgrad.csv 52 78 > generated-lists/consgrad-verbs.csv
 
 echo "Writing nonfinals.txt..."
 python3 nonfinals.py compounds.txt | sort > generated-lists/nonfinals.txt
