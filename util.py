@@ -5,7 +5,6 @@ def read_lines(file_):
     try:
         with open(file_, "rt", encoding="utf8") as handle:
             handle.seek(0)
-            for line in handle:
-                yield line.rstrip("\n")
+            yield from (l.rstrip("\n") for l in handle)
     except OSError:
         sys.exit("Error reading " + file_)
