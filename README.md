@@ -71,6 +71,13 @@ See also `test_nounverb.py`.
 ### verb_consgrad.py
 Argument: a Finnish verb (not a compound) in the infinitive. Print the Kotus conjugation(s) (52-78) and whether consonant gradation applies.
 
+Example:
+```
+$ python3 verb_consgrad.py "keritä"
+Conjugation 69 (like "valit|a, -sen, -si, -sisi, -koon, valinnut, -tiin") without consonant gradation
+Conjugation 75 (like "selvi|tä, -än, -si, -äisi, -tköön, -nnyt, -ttiin") with consonant gradation
+```
+
 See also `test_nounverb.py`.
 
 ### countsyll.py
