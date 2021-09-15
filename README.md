@@ -71,8 +71,6 @@ See also `test_nounverb.py`.
 ### verb_consgrad.py
 Argument: a Finnish verb (not a compound) in the infinitive. Print the Kotus conjugation(s) (52-78) and whether consonant gradation applies.
 
-TODO: finish this file.
-
 See also `test_nounverb.py`.
 
 ### countsyll.py
