@@ -61,7 +61,19 @@ print(verbconj.get_conjugations("isota"))  # {72, 74}
 
 See also `test_nounverb.py`.
 
-To do: print consonant gradation info.
+### noun_consgrad.py
+Argument: a Finnish noun (including adjectives/pronouns/numerals, excluding compounds) in nominative singular. Print the Kotus declension(s) (1-49) and whether consonant gradation applies.
+
+TODO: create this file.
+
+See also `test_nounverb.py`.
+
+### verb_consgrad.py
+Argument: a Finnish verb (not a compound) in the infinitive. Print the Kotus conjugation(s) (52-78) and whether consonant gradation applies.
+
+TODO: finish this file.
+
+See also `test_nounverb.py`.
 
 ### countsyll.py
 Count the number of syllables in a Finnish word. Argument: word
@@ -123,9 +135,10 @@ Creates the subdirectory `generated-lists/` and generates these files under it:
 Also generates `stats-compound.txt` and `stats-nounverb.txt` under the current directory (see [text files](#text-files)).
 
 ### test_nounverb.py
-Argument: which program to test ('n'=noundecl.py, 'v'=verbconj.py).
+Argument: which program to test ('n'=noundecl.py, 'v'=verbconj.py, 'nc'=noun_consgrad.py,
+'vc'=verb_consgrad.py).
 
-Requires `generated-lists/nouns.csv` and `generated-lists/verbs.csv` which can be generated with `extract.sh`.
+Needs files created by `extract.sh`.
 
 ### test_splitcomp.py
 Test `splitcomp.py` against known single words and compounds.
