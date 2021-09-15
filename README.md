@@ -116,9 +116,7 @@ Creates the subdirectory `generated-lists/` and generates these files under it:
     * `verbs-2syll.csv`: disyllabic verbs
     * `verbs-3syll.csv`: trisyllabic verbs
     * `verbs-4syll.csv`: quadrisyllabic and longer verbs
-* `consgrad.csv`: like `words-orig.csv` but only words to which consonant gradation applies (~12,000 words)
-* `consgrad-nouns.csv`: nouns from `consgrad.csv` (~6,400 words)
-* `consgrad-verbs.csv`: verbs from `consgrad.csv` (~5,300 words)
+* `words-consgrad.csv`: like `words.csv` but only the words to which consonant gradation applies (~11,000 words)
 * `finals.csv`: words that occur as final parts of compounds (and possibly non-finally or alone) (~8,400 words)
 * `nonfinals.txt`: words that occur as non-final parts of compounds (not finally) (~5,300 words)
 

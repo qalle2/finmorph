@@ -5,7 +5,6 @@ import collections, itertools, sys
 import util
 
 # parts of fancy Latin/Greek compounds; used for finding possible new compounds
-# (no words that are already in "words-orig.txt")
 FANCY_PARTS = {
     "a", "aero", "agraari", "amfi", "aneroidi", "antropo", "arkeo", "astro",
     #
