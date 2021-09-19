@@ -25,48 +25,30 @@ CSV file format used in this project:
 
 ## Programs interesting to the end user
 
+### noun_consgrad.py
+Argument: a Finnish noun (including adjectives/pronouns/numerals, excluding compounds) in nominative singular. Print the Kotus declension(s) (1-49) and whether consonant gradation applies.
+
+Example:
+```
+$ python3 noun_consgrad.py "kuusi"
+Declension 24 (like "un|i, -en, -ien/-ten, -ta, -ia, -een, -iin") without consonant gradation
+Declension 27 (like "käsi, käden, -en/kätten, kättä, -ä, käteen, -in") without consonant gradation
+```
+
+Needs `noundecl.py` and `countsyll.py`. Can be tested with `test_nounverb.py`.
+
 ### noundecl.py
 Get the Kotus declension(s) (1-49) of a Finnish noun (including adjectives/pronouns/numerals, excluding compounds). Argument: noun in nominative singular
 
-Example (from command line):
+Example:
 ```
 $ python3 noundecl.py "kuusi"
 Declension 24 (like "un|i, -en, -ien/-ten, -ta, -ia, -een, -iin")
 Declension 27 (like "käsi, käden, -en/kätten, kättä, -ä, käteen, -in")
 ```
-Example (from another Python program):
-```
-import noundecl
-print(noundecl.get_declensions("kuusi"))  # {24, 27}
-```
 
-See also `test_nounverb.py`.
-
-To do: print consonant gradation info.
-
-### verbconj.py
-Get the Kotus conjugation(s) (52-78) of a Finnish verb (not a compound). Argument: verb in infinitive
-
-Example (from command line):
-```
-$ python3 verbconj.py "isota"
-Conjugation 72 (like "vanhe|ta, -nen, -ni, -nisi, -tkoon, -nnut, -ttiin")
-Conjugation 74 (like "katke|ta, -an, -si, -(a)isi, -tkoon, -nnut, -ttiin")
-```
-Example (from another Python program):
-```
-import verbconj
-print(verbconj.get_conjugations("isota"))  # {72, 74}
-```
-
-See also `test_nounverb.py`.
-
-### noun_consgrad.py
-Argument: a Finnish noun (including adjectives/pronouns/numerals, excluding compounds) in nominative singular. Print the Kotus declension(s) (1-49) and whether consonant gradation applies.
-
-TODO: create this file.
-
-See also `test_nounverb.py`.
+See also `noun_consgrad.py`.
+Needs `countsyll.py`. Can be tested with `test_nounverb.py`.
 
 ### verb_consgrad.py
 Argument: a Finnish verb (not a compound) in the infinitive. Print the Kotus conjugation(s) (52-78) and whether consonant gradation applies.
@@ -78,39 +60,41 @@ Conjugation 69 (like "valit|a, -sen, -si, -sisi, -koon, valinnut, -tiin") withou
 Conjugation 75 (like "selvi|tä, -än, -si, -äisi, -tköön, -nnyt, -ttiin") with consonant gradation
 ```
 
-See also `test_nounverb.py`.
+Needs `verbconj.py`. Can be tested with `test_nounverb.py`.
+
+### verbconj.py
+Get the Kotus conjugation(s) (52-78) of a Finnish verb (not a compound). Argument: verb in infinitive
+
+Example:
+```
+$ python3 verbconj.py "keritä"
+Conjugation 69 (like "valit|a, -sen, -si, -sisi, -koon, valinnut, -tiin")
+Conjugation 75 (like "selvi|tä, -än, -si, -äisi, -tköön, -nnyt, -ttiin")
+```
+
+Needs `countsyll.py`. Can be tested with `test_nounverb.py`.
 
 ### countsyll.py
 Count the number of syllables in a Finnish word. Argument: word
 
-Example (from command line):
+Example:
 ```
 $ python3 countsyll.py "liioitella"
-Syllables: 4 or more, or the word is invalid
-```
-Example (from another Python program):
-```
-import countsyll
-print(countsyll.count_syllables("liioitella"))  # 4
+Syllables: 4 or more, or the word is unknown
 ```
 
 ### splitcomp.py
 Split a Finnish compound. Argument: compound to split.
 
-Requires `generated-lists/nonfinals.txt` and `generated-lists/finals.csv` which can be generated with `extract.sh`.
-
-TODO: make `splitcomp.py` more space efficient (those word lists are more than a hundred kilobytes together).
-
-Example (from command line):
+Example:
 ```
 $ python3 splitcomp.py "ylivoimamaali"
 yli_voima_maali
 ```
-Example (from another Python program):
-```
-import splitcomp
-print(splitcomp.split_compound("ylivoimamaali"))  # ('yli', 'voima', 'maali')
-```
+
+Needs `generated-lists/nonfinals.txt` and `generated-lists/finals.csv` which can be generated with `extract.sh`.
+
+TODO: make the program more space efficient (those word lists are more than a hundred kilobytes together).
 
 ## Programs less interesting to the end user
 

@@ -3,8 +3,17 @@
 # TODO: reduce the number of exceptions needed (handle spaces/hyphens better)
 # TODO: reduce the length of word lists needed
 
+# note: don't bother end user with having to download "util.py"
 import itertools, sys
-import util
+
+def read_lines(file_):
+    # generate lines from file without newlines
+    try:
+        with open(file_, "rt", encoding="utf8") as handle:
+            handle.seek(0)
+            yield from (l.rstrip("\n") for l in handle)
+    except OSError:
+        sys.exit("Error reading " + file_)
 
 SINGLE_WORDS = {
     # spaces/hyphens
@@ -347,8 +356,8 @@ PART_BLOCKLIST = {
 
 DOUBLE_VOWELS = {"aa", "ee", "ii", "oo", "uu", "yy", "ää", "öö"}
 
-NON_FINALS = {l.rstrip("\n") for l in util.read_lines("generated-lists/nonfinals.txt")}
-FINALS = {l.rstrip("\n").split(",")[0] for l in util.read_lines("generated-lists/finals.csv")}
+NON_FINALS = {l.rstrip("\n") for l in read_lines("generated-lists/nonfinals.txt")}
+FINALS = {l.rstrip("\n").split(",")[0] for l in read_lines("generated-lists/finals.csv")}
 assert NON_FINALS.isdisjoint(FINALS)
 
 NON_FINALS.difference_update(PART_BLOCKLIST)

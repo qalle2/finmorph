@@ -112,8 +112,7 @@ def main():
     for (conj, consGrad) in sorted(conjugationsAndConsGradations):
         print(
             f'Conjugation {conj} (like "{verbconj.CONJUGATION_DESCRIPTIONS[conj]}") '
-            + ["without", "with"][consGrad]
-            + " consonant gradation"
+            + ["without", "with"][consGrad] + " consonant gradation"
         )
 
 if __name__ == "__main__":

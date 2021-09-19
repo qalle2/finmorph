@@ -204,7 +204,7 @@ _RE_3SYLL = re.compile(
 
 def count_syllables(word, useExceptions=True):
     """word: a Finnish word
-    return: number of syllables (1-4; note: 4 = 4 or more syllables or an invalid word)"""
+    return: number of syllables (1-4; note: 4 = 4 or more syllables or an unknown word)"""
 
     if useExceptions:
         try:
@@ -230,7 +230,7 @@ def main():
         sys.exit("Count the number of syllables in a Finnish word. Argument: word")
 
     syllCnt = count_syllables(sys.argv[1])
-    print(f"Syllables: {syllCnt}" + (" or more, or the word is invalid" if syllCnt == 4 else ""))
+    print(f"Syllables: {syllCnt}" + (" or more, or the word is unknown" if syllCnt == 4 else ""))
 
 if __name__ == "__main__":
     main()
