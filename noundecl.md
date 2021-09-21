@@ -159,11 +159,43 @@ Declension 19:
 * endings: *-ie, -UO*
 * no consonant gradation
 
-20. file|e, -en, -iden, -etä, -itä, -ehen/-eseen, -ihin/-isiin
-21. rosé, -n, -iden, -ta, -ita, -hen, -ihin
-22. parfait, -'n, -'iden, -'ta, -'ita, -'hen, -'ihin
-23. tiil|i, -en, -ien, -tä, -iä, -een, -iin
-24. un|i, -en, -ien/-ten, -ta, -ia, -een, -iin
+Declension 20:
+* *file|e, -en, -iden, -etä, -itä, -ehen/-eseen, -ihin/-isiin*
+* 46 nouns
+* 2+ syllables
+* endings: *-ee, -oo, -yy* except for *bile, miljöö, nugaa, raguu*
+* no consonant gradation
+
+Declension 21:
+* *rosé, -n, -iden, -ta, -ita, -hen, -ihin*
+* pronunciation: *rose|e, -en, -iden, -eta, -ita, -ehen, -ihin*
+* 22 nouns
+* 1&ndash;3 syllables
+* endings: *-Ve, -Cé, -Vy* except for *cha-cha-cha, clou, kung-fu* (written); *-VV* (pronounced)
+* no consonant gradation
+
+Declension 22:
+* *parfait, -'n, -'iden, -'ta, -'ita, -'hen, -'ihin*
+* pronunciation: *parfe|e, -en, -iden, -eta, -ita, -ehen, -ihin*
+* 14 nouns
+* 2&ndash;3 syllables except for *show*
+* endings: *-C* (written), *-VV* (pronounced)
+* no consonant gradation
+
+Declension 23:
+* *tiil|i, -en, -ien, -tä, -iä, -een, -iin*
+* 10 nouns
+* 2 syllables
+* endings: *-Ci*
+* no consonant gradation
+
+Declension 24:
+* *un|i, -en, -ien/-ten, -ta, -ia, -een, -iin*
+* 7 nouns
+* 2 syllables
+* endings: *-Ci*
+* no consonant gradation
+
 25. toim|i, -en, -ien/tointen, -ea/tointa, -ia, -een, -iin
 26. pien|i, -en, -ten/-ien, -tä, -iä, -een, -iin
 27. käsi, käden, -en/kätten, kättä, -ä, käteen, -in
@@ -193,11 +225,6 @@ Declension 19:
 ```
 Decl Noun      1syll 2syll 3syll 4syll   -VV   -CV    -C Total
 ---- --------- ----- ----- ----- ----- ----- ----- ----- -----
-  20 filee         -    37     7     2    45     1     -    46
-  21 rosé          5    15     2     -    15     7     -    22
-  22 parfait       1    10     3     -     -     -    14    14
-  23 tiili         -    10     -     -     -    10     -    10
-  24 uni           -     8     -     -     -     8     -     8
   25 toimi         -     8     -     -     -     8     -     8
   26 pieni         -    30     -     -     -    30     -    30
   27 käsi          -    20     -     -     -    20     -    20
