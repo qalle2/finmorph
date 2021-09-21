@@ -11,7 +11,7 @@ EXCEPTIONS_NO = {
     (1, "ampu"), (1, "auto"), (1, "bantu"), (1, "city"), (1, "deeku"), (1, "doku"),
     (1, "foto"), (1, "hutu"), (1, "hötö"), (1, "kurko"), (1, "laku"), (1, "lito"),
     (1, "moto"), (1, "naku"), (1, "näpy"), (1, "party"), (1, "patu"), (1, "pipo"),
-    (1, "pirtu"), (1, "platy"), (1, "plootu"), (1, "proto"), (1, "royalty"),  (1, "rubato"),
+    (1, "pirtu"), (1, "platy"), (1, "plootu"), (1, "proto"), (1, "royalty"), (1, "rubato"),
     (1, "saku"), (1, "šinto"), (1, "sotu"), (1, "sökö"), (1, "teku"), (1, "tempo"),
     (1, "tipu"), (1, "toto"), (1, "vibrato"), (1, "zloty"),
 

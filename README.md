@@ -205,6 +205,9 @@ Notes:
   * e.g. `all stars -_joukkue` becomes `all stars` and `joukkue`
 * The GPLv3 license does not apply to this file (I think) because it is largely based on the Kotus wordlist.
 
+### noundecl.md
+Noun declension. Under construction.
+
 ### plurals.csv
 A list of "plural only" words on the Kotus list.
 

@@ -69,17 +69,17 @@ assert EXCEPTIONS_NO.isdisjoint(EXCEPTIONS_YES)
 # that is, the order of the rules doesn't matter; each rule: (conjugation, regex)
 RULES = (
     # -VA
-    ((52, 58, 61), r"( [aeiouyäölr][kpt] | [kn]k | [mp]p | [hnt]t )[eiouy][aä]$"),
+    ((52, 58, 61),     r"( [aeiouyäölr][kpt] | [kn]k | [mp]p | [hnt]t )[eiouy][aä]$"),
     ((53, 54, 55, 57), r"[aeiouyäöhlnrt]t[aä][aä]$"),
-    ((56,), r"( pp | [ahnt]t )aa$"),
+    ((56,),            r"( pp | [ahnt]t )aa$"),
 
     # -llA
     ((67,), r"( [dpr] | ll | nn | [aeiouyäölr]t )ell[aä]$"),
 
     # -VtA (many false positives in conj. 73; many false negatives in conj. 72-74)
-    ((72,73,74,75), r"( hd | lj | [lnr]k | [lmr]p | [lnr]t )[aäeiouy]t[aä]$"),
-    ((72,73,74,75), r"[aeiouyäö][dkpt]?[aäeiouy]t[aä]$"),
-    ((74,), r"( hj | ng | mm | rr | rv )[eou]t[aä]$"),
+    ((72, 73, 74, 75), r"( hd | lj | [lnr]k | [lmr]p | [lnr]t )[aäeiouy]t[aä]$"),
+    ((72, 73, 74, 75), r"[aeiouyäö][dkpt]?[aäeiouy]t[aä]$"),
+    ((74,),            r"( hj | ng | mm | rr | rv )[eou]t[aä]$"),
 )
 
 def get_consonant_gradation(verb, conj, useExceptions=True):
