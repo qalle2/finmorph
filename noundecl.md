@@ -1,5 +1,7 @@
 # Finnish noun declension
 
+Source: `generated-lists/words.csv`
+
 Note: *V* = any vowel, *C* = any consonant, *A* = *a* or *ä*, *O* = *o* or *ö*, *U* = *u* or *y*.
 
 This file is under construction.
@@ -9,25 +11,23 @@ The forms are: nominative singular, genitive singular/plural, partitive singular
 Genitive plurals that end with *-in* or *-itten* have been omitted.
 
 Declension 1:
-* example: *valo, -n, -jen, -a, -ja, -on, -ihin*
+* *valo, -n, -jen, -a, -ja, -on, -ihin*
 * ~1,700 nouns
 * 2+ syllables (~1,400 nouns are disyllabic)
-* endings: *-O, -CU* (*-CO*, *-CU* except for *adagio*, *duo*, *trio*)
+* endings: *-CO, -CU* except for *adagio, duo, trio*
 * consonant gradation: ~a half of nouns
 
 Declension 2:
-* example:
-  * *palvelu, -n, -jen, -a, -ja, -un, -ihin*
-  * *palvelu, -n, -iden, -a, -ita, -un, -ihin*
+* *palvelu, -n, -jen/-iden, -a, -ja/-ita, -un, -ihin*
 * ~1,200 nouns
 * 3+ syllables
-* endings: *-CO*, *-CU*:
+* endings: *-CO, -CU*:
   * trisyllabic nouns: *-VCO, -skO, -stO, -elU, -ilU, -isU* except for *angervo, calypso, espresso, hidalgo, maestro, pajatso, parnasso* and *illatsu, kakadu, kenguru, kikuju*
   * quadrisyllabic and longer nouns: *-AmO, -imO, -kelU, -telU* except for *katajisto, koordinaatisto, luettelo*
 * no consonant gradation
 
 Declension 3:
-* example: *valtio, -n, -iden, -ta, -ita, -on, -ihin*
+* *valtio, -n, -iden, -ta, -ita, -on, -ihin*
 * ~480 nouns
 * 3+ syllables
 * endings: *-CVV*:
@@ -36,45 +36,43 @@ Declension 3:
 * no consonant gradation
 
 Declension 4:
-* example:
-  * *laatik|ko, -on, -kojen, -koa, -koja, -koon, -koihin*
-  * *laatik|ko, -on, -oiden, -koa, -oita, -koon, -oihin*
+* *laatik|ko, -on, -kojen/-oiden, -koa, -koja/-oita, -koon, -(k)oihin*
 * ~270 nouns
 * 3+ syllables
 * endings: *-VkkO*
 * consonant gradation: all nouns
 
 Declension 5:
-* example: *rist|i, -in, -ien, -iä, -ejä, -iin, -eihin*
+* *rist|i, -in, -ien, -iä, -ejä, -iin, -eihin*
 * ~4,600 nouns
 * any number of syllables, but only 42 nouns are monosyllabic (recent loanwords)
 * endings: *-CCi* (~3,000 nouns), *-VVCi* (~860 nouns), *-CVCi* (~470 nouns), *-C* (~290 nouns, recent loanwords)
 * consonant gradation: ~a third of nouns
 
 Declension 6:
-* example: *paper|i, -in, -ien/-eiden, -ia, -eja/-eita, -iin, -eihin*
+* *paper|i, -in, -ien/-eiden, -ia, -eja/-eita, -iin, -eihin*
 * ~1,200 nouns
 * 2+ syllables, but only 31 nouns are disyllabic (recent loanwords)
 * endings: *-CVCi* (~890 nouns), *-VVCi* (~220 nouns), *-CCi* (21 nouns, less-recent loanwords), *-C* (53 nouns, recent loanwords)
 * no consonant gradation
 
 Declension 7:
-* example: *ov|i, -en, -ien, -ea, -ia, -een, -iin*
+* *ov|i, -en, -ien, -ea, -ia, -een, -iin*
 * ~120 nouns
 * 2 syllables
 * ending: *-Ci*
 * consonant gradation: ~a half of nouns
 
 Declension 8:
-* example: *nalle, -n, -jen, -a, -ja, -en, -eihin*
+* *nalle, -n, -jen, -a, -ja, -en, -eihin*
 * ~110 nouns
 * any number of syllables
 * mostly recent loanwords
-* endings: *-e* (*-Ce* except for *boutique, petanque*)
+* endings: *-Ce* except for *boutique, petanque*
 * consonant gradation: only a few nouns
 
 Declension 9:
-* example: *kal|a, -an, -ojen, -aa, -oja, -aan, -oihin*
+* *kal|a, -an, -ojen, -aa, -oja, -aan, -oihin*
 * ~1,100 nouns
 * 2+ syllables
 * endings:
@@ -83,24 +81,24 @@ Declension 9:
 * consonant gradation: ~a half of nouns
 
 Declension 10:
-* example: *koir|a, -an, -ien, -aa, -ia, -aan, -iin*
+* *koir|a, -an, -ien, -aa, -ia, -aan, -iin*
 * ~2,200 nouns
 * 2+ syllables
 * endings:
   * disyllabic nouns: *-CA* except for *boa*
-  * trisyllabic nouns: *-CA*, *-An* except for *feijoa*
+  * trisyllabic nouns: *-CA, -An* except for *feijoa*
   * quadrisyllabic and longer nouns: *-CA* except for *paranoia*
 * consonant gradation: ~a tenth of nouns
 
 Declension 11:
-* example: *omen|a, -an, -ien/-oiden/-ojen, -aa, -ia/-oita/-oja, -aan, -iin/-oihin*
+* *omen|a, -an, -ien/-oiden/-ojen, -aa, -ia/-oita/-oja, -aan, -iin/-oihin*
 * 47 nouns
 * 3 syllables except for *marihuana*
-* endings: *-CA* (*-VCA* except for *algebra, mahatma*)
+* endings: *-VCA* except for *algebra, mahatma*
 * no consonant gradation
 
 Declension 12:
-* example: *kulkij|a, -an, -oiden, -aa, -oita, -aan, -oihin*
+* *kulkij|a, -an, -oiden, -aa, -oita, -aan, -oihin*
 * ~1,100 nouns
 * 3+ syllables
 * endings: *-A*:
@@ -109,7 +107,7 @@ Declension 12:
 * no consonant gradation
 
 Declension 13:
-* example: *katisk|a, -an, -oiden/-ojen, -aa, -oita/-oja, -aan, -oihin*
+* *katisk|a, -an, -oiden/-ojen, -aa, -oita/-oja, -aan, -oihin*
 * ~150 nouns
 * 3+ syllables (only 8 nouns are more than 3 syllables)
 * endings: *-A*:
@@ -118,19 +116,49 @@ Declension 13:
 * no consonant gradation
 
 Declension 14:
-* example: *solak|ka, -an, -oiden/-kojen, -kaa, -oita/-koja, -kaan, -(k)oihin*
+* *solak|ka, -an, -oiden/-kojen, -kaa, -oita/-koja, -kaan, -(k)oihin*
 * ~240 nouns
-* 3+ syllables (only 3 nouns are more than 3 syllables)
+* 3+ syllables (only these nouns are more than 3 syllables: *estetiikka, poliklinikka, psykometriikka*)
 * endings: *-CCA*:
   * trisyllabic: *-kkA, -VttA* except for *ulappa*
   * quadrisyllabic or longer: *-ikka*
 * consonant gradation: all nouns
 
-15. korke|a, -an, -iden, -a(t)a, -ita, -aan, -isiin/-ihin
-16. vanhem|pi, -man, -pien, -paa, -pia, -paan, -piin
-17. vapa|a, -an, -iden, -ata, -ita, -aseen, -isiin/-ihin
-18. maa, -n, maiden, -ta, maita, -han, maihin
-19. suo, -n, soiden, -ta, soita, -hon, soihin
+Declension 15:
+* *korke|a, -an, -iden, -a(t)a, -ita, -aan, -isiin/-ihin*
+* ~170 nouns
+* 3 syllables
+* endings: *-eA* except for *ainoa, tanhua*
+* no consonant gradation
+
+Declension 16:
+* *vanhem|pi, -man, -pien, -paa, -pia, -paan, -piin*
+* 22 nouns
+* 3 syllables except for *kumpi*
+* endings: *-mpi*
+* consonant gradation: all nouns
+
+Declension 17:
+* *vapa|a, -an, -iden, -ata, -ita, -aseen, -isiin/-ihin*
+* 38 nouns
+* 2 syllables
+* endings: *-aa, -oo, -UU*
+* no consonant gradation
+
+Declension 18:
+* *maa, -n, maiden, -ta, maita, -han, maihin*
+* 57 nouns
+* 1&ndash;3 syllables
+* endings: *-VV* (*-AA, -ee, -OO, -Vi, -Vu, -yy*) except for *go-go*
+* no consonant gradation
+
+Declension 19:
+* *suo, -n, soiden, -ta, soita, -hon, soihin*
+* 6 nouns (*suo, tie, työ, vuo, vyö, yö*)
+* 1 syllable
+* endings: *-ie, -UO*
+* no consonant gradation
+
 20. file|e, -en, -iden, -etä, -itä, -ehen/-eseen, -ihin/-isiin
 21. rosé, -n, -iden, -ta, -ita, -hen, -ihin
 22. parfait, -'n, -'iden, -'ta, -'ita, -'hen, -'ihin
@@ -165,11 +193,6 @@ Declension 14:
 ```
 Decl Noun      1syll 2syll 3syll 4syll   -VV   -CV    -C Total
 ---- --------- ----- ----- ----- ----- ----- ----- ----- -----
-  15 korkea        -     -   169     -   169     -     -   169
-  16 vanhempi      -     1    21     -     -    20     2    22
-  17 vapaa         -    38     -     -    38     -     -    38
-  18 maa          32     9    16     -    55     1     1    57
-  19 suo           6     -     -     -     6     -     -     6
   20 filee         -    37     7     2    45     1     -    46
   21 rosé          5    15     2     -    15     7     -    22
   22 parfait       1    10     3     -     -     -    14    14
