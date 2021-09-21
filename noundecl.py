@@ -810,8 +810,8 @@ def main():
 
     if len(sys.argv) != 2:
         sys.exit(
-            "Get the Kotus declension(s) (1-49) of a Finnish noun (including adjectives/pronouns/"
-            "numerals, excluding compounds). Argument: noun in nominative singular"
+            "Argument: a Finnish noun (including adjectives/pronouns/numerals, excluding "
+            "compounds) in nominative singular. Print the Kotus declension(s) (1-49)."
         )
     noun = sys.argv[1]
 

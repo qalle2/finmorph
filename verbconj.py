@@ -253,8 +253,8 @@ def main():
 
     if len(sys.argv) != 2:
         sys.exit(
-            "Get the Kotus conjugation(s) (52-78) of a Finnish verb (not a compound). Argument: "
-            "verb in infinitive"
+            "Argument: a Finnish verb (not a compound) in the infinitive. Print the Kotus "
+            "conjugation(s) (52-78)."
         )
     verb = sys.argv[1]
 

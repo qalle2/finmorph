@@ -38,7 +38,7 @@ Declension 27 (like "käsi, käden, -en/kätten, kättä, -ä, käteen, -in") wi
 Needs `noundecl.py` and `countsyll.py`. Can be tested with `test_nounverb.py`.
 
 ### noundecl.py
-Get the Kotus declension(s) (1-49) of a Finnish noun (including adjectives/pronouns/numerals, excluding compounds). Argument: noun in nominative singular
+Argument: a Finnish noun (including adjectives/pronouns/numerals, excluding compounds) in nominative singular. Print the Kotus declension(s) (1-49).
 
 Example:
 ```
@@ -47,7 +47,6 @@ Declension 24 (like "un|i, -en, -ien/-ten, -ta, -ia, -een, -iin")
 Declension 27 (like "käsi, käden, -en/kätten, kättä, -ä, käteen, -in")
 ```
 
-See also `noun_consgrad.py`.
 Needs `countsyll.py`. Can be tested with `test_nounverb.py`.
 
 ### verb_consgrad.py
@@ -63,7 +62,7 @@ Conjugation 75 (like "selvi|tä, -än, -si, -äisi, -tköön, -nnyt, -ttiin") wi
 Needs `verbconj.py`. Can be tested with `test_nounverb.py`.
 
 ### verbconj.py
-Get the Kotus conjugation(s) (52-78) of a Finnish verb (not a compound). Argument: verb in infinitive
+Argument: a Finnish verb (not a compound) in the infinitive. Print the Kotus conjugation(s) (52-78).
 
 Example:
 ```
