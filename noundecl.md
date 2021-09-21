@@ -12,7 +12,7 @@ Declension 1:
 * example: *valo, -n, -jen, -a, -ja, -on, -ihin*
 * ~1,700 nouns
 * 2+ syllables (~1,400 nouns are disyllabic)
-* endings: *-CO*, *-CU* and a few with *-io*, *-uo* (*adagio*, *duo*, *trio*)
+* endings: *-O, -CU* (*-CO*, *-CU* except for *adagio*, *duo*, *trio*)
 * consonant gradation: ~a half of nouns
 
 Declension 2:
@@ -21,14 +21,18 @@ Declension 2:
   * *palvelu, -n, -iden, -a, -ita, -un, -ihin*
 * ~1,200 nouns
 * 3+ syllables
-* endings: *-CO*, *-CU*
+* endings: *-CO*, *-CU*:
+  * trisyllabic nouns: *-VCO, -skO, -stO, -elU, -ilU, -isU* except for *angervo, calypso, espresso, hidalgo, maestro, pajatso, parnasso* and *illatsu, kakadu, kenguru, kikuju*
+  * quadrisyllabic and longer nouns: *-AmO, -imO, -kelU, -telU* except for *katajisto, koordinaatisto, luettelo*
 * no consonant gradation
 
 Declension 3:
 * example: *valtio, -n, -iden, -ta, -ita, -on, -ihin*
 * ~480 nouns
 * 3+ syllables
-* endings: *-CiO* (~450 nouns) and a few with *-Cao*, *-Ceo*, *-Cie*, *-Coe*, *-Cyo* (e.g. *kaakao*, *video*, *collie*, *oboe*, *embryo*)
+* endings: *-CVV*:
+  * trisyllabic nouns: *-Cie, -Cao, -Ceo, -CiO* except for *aaloe, embryo, oboe*
+  * quadrisyllabic and longer nouns: *-CiO*
 * no consonant gradation
 
 Declension 4:
@@ -82,7 +86,10 @@ Declension 10:
 * example: *koir|a, -an, -ien, -aa, -ia, -aan, -iin*
 * ~2,200 nouns
 * 2+ syllables
-* endings: *-CA* except for *boa, feijoa, paranoia; kahdeksan, seitsemän, yhdeksän*
+* endings:
+  * disyllabic nouns: *-CA* except for *boa*
+  * trisyllabic nouns: *-CA*, *-An* except for *feijoa*
+  * quadrisyllabic and longer nouns: *-CA* except for *paranoia*
 * consonant gradation: ~a tenth of nouns
 
 Declension 11:
@@ -92,9 +99,33 @@ Declension 11:
 * endings: *-CA* (*-VCA* except for *algebra, mahatma*)
 * no consonant gradation
 
-12. kulkij|a, -an, -oiden, -aa, -oita, -aan, -oihin
-13. katisk|a, -an, -oiden/-ojen, -aa, -oita/-oja, -aan, -oihin
-14. solak|ka, -an, -oiden/-kojen, -kaa, -oita/-koja, -kaan, -(k)oihin
+Declension 12:
+* example: *kulkij|a, -an, -oiden, -aa, -oita, -aan, -oihin*
+* ~1,100 nouns
+* 3+ syllables
+* endings: *-A*:
+  * trisyllabic: *-ea, -iA, -ua, -jA, -VlA, -VnA, -VrA* except for *paprika, passiiva, salama*
+  * quadrisyllabic or longer: *-ea, -ia, -CijA, -Vla* except for *ekliptika*
+* no consonant gradation
+
+Declension 13:
+* example: *katisk|a, -an, -oiden/-ojen, -aa, -oita/-oja, -aan, -oihin*
+* ~150 nouns
+* 3+ syllables (only 8 nouns are more than 3 syllables)
+* endings: *-A*:
+  * trisyllabic: *-CA* except for *media*
+  * quadrisyllabic or longer: *-ea, -Ca*
+* no consonant gradation
+
+Declension 14:
+* example: *solak|ka, -an, -oiden/-kojen, -kaa, -oita/-koja, -kaan, -(k)oihin*
+* ~240 nouns
+* 3+ syllables (only 3 nouns are more than 3 syllables)
+* endings: *-CCA*:
+  * trisyllabic: *-kkA, -VttA* except for *ulappa*
+  * quadrisyllabic or longer: *-ikka*
+* consonant gradation: all nouns
+
 15. korke|a, -an, -iden, -a(t)a, -ita, -aan, -isiin/-ihin
 16. vanhem|pi, -man, -pien, -paa, -pia, -paan, -piin
 17. vapa|a, -an, -iden, -ata, -ita, -aseen, -isiin/-ihin
@@ -134,9 +165,6 @@ Declension 11:
 ```
 Decl Noun      1syll 2syll 3syll 4syll   -VV   -CV    -C Total
 ---- --------- ----- ----- ----- ----- ----- ----- ----- -----
-  12 kulkija       -     -   484   620   405   699     -  1104
-  13 katiska       -     -   146     8     4   150     -   154
-  14 solakka       -     -   238     3     -   241     -   241
   15 korkea        -     -   169     -   169     -     -   169
   16 vanhempi      -     1    21     -     -    20     2    22
   17 vapaa         -    38     -     -    38     -     -    38
