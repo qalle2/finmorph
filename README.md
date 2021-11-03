@@ -118,7 +118,8 @@ Creates the subdirectory `generated-lists/` and generates these files under it:
     * `verbs-4syll.csv`: quadrisyllabic and longer verbs
 * `words-consgrad.csv`: like `words.csv` but only the words to which consonant gradation applies (~11,000 words)
 * `finals.csv`: words that occur as final parts of compounds (and possibly non-finally or alone) (~8,400 words)
-* `nonfinals.txt`: words that occur as non-final parts of compounds (not finally) (~5,300 words)
+* `nonfinals.txt`: words that occur as non-final parts of compounds (not finally but possibly alone) (~5,300 words)
+* `compositives.txt`: words that occur as non-final parts of compounds (not finally or alone) (~2,900 words)
 
 Also generates `stats-compound.txt` and `stats-nounverb.txt` under the current directory (see [text files](#text-files)).
 
@@ -169,6 +170,9 @@ Arguments: CSV file, syllable count (1-4; 4=4 or more). Print lines containing a
 
 ### nonfinals.py
 Print words that only occur as non-final parts of compounds (not final). Argument: compound list file
+
+### compositives.py
+Print words that only occur as non-final parts of compounds (not final or alone). Arguments: compound list file, word CSV file
 
 ### stats_compound.py
 Print a table of compound counts by number of parts and number of letters. Argument: compound list file.

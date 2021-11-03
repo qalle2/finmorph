@@ -37,6 +37,9 @@ done
 echo "Writing nonfinals.txt..."
 python3 nonfinals.py compounds.txt | sort > generated-lists/nonfinals.txt
 
+echo "Writing compositives.txt..."
+python3 compositives.py compounds.txt generated-lists/words.csv | sort > generated-lists/compositives.txt
+
 echo "generated-lists/:"
 ls -l generated-lists/
 
