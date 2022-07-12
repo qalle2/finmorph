@@ -137,12 +137,6 @@ Requires `generated-lists/words.csv` which can be generated with `extract.sh`.
 ### validate_compounds.py
 Validate `compounds.txt` and `generated-lists/words.csv`.
 
-### short_compound_parts.py
-Print distinct short parts in `compounds.txt` and one word they occur in.
-
-### polysemous_compounds.py
-Find compounds that can be split to many parts or in many ways.
-
 ## Programs even less interesting to the end user
 
 These are only meant to be used by `extract.sh`.
