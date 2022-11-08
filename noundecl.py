@@ -17,7 +17,7 @@ DECLENSION_DESCRIPTIONS = {
     5:  "rist|i, -in, -ien, -iä, -ejä, -iin, -eihin",
     6:  "paper|i, -in, -ien/-eiden, -ia, -eja/-eita, -iin, -eihin",
     7:  "ov|i, -en, -ien, -ea, -ia, -een, -iin",
-    8:  "nalle, -n, -jen, -a, -ja, -en, -eihin",
+    8:  "nalle, -n, -jen, -a, -ja, -en, -ihin",
     9:  "kal|a, -an, -ojen, -aa, -oja, -aan, -oihin",
     10: "koir|a, -an, -ien, -aa, -ia, -aan, -iin",
     11: "omen|a, -an, -ien/-oiden/-ojen, -aa, -ia/-oita/-oja, -aan, -iin/-oihin",
