@@ -49,7 +49,7 @@ DECLENSION_DESCRIPTIONS = {
     37: "vase|n, -mman, -mpien/-nten, -nta/-mpaa, -mpia, -mpaan, -mpiin",
     38: "nai|nen, -sen, -sten/-sien, -sta, -sia, -seen, -siin",
     39: "vastau|s, -ksen, -sten/-ksien, -sta, -ksia, -kseen, -ksiin",
-    40: "kalleu|s, -den, -ksien, -tta, -ksia, -teen, ksiin",
+    40: "kalleu|s, -den, -ksien, -tta, -ksia, -teen, -ksiin",
     41: "viera|s, -an, -iden, -sta, -ita, -aseen, -isiin/-ihin",
     42: "mie|s, -hen, -sten/-hien, -stä, -hiä, -heen, -hiin",
     43: "ohu|t, -en, -iden, -tta, -ita, -een, -isiin/-ihin",
