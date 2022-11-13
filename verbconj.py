@@ -10,7 +10,7 @@ import countsyll
 # exception: for 77/78, only some third person forms
 CONJUGATION_DESCRIPTIONS = {
     52: "sano|a, -n, -i, -isi, -koon, -nut, -ttiin",
-    53: "muist|aa, -an, -i, -aisi, -akoon, -anut, -ettiin",
+    53: "muis|taa, -tan, -ti, -taisi, -takoon, -tanut, -tettiin",
     54: "huu|taa, -dan, -si, -taisi, -takoon, -tanut, -dettiin",
     55: "sou|taa, -dan, -ti/-si, -taisi, -takoon, -tanut, -dettiin",
     56: "kaiv|aa, -an, -oi, -aisi, -akoon, -anut, -ettiin",
