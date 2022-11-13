@@ -23,7 +23,7 @@ CONJUGATION_DESCRIPTIONS = {
     63: "sa|ada, -an, -i, -isi, -akoon, -anut, -atiin",
     64: "j|uoda, -uon, -oi, -oisi, -uokoon, -uonut, -uotiin",
     65: "kä|ydä, -yn, -vi, -visi, -yköön, -ynyt, -ytiin",
-    66: "rohkais|ta, -en, -i, -isi, -koon, -sut, -tiin",
+    66: "rohkai|sta, -sen, -si, -sisi, -skoon, -ssut, -stiin",
     67: "tul|la, -en, -i, -isi, -koon, -lut, -tiin",
     68: "tupakoi|da, -(tse)n, -(tsi), -(tsi)si, -koon, -nut, -tiin",
     69: "vali|ta, -tsen, -tsi, -tsisi, -tkoon, -nnut, -ttiin",
