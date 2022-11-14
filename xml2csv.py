@@ -14,9 +14,9 @@ REGEX_0CONJ = re.compile(
 
 if len(sys.argv) != 3:
     sys.exit(
-        "Read Kotus XML file, print distinct words and their declensions/conjugations (0-2) in "
-        "CSV format. Arguments: XML file, which words ('a' = all, 'g' = only those that consonant "
-        "gradation applies to)."
+        "Read Kotus XML file, print distinct words and their declensions/"
+        "conjugations (0-2) in CSV format. Arguments: XML file, which words "
+        "('a' = all, 'g' = only those that consonant gradation applies to)."
     )
 
 getAllWords = {"a": True, "g": False}[sys.argv[2]]
@@ -38,4 +38,6 @@ for line in util.read_lines(sys.argv[1]):
             conjugationsByWord.setdefault(word, set()).update(conjugations)
 
 for word in conjugationsByWord:
-    print(",".join([word] + [str(c) for c in sorted(conjugationsByWord[word])]))
+    print(",".join(
+        [word] + [str(c) for c in sorted(conjugationsByWord[word])]
+    ))

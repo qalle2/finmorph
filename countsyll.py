@@ -57,7 +57,7 @@ _EXCEPTIONS = {
     "hardware": 2,
     "hereford": 2,
     "hi-hat": 2,
-    "hioa": 3,  # I won't make the trisyllabic word regex more complex just because of this
+    "hioa": 3,      # won't make the 3-syll. regex more complex because of this
     "high tech": 2,
     "hi-tec": 2,
     "hi-tech": 2,
@@ -204,7 +204,8 @@ _RE_3SYLL = re.compile(
 
 def count_syllables(word, useExceptions=True):
     """word: a Finnish word
-    return: number of syllables (1-4; note: 4 = 4 or more syllables or an unknown word)"""
+    return: number of syllables (1-4; note: 4 = 4 or more syllables or an
+    unknown word)"""
 
     if useExceptions:
         try:
@@ -227,10 +228,15 @@ def main():
     #_check_redundant_exceptions()
 
     if len(sys.argv) != 2:
-        sys.exit("Count the number of syllables in a Finnish word. Argument: word")
+        sys.exit(
+            "Count the number of syllables in a Finnish word. Argument: word"
+        )
 
     syllCnt = count_syllables(sys.argv[1])
-    print(f"Syllables: {syllCnt}" + (" or more, or the word is unknown" if syllCnt == 4 else ""))
+    print(
+        f"Syllables: {syllCnt}"
+        + (" or more, or the word is unknown" if syllCnt == 4 else "")
+    )
 
 if __name__ == "__main__":
     main()

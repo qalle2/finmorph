@@ -3,8 +3,8 @@ import countsyll, util
 
 if len(sys.argv) != 3:
     sys.exit(
-        "Arguments: CSV file, syllable count (1-4; 4=4 or more). Print lines containing a word "
-        "with that many syllables."
+        "Arguments: CSV file, syllable count (1-4; 4=4 or more). Print lines "
+        "containing a word with that many syllables."
     )
 
 syllCnt = int(sys.argv[2], 10)

@@ -7,45 +7,47 @@ import util
 # parts of fancy Latin/Greek compounds; used for finding possible new compounds
 FANCY_PARTS = {
     "a", "aero", "agraari", "amfi", "aneroidi", "antropo", "arkeo", "astro",
-    #
+
     "baro", "bi", "bio", "bioottinen",
-    #
+
     "definiitti", "di", "digi", "digitaali", "dis", "dividuaali",
-    #
+
     "eko", "enkefalo", "etno",
-    #
+
     "feno", "fleksiivi", "fysio",
-    #
-    "galvano", "geeninen", "geno", "geo", "grafi", "grafia", "grafinen", "grafisesti", "grammi",
-    #
+
+    "galvano", "geeninen", "geno", "geo", "grafi", "grafia", "grafinen",
+    "grafisesti", "grammi",
+
     "halo", "heht", "hemi", "horo", "hydr", "hydro", "hygro", "hypo",
-    #
+
     "ideo", "immuno", "indo", "infra", "inter",
-    #
-    "kardio", "kinesia", "kosmeto", "kristus", "kroninen", "krono", "kronoida", "kronointi",
-    "kryo",
-    #
-    "latiivi", "logi", "logia", "loginen", "logisesti", "logisoida", "logisointi",
-    #
-    "metria", "metrisesti", "metrisuus", "metrisyys", "mon", "morfo", "morfologisesti", "multi",
-    "musiko",
-    #
+
+    "kardio", "kinesia", "kosmeto", "kristus", "kroninen", "krono", "kronoida",
+    "kronointi", "kryo",
+
+    "latiivi", "logi", "logia", "loginen", "logisesti", "logisoida",
+    "logisointi",
+
+    "metria", "metrisesti", "metrisuus", "metrisyys", "mon", "morfo",
+    "morfologisesti", "multi", "musiko",
+
     "neuro", "nominaali",
-    #
+
     "opto",
-    #
-    "paattinen", "paattisuus", "pan", "patia", "petro", "poly", "port", "possessiivi", "post",
-    "pre", "psyko",
-    #
+
+    "paattinen", "paattisuus", "pan", "patia", "petro", "poly", "port",
+    "possessiivi", "post", "pre", "psyko",
+
     "reaali", "reaalinen", "reaalisuus", "resiprookki", "rogatiivi",
-    #
-    "seksuaali", "semiitti", "semiittinen", "semiittisesti", "semitismi", "sensus", "skooppi",
-    "skooppinen", "skooppisesti", "skopia", "sosio", "spektro", "strukturaali", "sub", "sykliini",
-    "sym", "syn",
-    #
-    "teetti", "teettinen", "teistisesti", "termo", "tesia", "tetr", "tomo", "tragi", "trans",
-    "transitiivi", "tri",
-    #
+
+    "seksuaali", "semiitti", "semiittinen", "semiittisesti", "semitismi",
+    "sensus", "skooppi", "skooppinen", "skooppisesti", "skopia", "sosio",
+    "spektro", "strukturaali", "sub", "sykliini", "sym", "syn",
+
+    "teetti", "teettinen", "teistisesti", "termo", "tesia", "tetr", "tomo",
+    "tragi", "trans", "transitiivi", "tri",
+
     "vaso",
 }
 
@@ -58,12 +60,18 @@ EXCLUDE_PARTS = {
     "ja", "jo", "juu",
     "kai", "kas", "kii", "kop", "kuu",
     "lainen", "lata", "lei", "luo",
-    "ma", "maa", "mainen", "maisesti", "maisuus", "maton", "me", "mi", "moi", "moinen", "mä",
+    #
+    "ma", "maa", "mainen", "maisesti", "maisuus", "maton", "me", "mi", "moi",
+    "moinen", "mä",
+    #
     "nainen", "nais", "naisuus", "ne", "no",
     "oh", "oi", "oo",
     "pai", "par", "pas",
     "rai", "rata", "re",
-    "sa", "sata", "se", "sei", "sen", "silla", "so", "soida", "sointi", "suo", "syys", "sä",
+    #
+    "sa", "sata", "se", "sei", "sen", "silla", "so", "soida", "sointi", "suo",
+    "syys", "sä",
+    #
     "taa", "tai", "te", "teinen", "toi", "toinen", "tse", "tuma", "tää",
     "uus",
     "vai", "vainen", "vek", "voi",
@@ -75,8 +83,12 @@ assert EXCLUDE_PARTS.isdisjoint(FANCY_PARTS)
 compounds = set(util.read_lines("compounds.txt"))
 
 # check for duplicate lines (e.g. "maa_liero" and "maali_ero")
-plainCompoundCounts = collections.Counter(c.replace("_", "") for c in compounds)
-for plainComp in sorted(c for c in plainCompoundCounts if plainCompoundCounts[c] >= 2):
+plainCompoundCounts = collections.Counter(
+    c.replace("_", "") for c in compounds
+)
+for plainComp in sorted(
+    c for c in plainCompoundCounts if plainCompoundCounts[c] >= 2
+):
     print("Duplicate line:", plainComp)
 del plainCompoundCounts
 
@@ -100,8 +112,8 @@ print(
 print()
 
 print(
-    "Compounds that contain a part that only occurs once in all compounds and is a prefix/suffix "
-    "of another part:"
+    "Compounds that contain a part that only occurs once in all compounds "
+    "and is a prefix/suffix of another part:"
 )
 # e.g. {"yhde", "lyhde", "yhden", ...}
 similarParts = set(itertools.chain.from_iterable(
@@ -111,14 +123,19 @@ similarParts.update(itertools.chain.from_iterable(
     (p[1:], p) for p in partCounts if p[1:] in partCounts
 ))
 similarParts = {p for p in similarParts if partCounts[p] == 1}
-print(",".join("_".join(c) for c in sorted(compoundTuples) if set(c) & similarParts))
+print(",".join(
+    "_".join(c) for c in sorted(compoundTuples) if set(c) & similarParts
+))
 print()
 
 parts = set(partCounts)
 del partCounts
 
 # add single words (non-compounds) and fancy Latin/Greek words to parts
-parts.update(l.split(",")[0].strip("'- ") for l in util.read_lines("generated-lists/words.csv"))
+parts.update(
+    l.split(",")[0].strip("'- ")
+    for l in util.read_lines("generated-lists/words.csv")
+)
 print(f"{len(parts)} distinct parts including single words")
 parts.update(FANCY_PARTS)
 print(f"{len(parts)} distinct parts including fancy Latin/Greek ones")
@@ -152,20 +169,24 @@ for comp in parts:
 print(",".join(sorted("".join(r) for r in results)))
 print()
 
-print("Possible non-compounds (compounds that contain a fancy Latin/Greek part):")
+print(
+    "Possible non-compounds (compounds that contain a fancy Latin/Greek part):"
+)
 print(",".join(
     "_".join(c) for c in sorted(compoundTuples) if set(c) & FANCY_PARTS
 ))
 print()
 
 print(
-    "Compounds with possibly misplaced word boundaries (e.g. 'maaliero' being split as both "
-    "'maa_liero' and 'maali_ero'):"
+    "Compounds with possibly misplaced word boundaries (e.g. 'maaliero' "
+    "being split as both 'maa_liero' and 'maali_ero'):"
 )
-partPairsByNoBoundary = {}  # e.g. {"maaliero": {"maa_liero", "maali_ero"}, ...}
+partPairsByNoBoundary = {} # e.g. {"maaliero": {"maa_liero", "maali_ero"}, ...}
 for comp in compoundTuples:
     for partPair in zip(comp[:-1], comp[1:]):
-        partPairsByNoBoundary.setdefault("".join(partPair), set()).add("_".join(partPair))
+        partPairsByNoBoundary.setdefault(
+            "".join(partPair), set()
+        ).add("_".join(partPair))
 for partPair in partPairsByNoBoundary:
     if len(partPairsByNoBoundary[partPair]) > 1:
         print("/".join(partPairsByNoBoundary[partPair]))

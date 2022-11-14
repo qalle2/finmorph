@@ -340,7 +340,9 @@ EXCEPTIONS = {
     "kotimaisuusaste": ("koti", "maisuus", "aste"),
     "peruselintarvike": ("perus", "elin", "tarvike"),
     "yhteispohjoismainen": ("yhteis", "pohjois", "mainen"),
-    "ylioppilastutkintolautakunta": ("yli", "oppilas", "tutkinto", "lauta", "kunta"),
+    "ylioppilastutkintolautakunta": (
+        "yli", "oppilas", "tutkinto", "lauta", "kunta"
+    ),
 }
 
 PART_BLOCKLIST = {
@@ -356,8 +358,13 @@ PART_BLOCKLIST = {
 
 DOUBLE_VOWELS = {"aa", "ee", "ii", "oo", "uu", "yy", "ää", "öö"}
 
-NON_FINALS = {l.rstrip("\n") for l in read_lines("generated-lists/nonfinals.txt")}
-FINALS = {l.rstrip("\n").split(",")[0] for l in read_lines("generated-lists/finals.csv")}
+NON_FINALS = {
+    l.rstrip("\n") for l in read_lines("generated-lists/nonfinals.txt")
+}
+FINALS = {
+    l.rstrip("\n").split(",")[0]
+    for l in read_lines("generated-lists/finals.csv")
+}
 assert NON_FINALS.isdisjoint(FINALS)
 
 NON_FINALS.difference_update(PART_BLOCKLIST)
@@ -365,8 +372,8 @@ FINALS.difference_update(PART_BLOCKLIST)
 
 def split_compound(comp):
     """comp: a Finnish compound; e.g. 'all stars -joukkue'
-    return: a tuple of parts without leading/trailing apostrophes/hyphens/spaces; e.g.
-    ('all stars', 'joukkue')"""
+    return: a tuple of parts without leading/trailing apostrophes/hyphens/
+    spaces; e.g. ('all stars', 'joukkue')"""
 
     # handle exceptions
     if comp in SINGLE_WORDS:
@@ -379,7 +386,9 @@ def split_compound(comp):
     # if there are spaces or hyphens, recursively handle words between them
     if " " in comp or "-" in comp:
         comp = comp.replace(" ", "-").replace("--", "-").split("-")
-        return tuple(itertools.chain.from_iterable(split_compound(p) for p in comp))
+        return tuple(
+            itertools.chain.from_iterable(split_compound(p) for p in comp)
+        )
 
     # try to split in two
     for pos in range(2, len(comp) - 2 + 1):
@@ -398,7 +407,8 @@ def split_compound(comp):
             for pos2 in range(pos1 + 2, len(comp) - 2 + 1):
                 (part2, part3) = (comp[pos1:pos2], comp[pos2:])
                 #
-                if (part2 in FINALS or part2 in NON_FINALS) and part3 in FINALS \
+                if (part2 in FINALS or part2 in NON_FINALS) \
+                and part3 in FINALS \
                 and comp[pos2-1] + comp[pos2] not in DOUBLE_VOWELS:
                     return (part1, part2, part3)
 
@@ -416,7 +426,8 @@ def split_compound(comp):
                     for pos3 in range(pos2 + 2, len(comp) - 2 + 1):
                         (part3, part4) = (comp[pos2:pos3], comp[pos3:])
                         #
-                        if (part3 in FINALS or part3 in NON_FINALS) and part4 in FINALS \
+                        if (part3 in FINALS or part3 in NON_FINALS) \
+                        and part4 in FINALS \
                         and comp[pos3-1] + comp[pos3] not in DOUBLE_VOWELS:
                             return (part1, part2, part3, part4)
 
@@ -425,8 +436,8 @@ def split_compound(comp):
 def main():
     if len(sys.argv) != 2:
         sys.exit(
-            "Argument: compound to split. Print the compound with individual words separated by "
-            "underscores."
+            "Argument: compound to split. Print the compound with individual "
+            "words separated by underscores."
         )
 
     print("_".join(split_compound(sys.argv[1])))

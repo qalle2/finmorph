@@ -2,7 +2,8 @@ import collections, re, sys
 import countsyll, util
 
 INTRO = """\
-A table of noun/verb counts by declension/conjugation, syllable count and ending.
+A table of noun/verb counts by declension/conjugation, syllable count and
+ending.
 This file was generated automatically.
 
 Columns:
@@ -15,9 +16,11 @@ Columns:
     -VV   = number of words that end with two vowels
     -CV   = number of words that end with a consonant and a vowel
     -C    = number of words that end with a consonant
-    Total = total number of words (= 1syll + 2syll + 3syll + 4syll = -VV + -CV + -C)
+    Total = total number of words (= 1syll + 2syll + 3syll + 4syll
+          = -VV + -CV + -C)
 
-The last row (TOTAL) has the number of words for all declensions/conjugations combined.
+The last row (TOTAL) has the number of words for all declensions/conjugations
+combined.
 
 Conj Word      1syll 2syll 3syll 4syll   -VV   -CV    -C Total
 ---- --------- ----- ----- ----- ----- ----- ----- ----- -----"""
@@ -30,7 +33,7 @@ RE_CONS_VOWEL = re.compile(
     "[^aeiouyäöéû][aeiouyäöéû] -? $", re.IGNORECASE | re.VERBOSE
 )
 
-# noun declensions / verb conjugations and sample words
+# noun declensions / verb conjugations and Kotus sample words
 CONJUGATIONS = {
     0: "(other)",
     # nouns
@@ -59,8 +62,9 @@ CONJUGATIONS = {
 
 if len(sys.argv) != 2:
     sys.exit(
-        "Print a table of noun/verb counts by declension/conjugation, syllable count and ending. "
-        "Argument: CSV file with words (no compounds)."
+        "Print a table of noun/verb counts by declension/conjugation, "
+        "syllable count and ending. Argument: CSV file with words (no "
+        "compounds)."
     )
 
 # word counts by declension/conjugation and ending

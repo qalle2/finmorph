@@ -3,9 +3,9 @@ import util
 
 if len(sys.argv) != 3:
     sys.exit(
-        "Arguments: CSV file with words and declensions/conjugations, CSV file with plurals and "
-        "singulars. Print words and declensions/conjugations in CSV format, with plurals replaced "
-        "with singulars."
+        "Arguments: CSV file with words and declensions/conjugations, CSV "
+        "file with plurals and singulars. Print words and declensions/"
+        "conjugations in CSV format, with plurals replaced with singulars."
     )
 
 # get singular forms by plural forms
@@ -25,4 +25,6 @@ for line in util.read_lines(sys.argv[1]):
 
 # print results
 for word in sorted(conjugationsByWord):
-    print(",".join([word] + [str(c) for c in sorted(conjugationsByWord[word])]))
+    print(",".join(
+        [word] + [str(c) for c in sorted(conjugationsByWord[word])]
+    ))

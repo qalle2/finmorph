@@ -5,8 +5,9 @@
 import re, sys
 import countsyll
 
-# a typical verb in each conjugation; forms: infinitive, 1SG present, 3SG past, 3SG conditional,
-# 3SG imperative, singular perfect, passive past;
+# a typical verb in each conjugation;
+# forms: infinitive, 1SG present, 3SG past, 3SG conditional, 3SG imperative,
+# singular perfect, passive past;
 # exception: for 77/78, only some third person forms
 CONJUGATION_DESCRIPTIONS = {
     52: "sano|a, -n, -i, -isi, -koon, -nut, -ttiin",
@@ -61,19 +62,26 @@ _MULTI_CONJUGATION_VERBS = {
     "sueta": {72, 74},
 }
 
-# exceptions to rules (key = noun, value = conjugation)
-# order: first by syllable count, then by ending, then by conjugation, then alphabetically
-# note: if there are more than one line of words per conjugation, separate them with empty comment
-#       lines ("#") for readability
+# exceptions to rules (key = noun, value = conjugation);
+# order: first by syllable count, then by ending, then by conjugation, then
+# alphabetically;
+# note: if there are more than one line of words per conjugation, separate
+#     them with empty comment lines ("#") for readability
 _EXCEPTIONS = {
     # === disyllabic ===
 
     # -tAA
     "kyntää": 53, "taustaa": 53,
+    #
     "huutaa": 54, "löytää": 54, "pyytää": 54,
-    "entää": 55, "häätää": 55, "hyytää": 55, "kiitää": 55, "liitää": 55, "soutaa": 55, "yltää": 55,
+    #
+    "entää": 55, "häätää": 55, "hyytää": 55, "kiitää": 55, "liitää": 55,
+    "soutaa": 55, "yltää": 55,
+    #
     "antaa": 56, "kantaa": 56,
+    #
     "kaartaa": 57, "kaataa": 57, "saartaa": 57,
+    #
     "taitaa": 76, "tietää": 76,
 
     # -AA (not -tAA)
@@ -106,11 +114,12 @@ _EXCEPTIONS = {
     "hapata": 72, "mädätä": 72, "parata": 72,
 
     # -etA
-    "haljeta": 74, "herjetä": 74, "hirvetä": 74, "hävetä": 74, "kammeta": 74, "kangeta": 74,
-    "kasketa": 74, "katketa": 74, "kehjetä": 74, "keretä": 74, "kerjetä": 74, "kiivetä": 74,
-    "kivetä": 74, "korveta": 74, "langeta": 74, "laueta": 74, "livetä": 74, "lohjeta": 74,
-    "loveta": 74, "lumeta": 74, "noeta": 74, "poiketa": 74, "puhjeta": 74, "ratketa": 74,
-    "revetä": 74, "ristetä": 74, "ruveta": 74, "saveta": 74, "teljetä": 74, "todeta": 74,
+    "haljeta": 74, "herjetä": 74, "hirvetä": 74, "hävetä": 74, "kammeta": 74,
+    "kangeta": 74, "kasketa": 74, "katketa": 74, "kehjetä": 74, "keretä": 74,
+    "kerjetä": 74, "kiivetä": 74, "kivetä": 74, "korveta": 74, "langeta": 74,
+    "laueta": 74, "livetä": 74, "lohjeta": 74, "loveta": 74, "lumeta": 74,
+    "noeta": 74, "poiketa": 74, "puhjeta": 74, "ratketa": 74, "revetä": 74,
+    "ristetä": 74, "ruveta": 74, "saveta": 74, "teljetä": 74, "todeta": 74,
     "tuketa": 74, "vyyhdetä": 74, "ängetä": 74,
     #
     "nimetä": 75,
@@ -122,20 +131,22 @@ _EXCEPTIONS = {
     "häiritä": 69, "hillitä": 69, "kestitä": 69, "kyyditä": 69, "villitä": 69,
 
     # -ota
-    "heikota": 72, "helpota": 72, "hienota": 72, "huonota": 72, "kehnota": 72, "leudota": 72,
-    "loitota": 72, "ulota": 72,
+    "heikota": 72, "helpota": 72, "hienota": 72, "huonota": 72, "kehnota": 72,
+    "leudota": 72, "loitota": 72, "ulota": 72,
     #
-    "aallota": 75, "bingota": 75, "diskota": 75, "lassota": 75, "muodota": 75, "peitota": 75,
+    "aallota": 75, "bingota": 75, "diskota": 75, "lassota": 75, "muodota": 75,
+    "peitota": 75,
 
     # -uta
     "paksuta": 72,
     #
-    "haluta": 75, "hamuta": 75, "hulmuta": 75, "kohuta": 75, "lastuta": 75, "liesuta": 75,
-    "lietsuta": 75, "loimuta": 75, "loiskuta": 75, "meluta": 75, "nujuta": 75, "piiluta": 75,
+    "haluta": 75, "hamuta": 75, "hulmuta": 75, "kohuta": 75, "lastuta": 75,
+    "liesuta": 75, "lietsuta": 75, "loimuta": 75, "loiskuta": 75, "meluta": 75,
+    "nujuta": 75, "piiluta": 75,
 
     # -ytä
-    "hymytä": 74, "hyrskytä": 74, "höyrytä": 74, "könytä": 74, "syyhytä": 74, "tähytä": 74,
-    "älytä": 74, "öljytä": 74,
+    "hymytä": 74, "hyrskytä": 74, "höyrytä": 74, "könytä": 74, "syyhytä": 74,
+    "tähytä": 74, "älytä": 74, "öljytä": 74,
 
     # === quadrisyllabic and longer ===
 
@@ -144,21 +155,24 @@ _EXCEPTIONS = {
     "pörhistyä": 61,
 
     # -OidA
-    "ahkeroida": 68, "aprikoida": 68, "aterioida": 68, "emännöidä": 68, "haravoida": 68,
-    "heilimöidä": 68, "hekumoida": 68, "hihhuloida": 68, "ikävöidä": 68, "ilakoida": 68,
-    "ilkamoida": 68, "isännöidä": 68, "kapaloida": 68, "kapinoida": 68, "karkeloida": 68,
-    "keikaroida": 68, "kekkaloida": 68, "kekkuloida": 68, "kihelmöidä": 68, "kipenöidä": 68,
-    "kipinöidä": 68, "kipunoida": 68, "koheloida": 68, "kuutioida": 68, "kyynelöidä": 68,
-    "käpälöidä": 68, "kärhämöidä": 68, "käräjöidä": 68, "liehakoida": 68, "liikennöidä": 68,
-    "luennoida": 68, "mankeloida": 68, "mellakoida": 68, "metelöidä": 68, "murkinoida": 68,
-    "pakinoida": 68, "patikoida": 68, "pokkuroida": 68, "pomiloida": 68, "pullikoida": 68,
-    "rettelöidä": 68, "rähinöidä": 68, "seppelöidä": 68, "sukuloida": 68, "teikaroida": 68,
-    "tupakoida": 68, "urakoida": 68, "vihannoida": 68, "viheriöidä": 68,
+    "ahkeroida": 68, "aprikoida": 68, "aterioida": 68, "emännöidä": 68,
+    "haravoida": 68, "heilimöidä": 68, "hekumoida": 68, "hihhuloida": 68,
+    "ikävöidä": 68, "ilakoida": 68, "ilkamoida": 68, "isännöidä": 68,
+    "kapaloida": 68, "kapinoida": 68, "karkeloida": 68, "keikaroida": 68,
+    "kekkaloida": 68, "kekkuloida": 68, "kihelmöidä": 68, "kipenöidä": 68,
+    "kipinöidä": 68, "kipunoida": 68, "koheloida": 68, "kuutioida": 68,
+    "kyynelöidä": 68, "käpälöidä": 68, "kärhämöidä": 68, "käräjöidä": 68,
+    "liehakoida": 68, "liikennöidä": 68, "luennoida": 68, "mankeloida": 68,
+    "mellakoida": 68, "metelöidä": 68, "murkinoida": 68, "pakinoida": 68,
+    "patikoida": 68, "pokkuroida": 68, "pomiloida": 68, "pullikoida": 68,
+    "rettelöidä": 68, "rähinöidä": 68, "seppelöidä": 68, "sukuloida": 68,
+    "teikaroida": 68, "tupakoida": 68, "urakoida": 68, "vihannoida": 68,
+    "viheriöidä": 68,
 }
 
 # note: rules in _RULES_2SYLL etc.:
-# - sort by ending (first those that end with -AA, then others that end with -A, etc.; all vowels
-#   before consonants)
+# - sort by ending (first those that end with -AA, then others that end with
+#   -A, etc.; all vowels before consonants)
 # - each regex should match at least three verbs
 
 # rules for disyllabic verbs (conjugation, regex)
@@ -234,7 +248,9 @@ def get_conjugations(verb, useExceptions=True):
             pass
 
 
-    rules = [(), _RULES_2SYLL, _RULES_3SYLL, _RULES_4SYLL][countsyll.count_syllables(verb)-1]
+    rules = [
+        (), _RULES_2SYLL, _RULES_3SYLL, _RULES_4SYLL
+    ][countsyll.count_syllables(verb)-1]
 
     for (conjugation, regex) in rules:
         if re.search(regex, verb, re.VERBOSE) is not None:
@@ -245,7 +261,8 @@ def get_conjugations(verb, useExceptions=True):
 def _check_redundant_exceptions():
     for verb in _EXCEPTIONS:
         detectedConjugations = get_conjugations(verb, False)
-        if detectedConjugations and _EXCEPTIONS[verb] == list(detectedConjugations)[0]:
+        if detectedConjugations \
+        and _EXCEPTIONS[verb] == list(detectedConjugations)[0]:
             print(f'Redundant exception: "{verb}"')
 
 def main():
@@ -253,8 +270,8 @@ def main():
 
     if len(sys.argv) != 2:
         sys.exit(
-            "Argument: a Finnish verb (not a compound) in the infinitive. Print the Kotus "
-            "conjugation(s) (52-78)."
+            "Argument: a Finnish verb (not a compound) in the infinitive. "
+            "Print the Kotus conjugation(s) (52-78)."
         )
     verb = sys.argv[1]
 

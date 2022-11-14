@@ -3,8 +3,9 @@ import util
 
 if len(sys.argv) != 3:
     sys.exit(
-        "Arguments: CSV file with words and declensions/conjugations, list file with compounds. "
-        "Print CSV lines without those that contain a compound."
+        "Arguments: CSV file with words and declensions/conjugations, list "
+        "file with compounds. Print CSV lines without those that contain a "
+        "compound."
     )
 
 # read compounds without underscores

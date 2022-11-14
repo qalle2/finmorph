@@ -3,8 +3,9 @@ import util
 
 if len(sys.argv) != 3:
     sys.exit(
-        "Get words that occur as finals of compounds. Print them and their declensions/"
-        "conjugations in CSV format. Arguments: wordCsvFile compoundListFile"
+        "Get words that occur as finals of compounds. Print them and their "
+        "declensions/conjugations in CSV format. Arguments: wordCsvFile "
+        "compoundListFile"
     )
 
 (wordCsvFile, compoundListFile) = sys.argv[1:]
@@ -26,4 +27,6 @@ for line in util.read_lines(wordCsvFile):
         conjugationsByFinal.setdefault(final, set()).update(conjugations)
 
 for final in conjugationsByFinal:
-    print(",".join([final] + [str(c) for c in sorted(conjugationsByFinal.get(final, {}))]))
+    print(",".join(
+        [final] + [str(c) for c in sorted(conjugationsByFinal.get(final, {}))]
+    ))
