@@ -9,7 +9,9 @@ for line in util.read_lines("generated-lists/words.csv"):
     word = line.split(",")[0]
     detectedParts = splitcomp.split_compound(word)
     if len(detectedParts) != 1:
-        print(f'"{word}": expected "{word}", got "{"_".join(detectedParts)}"')
+        print("{}: expected {}, got {}".format(
+            word, word, "_".join(detectedParts)
+        ))
         errorCount += 1
     wordCount += 1
 
@@ -19,7 +21,9 @@ for comp in util.read_lines("compounds.txt"):
     origComp = comp.replace("_", "")
     detectedParts = splitcomp.split_compound(origComp)
     if detectedParts != parts:
-        print(f'"{origComp}": expected "{"_".join(parts)}", got "{"_".join(detectedParts)}"')
+        print("{}: expected {}, got {}".format(
+            origComp, "_".join(parts), "_".join(detectedParts)
+        ))
         errorCount += 1
     wordCount += 1
 

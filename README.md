@@ -31,8 +31,10 @@ Argument: a Finnish noun (including adjectives/pronouns/numerals, excluding comp
 Example:
 ```
 $ python3 noun_consgrad.py "kuusi"
-Declension 24 (like "un|i, -en, -ien/-ten, -ta, -ia, -een, -iin") without consonant gradation
-Declension 27 (like "käsi, käden, -en/kätten, kättä, -ä, käteen, -in") without consonant gradation
+Declension 24 (like "un|i, -en, -ien/-ten, -ta, -ia, -een, -iin") without
+consonant gradation
+Declension 27 (like "käsi, käden, -en/kätten, kättä, -ä, käteen, -in") without
+consonant gradation
 ```
 
 Needs `noundecl.py` and `countsyll.py`. Can be tested with `test_nounverb.py`.
@@ -55,8 +57,10 @@ Argument: a Finnish verb (not a compound) in the infinitive. Print the Kotus con
 Example:
 ```
 $ python3 verb_consgrad.py "keritä"
-Conjugation 69 (like "valit|a, -sen, -si, -sisi, -koon, valinnut, -tiin") without consonant gradation
-Conjugation 75 (like "selvi|tä, -än, -si, -äisi, -tköön, -nnyt, -ttiin") with consonant gradation
+Conjugation 69 (like "vali|ta, -tsen, -tsi, -tsisi, -tkoon, -nnut, -ttiin")
+without consonant gradation
+Conjugation 75 (like "selvi|tä, -än, -si, -äisi, -tköön, -nnyt, -ttiin") with
+consonant gradation
 ```
 
 Needs `verbconj.py`. Can be tested with `test_nounverb.py`.
@@ -67,7 +71,7 @@ Argument: a Finnish verb (not a compound) in the infinitive. Print the Kotus con
 Example:
 ```
 $ python3 verbconj.py "keritä"
-Conjugation 69 (like "valit|a, -sen, -si, -sisi, -koon, valinnut, -tiin")
+Conjugation 69 (like "vali|ta, -tsen, -tsi, -tsisi, -tkoon, -nnut, -ttiin")
 Conjugation 75 (like "selvi|tä, -än, -si, -äisi, -tköön, -nnyt, -ttiin")
 ```
 

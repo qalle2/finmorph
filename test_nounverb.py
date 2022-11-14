@@ -17,7 +17,8 @@ elif sys.argv[1] in ("v", "vc"):
 else:
     sys.exit("Invalid argument.")
 
-# get consonant gradation detection function and list of words to which consonant gradation applies
+# get consonant gradation detection function and list of words to which
+# consonant gradation applies
 if sys.argv[1] == "nc":
     from noun_consgrad import get_consonant_gradation as detect_gradation
     consGradFile = "generated-lists/words-consgrad.csv"
@@ -28,12 +29,14 @@ else:
     consGradFile = None
 
 if consGradFile is not None:
-    # get combinations of word and conjugation to which consonant gradation applies
+    # get combinations of word and conjugation to which consonant gradation
+    # applies
     consGradConjugationsByWord = {}
     for line in util.read_lines(consGradFile):
         fields = line.split(",")
         assert len(fields) >= 2
-        consGradConjugationsByWord[fields[0]] = {int(c, 10) for c in fields[1:]}
+        consGradConjugationsByWord[fields[0]] \
+        = {int(c, 10) for c in fields[1:]}
 
 wordCount = errorCount = 0
 
@@ -62,15 +65,15 @@ for line in util.read_lines(testFile):
             if detectedGradation \
             and conj not in consGradConjugationsByWord.setdefault(word, set()):
                 print(
-                    f"'{word}' in declension/conjugation {conj}: expected no consonant gradation "
-                    "but got it"
+                    f"'{word}' in declension/conjugation {conj}: expected no "
+                    "consonant gradation but got it"
                 )
                 errorCount += 1
             elif not detectedGradation \
             and conj in consGradConjugationsByWord.setdefault(word, set()):
                 print(
-                    f"'{word}' in declension/conjugation {conj}: expected consonant gradation but "
-                    "got none"
+                    f"'{word}' in declension/conjugation {conj}: expected "
+                    "consonant gradation but got none"
                 )
                 errorCount += 1
 
