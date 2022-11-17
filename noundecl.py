@@ -63,7 +63,7 @@ DECLENSION_DESCRIPTIONS = {
         "-ee(see)n, -(eis)iin/-eihin",
 }
 
-# nouns with more than one declension (key = noun, value = set of declensions)
+# key = noun, value = tuple of declensions
 _MULTI_DECLENSION_NOUNS = {
     # different meanings
     "lahti": (5, 7),
@@ -870,7 +870,7 @@ def get_declensions(noun, useExceptions=True):
         if re.search(regex, noun, re.VERBOSE) is not None:
             return (declension,)
 
-    return set()
+    return ()
 
 def _check_redundant_exceptions():
     for noun in _EXCEPTIONS:

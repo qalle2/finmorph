@@ -39,7 +39,7 @@ CONJUGATION_DESCRIPTIONS = {
     78: "kaikaa, kaikaisi",
 }
 
-# key = verb, value = set of conjugations
+# key = verb, value = tuple of conjugations
 _MULTI_CONJUGATION_VERBS = {
     # different meanings
     "maistaa": (53, 56),
@@ -256,7 +256,7 @@ def get_conjugations(verb, useExceptions=True):
         if re.search(regex, verb, re.VERBOSE) is not None:
             return (conjugation,)
 
-    return set()
+    return ()
 
 def _check_redundant_exceptions():
     for verb in _EXCEPTIONS:
