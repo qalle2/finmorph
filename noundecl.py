@@ -66,80 +66,80 @@ DECLENSION_DESCRIPTIONS = {
 # nouns with more than one declension (key = noun, value = set of declensions)
 _MULTI_DECLENSION_NOUNS = {
     # different meanings
-    "lahti": {5, 7},
-    "laki": {5, 7},
-    "palvi": {5, 7},
-    "ripsi": {5, 7},
-    "saksi": {5, 7},  # "sakset" vs. "anglosaksi"
-    "sini": {5, 7},
+    "lahti": (5, 7),
+    "laki": (5, 7),
+    "palvi": (5, 7),
+    "ripsi": (5, 7),
+    "saksi": (5, 7),  # "sakset" vs. "anglosaksi"
+    "sini": (5, 7),
     #
-    "kuori": {5, 26},
-    "viini": {5, 26},
-    "vuori": {5, 26},
+    "kuori": (5, 26),
+    "viini": (5, 26),
+    "vuori": (5, 26),
     #
-    "peitsi": {5, 30},
+    "peitsi": (5, 30),
     #
-    "puola": {9, 10},
+    "puola": (9, 10),
     #
-    "kikkara": {11, 12},
+    "kikkara": (11, 12),
     #
-    "ilmeinen": {18, 38},  # 18 (e.g. "vähäilmeinen") is probably an error
+    "ilmeinen": (18, 38),  # 18 (e.g. "vähäilmeinen") is probably an error
     #
-    "kuusi": {24, 27},
+    "kuusi": (24, 27),
     #
-    "ahtaus": {39, 40,},
-    "karvaus": {39, 40,},
-    "vakaus":  {39, 40},
+    "ahtaus": (39, 40,),
+    "karvaus": (39, 40,),
+    "vakaus":  (39, 40),
     #
-    "kymmenes": {39, 45},
+    "kymmenes": (39, 45),
 
     # same meanings
-    "menu": {1, 21},
+    "menu": (1, 21),
     #
-    "caddie": {3, 8},
+    "caddie": (3, 8),
     #
-    "finaali": {5, 6},  # "finaali" vs. "semifinaali"
+    "finaali": (5, 6),  # "finaali" vs. "semifinaali"
     #
-    "alpi": {5, 7},
-    "helpi": {5, 7},
-    "kaihi": {5, 7},
-    "karhi": {5, 7},
-    "kymi": {5, 7},
-    "vyyhti": {5, 7},
+    "alpi": (5, 7),
+    "helpi": (5, 7),
+    "kaihi": (5, 7),
+    "karhi": (5, 7),
+    "kymi": (5, 7),
+    "vyyhti": (5, 7),
     #
-    "sioux": {5, 22},
+    "sioux": (5, 22),
     #
-    "syli": {5, 23},
+    "syli": (5, 23),
     #
-    "csárdás": {5, 39},
-    "kuskus":  {5, 39},
+    "csárdás": (5, 39),
+    "kuskus":  (5, 39),
     #
-    "ori": {5, 48},
+    "ori": (5, 48),
     #
-    "kolme": {7, 8},  # 8 in singular, 7 in plural
+    "kolme": (7, 8),  # 8 in singular, 7 in plural
     #
-    "hapsi": {7, 29},
-    "uksi":  {7, 29},
+    "hapsi": (7, 29),
+    "uksi":  (7, 29),
     #
-    "siitake": {8, 48},
+    "siitake": (8, 48),
     #
-    "aneurysma": {9, 10},
-    "kysta": {9, 10},
-    "lyyra": {9, 10},
+    "aneurysma": (9, 10),
+    "kysta": (9, 10),
+    "lyyra": (9, 10),
     #
-    "humala": {10, 11},
+    "humala": (10, 11),
     #
-    "tanhua": {12, 15},
+    "tanhua": (12, 15),
     #
-    "rosvous": {39, 40},
-    "siivous":  {39, 40},
+    "rosvous": (39, 40),
+    "siivous":  (39, 40),
     #
-    "havas":  {39, 41},
-    "kallas": {39, 41},
-    "koiras": {39, 41},
-    "olas": {39, 41},
-    "pallas": {39, 41},
-    "uros": {39, 41},
+    "havas":  (39, 41),
+    "kallas": (39, 41),
+    "koiras": (39, 41),
+    "olas": (39, 41),
+    "pallas": (39, 41),
+    "uros": (39, 41),
 }
 
 # exceptions to rules (key = noun, value = declension);
@@ -847,7 +847,7 @@ _RULES_4SYLL = (
 
 def get_declensions(noun, useExceptions=True):
     """noun: a Finnish noun in nominative singular
-    return: a set of 0-2 Kotus declensions (each 1-49)"""
+    return: a tuple of 0-2 Kotus declensions (each 1-49)"""
 
     noun = noun.strip("'- ")
 
@@ -858,7 +858,7 @@ def get_declensions(noun, useExceptions=True):
 
     if useExceptions:
         try:
-            return {_EXCEPTIONS[noun]}
+            return (_EXCEPTIONS[noun],)
         except KeyError:
             pass
 
@@ -868,7 +868,7 @@ def get_declensions(noun, useExceptions=True):
 
     for (declension, regex) in rules:
         if re.search(regex, noun, re.VERBOSE) is not None:
-            return {declension}
+            return (declension,)
 
     return set()
 

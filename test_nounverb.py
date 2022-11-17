@@ -45,7 +45,7 @@ for line in util.read_lines(testFile):
     fields = line.split(",")
     assert len(fields) >= 2
     word = fields[0]
-    conjugations = {int(c, 10) for c in fields[1:]}
+    conjugations = tuple(int(c, 10) for c in fields[1:])
 
     if sys.argv[1] in ("n", "v"):
         # test declension/conjugation detection function

@@ -42,24 +42,24 @@ CONJUGATION_DESCRIPTIONS = {
 # key = verb, value = set of conjugations
 _MULTI_CONJUGATION_VERBS = {
     # different meanings
-    "maistaa": {53, 56},
+    "maistaa": (53, 56),
     #
-    "keritä": {69, 75},
+    "keritä": (69, 75),
     #
-    "isota": {72, 74},
-    "sietä": {72, 74},
-    "tyvetä": {72, 74},
+    "isota": (72, 74),
+    "sietä": (72, 74),
+    "tyvetä": (72, 74),
 
     # same meanings
-    "sortaa": {53, 54},
-    "vuotaa": {53, 54},
+    "sortaa": (53, 54),
+    "vuotaa": (53, 54),
     #
-    "aueta": {72, 74},
-    "iljetä": {72, 74},
-    "juljeta": {72, 74},
-    "oieta": {72, 74},
-    "raueta": {72, 74},
-    "sueta": {72, 74},
+    "aueta": (72, 74),
+    "iljetä": (72, 74),
+    "juljeta": (72, 74),
+    "oieta": (72, 74),
+    "raueta": (72, 74),
+    "sueta": (72, 74),
 }
 
 # exceptions to rules (key = noun, value = conjugation);
@@ -232,7 +232,7 @@ _RULES_4SYLL = (
 
 def get_conjugations(verb, useExceptions=True):
     """verb: a Finnish verb in infinitive
-    return: a set of 0-2 Kotus conjugations (each 52-78)"""
+    return: a tuple of 0-2 Kotus conjugations (each 52-78)"""
 
     verb = verb.strip("'- ")
 
@@ -243,7 +243,7 @@ def get_conjugations(verb, useExceptions=True):
 
     if useExceptions:
         try:
-            return {_EXCEPTIONS[verb]}
+            return (_EXCEPTIONS[verb],)
         except KeyError:
             pass
 
@@ -254,7 +254,7 @@ def get_conjugations(verb, useExceptions=True):
 
     for (conjugation, regex) in rules:
         if re.search(regex, verb, re.VERBOSE) is not None:
-            return {conjugation}
+            return (conjugation,)
 
     return set()
 
