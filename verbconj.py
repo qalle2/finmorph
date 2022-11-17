@@ -90,11 +90,6 @@ _EXCEPTIONS = {
     "lypsää": 54, "pieksää": 54,
     #
     "jaksaa": 56, "maksaa": 56, "virkkaa": 56,
-    "jauhaa": 56,  # the only -hAA verb
-    "nauraa": 56,  # the only -rAA verb
-    "painaa": 56,  # the only -nAA verb
-    #
-    "telmää": 78,  # the only -mAA verb
 
     # -CA
     "käydä": 65,
@@ -113,22 +108,22 @@ _EXCEPTIONS = {
     # -AtA
     "hapata": 72, "mädätä": 72, "parata": 72,
 
-    # -etA
-    "haljeta": 74, "herjetä": 74, "hirvetä": 74, "hävetä": 74, "kammeta": 74,
-    "kangeta": 74, "kasketa": 74, "katketa": 74, "kehjetä": 74, "keretä": 74,
-    "kerjetä": 74, "kiivetä": 74, "kivetä": 74, "korveta": 74, "langeta": 74,
-    "laueta": 74, "livetä": 74, "lohjeta": 74, "loveta": 74, "lumeta": 74,
-    "noeta": 74, "poiketa": 74, "puhjeta": 74, "ratketa": 74, "revetä": 74,
-    "ristetä": 74, "ruveta": 74, "saveta": 74, "teljetä": 74, "todeta": 74,
-    "tuketa": 74, "vyyhdetä": 74, "ängetä": 74,
+    # -eta
+    "haljeta": 74, "kammeta": 74, "kasketa": 74, "katketa": 74, "korveta": 74,
+    "laueta": 74, "lohjeta": 74, "loveta": 74, "lumeta": 74, "noeta": 74,
+    "poiketa": 74, "puhjeta": 74, "ratketa": 74, "ruveta": 74, "saveta": 74,
+    "tuketa": 74,
+
+    # -etä
+    "herjetä": 74, "hirvetä": 74, "hävetä": 74, "kehjetä": 74, "keretä": 74,
+    "kerjetä": 74, "kiivetä": 74, "kivetä": 74, "livetä": 74, "revetä": 74,
+    "teljetä": 74, "vyyhdetä": 74,
     #
     "nimetä": 75,
 
-    # -ita
+    # -itA
+    "häiritä": 69, "hillitä": 69, "villitä": 69,
     "solmita": 75,
-
-    # -itä
-    "häiritä": 69, "hillitä": 69, "kestitä": 69, "kyyditä": 69, "villitä": 69,
 
     # -ota
     "heikota": 72, "helpota": 72, "hienota": 72, "huonota": 72, "kehnota": 72,
@@ -145,14 +140,14 @@ _EXCEPTIONS = {
     "nujuta": 75, "piiluta": 75,
 
     # -ytä
-    "hymytä": 74, "hyrskytä": 74, "höyrytä": 74, "könytä": 74, "syyhytä": 74,
-    "tähytä": 74, "älytä": 74, "öljytä": 74,
+    "hymytä": 74, "hyrskytä": 74, "höyrytä": 74, "älytä": 74, "öljytä": 74,
+    "röyhytä": 75,
 
     # === quadrisyllabic and longer ===
 
     # -VA
-    "hilsehtiä": 52,
-    "pörhistyä": 61,
+    "hilsehtiä": 52,  # 61 according to Wiktionary
+    "pörhistyä": 61,  # 52 according to Wiktionary
 
     # -OidA
     "ahkeroida": 68, "aprikoida": 68, "aterioida": 68, "emännöidä": 68,
@@ -174,60 +169,72 @@ _EXCEPTIONS = {
 # - sort by ending (first those that end with -AA, then others that end with
 #   -A, etc.; all vowels before consonants)
 # - each regex should match at least three verbs
+# - tip: use a command like this to search for patterns:
+#       grep "ENDING," verbs.csv | python3 text-util/grouplines.py -7
 
 # rules for disyllabic verbs (conjugation, regex)
 _RULES_2SYLL = (
     # -AA
-    (54, r"[lnr]t( aa | ää )$"),         # -ltAA/-ntAA/-rtAA
-    (56, r"a[iu]?[lr]?[hst]?taa$"),      # -a(i/u)(l/r)(h/s/t)taa
-    (53, r"( [ltv]ää | taa )$"),         # -lää/-tAA/-vää
-    (56, r"( [jlpv]aa | a[lt]?kaa )$"),  # -jaa/-laa/-paa/-vaa; -a(l/t)kaa
-    (78, r"[ks]( aa | ää )$"),           # -kAA/-sAA except those in conj. 56
+    (54, r"[lnr]t( aa | ää )$"),            # -(l/n/r)tAA
+    (56, r"a[iu]?[lr]?[hst]?taa$"),         # -a(i/u/-)(l/r/-)(h/s/t/-)taa
 
-    # -CA
+    (53, r"( [ltv]ää | taa )$"),            # -lää/-tAA/-vää
+    (56, r"( [hjlnprv]aa | a[lt]?kaa )$"),  # -(h/j/l/n/p/r/v)aa; -a(l/t/-)kaa
+    (78, r"[mks]( aa | ää )$"),             # -(kms)AA
+
+    # -dA
     (63, r"( aa | ää | yy )d[aä]$"),   # -AAdA/-yydä
     (64, r"( ie | uo | yö )d[aä]$"),   # -iedA/-UOdA
     (62, r"id[aä]$"),                  # -idA
+
+    # -VtA
     (73, r"aata$"),                    # -aata
+
+    # other
     (70, r"( ie | uo | yö )st[aä]$"),  # -iestA/-UOstA
-    (66, r"st[aä]$"),                  # -stA except those in conj. 70
+    (66, r"st[aä]$"),                  # -stA
     (67, r"( ll | nn | rr )[aä]$"),    # -llA/-nnA/-rrA
 )
 
 # rules for trisyllabic verbs (conjugation, regex)
 _RULES_3SYLL = (
-    # -VV
+    # -VA
     (77, r"j( aa | ää )$"),       # -jAA
-    (53, r"[hst]t( aa | ää )$"),  # -htAA/-stAA/-ttAA
-    (54, r"[lnr]t( aa | ää )$"),  # -ltAA/-ntAA/-rtAA
+    (53, r"[hst]t( aa | ää )$"),  # -(h/s/t)tAA
+    (54, r"[lnr]t( aa | ää )$"),  # -(l/n/r)tAA
     (58, r"e[aä]$"),              # -eA
     (61, r"i[aä]$"),              # -iA
     (52, r"[oöuy][aä]$"),         # -OA/-UA
-    (72, r"nee$"),                # -nee
 
-    # -CV
-    (62, r"[oö]id[aä]$"),      # -OidA
-    (67, r"[ei]ll[aä]$"),      # -ellA/-illA
-    (73, r"[aä]t[aä]$"),       # -AtA
-    (72, r"et[aä]$"),          # -etA (many are conj. 74 instead)
-    (69, r"( ita | kitä )$"),  # -ita/-kitä
-    (75, r"[iy]tä$"),          # -itä/-ytä
-    (74, r"[oöu]t[aä]$"),      # -OtA/-uta (many are conj. 72 or 75 instead)
-    (66, r"ist[aä]$"),         # -istA
+    # -VtA
+    (73, r"[aä]t[aä]$"),            # -AtA
+    (74, r"(deta|get[aä]|tetä)$"),  # -deta/-getA/-tetä
+    (72, r"et[aä]$"),               # -etA (many are cnj. 74 instead)
+    (69, r"( ita | [dkt]itä )$"),   # -ita/-(d/k/t)itä
+    (74, r"([oöu]|hy|ny)t[aä]$"),   # -(O/u/hy/ny)tA (many are 72/75 instead)
+    (75, r"[iy]tä$"),               # -itä/-ytä
+
+    # other
+    (62, r"[oö]id[aä]$"),  # -OidA
+    (66, r"ist[aä]$"),     # -istA
+    (67, r"[ei]ll[aä]$"),  # -ellA/-illA
+    (72, r"nee$"),         # -nee
 )
 
 # rules for quadrisyllabic and longer verbs (conjugation, regex)
 _RULES_4SYLL = (
-    # -VV
+    # -VA
     (53, r"( is | [iuy]t )t( aa | ää )$"),  # -istAA/-ittAA/-UttAA
     (54, r"nt( aa | ää )$"),                # -ntAA
     (61, r"( ks | eht )i[aä]$"),            # -ksiA/-ehtiA
     (52, r"( ks | t )( ua | yä )$"),        # -ksUA/-tUA
 
-    # -CV
-    (62, r"[oö]id[aä]$"),        # -OidA (many are conj. 68 instead)
+    # -VCA
+    (62, r"[oö]id[aä]$"),  # -OidA (many are conj. 68 instead)
+    (73, r"[aä]t[aä]$"),   # -AtA
+
+    # -CCA
     (67, r"( e | ai )ll[aä]$"),  # -ellA/-ailla
-    (73, r"[aä]t[aä]$"),         # -AtA
 )
 
 def get_conjugations(verb, useExceptions=True):
@@ -246,7 +253,6 @@ def get_conjugations(verb, useExceptions=True):
             return (_EXCEPTIONS[verb],)
         except KeyError:
             pass
-
 
     rules = [
         (), _RULES_2SYLL, _RULES_3SYLL, _RULES_4SYLL
