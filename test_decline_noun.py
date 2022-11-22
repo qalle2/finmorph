@@ -418,6 +418,12 @@ TESTS_ABL_SG = {
     "kymmenen": ("kymmeneltä",),
     "valo": ("valolta",),
 }
+TESTS_ABE_SG = {
+    "kuusi": ("kuudetta", "kuusetta"),
+    "esine": ("esineettä",),
+    "kymmenen": ("kymmenettä",),
+    "valo": ("valotta",),
+}
 
 def run_test(case, number, dict_):
     # compare output of decline_noun to dictionary
@@ -449,6 +455,7 @@ def main():
         ("ela", "sg", TESTS_ELA_SG),
         ("ade", "sg", TESTS_ADE_SG),
         ("abl", "sg", TESTS_ABL_SG),
+        ("abe", "sg", TESTS_ABE_SG),
     ):
         print("Running test:", case.title() + number.title())
         run_test(case, number, dict_)

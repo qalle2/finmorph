@@ -14,6 +14,18 @@ import noundecl
 # 42=mies, 43=ohut, 44=kevät, 45=kahdeksas, 46=tuhat, 47=kuollut, 48=hame,
 # 49=askel/askele
 
+# combinations of case/number that behave like genitive singular
+LIKE_GEN_SG = (
+    ("nom", "pl"),
+    ("gen", "sg"),
+    ("tra", "sg"),
+    ("ine", "sg"),
+    ("ela", "sg"),
+    ("ade", "sg"),
+    ("abl", "sg"),
+    ("abe", "sg"),
+)
+
 # (from, to); the first match will be used
 REGEXES_WEAKEN = (
     # t
@@ -50,8 +62,6 @@ REGEXES_STRENGTHEN = (
     (r"([lnr])\1(aa|ää|ee|are|ele|ere|ime)$", r"\1t\2"),   # e.g. kallas
     (r"([aeiouyäöh])d(aa|ee|are|ime)$",       r"\1t\2"),   # e.g. pidin
 )
-
-# TODO: muuta testit dictiksi
 
 def consonant_gradation(word, strengthen=False):
     # apply consonant gradation
@@ -132,8 +142,9 @@ FINAL_VOWEL_CHANGES = {
     48: ((r"([aeiouyäö])$", r"\1\1"),),
 }
 
-def decline_noun_root_gen_sg(word, decl, consGrad):
-    # decline a noun for genitive singular (no -n ending)
+def decline_noun_gen_sg(word, decl, consGrad):
+    # decline a noun for a case/number that behaves like genitive singular;
+    # no case/number ending; e.g. "kaksi" -> "kahde"
 
     # irregular changes to final consonant
     (reFrom, reTo) = FINAL_CONS_CHANGES.get(decl, ("", ""))
@@ -176,25 +187,28 @@ def decline_noun_root_gen_sg(word, decl, consGrad):
 def decline_noun(word, decl, consGrad, case, number):
     # decline a Finnish noun
 
-    word = decline_noun_root_gen_sg(word, decl, consGrad)
-
     # use back or front vowels for endings?
     useBackVowels = re.search(r"^[^aou]+$", word) is None
 
-    if case == "nom" and number == "pl":
-        return word + "t"
-    if case == "gen" and number == "sg":
-        return word + "n"
-    if case == "tra" and number == "sg":
-        return word + "ksi"
-    if case == "ine" and number == "sg":
-        return word + "ss" + ("a" if useBackVowels else "ä")
-    if case == "ela" and number == "sg":
-        return word + "st" + ("a" if useBackVowels else "ä")
-    if case == "ade" and number == "sg":
-        return word + "ll" + ("a" if useBackVowels else "ä")
-    if case == "abl" and number == "sg":
-        return word + "lt" + ("a" if useBackVowels else "ä")
+    if (case, number) in LIKE_GEN_SG:
+        word = decline_noun_gen_sg(word, decl, consGrad)
+
+        if case == "nom":
+            return word + "t"
+        if case == "gen":
+            return word + "n"
+        if case == "tra":
+            return word + "ksi"
+        if case == "ine":
+            return word + "ss" + ("a" if useBackVowels else "ä")
+        if case == "ela":
+            return word + "st" + ("a" if useBackVowels else "ä")
+        if case == "ade":
+            return word + "ll" + ("a" if useBackVowels else "ä")
+        if case == "abl":
+            return word + "lt" + ("a" if useBackVowels else "ä")
+        if case == "abe":
+            return word + "tt" + ("a" if useBackVowels else "ä")
 
     sys.exit("Case/number not implemented.")
 
