@@ -257,7 +257,7 @@ def decline_noun(word, decl, consGrad, case, number):
     useBackVowels = re.search(r"^[^aáou]+$", word) is None
 
     if number == "pl" and case == "nom" or number == "sg" \
-    and case in ("gen", "tra", "ine", "ela", "ade", "abl", "abe"):
+    and case in ("gen", "tra", "ine", "ela", "ade", "abl", "all", "abe"):
         word = decline_noun_gen_sg(word, decl, consGrad)
         if decl == 22:
             word += "'"
@@ -276,6 +276,8 @@ def decline_noun(word, decl, consGrad, case, number):
             yield word + "ll" + ("a" if useBackVowels else "ä")
         elif case == "abl":
             yield word + "lt" + ("a" if useBackVowels else "ä")
+        elif case == "all":
+            yield word + "lle"
         elif case == "abe":
             yield word + "tt" + ("a" if useBackVowels else "ä")
 

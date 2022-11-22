@@ -418,6 +418,12 @@ TESTS_ABL_SG = {
     "kymmenen": ("kymmeneltä",),
     "valo": ("valolta",),
 }
+TESTS_ALL_SG = {
+    "kuusi": ("kuudelle", "kuuselle"),
+    "esine": ("esineelle",),
+    "kymmenen": ("kymmenelle",),
+    "valo": ("valolle",),
+}
 TESTS_ABE_SG = {
     "kuusi": ("kuudetta", "kuusetta"),
     "esine": ("esineettä",),
@@ -1064,6 +1070,7 @@ def main():
         ("ela", "sg", TESTS_ELA_SG),
         ("ade", "sg", TESTS_ADE_SG),
         ("abl", "sg", TESTS_ABL_SG),
+        ("all", "sg", TESTS_ALL_SG),
         ("abe", "sg", TESTS_ABE_SG),
         ("ess", "sg", TESTS_ESS_SG),
         ("ill", "sg", TESTS_ILL_SG),
