@@ -13,7 +13,7 @@ import decline_noun
 
 # nominative_singular: (genitive_singulars_in_alphabetical_order)
 TESTS_GEN_SG = {
-    # more than one result (all)
+    # more than one declension (all)
     "ahtaus": ("ahtauden", "ahtauksen"),
     "alpi": ("alpin", "alven"),
     "csárdás": ("csárdáksen", "csárdásin"),
@@ -50,7 +50,7 @@ TESTS_GEN_SG = {
     "vuori": ("vuoren", "vuorin"),
     "vyyhti": ("vyyhden", "vyyhdin"),
 
-    # Kotus 1
+    # declension 1
     "ehto": ("ehdon",),
     "kirppu": ("kirpun",),
     "korko": ("koron",),
@@ -75,18 +75,18 @@ TESTS_GEN_SG = {
     "yö": ("yön",),
     "äly": ("älyn",),
 
-    # Kotus 2
+    # declension 2
     "palvelu": ("palvelun",),
     "väestö": ("väestön",),
 
-    # Kotus 3
+    # declension 3
     "valtio": ("valtion",),
     "yhtiö": ("yhtiön",),
 
-    # Kotus 4
+    # declension 4
     "laatikko": ("laatikon",),
 
-    # Kotus 5
+    # declension 5
     "lux": ("luxin",),
     "risti": ("ristin",),
     "šakki": ("šakin",),
@@ -94,12 +94,12 @@ TESTS_GEN_SG = {
     "wok": ("wokin",),
     "vouti": ("voudin",),
 
-    # Kotus 6
+    # declension 6
     "lumen": ("lumenin",),
     "paperi": ("paperin",),
     "weber": ("weberin",),
 
-    # Kotus 7
+    # declension 7
     "arki": ("arjen",),
     "arpi": ("arven",),
     "impi": ("immen",),
@@ -115,12 +115,12 @@ TESTS_GEN_SG = {
     "soppi": ("sopen",),
     "tuki": ("tuen",),
 
-    # Kotus 8
+    # declension 8
     "jeppe": ("jepen",),
     "nalle": ("nallen",),
     "nukke": ("nuken",),
 
-    # Kotus 9
+    # declension 9
     "aika": ("ajan",),
     "arka": ("aran",),
     "jalka": ("jalan",),
@@ -136,7 +136,7 @@ TESTS_GEN_SG = {
     "vihta": ("vihdan",),
     "virka": ("viran",),
 
-    # Kotus 10
+    # declension 10
     "kahdeksan": ("kahdeksan",),
     "koira": ("koiran",),
     "nälkä": ("nälän",),
@@ -144,59 +144,59 @@ TESTS_GEN_SG = {
     "yhdeksän": ("yhdeksän",),
     "ylkä": ("yljän",),
 
-    # Kotus 11
+    # declension 11
     "omena": ("omenan",),
 
-    # Kotus 12
+    # declension 12
     "kulkija": ("kulkijan",),
 
-    # Kotus 13
+    # declension 13
     "katiska": ("katiskan",),
 
-    # Kotus 14
+    # declension 14
     "solakka": ("solakan",),
 
-    # Kotus 15
+    # declension 15
     "korkea": ("korkean",),
 
-    # Kotus 16
+    # declension 16
     "idempi": ("idemmän",),
     "vanhempi": ("vanhemman",),
 
-    # Kotus 17
+    # declension 17
     "vapaa": ("vapaan",),
 
-    # Kotus 18
+    # declension 18
     "maa": ("maan",),
 
-    # Kotus 19
+    # declension 19
     "suo": ("suon",),
 
-    # Kotus 20
+    # declension 20
     "filee": ("fileen",),
 
-    # Kotus 21
+    # declension 21
     "rosé": ("rosén",),
 
-    # Kotus 22
+    # declension 22
     "parfait": ("parfait'n",),
 
-    # Kotus 23
+    # declension 23
     "tiili": ("tiilen",),
 
-    # Kotus 24
+    # declension 24
     "uni": ("unen",),
 
-    # Kotus 25
+    # declension 25
     "toimi": ("toimen",),
 
-    # Kotus 26
+    # declension 26
     "pieni": ("pienen",),
 
-    # Kotus 27
+    # declension 27
     "käsi": ("käden",),
 
-    # Kotus 28 (all)
+    # declension 28 (all)
     "hirsi": ("hirren",),
     "jälsi": ("jällen",),
     "kansi": ("kannen",),
@@ -212,20 +212,20 @@ TESTS_GEN_SG = {
     "varsi": ("varren",),
     "virsi": ("virren",),
 
-    # Kotus 29 (all)
+    # declension 29 (all)
     "hapsi": ("hapsen",),
     "lapsi": ("lapsen",),
     "uksi": ("uksen",),
 
-    # Kotus 30 (all)
+    # declension 30 (all)
     "veitsi": ("veitsen",),
 
-    # Kotus 31 (all)
+    # declension 31 (all)
     "haaksi": ("haahden",),
     "kaksi": ("kahden",),
     "yksi": ("yhden",),
 
-    # Kotus 32
+    # declension 32
     "ahven": ("ahvenen",),
     "höyhen": ("höyhenen",),
     "ien": ("ikenen",),
@@ -241,7 +241,7 @@ TESTS_GEN_SG = {
     "syöjätär": ("syöjättären",),
     "sävel": ("sävelen",),
 
-    # Kotus 33
+    # declension 33
     "annin": ("antimen",),
     "avarrin": ("avartimen",),
     "elin": ("elimen",),
@@ -257,38 +257,38 @@ TESTS_GEN_SG = {
     "uistin": ("uistimen",),
     "ydin": ("ytimen",),
 
-    # Kotus 34
+    # declension 34
     "alaston": ("alastoman",),
     "onneton": ("onnettoman",),
     "yötön": ("yöttömän",),
 
-    # Kotus 35 (all)
+    # declension 35 (all)
     "lämmin": ("lämpimän",),
 
-    # Kotus 36
+    # declension 36
     "alin": ("alimman",),
     "sisin": ("sisimmän",),
     "uloin": ("uloimman",),
 
-    # Kotus 37 (all)
+    # declension 37 (all)
     "vasen": ("vasemman",),
 
-    # Kotus 38
+    # declension 38
     "nainen": ("naisen",),
     "osanen": ("osasen",),
     "öinen": ("öisen",),
 
-    # Kotus 39
+    # declension 39
     "aines": ("aineksen",),
     "vastaus": ("vastauksen",),
     "varis": ("variksen",),
     "yritys": ("yrityksen",),
 
-    # Kotus 40
+    # declension 40
     "kalleus": ("kalleuden",),
     "äreys": ("äreyden",),
 
-    # Kotus 41
+    # declension 41
     "allas": ("altaan",),
     "altis": ("alttiin",),
     "kinnas": ("kintaan",),
@@ -303,28 +303,28 @@ TESTS_GEN_SG = {
     "varras": ("vartaan",),
     "vieras": ("vieraan",),
 
-    # Kotus 42 (all)
+    # declension 42 (all)
     "mies": ("miehen",),
 
-    # Kotus 43
+    # declension 43
     "immyt": ("impyen",),
     "ohut": ("ohuen",),
 
-    # Kotus 44 (all)
+    # declension 44 (all)
     "kevät": ("kevään",),
 
-    # Kotus 45
+    # declension 45
     "kahdeksas": ("kahdeksannen",),
     "neljäs": ("neljännen",),
 
-    # Kotus 46 (all)
+    # declension 46 (all)
     "tuhat": ("tuhannen",),
 
-    # Kotus 47
+    # declension 47
     "kuollut": ("kuolleen",),
     "tehnyt": ("tehneen",),
 
-    # Kotus 48
+    # declension 48
     # -Ve
     "aie": ("aikeen",),
     "alue": ("alueen",),
@@ -365,7 +365,7 @@ TESTS_GEN_SG = {
     "uurre": ("uurteen",),
     "vuode": ("vuoteen",),
 
-    # Kotus 49 (all)
+    # declension 49 (all)
     "askel": ("askelen",),
     "askele": ("askeleen",),
     "kannel": ("kantelen",),
@@ -425,6 +425,615 @@ TESTS_ABE_SG = {
     "valo": ("valotta",),
 }
 
+TESTS_ESS_SG = {
+    # more than one declension (all)
+    "ahtaus": ("ahtauksena", "ahtautena"),
+    "alpi": ("alpena", "alpina"),
+    "csárdás": ("csárdáksena", "csárdásina"),
+    "havas": ("hapaana", "havaksena"),
+    "helpi": ("helpenä", "helpinä"),
+    "kaihi": ("kaihena", "kaihina"),
+    "kallas": ("kallaksena", "kaltaana"),
+    "karhi": ("karhena", "karhina"),
+    "karvaus": ("karvauksena", "karvautena"),
+    "koiras": ("koiraana", "koiraksena"),
+    "kuori": ("kuorena", "kuorina"),
+    "kuskus": ("kuskuksena", "kuskusina"),
+    "kuusi": ("kuusena", "kuutena"),
+    "kymi": ("kymenä", "kyminä"),
+    "kymmenes": ("kymmeneksenä", "kymmenentenä"),
+    "lahti": ("lahtena", "lahtina"),
+    "laki": ("lakena", "lakina"),
+    "olas": ("olaana", "olaksena"),
+    "ori": ("oriina", "orina"),
+    "pallas": ("pallaksena", "paltaana"),
+    "palvi": ("palvena", "palvina"),
+    "peitsi": ("peitsenä", "peitsinä"),
+    "ripsi": ("ripsenä", "ripsinä"),
+    "rosvous": ("rosvouksena", "rosvoutena"),
+    "saksi": ("saksena", "saksina"),
+    "siitake": ("siitakena", "siitakkeena"),
+    "siivous": ("siivouksena", "siivoutena"),
+    "sini": ("sinenä", "sininä"),
+    "sioux": ("sioux'na", "siouxina"),
+    "syli": ("sylenä", "sylinä"),
+    "uros": ("uroksena", "uroona"),
+    "vakaus": ("vakauksena", "vakautena"),
+    "viini": ("viinenä", "viininä"),
+    "vuori": ("vuorena", "vuorina"),
+    "vyyhti": ("vyyhtenä", "vyyhtinä"),
+
+    # declension 1
+    "valo": ("valona",),
+
+    # declension 2
+    "palvelu": ("palveluna",),
+
+    # declension 3
+    "valtio": ("valtiona",),
+
+    # declension 4
+    "laatikko": ("laatikkona",),
+
+    # declension 5
+    "lux": ("luxina",),
+    "risti": ("ristinä",),
+    "šakki": ("šakkina",),
+    "self-made man": ("self-made manina",),
+    "wok": ("wokina",),
+    "vouti": ("voutina",),
+
+    # declension 6
+    "lumen": ("lumenina",),
+    "paperi": ("paperina",),
+    "weber": ("weberinä",),
+
+    # declension 7
+    "ovi": ("ovena",),
+
+    # declension 8
+    "nalle": ("nallena",),
+
+    # declension 9
+    "kala": ("kalana",),
+
+    # declension 10
+    "koira": ("koirana",),
+    "kahdeksan": ("kahdeksana",),
+
+    # declension 11
+    "omena": ("omenana",),
+
+    # declension 12
+    "kulkija": ("kulkijana",),
+
+    # declension 13
+    "katiska": ("katiskana",),
+
+    # declension 14
+    "solakka": ("solakkana",),
+
+    # declension 15
+    "korkea": ("korkeana",),
+
+    # declension 16
+    "vanhempi": ("vanhempana",),
+
+    # declension 17
+    "vapaa": ("vapaana",),
+
+    # declension 18
+    "maa": ("maana",),
+
+    # declension 19
+    "suo": ("suona",),
+
+    # declension 20
+    "filee": ("fileenä",),
+
+    # declension 21
+    "rosé": ("roséna",),
+
+    # declension 22
+    "parfait": ("parfait'na",),
+
+    # declension 23
+    "tiili": ("tiilenä",),
+
+    # declension 24
+    "uni": ("unena",),
+
+    # declension 25
+    "toimi": ("toimena",),
+
+    # declension 26
+    "pieni": ("pienenä",),
+
+    # declension 27
+    "käsi": ("kätenä",),
+
+    # declension 28
+    "kynsi": ("kyntenä",),
+
+    # declension 29
+    "lapsi": ("lapsena",),
+
+    # declension 30
+    "veitsi": ("veitsenä",),
+
+    # declension 31
+    "kaksi": ("kahtena",),
+
+    # declension 32
+    "kymmenen": ("kymmenenä",),
+    "sisar": ("sisarena",),
+    "tytär": ("tyttärenä",),
+
+    # declension 33
+    "kytkin": ("kytkimenä",),
+    "ydin": ("ytimenä",),
+
+    # declension 34
+    "onneton": ("onnettomana",),
+    "yötön": ("yöttömänä",),
+
+    # declension 35
+    "lämmin": ("lämpimänä",),
+
+    # declension 36
+    "sisin": ("sisimpänä",),
+
+    # declension 37
+    "vasen": ("vasempana",),
+
+    # declension 38
+    "nainen": ("naisena",),
+
+    # declension 39
+    "vastaus": ("vastauksena",),
+
+    # declension 40
+    "kalleus": ("kalleutena",),
+
+    # declension 41
+    "vieras": ("vieraana",),
+    "äes": ("äkeenä",),
+
+    # declension 42
+    "mies": ("miehenä",),
+
+    # declension 43
+    "immyt": ("impyenä",),
+    "ohut": ("ohuena",),
+
+    # declension 44
+    "kevät": ("keväänä",),
+
+    # declension 45
+    "kahdeksas": ("kahdeksantena",),
+
+    # declension 46
+    "tuhat": ("tuhantena",),
+
+    # declension 47
+    "kuollut": ("kuolleena",),
+
+    # declension 48
+    "hame": ("hameena",),
+    "vuode": ("vuoteena",),
+
+    # declension 49
+    "askel": ("askelena",),
+    "askele": ("askeleena",),
+    "säen": ("säkenenä",),
+}
+
+TESTS_ILL_SG = {
+    # more than one declension (all)
+    "ahtaus": ("ahtaukseen", "ahtauteen"),
+    "alpi": ("alpeen", "alpiin"),
+    "csárdás": ("csárdákseen", "csárdásiin"),
+    "havas": ("hapaaseen", "havakseen"),
+    "helpi": ("helpeen", "helpiin"),
+    "kaihi": ("kaiheen", "kaihiin"),
+    "kallas": ("kallakseen", "kaltaaseen"),
+    "karhi": ("karheen", "karhiin"),
+    "karvaus": ("karvaukseen", "karvauteen"),
+    "koiras": ("koiraaseen", "koirakseen"),
+    "kuori": ("kuoreen", "kuoriin"),
+    "kuskus": ("kuskukseen", "kuskusiin"),
+    "kuusi": ("kuuseen", "kuuteen"),
+    "kymi": ("kymeen", "kymiin"),
+    "kymmenes": ("kymmenekseen", "kymmenenteen"),
+    "lahti": ("lahteen", "lahtiin"),
+    "laki": ("lakeen", "lakiin"),
+    "olas": ("olaaseen", "olakseen"),
+    "ori": ("oriin", "oriiseen"),
+    "pallas": ("pallakseen", "paltaaseen"),
+    "palvi": ("palveen", "palviin"),
+    "peitsi": ("peitseen", "peitsiin"),
+    "ripsi": ("ripseen", "ripsiin"),
+    "rosvous": ("rosvoukseen", "rosvouteen"),
+    "saksi": ("sakseen", "saksiin"),
+    "siitake": ("siitakeen", "siitakkeeseen"),
+    "siivous": ("siivoukseen", "siivouteen"),
+    "sini": ("sineen", "siniin"),
+    "sioux": ("sioux'hun", "siouxiin"),
+    "syli": ("syleen", "syliin"),
+    "uros": ("urokseen", "urooseen"),
+    "vakaus": ("vakaukseen", "vakauteen"),
+    "viini": ("viineen", "viiniin"),
+    "vuori": ("vuoreen", "vuoriin"),
+    "vyyhti": ("vyyhteen", "vyyhtiin"),
+
+    # declension 1
+    "valo": ("valoon",),
+
+    # declension 2
+    "palvelu": ("palveluun",),
+
+    # declension 3
+    "valtio": ("valtioon",),
+
+    # declension 4
+    "laatikko": ("laatikkoon",),
+
+    # declension 5
+    "lux": ("luxiin",),
+    "risti": ("ristiin",),
+    "šakki": ("šakkiin",),
+    "self-made man": ("self-made maniin",),
+    "wok": ("wokiin",),
+    "vouti": ("voutiin",),
+
+    # declension 6
+    "lumen": ("lumeniin",),
+    "paperi": ("paperiin",),
+    "weber": ("weberiin",),
+
+    # declension 7
+    "ovi": ("oveen",),
+
+    # declension 8
+    "nalle": ("nalleen",),
+
+    # declension 9
+    "kala": ("kalaan",),
+
+    # declension 10
+    "koira": ("koiraan",),
+    "kahdeksan": ("kahdeksaan",),
+
+    # declension 11
+    "omena": ("omenaan",),
+
+    # declension 12
+    "kulkija": ("kulkijaan",),
+
+    # declension 13
+    "katiska": ("katiskaan",),
+
+    # declension 14
+    "solakka": ("solakkaan",),
+
+    # declension 15
+    "korkea": ("korkeaan",),
+
+    # declension 16
+    "vanhempi": ("vanhempaan",),
+
+    # declension 17
+    "vapaa": ("vapaaseen",),
+
+    # declension 18
+    "maa": ("maahan",),
+
+    # declension 19
+    "suo": ("suohon",),
+
+    # declension 20
+    "filee": ("fileehen", "fileeseen"),
+
+    # declension 21
+    "rosé": ("roséhen",),
+
+    # declension 22
+    "parfait": ("parfait'hen",),
+
+    # declension 23
+    "tiili": ("tiileen",),
+
+    # declension 24
+    "uni": ("uneen",),
+
+    # declension 25
+    "toimi": ("toimeen",),
+
+    # declension 26
+    "pieni": ("pieneen",),
+
+    # declension 27
+    "käsi": ("käteen",),
+
+    # declension 28
+    "kynsi": ("kynteen",),
+
+    # declension 29
+    "lapsi": ("lapseen",),
+
+    # declension 30
+    "veitsi": ("veitseen",),
+
+    # declension 31
+    "kaksi": ("kahteen",),
+
+    # declension 32
+    "kymmenen": ("kymmeneen",),
+    "sisar": ("sisareen",),
+    "tytär": ("tyttäreen",),
+
+    # declension 33
+    "kytkin": ("kytkimeen",),
+    "ydin": ("ytimeen",),
+
+    # declension 34
+    "onneton": ("onnettomaan",),
+    "yötön": ("yöttömään",),
+
+    # declension 35
+    "lämmin": ("lämpimään",),
+
+    # declension 36
+    "sisin": ("sisimpään",),
+
+    # declension 37
+    "vasen": ("vasempaan",),
+
+    # declension 38
+    "nainen": ("naiseen",),
+
+    # declension 39
+    "vastaus": ("vastaukseen",),
+
+    # declension 40
+    "kalleus": ("kalleuteen",),
+
+    # declension 41
+    "vieras": ("vieraaseen",),
+    "äes": ("äkeeseen",),
+
+    # declension 42
+    "mies": ("mieheen",),
+
+    # declension 43
+    "immyt": ("impyeen",),
+    "ohut": ("ohueen",),
+
+    # declension 44
+    "kevät": ("kevääseen",),
+
+    # declension 45
+    "kahdeksas": ("kahdeksanteen",),
+
+    # declension 46
+    "tuhat": ("tuhanteen",),
+
+    # declension 47
+    "kuollut": ("kuolleeseen",),
+
+    # declension 48
+    "hame": ("hameeseen",),
+    "vuode": ("vuoteeseen",),
+
+    # declension 49
+    "askel": ("askeleen",),
+    "askele": ("askeleeseen",),
+    "säen": ("säkeneen",),
+}
+
+TESTS_PAR_SG = {
+    # more than one declension (all)
+    "ahtaus": ("ahtausta", "ahtautta"),
+    "alpi": ("alpea", "alpia"),
+    "csárdás": ("csárdásia", "csárdásta"),
+    "havas": ("havasta",),
+    "helpi": ("helpeä", "helpiä"),
+    "kaihi": ("kaihea", "kaihia"),
+    "kallas": ("kallasta",),
+    "karhi": ("karhea", "karhia"),
+    "karvaus": ("karvausta", "karvautta"),
+    "koiras": ("koirasta",),
+    "kuori": ("kuoria", "kuorta"),
+    "kuskus": ("kuskusia", "kuskusta"),
+    "kuusi": ("kuusta", "kuutta"),
+    "kymi": ("kymeä", "kymiä"),
+    "kymmenes": ("kymmenestä", "kymmenettä"),
+    "lahti": ("lahtea", "lahtia"),
+    "laki": ("lakea", "lakia"),
+    "olas": ("olasta",),
+    "ori": ("oria", "oritta"),
+    "pallas": ("pallasta",),
+    "palvi": ("palvea", "palvia"),
+    "peitsi": ("peistä", "peitsiä"),
+    "ripsi": ("ripseä", "ripsiä"),
+    "rosvous": ("rosvousta", "rosvoutta"),
+    "saksi": ("saksea", "saksia"),
+    "siitake": ("siitakea", "siitaketta"),
+    "siivous": ("siivousta", "siivoutta"),
+    "sini": ("sineä", "siniä"),
+    "sioux": ("sioux'ta", "siouxia"),
+    "syli": ("syliä", "syltä"),
+    "uros": ("urosta",),
+    "vakaus": ("vakausta", "vakautta"),
+    "viini": ("viiniä", "viintä"),
+    "vuori": ("vuoria", "vuorta"),
+    "vyyhti": ("vyyhteä", "vyyhtiä"),
+
+    # declension 1
+    "valo": ("valoa",),
+
+    # declension 2
+    "palvelu": ("palvelua",),
+
+    # declension 3
+    "valtio": ("valtiota",),
+
+    # declension 4
+    "laatikko": ("laatikkoa",),
+
+    # declension 5
+    "lux": ("luxia",),
+    "risti": ("ristiä",),
+    "šakki": ("šakkia",),
+    "self-made man": ("self-made mania",),
+    "wok": ("wokia",),
+    "vouti": ("voutia",),
+
+    # declension 6
+    "lumen": ("lumenia",),
+    "paperi": ("paperia",),
+    "weber": ("weberiä",),
+
+    # declension 7
+    "ovi": ("ovea",),
+
+    # declension 8
+    "nalle": ("nallea",),
+
+    # declension 9
+    "kala": ("kalaa",),
+
+    # declension 10
+    "koira": ("koiraa",),
+    "kahdeksan": ("kahdeksaa",),
+
+    # declension 11
+    "omena": ("omenaa",),
+
+    # declension 12
+    "kulkija": ("kulkijaa",),
+
+    # declension 13
+    "katiska": ("katiskaa",),
+
+    # declension 14
+    "solakka": ("solakkaa",),
+
+    # declension 15
+    "korkea": ("korkeaa", "korkeata"),
+
+    # declension 16
+    "vanhempi": ("vanhempaa",),
+
+    # declension 17
+    "vapaa": ("vapaata",),
+
+    # declension 18
+    "maa": ("maata",),
+
+    # declension 19
+    "suo": ("suota",),
+
+    # declension 20
+    "filee": ("fileetä",),
+
+    # declension 21
+    "rosé": ("roséta",),
+
+    # declension 22
+    "parfait": ("parfait'ta",),
+
+    # declension 23
+    "tiili": ("tiiltä",),
+
+    # declension 24
+    "uni": ("unta",),
+
+    # declension 25
+    "toimi": ("toimea", "tointa"),
+
+    # declension 26
+    "pieni": ("pientä",),
+
+    # declension 27
+    "käsi": ("kättä",),
+
+    # declension 28
+    "kynsi": ("kynttä",),
+
+    # declension 29
+    "lapsi": ("lasta",),
+
+    # declension 30
+    "veitsi": ("veistä",),
+
+    # declension 31
+    "kaksi": ("kahta",),
+
+    # declension 32
+    "kymmenen": ("kymmentä",),
+    "sisar": ("sisarta",),
+    "tytär": ("tytärtä",),
+
+    # declension 33
+    "kytkin": ("kytkintä",),
+    "ydin": ("ydintä",),
+
+    # declension 34
+    "onneton": ("onnetonta",),
+    "yötön": ("yötöntä",),
+
+    # declension 35
+    "lämmin": ("lämmintä",),
+
+    # declension 36
+    "sisin": ("sisintä",),
+
+    # declension 37
+    "vasen": ("vasempaa", "vasenta"),
+
+    # declension 38
+    "nainen": ("naista",),
+
+    # declension 39
+    "vastaus": ("vastausta",),
+
+    # declension 40
+    "kalleus": ("kalleutta",),
+
+    # declension 41
+    "vieras": ("vierasta",),
+    "äes": ("äestä",),
+
+    # declension 42
+    "mies": ("miestä",),
+
+    # declension 43
+    "immyt": ("immyttä",),
+    "ohut": ("ohutta",),
+
+    # declension 44
+    "kevät": ("kevättä",),
+
+    # declension 45
+    "kahdeksas": ("kahdeksatta",),
+
+    # declension 46
+    "tuhat": ("tuhatta",),
+
+    # declension 47
+    "kuollut": ("kuollutta",),
+
+    # declension 48
+    "hame": ("hametta",),
+    "vuode": ("vuodetta",),
+
+    # declension 49
+    "askel": ("askelta",),
+    "askele": ("askeletta",),
+    "säen": ("säentä",),
+}
+
 def run_test(case, number, dict_):
     # compare output of decline_noun to dictionary
     # case: e.g. "gen"
@@ -456,6 +1065,9 @@ def main():
         ("ade", "sg", TESTS_ADE_SG),
         ("abl", "sg", TESTS_ABL_SG),
         ("abe", "sg", TESTS_ABE_SG),
+        ("ess", "sg", TESTS_ESS_SG),
+        ("ill", "sg", TESTS_ILL_SG),
+        ("par", "sg", TESTS_PAR_SG),
     ):
         print("Running test:", case.title() + number.title())
         run_test(case, number, dict_)

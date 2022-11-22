@@ -14,54 +14,151 @@ import noundecl
 # 42=mies, 43=ohut, 44=kevät, 45=kahdeksas, 46=tuhat, 47=kuollut, 48=hame,
 # 49=askel/askele
 
-# combinations of case/number that behave like genitive singular
-LIKE_GEN_SG = (
-    ("nom", "pl"),
-    ("gen", "sg"),
-    ("tra", "sg"),
-    ("ine", "sg"),
-    ("ela", "sg"),
-    ("ade", "sg"),
-    ("abl", "sg"),
-    ("abe", "sg"),
-)
-
-# (from, to); the first match will be used
+# (regex_from, regex_to); the first match will be used
 REGEXES_WEAKEN = (
     # t
-    (r"([lnr])t([aeiouyäö])$", r"\1\1\2"),  # -ltV/-ntV/-rtV
-    (r"tt([aeiouyäö])$", r"t\1"),           # -ttV
-    (r"t([aeiouyäö])$",  r"d\1"),           # -tV
+    ("([lnr])t([aeiouyäö])$", r"\1\1\2"),  # -ltV/-ntV/-rtV
+    ("tt([aeiouyäö])$", r"t\1"),           # -ttV
+    ("t([aeiouyäö])$",  r"d\1"),           # -tV
     # p
-    (r"mp([aeiouyäö])$", r"mm\1"),  # -mpV
-    (r"pp([aeiouyäö])$", r"p\1"),   # -ppV
-    (r"p([aeiouyäö])$",  r"v\1"),   # -pV
+    ("mp([aeiouyäö])$", r"mm\1"),  # -mpV
+    ("pp([aeiouyäö])$", r"p\1"),   # -ppV
+    ("p([aeiouyäö])$",  r"v\1"),   # -pV
     # k
-    (r"([uy])k([uy])$",    r"\1v\2"),  # -UkU
-    (r"ylkä$",             r"yljä"),   # -ylkä
-    (r"([lr])k(e)$",       r"\1j\2"),  # -lke/-rke
-    (r"(n)k([aeiouyäö])$", r"\1g\2"),  # -nkV
-    (r"k([aeiouyäö])$",    r"\1"),     # -kV
+    ("([uy])k([uy])$",    r"\1v\2"),  # -UkU
+    ("ylkä$",             r"yljä"),   # -ylkä
+    ("([lr])k(e)$",       r"\1j\2"),  # -lke/-rke
+    ("(n)k([aeiouyäö])$", r"\1g\2"),  # -nkV
+    ("k([aeiouyäö])$",    r"\1"),     # -kV
 )
 
-# (from, to); the first match will be used
+# (regex_from, regex_to); the first match will be used
 REGEXES_STRENGTHEN = (
     # k
-    (r"([aeiouyäölnr])k(aa|ee)$",   r"\1kk\2"),  # e.g. tikas
-    (r"(e)ng(ere)$",                r"\1nk\2"),  # e.g. penger
-    (r"([hl])j(ee)$",               r"\1k\2"),   # e.g. hylje
-    (r"([aeiouyäöh])(ene|ime)$",    r"\1k\2"),   # e.g. säen
-    (r"([aeiouyäö]|ar)(aa|ee|ii)$", r"\1k\2"),   # e.g. ruis
+    ("([aeiouyäölnr])k(aa|ee)$",   r"\1kk\2"),  # e.g. tikas
+    ("(e)ng(ere)$",                r"\1nk\2"),  # e.g. penger
+    ("([hl])j(ee)$",               r"\1k\2"),   # e.g. hylje
+    ("([aeiouyäöh])(ene|ime)$",    r"\1k\2"),   # e.g. säen
+    ("([aeiouyäö]|ar)(aa|ee|ii)$", r"\1k\2"),   # e.g. ruis
     # p
-    (r"([aeiouyäö])p(ee)$",             r"\1pp\2"),  # e.g. ape
-    (r"([aeiouyäö])mm(ee|ele|imä|ye)$", r"\1mp\2"),  # e.g. lämmin
-    (r"([aeiouyäö])v(aa|ale|ime)$",     r"\1p\2"),   # e.g. taival
+    ("([aeiouyäö])p(ee)$",             r"\1pp\2"),  # e.g. ape
+    ("([aeiouyäö])mm(ee|ele|imä|ye)$", r"\1mp\2"),  # e.g. lämmin
+    ("([aeiouyäö])v(aa|ale|ime)$",     r"\1p\2"),   # e.g. taival
     # t
-    (r"([aeiouyäöln])t(aa|ää|ii|uu)$",        r"\1tt\2"),  # e.g. altis
-    (r"([aeiouyäö])t(are|äre|ime|oma|ömä)$",  r"\1tt\2"),  # e.g. heitin
+    ("([aeiouyäöln])t(aa|ää|ii|uu)$",         r"\1tt\2"),  # e.g. altis
+    ("([aeiouyäö])t(are|äre|ime|oma|ömä)$",   r"\1tt\2"),  # e.g. heitin
     (r"([lnr])\1(aa|ää|ee|are|ele|ere|ime)$", r"\1t\2"),   # e.g. kallas
-    (r"([aeiouyäöh])d(aa|ee|are|ime)$",       r"\1t\2"),   # e.g. pidin
+    ("([aeiouyäöh])d(aa|ee|are|ime)$",        r"\1t\2"),   # e.g. pidin
 )
+
+# declension: ((regex_from, regex_to), ...);
+# for genitive singular, essive singular and partitive singular
+FINAL_CONS_CHANGES_COMMON = {
+    # -n
+    10: (("n$",   ""),),   # only kahdeksan
+    32: (("nen$", "n"),),  # only kymmenen
+    38: (("nen$", "s"),),  # e.g. nainen
+    # -si, -s
+    27: (("si$", "ti"),),  # e.g. käsi
+    28: (("si$", "ti"),),  # e.g. kynsi
+    40: (("s$",  "t"),),   # e.g. kalleus
+}
+
+# declension: ((regex_from, regex_to), ...);
+# for genitive singular and essive singular
+FINAL_CONS_CHANGES_GEN_SG_ESS_SG = {
+    # -n
+    33: (("n$", "m"),),
+    34: (("n$", "m"),),
+    35: (("n$", "m"),),
+    36: (("n$", "mp"),),
+    37: (("n$", "mp"),),
+    # -s, -si
+    31: (("ksi$", "hti"),),
+    39: (("s$",   "ks"),),
+    41: (("s$",   ""),),
+    42: (("s$",   "h"),),
+    45: (("s$",   "nt"),),
+    # -t
+    43: (("t$", ""),),
+    44: (("t$", ""),),
+    46: (("t$", "nt"),),
+    47: (("t$", ""),),
+}
+
+# declension: ((regex_from, regex_to), ...);
+# for partitive singular
+FINAL_CONS_CHANGES_PAR_SG = {
+    # -s, -si
+    29: (("psi$", "si"),),
+    30: (("tsi$", "si"),),
+    31: (("ksi$", "hi"),),
+    45: (("s$",   "t"),),
+}
+
+# declension: ((regex_from, regex_to), ...);
+# for genitive singular, essive singular and partitive singular
+FINAL_VOWEL_CHANGES_COMMON = {
+    # - -> -i if not already -i
+    5:  (("([^i])$", r"\1i"),),  # e.g. rock
+    6:  (("([^i])$", r"\1i"),),  # e.g. nylon
+    # -i -> -e
+    7:  (("i$", "e"),),  # e.g. ovi
+    # -i -> -A
+    16: (("^([^aou]+)i$", r"\1ä"), ("i$", "a")),  # e.g. vanhempi
+}
+
+# declension: ((regex_from, regex_to), ...);
+# for genitive singular and essive singular
+FINAL_VOWEL_CHANGES_GEN_SG_ESS_SG = {
+    # - -> -e
+    32: (("$", "e"),),
+    33: (("$", "e"),),
+    38: (("$", "e"),),
+    39: (("$", "e"),),
+    40: (("$", "e"),),
+    42: (("$", "e"),),
+    43: (("$", "e"),),
+    45: (("$", "e"),),
+    46: (("$", "e"),),
+    49: (("$", "e"),),
+    # -i -> -e
+    23: (("i$", "e"),),
+    24: (("i$", "e"),),
+    25: (("i$", "e"),),
+    26: (("i$", "e"),),
+    27: (("i$", "e"),),
+    28: (("i$", "e"),),
+    29: (("i$", "e"),),
+    30: (("i$", "e"),),
+    31: (("i$", "e"),),
+    # - -> -A
+    34: (("^([^aou]+)$", r"\1ä"), ("$", "a")),
+    35: (("^([^aou]+)$", r"\1ä"), ("$", "a")),
+    36: (("^([^aou]+)$", r"\1ä"), ("$", "a")),
+    37: (("^([^aou]+)$", r"\1ä"), ("$", "a")),
+    # -U -> -ee
+    47: (("[uy]$", "ee"),),
+    # -V -> -VV
+    41: (("([aeiouyäö])$", r"\1\1"),),
+    44: (("([aeiouyäö])$", r"\1\1"),),
+    48: (("([aeiouyäö])$", r"\1\1"),),
+}
+
+# declension: ((regex_from, regex_to), ...);
+# for partitive singular
+FINAL_VOWEL_CHANGES_PAR_SG = {
+    # -i -> -
+    23: (("i$", ""),),
+    24: (("i$", ""),),
+    25: (("i$", ""),),
+    26: (("i$", ""),),
+    27: (("i$", ""),),
+    28: (("i$", ""),),
+    29: (("i$", ""),),
+    30: (("i$", ""),),
+    31: (("i$", ""),),
+}
 
 def consonant_gradation(word, strengthen=False):
     # apply consonant gradation
@@ -73,93 +170,29 @@ def consonant_gradation(word, strengthen=False):
             return re.sub(reFrom, reTo, word)
     return word
 
-# declension: (regex_from, regex_to)
-FINAL_CONS_CHANGES = {
-    # -n
-    10: (r"n$",   r""),
-    32: (r"nen$", r"n"),
-    33: (r"n$",   r"m"),
-    34: (r"n$",   r"m"),
-    35: (r"n$",   r"m"),
-    36: (r"n$",   r"mp"),
-    37: (r"n$",   r"mp"),
-    38: (r"nen$", r"s"),
-    # -s, -si
-    27: (r"si$",  r"ti"),
-    28: (r"si$",  r"ti"),
-    31: (r"ksi$", r"hti"),
-    39: (r"s$",   r"ks"),
-    40: (r"s$",   r"t"),
-    41: (r"s$",   r""),
-    42: (r"s$",   r"h"),
-    45: (r"s$",   r"nt"),
-    # -t
-    43: (r"t$",   r""),
-    44: (r"t$",   r""),
-    46: (r"t$",   r"nt"),
-    47: (r"t$",   r""),
-}
+def apply_replacement(word, decl, regexes):
+    # regexes: {declension: ((regex_from, regex_to), ...), ...}
+    # only the first matching regex_from will be applied
 
-# declension: ((regex_from, regex_to), ...)
-FINAL_VOWEL_CHANGES = {
-    # - -> -e
-    32: ((r"$", r"e"),),
-    33: ((r"$", r"e"),),
-    38: ((r"$", r"e"),),
-    39: ((r"$", r"e"),),
-    40: ((r"$", r"e"),),
-    42: ((r"$", r"e"),),
-    43: ((r"$", r"e"),),
-    45: ((r"$", r"e"),),
-    46: ((r"$", r"e"),),
-    49: ((r"$", r"e"),),
-    # - -> -i if not already -i
-    5:  ((r"([^i])$", r"\1i"),),
-    6:  ((r"([^i])$", r"\1i"),),
-    # -i -> -e
-    7:  ((r"i$", r"e"),),
-    23: ((r"i$", r"e"),),
-    24: ((r"i$", r"e"),),
-    25: ((r"i$", r"e"),),
-    26: ((r"i$", r"e"),),
-    27: ((r"i$", r"e"),),
-    28: ((r"i$", r"e"),),
-    29: ((r"i$", r"e"),),
-    30: ((r"i$", r"e"),),
-    31: ((r"i$", r"e"),),
-    # - -> -A
-    34: ((r"^([^aou]+)$", r"\1ä"), (r"$", r"a")),
-    35: ((r"^([^aou]+)$", r"\1ä"), (r"$", r"a")),
-    36: ((r"^([^aou]+)$", r"\1ä"), (r"$", r"a")),
-    37: ((r"^([^aou]+)$", r"\1ä"), (r"$", r"a")),
-    44: ((r"^([^aou]+)$", r"\1ä"), (r"$", r"a")),
-    # -i -> -A
-    16: ((r"^([^aou]+)i$", r"\1ä"), (r"i$", r"a")),
-    # -U -> -ee
-    47: ((r"[uy]$", r"ee"),),
-    # -V -> -VV
-    41: ((r"([aeiouyäö])$", r"\1\1"),),
-    48: ((r"([aeiouyäö])$", r"\1\1"),),
-}
+    for (reFrom, reTo) in regexes.get(decl, ()):
+        if re.search(reFrom, word) is not None:
+            return re.sub(reFrom, reTo, word)
+    return word
 
 def decline_noun_gen_sg(word, decl, consGrad):
-    # decline a noun for a case/number that behaves like genitive singular;
-    # no case/number ending; e.g. "kaksi" -> "kahde"
-
-    # irregular changes to final consonant
-    (reFrom, reTo) = FINAL_CONS_CHANGES.get(decl, ("", ""))
-    word = re.sub(reFrom, reTo, word)
-
-    # irregular changes to final vowel
-    for (reFrom, reTo) in FINAL_VOWEL_CHANGES.get(decl, ()):
-        if re.search(reFrom, word) is not None:
-            word = re.sub(reFrom, reTo, word)
-            break
+    # return inflected form for a case/number that behaves like
+    # genitive singular; no case/number ending; e.g. "kaksi" -> "kahde"
 
     #print(word, decl, consGrad)
 
+    # irregular changes to final consonant and vowel
+    word = apply_replacement(word, decl, FINAL_CONS_CHANGES_COMMON)
+    word = apply_replacement(word, decl, FINAL_CONS_CHANGES_GEN_SG_ESS_SG)
+    word = apply_replacement(word, decl, FINAL_VOWEL_CHANGES_COMMON)
+    word = apply_replacement(word, decl, FINAL_VOWEL_CHANGES_GEN_SG_ESS_SG)
+
     # consonant gradation
-    if consGrad and decl in (32, 33, 34, 35, 41, 43, 48, 49) \
+    if consGrad and decl >= 32 \
     or word == "näime" and decl == 33 \
     or word == "puee" and decl == 48:
         # strengthening
@@ -178,47 +211,139 @@ def decline_noun_gen_sg(word, decl, consGrad):
         else:
             word = re.sub(r"aaa$", r"aa'a", word)
 
-    # apostrophe
-    if decl == 22:  # "parfait"
-        word += "'"
+    return word
+
+def decline_noun_ess_sg(word, decl, consGrad):
+    # return inflected form for a case/number that behaves like
+    # essive singular; no case/number ending; e.g. "kaksi" -> "kahte"
+
+    #print(word, decl, consGrad)
+
+    # irregular changes to final consonant and vowel
+    word = apply_replacement(word, decl, FINAL_CONS_CHANGES_COMMON)
+    word = apply_replacement(word, decl, FINAL_CONS_CHANGES_GEN_SG_ESS_SG)
+    word = apply_replacement(word, decl, FINAL_VOWEL_CHANGES_COMMON)
+    word = apply_replacement(word, decl, FINAL_VOWEL_CHANGES_GEN_SG_ESS_SG)
+
+    # strengthening consonant gradation
+    if consGrad and decl >= 32:
+        word = consonant_gradation(word, True)
+
+    return word
+
+def decline_noun_par_sg(word, decl, consGrad):
+    # return inflected form for a case/number that behaves like
+    # partitive singular; no case/number ending; e.g. "kaksi" -> "kaht"
+
+    #print(word, decl, consGrad)
+
+    # irregular changes to final consonant and vowel
+    word = apply_replacement(word, decl, FINAL_CONS_CHANGES_COMMON)
+    word = apply_replacement(word, decl, FINAL_CONS_CHANGES_PAR_SG)
+    word = apply_replacement(word, decl, FINAL_VOWEL_CHANGES_COMMON)
+    word = apply_replacement(word, decl, FINAL_VOWEL_CHANGES_PAR_SG)
+
+    # strengthening consonant gradation
+    if consGrad and decl >= 32:
+        word = consonant_gradation(word, True)
 
     return word
 
 def decline_noun(word, decl, consGrad, case, number):
-    # decline a Finnish noun
+    # generate inflected forms (one or two) of a Finnish noun using specified
+    # declension and consonant gradation
 
     # use back or front vowels for endings?
-    useBackVowels = re.search(r"^[^aou]+$", word) is None
+    useBackVowels = re.search(r"^[^aáou]+$", word) is None
 
-    if (case, number) in LIKE_GEN_SG:
+    if number == "pl" and case == "nom" or number == "sg" \
+    and case in ("gen", "tra", "ine", "ela", "ade", "abl", "abe"):
         word = decline_noun_gen_sg(word, decl, consGrad)
+        if decl == 22:
+            word += "'"
 
         if case == "nom":
-            return word + "t"
-        if case == "gen":
-            return word + "n"
-        if case == "tra":
-            return word + "ksi"
-        if case == "ine":
-            return word + "ss" + ("a" if useBackVowels else "ä")
-        if case == "ela":
-            return word + "st" + ("a" if useBackVowels else "ä")
-        if case == "ade":
-            return word + "ll" + ("a" if useBackVowels else "ä")
-        if case == "abl":
-            return word + "lt" + ("a" if useBackVowels else "ä")
-        if case == "abe":
-            return word + "tt" + ("a" if useBackVowels else "ä")
+            yield word + "t"
+        elif case == "gen":
+            yield word + "n"
+        elif case == "tra":
+            yield word + "ksi"
+        elif case == "ine":
+            yield word + "ss" + ("a" if useBackVowels else "ä")
+        elif case == "ela":
+            yield word + "st" + ("a" if useBackVowels else "ä")
+        elif case == "ade":
+            yield word + "ll" + ("a" if useBackVowels else "ä")
+        elif case == "abl":
+            yield word + "lt" + ("a" if useBackVowels else "ä")
+        elif case == "abe":
+            yield word + "tt" + ("a" if useBackVowels else "ä")
 
-    sys.exit("Case/number not implemented.")
+    elif case == "ess" and number == "sg":
+        word = decline_noun_ess_sg(word, decl, consGrad)
+        if decl == 22:
+            word += "'"
+        yield word + "n" + ("a" if useBackVowels else "ä")
+
+    elif case == "ill" and number == "sg":
+        # there can be multiple forms
+        word = decline_noun_ess_sg(word, decl, consGrad)
+        if decl == 20:
+            # e.g. fileehen/fileeseen
+            yield word + "h" + word[-1] + "n"
+            yield word + "seen"
+        elif decl in (18, 19):
+            yield word + "h" + word[-1] + "n"
+        elif decl == 21:
+            if word == "rosé":
+                yield word + "hen"
+            else:
+                yield word + "hin"
+        elif decl == 22:
+            if word == "parfait":
+                yield word + "'hen"
+            else:
+                yield word + "'h" + word[-2] + "n"
+        elif decl in (17, 41, 44, 47, 48) \
+        or decl == 49 and word.endswith("ee"):
+            yield word + "seen"
+        else:
+            yield word + word[-1] + "n"
+
+    elif case == "par" and number == "sg":
+        # there can be multiple forms
+
+        word = decline_noun_par_sg(word, decl, consGrad)
+        if decl == 22:
+            word += "'"
+
+        if decl == 15:
+            # e.g. korkeaa/korkeata
+            yield word + ("a" if useBackVowels else "ä")
+            yield word + "t" + ("a" if useBackVowels else "ä")
+        elif decl == 25:
+            # e.g. toimea/tointa
+            yield word + "e" + ("a" if useBackVowels else "ä")
+            yield word[:-1] + "nt" + ("a" if useBackVowels else "ä")
+        elif decl == 37:
+            # e.g. vasempaa/vasenta
+            yield word[:-1] + "mp" + ("aa" if useBackVowels else "ää")
+            yield word + "t" + ("a" if useBackVowels else "ä")
+        elif decl == 48 or decl == 49 and word.endswith("e"):
+            yield word + "tt" + ("a" if useBackVowels else "ä")
+        elif decl == 3 or decl >= 17:
+            yield word + "t" + ("a" if useBackVowels else "ä")
+        else:
+            yield word + ("a" if useBackVowels else "ä")
+
+    else:
+        sys.exit("Case/number not implemented.")
 
 def decline_noun_main(word, case, number):
-    # get declension and consonant gradation of a Finnish noun;
-    # generate (declension, consonant_gradation_applies)
-
+    # generate inflected forms of a Finnish noun
     for decl in noundecl.get_declensions(word):
         consGrad = noun_consgrad.get_consonant_gradation(word, decl)
-        yield decline_noun(word, decl, consGrad, case, number)
+        yield from decline_noun(word, decl, consGrad, case, number)
 
 def main():
     if len(sys.argv) != 4:
@@ -237,7 +362,7 @@ def main():
     if number not in ("sg", "pl"):
         sys.exit("Invalid number.")
 
-    declinedNouns = sorted(decline_noun_main(word, case, number))
+    declinedNouns = sorted(set(decline_noun_main(word, case, number)))
     if not declinedNouns:
         sys.exit("Unrecognized noun.")
 
