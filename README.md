@@ -25,6 +25,17 @@ CSV file format used in this project:
 
 ## Programs interesting to the end user
 
+### decline_noun.py
+Decline a Finnish noun. Arguments: noun case number. Cases: nom, gen, par, ess, tra, ine, ela, ill, ade, abl, all, abe, ins. Numbers: sg, pl.
+
+Note: many combinations of case/number have not been implemented yet.
+
+Example:
+```
+$ python3 decline_noun.py "kuusi" ine sg
+kuudessa/kuusessa
+```
+
 ### noun_consgrad.py
 Argument: a Finnish noun (including adjectives/pronouns/numerals, excluding compounds) in nominative singular. Print the Kotus declension(s) (1-49) and whether consonant gradation applies.
 
@@ -126,6 +137,9 @@ Creates the subdirectory `generated-lists/` and generates these files under it:
 * `compositives.txt`: words that occur as non-final parts of compounds (not finally or alone) (~2,900 words)
 
 Also generates `stats-compound.txt` and `stats-nounverb.txt` under the current directory (see [text files](#text-files)).
+
+### test_decline_noun.py
+Test `decline_noun.py`. No arguments.
 
 ### test_nounverb.py
 Argument: which program to test ('n'=noundecl.py, 'v'=verbconj.py, 'nc'=noun_consgrad.py,
