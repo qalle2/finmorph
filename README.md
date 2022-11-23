@@ -26,14 +26,15 @@ CSV file format used in this project:
 ## Programs interesting to the end user
 
 ### decline_noun.py
-Decline a Finnish noun. Arguments: noun case number. Cases: nom, gen, par, ess, tra, ine, ela, ill, ade, abl, all, abe, ins. Numbers: sg, pl.
+Decline a Finnish noun. Arguments: NOUN CASE NUMBER. Cases: nom, gen, par, ess, tra, ine, ela, ill, ade, abl, all, abe, ins. Numbers: sg, pl.
 
-Note: many combinations of case/number have not been implemented yet.
+Note: plurals (except for nominative) and instructive have not been implemented yet.
 
 Example:
 ```
-$ python3 decline_noun.py "kuusi" ine sg
-kuudessa/kuusessa
+$ python3 decline_noun.py "kuusi" gen sg
+kuuden
+kuusen
 ```
 
 ### noun_consgrad.py

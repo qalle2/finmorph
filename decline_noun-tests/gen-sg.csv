@@ -1,39 +1,53 @@
 # more than one declension (all)
-ahtaus,ahtauden,ahtauksen
+# 5/other
 alpi,alpin,alven
 csárdás,csárdáksen,csárdásin
-havas,hapaan,havaksen
 helpi,helpin,helven
 kaihi,kaihen,kaihin
-kallas,kallaksen,kaltaan
 karhi,karhen,karhin
-karvaus,karvauden,karvauksen
-koiras,koiraan,koiraksen
 kuori,kuoren,kuorin
 kuskus,kuskuksen,kuskusin
-kuusi,kuuden,kuusen
 kymi,kymen,kymin
-kymmenes,kymmeneksen,kymmenennen
 lahti,lahden,lahdin
 laki,laen,lain
-olas,olaan,olaksen
 ori,oriin,orin
-pallas,pallaksen,paltaan
 palvi,palven,palvin
 peitsi,peitsen,peitsin
 ripsi,ripsen,ripsin
-rosvous,rosvouden,rosvouksen
 saksi,saksen,saksin
-siitake,siitaken,siitakkeen
-siivous,siivouden,siivouksen
 sini,sinen,sinin
 sioux,sioux'n,siouxin
 syli,sylen,sylin
-uros,uroksen,uroon
-vakaus,vakauden,vakauksen
 viini,viinen,viinin
 vuori,vuoren,vuorin
 vyyhti,vyyhden,vyyhdin
+# 9/other
+aneurysma,aneurysman
+kysta,kystan
+lyyra,lyyran
+puola,puolan
+# 39/other
+ahtaus,ahtauden,ahtauksen
+havas,hapaan,havaksen
+kallas,kallaksen,kaltaan
+karvaus,karvauden,karvauksen
+koiras,koiraan,koiraksen
+kymmenes,kymmeneksen,kymmenennen
+olas,olaan,olaksen
+pallas,pallaksen,paltaan
+rosvous,rosvouden,rosvouksen
+siivous,siivouden,siivouksen
+uros,uroksen,uroon
+vakaus,vakauden,vakauksen
+# other
+caddie,caddien
+hapsi,hapsen
+humala,humalan
+kuusi,kuuden,kuusen
+menu,menun
+siitake,siitaken,siitakkeen
+tanhua,tanhuan
+uksi,uksen
 
 # declension 1
 ehto,ehdon
@@ -57,7 +71,6 @@ valo,valon
 vappu,vapun
 vihko,vihon
 vilu,vilun
-yö,yön
 äly,älyn
 
 # declension 2
@@ -75,7 +88,6 @@ laatikko,laatikon
 lux,luxin
 risti,ristin
 šakki,šakin
-self-made man,self-made manin
 wok,wokin
 vouti,voudin
 
@@ -163,8 +175,20 @@ filee,fileen
 # declension 21
 rosé,rosén
 
-# declension 22
+# declension 22 (all)
+beignet,beignet'n
+bordeaux,bordeaux'n
+bouquet,bouquet'n
+buffet,buffet'n
+gourmet,gourmet'n
+know-how,know-how'n
+nougat,nougat'n
 parfait,parfait'n
+passepartout,passepartout'n
+port salut,port salut'n
+ragoût,ragoût'n
+show,show'n
+tournedos,tournedos'n
 
 # declension 23
 tiili,tiilen
@@ -287,6 +311,7 @@ vantus,vanttuun
 varas,varkaan
 varras,vartaan
 vieras,vieraan
+äes,äkeen
 
 # declension 42 (all)
 mies,miehen
@@ -351,14 +376,45 @@ uurre,uurteen
 vuode,vuoteen
 
 # declension 49 (all)
-askel,askelen
+# -e
+askare,askareen
 askele,askeleen
+autere,autereen
+hepene,hepeneen
+huhmare,huhmareen
+kantele,kanteleen
+kintere,kintereen
+kyynele,kyyneleen
+mantere,mantereen
+murene,mureneen
+ompele,ompeleen
+penkere,penkereen
+petkele,petkeleen
+pientare,pientareen
+saivare,saivareen
+seppele,seppeleen
+säkene,säkeneen
+taipale,taipaleen
+tantere,tantereen
+utare,utareen
+vempele,vempeleen
+# -C
+askar,askaren
+askel,askelen
+auer,auteren
+huhmar,huhmaren
 kannel,kantelen
 kinner,kinteren
+kyynel,kyynelen
 manner,manteren
+muren,murenen
 ommel,ompelen
 penger,penkeren
+petkel,petkelen
 piennar,pientaren
+saivar,saivaren
+sammal,sammalen
+seppel,seppelen
 säen,säkenen
 taival,taipalen
 tanner,tanteren

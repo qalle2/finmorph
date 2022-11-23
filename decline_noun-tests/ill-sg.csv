@@ -1,48 +1,85 @@
 # more than one declension (all)
-ahtaus,ahtaukseen,ahtauteen
+# 5/other
 alpi,alpeen,alpiin
 csárdás,csárdákseen,csárdásiin
-havas,hapaaseen,havakseen
 helpi,helpeen,helpiin
 kaihi,kaiheen,kaihiin
-kallas,kallakseen,kaltaaseen
 karhi,karheen,karhiin
-karvaus,karvaukseen,karvauteen
-koiras,koiraaseen,koirakseen
 kuori,kuoreen,kuoriin
 kuskus,kuskukseen,kuskusiin
-kuusi,kuuseen,kuuteen
 kymi,kymeen,kymiin
-kymmenes,kymmenekseen,kymmenenteen
 lahti,lahteen,lahtiin
 laki,lakeen,lakiin
-olas,olaaseen,olakseen
 ori,oriin,oriiseen
-pallas,pallakseen,paltaaseen
 palvi,palveen,palviin
 peitsi,peitseen,peitsiin
 ripsi,ripseen,ripsiin
-rosvous,rosvoukseen,rosvouteen
 saksi,sakseen,saksiin
-siitake,siitakeen,siitakkeeseen
-siivous,siivoukseen,siivouteen
 sini,sineen,siniin
 sioux,sioux'hun,siouxiin
 syli,syleen,syliin
-uros,urokseen,urooseen
-vakaus,vakaukseen,vakauteen
 viini,viineen,viiniin
 vuori,vuoreen,vuoriin
 vyyhti,vyyhteen,vyyhtiin
+# 9/other
+aneurysma,aneurysmaan
+kysta,kystaan
+lyyra,lyyraan
+puola,puolaan
+# 39/other
+ahtaus,ahtaukseen,ahtauteen
+havas,hapaaseen,havakseen
+kallas,kallakseen,kaltaaseen
+karvaus,karvaukseen,karvauteen
+koiras,koiraaseen,koirakseen
+kymmenes,kymmenekseen,kymmenenteen
+olas,olaaseen,olakseen
+pallas,pallakseen,paltaaseen
+rosvous,rosvoukseen,rosvouteen
+siivous,siivoukseen,siivouteen
+uros,urokseen,urooseen
+vakaus,vakaukseen,vakauteen
+# other
+caddie,caddieen
+hapsi,hapseen
+humala,humalaan
+kuusi,kuuseen,kuuteen
+menu,menuhun,menuhyn,menuun
+siitake,siitakeen,siitakkeeseen
+tanhua,tanhuaan
+uksi,ukseen
 
 # declension 1
+ehto,ehtoon
+kirppu,kirppuun
+korko,korkoon
+kumpu,kumpuun
+kyky,kykyyn
+laku,lakuun
+muki,mukiin
+murto,murtoon
+orpo,orpoon
+pelto,peltoon
+rako,rakoon
+rapu,rapuun
+rento,rentoon
+suku,sukuun
+söpö,söpöön
+tikku,tikkuun
+tyttö,tyttöön
 valo,valoon
+vappu,vappuun
+vihko,vihkoon
+vilu,viluun
+äly,älyyn
 
 # declension 2
 palvelu,palveluun
+väestö,väestöön
 
 # declension 3
 valtio,valtioon
+yhtiö,yhtiöön
 
 # declension 4
 laatikko,laatikkoon
@@ -51,7 +88,6 @@ laatikko,laatikkoon
 lux,luxiin
 risti,ristiin
 šakki,šakkiin
-self-made man,self-made maniin
 wok,wokiin
 vouti,voutiin
 
@@ -61,17 +97,49 @@ paperi,paperiin
 weber,weberiin
 
 # declension 7
+arki,arkeen
+arpi,arpeen
+impi,impeen
+jälki,jälkeen
+järki,järkeen
+kaski,kaskeen
+lehti,lehteen
+läpi,läpeen
+olki,olkeen
+onki,onkeen
 ovi,oveen
+piki,pikeen
+soppi,soppeen
+tuki,tukeen
 
 # declension 8
+jeppe,jeppeen
 nalle,nalleen
+nukke,nukkeen
 
 # declension 9
+aika,aikaan
+arka,arkaan
+jalka,jalkaan
 kala,kalaan
+iskä,iskään
+lanka,lankaan
+lika,likaan
+taika,taikaan
+takka,takkaan
+vaaka,vaakaan
+vehka,vehkaan
+velka,velkaan
+vihta,vihtaan
+virka,virkaan
 
 # declension 10
-koira,koiraan
 kahdeksan,kahdeksaan
+koira,koiraan
+nälkä,nälkään
+seitsemän,seitsemään
+yhdeksän,yhdeksään
+ylkä,ylkään
 
 # declension 11
 omena,omenaan
@@ -89,6 +157,7 @@ solakka,solakkaan
 korkea,korkeaan
 
 # declension 16
+idempi,idempään
 vanhempi,vanhempaan
 
 # declension 17
@@ -106,8 +175,20 @@ filee,fileehen,fileeseen
 # declension 21
 rosé,roséhen
 
-# declension 22
+# declension 22 (all)
+beignet,beignet'hen
+bordeaux,bordeaux'hon
+bouquet,bouquet'hen
+buffet,buffet'hen
+gourmet,gourmet'hen
+know-how,know-how'hun
+nougat,nougat'han
 parfait,parfait'hen
+passepartout,passepartout'hun
+port salut,port salut'hun,port salut'hyn
+ragoût,ragoût'hun
+show,show'hun
+tournedos,tournedos'hon
 
 # declension 23
 tiili,tiileen
@@ -124,77 +205,218 @@ pieni,pieneen
 # declension 27
 käsi,käteen
 
-# declension 28
+# declension 28 (all)
+hirsi,hirteen
+jälsi,jälteen
+kansi,kanteen
+karsi,karteen
+kirsi,kirteen
+korsi,korteen
 kynsi,kynteen
+länsi,länteen
+orsi,orteen
+parsi,parteen
+ponsi,ponteen
+pursi,purteen
+varsi,varteen
+virsi,virteen
 
-# declension 29
+# declension 29 (all)
+hapsi,hapseen
 lapsi,lapseen
+uksi,ukseen
 
-# declension 30
+# declension 30 (all)
 veitsi,veitseen
 
-# declension 31
+# declension 31 (all)
+haaksi,haahteen
 kaksi,kahteen
+yksi,yhteen
 
 # declension 32
+ahven,ahveneen
+höyhen,höyheneen
+ien,ikeneen
+jumalatar,jumalattareen
+jäsen,jäseneen
+kaunotar,kaunottareen
 kymmenen,kymmeneen
+nivel,niveleen
+onnetar,onnettareen
+papitar,papittareen
+siemen,siemeneen
 sisar,sisareen
-tytär,tyttäreen
+syöjätär,syöjättäreen
+sävel,säveleen
 
 # declension 33
+annin,antimeen
+avarrin,avartimeen
+elin,elimeen
+heitin,heittimeen
 kytkin,kytkimeen
+näin,näkimeen
+otin,ottimeen
+pidin,pitimeen
+puin,pukimeen
+pyyhin,pyyhkimeen
+raavin,raapimeen
+sydän,sydämeen
+uistin,uistimeen
 ydin,ytimeen
 
 # declension 34
+alaston,alastomaan
 onneton,onnettomaan
 yötön,yöttömään
 
-# declension 35
+# declension 35 (all)
 lämmin,lämpimään
 
 # declension 36
+alin,alimpaan
 sisin,sisimpään
+uloin,uloimpaan
 
-# declension 37
+# declension 37 (all)
 vasen,vasempaan
 
 # declension 38
 nainen,naiseen
+osanen,osaseen
+öinen,öiseen
 
 # declension 39
+aines,ainekseen
 vastaus,vastaukseen
+varis,varikseen
+yritys,yritykseen
 
 # declension 40
 kalleus,kalleuteen
+äreys,äreyteen
 
 # declension 41
+allas,altaaseen
+altis,alttiiseen
+kinnas,kintaaseen
+mätäs,mättääseen
+ratas,rattaaseen
+ruis,rukiiseen
+rynnäs,ryntääseen
+tahdas,tahtaaseen
+tikas,tikkaaseen
+vantus,vanttuuseen
+varas,varkaaseen
+varras,vartaaseen
 vieras,vieraaseen
 äes,äkeeseen
 
-# declension 42
+# declension 42 (all)
 mies,mieheen
 
 # declension 43
 immyt,impyeen
 ohut,ohueen
 
-# declension 44
+# declension 44 (all)
 kevät,kevääseen
 
 # declension 45
 kahdeksas,kahdeksanteen
+neljäs,neljänteen
 
-# declension 46
+# declension 46 (all)
 tuhat,tuhanteen
 
 # declension 47
 kuollut,kuolleeseen
+tehnyt,tehneeseen
 
 # declension 48
+# -Ve
+aie,aikeeseen
+alue,alueeseen
+hiue,hiukeeseen
+koe,kokeeseen
+lippue,lippueeseen
+pesue,pesueeseen
+pue,pukeeseen
+säe,säkeeseen
+tae,takeeseen
+yhtye,yhtyeeseen
+# -je
+hylje,hylkeeseen
+kirje,kirjeeseen
+koje,kojeeseen
+lahje,lahkeeseen
+sulje,sulkeeseen
+# -ke
+hanke,hankkeeseen
+jatke,jatkeeseen
+leike,leikkeeseen
+ryske,ryskeeseen
+sähke,sähkeeseen
+virke,virkkeeseen
+välke,välkkeeseen
+# -Ce (not -je, -ke)
+ahne,ahneeseen
+aihe,aiheeseen
+ape,appeeseen
 hame,hameeseen
+helle,helteeseen
+ihme,ihmeeseen
+lumme,lumpeeseen
+ripe,rippeeseen
+sose,soseeseen
+suhde,suhteeseen
+tunne,tunteeseen
+uurre,uurteeseen
 vuode,vuoteeseen
 
-# declension 49
-askel,askeleen
+# declension 49 (all)
+# -e
+askare,askareeseen
 askele,askeleeseen
+autere,autereeseen
+hepene,hepeneeseen
+huhmare,huhmareeseen
+kantele,kanteleeseen
+kintere,kintereeseen
+kyynele,kyyneleeseen
+mantere,mantereeseen
+murene,mureneeseen
+ompele,ompeleeseen
+penkere,penkereeseen
+petkele,petkeleeseen
+pientare,pientareeseen
+saivare,saivareeseen
+seppele,seppeleeseen
+säkene,säkeneeseen
+taipale,taipaleeseen
+tantere,tantereeseen
+utare,utareeseen
+vempele,vempeleeseen
+# -C
+askar,askareen
+askel,askeleen
+auer,autereen
+huhmar,huhmareen
+kannel,kanteleen
+kinner,kintereen
+kyynel,kyyneleen
+manner,mantereen
+muren,mureneen
+ommel,ompeleen
+penger,penkereen
+petkel,petkeleen
+piennar,pientareen
+saivar,saivareen
+sammal,sammaleen
+seppel,seppeleen
 säen,säkeneen
+taival,taipaleen
+tanner,tantereen
+udar,utareen
+vemmel,vempeleen

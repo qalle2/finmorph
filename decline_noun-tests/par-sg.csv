@@ -1,48 +1,85 @@
 # more than one declension (all)
-ahtaus,ahtausta,ahtautta
+# 5/other
 alpi,alpea,alpia
 csárdás,csárdásia,csárdásta
-havas,havasta
 helpi,helpeä,helpiä
 kaihi,kaihea,kaihia
-kallas,kallasta
 karhi,karhea,karhia
-karvaus,karvausta,karvautta
-koiras,koirasta
 kuori,kuoria,kuorta
 kuskus,kuskusia,kuskusta
-kuusi,kuusta,kuutta
 kymi,kymeä,kymiä
-kymmenes,kymmenestä,kymmenettä
 lahti,lahtea,lahtia
 laki,lakea,lakia
-olas,olasta
 ori,oria,oritta
-pallas,pallasta
 palvi,palvea,palvia
 peitsi,peistä,peitsiä
 ripsi,ripseä,ripsiä
-rosvous,rosvousta,rosvoutta
 saksi,saksea,saksia
-siitake,siitakea,siitaketta
-siivous,siivousta,siivoutta
 sini,sineä,siniä
 sioux,sioux'ta,siouxia
 syli,syliä,syltä
-uros,urosta
-vakaus,vakausta,vakautta
 viini,viiniä,viintä
 vuori,vuoria,vuorta
 vyyhti,vyyhteä,vyyhtiä
+# 9/other
+aneurysma,aneurysmaa
+kysta,kystaa
+lyyra,lyyraa
+puola,puolaa
+# 39/other
+ahtaus,ahtausta,ahtautta
+havas,havasta
+kallas,kallasta
+karvaus,karvausta,karvautta
+koiras,koirasta
+kymmenes,kymmenestä,kymmenettä
+olas,olasta
+pallas,pallasta
+rosvous,rosvousta,rosvoutta
+siivous,siivousta,siivoutta
+uros,urosta
+vakaus,vakausta,vakautta
+# other
+caddie,caddiea,caddieta,caddietä,caddieä
+hapsi,hapsea,hasta
+humala,humalaa
+kuusi,kuusta,kuutta
+menu,menua,menuta,menutä
+siitake,siitakea,siitaketta
+tanhua,tanhuaa,tanhuata
+uksi,uksea,usta
 
 # declension 1
+ehto,ehtoa
+kirppu,kirppua
+korko,korkoa
+kumpu,kumpua
+kyky,kykyä
+laku,lakua
+muki,mukia
+murto,murtoa
+orpo,orpoa
+pelto,peltoa
+rako,rakoa
+rapu,rapua
+rento,rentoa
+suku,sukua
+söpö,söpöä
+tikku,tikkua
+tyttö,tyttöä
 valo,valoa
+vappu,vappua
+vihko,vihkoa
+vilu,vilua
+äly,älyä
 
 # declension 2
 palvelu,palvelua
+väestö,väestöä
 
 # declension 3
 valtio,valtiota
+yhtiö,yhtiötä
 
 # declension 4
 laatikko,laatikkoa
@@ -51,7 +88,6 @@ laatikko,laatikkoa
 lux,luxia
 risti,ristiä
 šakki,šakkia
-self-made man,self-made mania
 wok,wokia
 vouti,voutia
 
@@ -61,17 +97,49 @@ paperi,paperia
 weber,weberiä
 
 # declension 7
+arki,arkea
+arpi,arpea
+impi,impeä
+jälki,jälkeä
+järki,järkeä
+kaski,kaskea
+lehti,lehteä
+läpi,läpeä
+olki,olkea
+onki,onkea
 ovi,ovea
+piki,pikeä
+soppi,soppea
+tuki,tukea
 
 # declension 8
+jeppe,jeppeä
 nalle,nallea
+nukke,nukkea
 
 # declension 9
+aika,aikaa
+arka,arkaa
+jalka,jalkaa
 kala,kalaa
+iskä,iskää
+lanka,lankaa
+lika,likaa
+taika,taikaa
+takka,takkaa
+vaaka,vaakaa
+vehka,vehkaa
+velka,velkaa
+vihta,vihtaa
+virka,virkaa
 
 # declension 10
-koira,koiraa
 kahdeksan,kahdeksaa
+koira,koiraa
+nälkä,nälkää
+seitsemän,seitsemää
+yhdeksän,yhdeksää
+ylkä,ylkää
 
 # declension 11
 omena,omenaa
@@ -89,6 +157,7 @@ solakka,solakkaa
 korkea,korkeaa,korkeata
 
 # declension 16
+idempi,idempää
 vanhempi,vanhempaa
 
 # declension 17
@@ -106,8 +175,20 @@ filee,fileetä
 # declension 21
 rosé,roséta
 
-# declension 22
+# declension 22 (all)
+beignet,beignet'tä
+bordeaux,bordeaux'ta
+bouquet,bouquet'ta
+buffet,buffet'ta,buffet'tä
+gourmet,gourmet'ta
+know-how,know-how'ta
+nougat,nougat'ta
 parfait,parfait'ta
+passepartout,passepartout'ta
+port salut,port salut'ta,port salut'tä
+ragoût,ragoût'ta
+show,show'ta
+tournedos,tournedos'ta
 
 # declension 23
 tiili,tiiltä
@@ -124,77 +205,218 @@ pieni,pientä
 # declension 27
 käsi,kättä
 
-# declension 28
+# declension 28 (all)
+hirsi,hirttä
+jälsi,jälttä
+kansi,kantta
+karsi,kartta
+kirsi,kirttä
+korsi,kortta
 kynsi,kynttä
+länsi,länttä
+orsi,ortta
+parsi,partta
+ponsi,pontta
+pursi,purtta
+varsi,vartta
+virsi,virttä
 
-# declension 29
+# declension 29 (all)
+hapsi,hapsea,hasta
 lapsi,lasta
+uksi,uksea,usta
 
-# declension 30
+# declension 30 (all)
 veitsi,veistä
 
-# declension 31
+# declension 31 (all)
+haaksi,haahta
 kaksi,kahta
+yksi,yhtä
 
 # declension 32
+ahven,ahventa
+höyhen,höyhentä
+ien,ientä
+jumalatar,jumalatarta
+jäsen,jäsentä
+kaunotar,kaunotarta
 kymmenen,kymmentä
+nivel,niveltä
+onnetar,onnetarta
+papitar,papitarta
+siemen,siementä
 sisar,sisarta
-tytär,tytärtä
+syöjätär,syöjätärtä
+sävel,säveltä
 
 # declension 33
+annin,anninta
+avarrin,avarrinta
+elin,elintä
+heitin,heitintä
 kytkin,kytkintä
+näin,näintä
+otin,otinta
+pidin,pidintä
+puin,puinta
+pyyhin,pyyhintä
+raavin,raavinta
+sydän,sydäntä
+uistin,uistinta
 ydin,ydintä
 
 # declension 34
+alaston,alastonta
 onneton,onnetonta
 yötön,yötöntä
 
-# declension 35
+# declension 35 (all)
 lämmin,lämmintä
 
 # declension 36
+alin,alinta
 sisin,sisintä
+uloin,ulointa
 
-# declension 37
+# declension 37 (all)
 vasen,vasempaa,vasenta
 
 # declension 38
 nainen,naista
+osanen,osasta
+öinen,öistä
 
 # declension 39
+aines,ainesta
 vastaus,vastausta
+varis,varista
+yritys,yritystä
 
 # declension 40
 kalleus,kalleutta
+äreys,äreyttä
 
 # declension 41
+allas,allasta
+altis,altista
+kinnas,kinnasta
+mätäs,mätästä
+ratas,ratasta
+ruis,ruista
+rynnäs,rynnästä
+tahdas,tahdasta
+tikas,tikasta
+vantus,vantusta
+varas,varasta
+varras,varrasta
 vieras,vierasta
 äes,äestä
 
-# declension 42
+# declension 42 (all)
 mies,miestä
 
 # declension 43
 immyt,immyttä
 ohut,ohutta
 
-# declension 44
+# declension 44 (all)
 kevät,kevättä
 
 # declension 45
 kahdeksas,kahdeksatta
+neljäs,neljättä
 
-# declension 46
+# declension 46 (all)
 tuhat,tuhatta
 
 # declension 47
 kuollut,kuollutta
+tehnyt,tehnyttä
 
 # declension 48
+# -Ve
+aie,aietta
+alue,aluetta
+hiue,hiuetta
+koe,koetta
+lippue,lippuetta
+pesue,pesuetta
+pue,puetta
+säe,säettä
+tae,taetta
+yhtye,yhtyettä
+# -je
+hylje,hyljettä
+kirje,kirjettä
+koje,kojetta
+lahje,lahjetta
+sulje,suljetta
+# -ke
+hanke,hanketta
+jatke,jatketta
+leike,leikettä
+ryske,ryskettä
+sähke,sähkettä
+virke,virkettä
+välke,välkettä
+# -Ce (not -je, -ke)
+ahne,ahnetta
+aihe,aihetta
+ape,apetta
 hame,hametta
+helle,hellettä
+ihme,ihmettä
+lumme,lummetta
+ripe,ripettä
+sose,sosetta
+suhde,suhdetta
+tunne,tunnetta
+uurre,uurretta
 vuode,vuodetta
 
-# declension 49
-askel,askelta
+# declension 49 (all)
+# -e
+askare,askaretta
 askele,askeletta
+autere,auteretta
+hepene,hepenettä
+huhmare,huhmaretta
+kantele,kanteletta
+kintere,kinterettä
+kyynele,kyynelettä
+mantere,manteretta
+murene,murenetta
+ompele,ompeletta
+penkere,penkerettä
+petkele,petkelettä
+pientare,pientaretta
+saivare,saivaretta
+seppele,seppelettä
+säkene,säkenettä
+taipale,taipaletta
+tantere,tanteretta
+utare,utaretta
+vempele,vempelettä
+# -C
+askar,askarta
+askel,askelta
+auer,auerta
+huhmar,huhmarta
+kannel,kannelta
+kinner,kinnertä
+kyynel,kyyneltä
+manner,mannerta
+muren,murenta
+ommel,ommelta
+penger,pengertä
+petkel,petkeltä
+piennar,piennarta
+saivar,saivarta
+sammal,sammalta
+seppel,seppeltä
 säen,säentä
+taival,taivalta
+tanner,tannerta
+udar,udarta
+vemmel,vemmeltä

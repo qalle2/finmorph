@@ -33,7 +33,8 @@ _ALL_TESTS = (
 
 def _read_csv(case, number):
     # Read test cases from CSV file.
-    # each line ([] = optional): NomSg,inflected[,inflected...]
+    # each line ([] = optional): NomSg,inflected[,inflected...];
+    #     inflected forms must be in alphabetical (Unicode) order
     # return: {NomSg: (inflected, ...), ...}
 
     words = {}
@@ -59,7 +60,7 @@ def run_test(case, number):
 
     for word in words:
         result = tuple(sorted(set(
-            decline_noun.decline_noun_main(word, case, number)
+            decline_noun.decline_noun(word, case, number)
         )))
         if result != words[word]:
             sys.exit("{}{} of {}: expected {}, got {}".format(
