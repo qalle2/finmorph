@@ -50,26 +50,47 @@ tanhua,tanhuan
 uksi,uksen
 
 # declension 1
-ehto,ehdon
-kirppu,kirpun
-korko,koron
-kumpu,kummun
+# -VkV
+koko,koon
 kyky,kyvyn
 laku,lakun
-muki,mukin
-murto,murron
-orpo,orvon
-pelto,pellon
-rako,raon
-rapu,ravun
-rento,rennon
 suku,suvun
-söpö,söpön
+# -CkV
+hehku,hehkun
+katku,katkun
+kinkku,kinkun
+korko,koron
+palko,palon
+pilkku,pilkun
+sisko,siskon
+sänky,sängyn
 tikku,tikun
-tyttö,tytön
-valo,valon
-vappu,vapun
+verkko,verkon
 vihko,vihon
+# -VpV
+rapu,ravun
+söpö,söpön
+# -CpV
+helppo,helpon
+kirppu,kirpun
+kumpu,kummun
+orpo,orvon
+temppu,tempun
+vappu,vapun
+# -VtV
+auto,auton
+etu,edun
+# -CtV
+ehto,ehdon
+lanttu,lantun
+murto,murron
+pelto,pellon
+rento,rennon
+torttu,tortun
+tyttö,tytön
+veltto,velton
+# -CV (not -kV, -pV, -tV)
+valo,valon
 vilu,vilun
 äly,älyn
 
@@ -83,6 +104,7 @@ yhtiö,yhtiön
 
 # declension 4
 laatikko,laatikon
+älykkö,älykön
 
 # declension 5
 lux,luxin
@@ -97,37 +119,47 @@ paperi,paperin
 weber,weberin
 
 # declension 7
+# -VCV
+läpi,läven
+ovi,oven
+piki,pien
+reki,reen
+tuki,tuen
+# -CCV
 arki,arjen
 arpi,arven
+hetki,hetken
 impi,immen
 jälki,jäljen
 järki,järjen
+kaikki,kaiken
 kaski,kasken
 lehti,lehden
-läpi,läven
 olki,oljen
 onki,ongen
-ovi,oven
-piki,pien
 soppi,sopen
-tuki,tuen
 
 # declension 8
 jeppe,jepen
 nalle,nallen
 nukke,nuken
+ope,open
 
 # declension 9
+# -VCV
 aika,ajan
+eka,ekan
+kala,kalan
+sata,sadan
+taika,taian
+tapa,tavan
+vaaka,vaa'an
+# -CCV
 arka,aran
 jalka,jalan
-kala,kalan
 iskä,iskän
 lanka,langan
-lika,lian
-taika,taian
 takka,takan
-vaaka,vaa'an
 vehka,vehkan
 velka,velan
 vihta,vihdan
@@ -137,43 +169,71 @@ virka,viran
 kahdeksan,kahdeksan
 koira,koiran
 nälkä,nälän
+poika,pojan
 seitsemän,seitsemän
 yhdeksän,yhdeksän
 ylkä,yljän
 
 # declension 11
+käpälä,käpälän
 omena,omenan
 
 # declension 12
 kulkija,kulkijan
+ritilä,ritilän
 
 # declension 13
 katiska,katiskan
+siivilä,siivilän
 
 # declension 14
 solakka,solakan
+ötökkä,ötökän
 
 # declension 15
 korkea,korkean
+äreä,äreän
 
 # declension 16
 idempi,idemmän
+kumpi,kumman
 vanhempi,vanhemman
 
 # declension 17
+hynttyy,hynttyyn
 vapaa,vapaan
 
 # declension 18
 maa,maan
+tii,tiin
 
 # declension 19
 suo,suon
+yö,yön
 
 # declension 20
 filee,fileen
+nugaa,nugaan
 
-# declension 21
+# declension 21 (all except "kungfu", "taxfree")
+brasserie,brasserien
+brie,brien
+bébé,bébén
+cha-cha-cha,cha-cha-chan
+clou,cloun
+coupé,coupén
+cowboy,cowboyn
+fondue,fonduen
+gay,gayn
+gray,grayn
+jersey,jerseyn
+jockey,jockeyn
+moiré,moirén
+playboy,playboyn
+reggae,reggaen
 rosé,rosén
+speedway,speedwayn
+spray,sprayn
 
 # declension 22 (all)
 beignet,beignet'n

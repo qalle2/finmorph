@@ -50,26 +50,47 @@ tanhua,tanhuana
 uksi,uksena
 
 # declension 1
-ehto,ehtona
-kirppu,kirppuna
-korko,korkona
-kumpu,kumpuna
+# -VkV
+koko,kokona
 kyky,kykynä
 laku,lakuna
-muki,mukina
-murto,murtona
-orpo,orpona
-pelto,peltona
-rako,rakona
-rapu,rapuna
-rento,rentona
 suku,sukuna
-söpö,söpönä
+# -CkV
+hehku,hehkuna
+katku,katkuna
+kinkku,kinkkuna
+korko,korkona
+palko,palkona
+pilkku,pilkkuna
+sisko,siskona
+sänky,sänkynä
 tikku,tikkuna
-tyttö,tyttönä
-valo,valona
-vappu,vappuna
+verkko,verkkona
 vihko,vihkona
+# -VpV
+rapu,rapuna
+söpö,söpönä
+# -CpV
+helppo,helppona
+kirppu,kirppuna
+kumpu,kumpuna
+orpo,orpona
+temppu,temppuna
+vappu,vappuna
+# -VtV
+auto,autona
+etu,etuna
+# -CtV
+ehto,ehtona
+lanttu,lanttuna
+murto,murtona
+pelto,peltona
+rento,rentona
+torttu,torttuna
+tyttö,tyttönä
+veltto,velttona
+# -CV (not -kV, -pV, -tV)
+valo,valona
 vilu,viluna
 äly,älynä
 
@@ -83,6 +104,7 @@ yhtiö,yhtiönä
 
 # declension 4
 laatikko,laatikkona
+älykkö,älykkönä
 
 # declension 5
 lux,luxina
@@ -97,37 +119,47 @@ paperi,paperina
 weber,weberinä
 
 # declension 7
+# -VCV
+läpi,läpenä
+ovi,ovena
+piki,pikenä
+reki,rekenä
+tuki,tukena
+# -CCV
 arki,arkena
 arpi,arpena
+hetki,hetkenä
 impi,impenä
 jälki,jälkenä
 järki,järkenä
+kaikki,kaikkena
 kaski,kaskena
 lehti,lehtenä
-läpi,läpenä
 olki,olkena
 onki,onkena
-ovi,ovena
-piki,pikenä
 soppi,soppena
-tuki,tukena
 
 # declension 8
 jeppe,jeppenä
 nalle,nallena
 nukke,nukkena
+ope,opena
 
 # declension 9
+# -VCV
 aika,aikana
+eka,ekana
+kala,kalana
+sata,satana
+taika,taikana
+tapa,tapana
+vaaka,vaakana
+# -CCV
 arka,arkana
 jalka,jalkana
-kala,kalana
 iskä,iskänä
 lanka,lankana
-lika,likana
-taika,taikana
 takka,takkana
-vaaka,vaakana
 vehka,vehkana
 velka,velkana
 vihta,vihtana
@@ -137,43 +169,71 @@ virka,virkana
 kahdeksan,kahdeksana
 koira,koirana
 nälkä,nälkänä
+poika,poikana
 seitsemän,seitsemänä
 yhdeksän,yhdeksänä
 ylkä,ylkänä
 
 # declension 11
+käpälä,käpälänä
 omena,omenana
 
 # declension 12
 kulkija,kulkijana
+ritilä,ritilänä
 
 # declension 13
 katiska,katiskana
+siivilä,siivilänä
 
 # declension 14
 solakka,solakkana
+ötökkä,ötökkänä
 
 # declension 15
 korkea,korkeana
+äreä,äreänä
 
 # declension 16
 idempi,idempänä
+kumpi,kumpana
 vanhempi,vanhempana
 
 # declension 17
+hynttyy,hynttyynä
 vapaa,vapaana
 
 # declension 18
 maa,maana
+tii,tiinä
 
 # declension 19
 suo,suona
+yö,yönä
 
 # declension 20
 filee,fileenä
+nugaa,nugaana
 
-# declension 21
+# declension 21 (all except "kungfu", "taxfree")
+brasserie,brasseriena
+brie,brienä
+bébé,bébénä
+cha-cha-cha,cha-cha-chana
+clou,clouna
+coupé,coupéna
+cowboy,cowboyna
+fondue,fonduena,fonduenä
+gay,gayna,gaynä
+gray,grayna,graynä
+jersey,jerseynä
+jockey,jockeyna,jockeynä
+moiré,moiréna
+playboy,playboyna
+reggae,reggaena,reggaenä
 rosé,roséna
+speedway,speedwayna,speedwaynä
+spray,sprayna,spraynä
 
 # declension 22 (all)
 beignet,beignet'nä

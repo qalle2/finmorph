@@ -20,20 +20,23 @@ import noundecl
 # (regex_from, regex_to); the first match will be used
 _CONS_GRAD_WEAKEN = (
     # k
-    ("([uy])k([uy])$",    r"\1v\2"),  # -UkU
-    ("ylkä$",             r"yljä"),   # -ylkä
-    ("([lr])k(e)$",       r"\1j\2"),  # -lke/-rke
-    ("(n)k([aeiouyäö])$", r"\1g\2"),  # -nkV
-    ("k([aeiouyäö])$",    r"\1"),     # -kV
+    ("kk([aeiouyäö])$",               r"k\1"),    # -kkV
+    ("nk([aeiouyäö])$",               r"ng\1"),   # -nkV
+    ("ylkä$",                         r"yljä"),   # -ylkä
+    ("([lr])ke$",                     r"\1je"),   # -lke/-rke
+    ("([uy])k([uy])$",                r"\1v\2"),  # -UkU
+    ("([aeiouyäöhlr])k([aeiouyäö])$", r"\1\2"),   # -VkV/-hkV/-lkV/-rkV
     # p
-    ("mp([aeiouyäö])$", r"mm\1"),  # -mpV
-    ("pp([aeiouyäö])$", r"p\1"),   # -ppV
-    ("p([aeiouyäö])$",  r"v\1"),   # -pV
+    ("pp([aeiouyäö])$",               r"p\1"),    # -ppV
+    ("mp([aeiouyäö])$",               r"mm\1"),   # -mpV
+    ("([aeiouyäölr])p([aeiouyäö])$",  r"\1v\2"),  # -VpV/-lpV/-rpV
     # t
-    ("([lnr])t([aeiouyäö])$", r"\1\1\2"),  # -ltV/-ntV/-rtV
-    ("tt([aeiouyäö])$", r"t\1"),           # -ttV
-    ("t([aeiouyäö])$",  r"d\1"),           # -tV
+    ("tt([aeiouyäö])$", r"t\1"),                 # -ttV
+    ("([lnr])t([aeiouyäö])$", r"\1\1\2"),        # -ltV/-ntV/-rtV
+    ("([aeiouyäöh])t([aeiouyäö])$",  r"\1d\2"),  # -VtV/-htV
 )
+
+# kpt mn hlr s dgjv
 
 # consonant gradation - weak to strong;
 # (regex_from, regex_to); the first match will be used
@@ -168,18 +171,40 @@ _FINAL_VOWEL_CHANGES_PAR_SG = {
 # these words allow both "a" and "ä" in their -A endings;
 # (word, declension)
 _BOTH_A_AND_AUML = frozenset((
-    ("buffet", 22),
-    ("caddie", 3),
-    ("caddie", 8),
+    ("buffet",     22),
+    ("caddie",     3),
+    ("caddie",     8),
+    ("fondue",     21),
+    ("gay",        21),
+    ("gray",       21),
+    ("jockey",     21),
+    ("reggae",     21),
+    ("speedway",   21),
+    ("spray",      21),
     ("port salut", 22),
-    ("menu", 21),
+    ("menu",       21),
 ))
 
 # vowels to use in illative singular endings (-hVn) in declensions 21 and 22
 _ILL_SG_VOWELS_21_22 = {
-    # 21 (default is "i")
-    "menu": "uy",
-    "rosé": "e",
+    # 21 (default is final vowel)
+    "bébé":      "e",
+    "brasserie": "ei",
+    "brie":      "i",
+    "coupé":     "e",
+    "cowboy":    "iy",
+    "fondue":    "ey",
+    "gay":       "iy",
+    "gray":      "iy",
+    "jersey":    "iy",
+    "jockey":    "iy",
+    "menu":      "uy",
+    "moiré":     "e",
+    "playboy":   "iy",
+    "reggae":    "ei",
+    "rosé":      "e",
+    "speedway":  "iy",
+    "spray":     "iy",
     # 22 (default is "e")
     "bordeaux":     "o",
     "know-how":     "u",
@@ -251,7 +276,9 @@ def _decline_gen_sg(word, decl, consGrad):
         # more than one declension)
         word = _consonant_gradation(word)
         if word == "aia":
-            word = "aja"  # exception for "aika" (not "taika")
+            word = "aja"  # "aika"
+        elif word == "poia":
+            word = "poja"  # "poika"
         else:
             word = re.sub(r"aaa$", r"aa'a", word)
 
@@ -295,26 +322,25 @@ def _decline_par_sg(word, decl, consGrad):
     return word
 
 def _decline_noun_specific(word, decl, consGrad, case, number):
-    # generate inflected forms (one or more) of a Finnish noun using specified
-    # declension and consonant gradation
+    # generate inflected forms of a Finnish noun using specified declension
+    # (1-49) and consonant gradation (bool)
 
     # use "a", "ä" or both in -A endings?
     if (word, decl) in _BOTH_A_AND_AUML:
-        endingVowels = ("a", "ä")
+        endingVowels = "aä"
     elif re.search(r"^[^aáou]+$", word) is not None:
-        endingVowels = ("ä",)
+        endingVowels = "ä"
     else:
-        endingVowels = ("a",)
+        endingVowels = "a"
 
     if case == "nom" and number == "sg":
+        # nominative singular (duh)
         yield word
-
     elif number == "pl" and case == "nom" or number == "sg" \
     and case in ("gen", "tra", "ine", "ela", "ade", "abl", "all", "abe"):
+        # many case/number combinations that resemble genitive singular
         word = _decline_gen_sg(word, decl, consGrad)
-        if decl == 22:
-            word += "'"
-
+        word += ("'" if decl == 22 else "")
         if case == "nom":
             yield word + "t"
         elif case == "gen":
@@ -333,16 +359,14 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
             yield word + "lle"
         elif case == "abe":
             yield from (word + "tt" + v for v in endingVowels)
-
     elif case == "ess" and number == "sg":
+        # essive singular
         word = _decline_ess_sg(word, decl, consGrad)
-        if decl == 22:
-            word += "'"
+        word += ("'" if decl == 22 else "")
         yield from (word + "n" + v for v in endingVowels)
-
     elif case == "ill" and number == "sg":
+        # illative singular
         word = _decline_ess_sg(word, decl, consGrad)
-
         if decl == 20:
             yield f"{word}h{word[-1]}n"
             yield f"{word}seen"
@@ -350,8 +374,11 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
             yield f"{word}h{word[-1]}n"
         elif decl == 21:
             yield from (
-                f"{word}h{v}n" for v in _ILL_SG_VOWELS_21_22.get(word, "i")
+                f"{word}h{v}n"
+                for v in _ILL_SG_VOWELS_21_22.get(word, word[-1])
             )
+            if word == "jersey":
+                yield "jerseyyn"  # additional form
         elif decl == 22:
             yield from (
                 f"{word}'h{v}n" for v in _ILL_SG_VOWELS_21_22.get(word, "e")
@@ -361,12 +388,10 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
             yield word + "seen"
         else:
             yield word + word[-1] + "n"
-
     elif case == "par" and number == "sg":
+        # partitive singular
         word = _decline_par_sg(word, decl, consGrad)
-        if decl == 22:
-            word += "'"
-
+        word += ("'" if decl == 22 else "")
         if decl == 15:
             # e.g. korkeaa/korkeata
             yield from (word + v for v in endingVowels)
@@ -383,14 +408,15 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
             yield from (word + "tt" + v for v in endingVowels)
         elif decl == 3 or decl >= 17:
             yield from (word + "t" + v for v in endingVowels)
+            if word == "jersey":
+                yield from (word + v for v in endingVowels)  # additional
         else:
             yield from (word + v for v in endingVowels)
-
     else:
         sys.exit("Case/number not implemented.")
 
 def decline_noun(word, case, number):
-    """Generate inflected forms of a Finnish noun."""
+    """Generate inflected forms of a Finnish noun. May contain duplicates."""
     for decl in noundecl.get_declensions(word):
         consGrad = noun_consgrad.get_consonant_gradation(word, decl)
         yield from _decline_noun_specific(word, decl, consGrad, case, number)

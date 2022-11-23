@@ -50,26 +50,47 @@ tanhua,tanhuaan
 uksi,ukseen
 
 # declension 1
-ehto,ehtoon
-kirppu,kirppuun
-korko,korkoon
-kumpu,kumpuun
+# -VkV
+koko,kokoon
 kyky,kykyyn
 laku,lakuun
-muki,mukiin
-murto,murtoon
-orpo,orpoon
-pelto,peltoon
-rako,rakoon
-rapu,rapuun
-rento,rentoon
 suku,sukuun
-söpö,söpöön
+# -CkV
+hehku,hehkuun
+katku,katkuun
+kinkku,kinkkuun
+korko,korkoon
+palko,palkoon
+pilkku,pilkkuun
+sisko,siskoon
+sänky,sänkyyn
 tikku,tikkuun
-tyttö,tyttöön
-valo,valoon
-vappu,vappuun
+verkko,verkkoon
 vihko,vihkoon
+# -VpV
+rapu,rapuun
+söpö,söpöön
+# -CpV
+helppo,helppoon
+kirppu,kirppuun
+kumpu,kumpuun
+orpo,orpoon
+temppu,temppuun
+vappu,vappuun
+# -VtV
+auto,autoon
+etu,etuun
+# -CtV
+ehto,ehtoon
+lanttu,lanttuun
+murto,murtoon
+pelto,peltoon
+rento,rentoon
+torttu,torttuun
+tyttö,tyttöön
+veltto,velttoon
+# -CV (not -kV, -pV, -tV)
+valo,valoon
 vilu,viluun
 äly,älyyn
 
@@ -83,6 +104,7 @@ yhtiö,yhtiöön
 
 # declension 4
 laatikko,laatikkoon
+älykkö,älykköön
 
 # declension 5
 lux,luxiin
@@ -97,37 +119,47 @@ paperi,paperiin
 weber,weberiin
 
 # declension 7
+# -VCV
+läpi,läpeen
+ovi,oveen
+piki,pikeen
+reki,rekeen
+tuki,tukeen
+# -CCV
 arki,arkeen
 arpi,arpeen
+hetki,hetkeen
 impi,impeen
 jälki,jälkeen
 järki,järkeen
+kaikki,kaikkeen
 kaski,kaskeen
 lehti,lehteen
-läpi,läpeen
 olki,olkeen
 onki,onkeen
-ovi,oveen
-piki,pikeen
 soppi,soppeen
-tuki,tukeen
 
 # declension 8
 jeppe,jeppeen
 nalle,nalleen
 nukke,nukkeen
+ope,opeen
 
 # declension 9
+# -VCV
 aika,aikaan
+eka,ekaan
+kala,kalaan
+sata,sataan
+taika,taikaan
+tapa,tapaan
+vaaka,vaakaan
+# -CCV
 arka,arkaan
 jalka,jalkaan
-kala,kalaan
 iskä,iskään
 lanka,lankaan
-lika,likaan
-taika,taikaan
 takka,takkaan
-vaaka,vaakaan
 vehka,vehkaan
 velka,velkaan
 vihta,vihtaan
@@ -137,43 +169,71 @@ virka,virkaan
 kahdeksan,kahdeksaan
 koira,koiraan
 nälkä,nälkään
+poika,poikaan
 seitsemän,seitsemään
 yhdeksän,yhdeksään
 ylkä,ylkään
 
 # declension 11
+käpälä,käpälään
 omena,omenaan
 
 # declension 12
 kulkija,kulkijaan
+ritilä,ritilään
 
 # declension 13
 katiska,katiskaan
+siivilä,siivilään
 
 # declension 14
 solakka,solakkaan
+ötökkä,ötökkään
 
 # declension 15
 korkea,korkeaan
+äreä,äreään
 
 # declension 16
 idempi,idempään
+kumpi,kumpaan
 vanhempi,vanhempaan
 
 # declension 17
+hynttyy,hynttyyseen
 vapaa,vapaaseen
 
 # declension 18
 maa,maahan
+tii,tiihin
 
 # declension 19
 suo,suohon
+yö,yöhön
 
 # declension 20
 filee,fileehen,fileeseen
+nugaa,nugaahan,nugaaseen
 
-# declension 21
+# declension 21 (all except "kungfu", "taxfree")
+brasserie,brasseriehen,brasseriehin
+brie,briehin
+bébé,bébéhen
+cha-cha-cha,cha-cha-chahan
+clou,clouhun
+coupé,coupéhen
+cowboy,cowboyhin,cowboyhyn
+fondue,fonduehen,fonduehyn
+gay,gayhin,gayhyn
+gray,grayhin,grayhyn
+jersey,jerseyhin,jerseyhyn,jerseyyn
+jockey,jockeyhin,jockeyhyn
+moiré,moiréhen
+playboy,playboyhin,playboyhyn
+reggae,reggaehen,reggaehin
 rosé,roséhen
+speedway,speedwayhin,speedwayhyn
+spray,sprayhin,sprayhyn
 
 # declension 22 (all)
 beignet,beignet'hen

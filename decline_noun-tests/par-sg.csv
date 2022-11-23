@@ -50,26 +50,47 @@ tanhua,tanhuaa,tanhuata
 uksi,uksea,usta
 
 # declension 1
-ehto,ehtoa
-kirppu,kirppua
-korko,korkoa
-kumpu,kumpua
+# -VkV
+koko,kokoa
 kyky,kykyä
 laku,lakua
-muki,mukia
-murto,murtoa
-orpo,orpoa
-pelto,peltoa
-rako,rakoa
-rapu,rapua
-rento,rentoa
 suku,sukua
-söpö,söpöä
+# -CkV
+hehku,hehkua
+katku,katkua
+kinkku,kinkkua
+korko,korkoa
+palko,palkoa
+pilkku,pilkkua
+sisko,siskoa
+sänky,sänkyä
 tikku,tikkua
-tyttö,tyttöä
-valo,valoa
-vappu,vappua
+verkko,verkkoa
 vihko,vihkoa
+# -VpV
+rapu,rapua
+söpö,söpöä
+# -CpV
+helppo,helppoa
+kirppu,kirppua
+kumpu,kumpua
+orpo,orpoa
+temppu,temppua
+vappu,vappua
+# -VtV
+auto,autoa
+etu,etua
+# -CtV
+ehto,ehtoa
+lanttu,lanttua
+murto,murtoa
+pelto,peltoa
+rento,rentoa
+torttu,torttua
+tyttö,tyttöä
+veltto,velttoa
+# -CV (not -kV, -pV, -tV)
+valo,valoa
 vilu,vilua
 äly,älyä
 
@@ -83,6 +104,7 @@ yhtiö,yhtiötä
 
 # declension 4
 laatikko,laatikkoa
+älykkö,älykköä
 
 # declension 5
 lux,luxia
@@ -97,37 +119,47 @@ paperi,paperia
 weber,weberiä
 
 # declension 7
+# -VCV
+läpi,läpeä
+ovi,ovea
+piki,pikeä
+reki,rekeä
+tuki,tukea
+# -CCV
 arki,arkea
 arpi,arpea
+hetki,hetkeä
 impi,impeä
 jälki,jälkeä
 järki,järkeä
+kaikki,kaikkea
 kaski,kaskea
 lehti,lehteä
-läpi,läpeä
 olki,olkea
 onki,onkea
-ovi,ovea
-piki,pikeä
 soppi,soppea
-tuki,tukea
 
 # declension 8
 jeppe,jeppeä
 nalle,nallea
 nukke,nukkea
+ope,opea
 
 # declension 9
+# -VCV
 aika,aikaa
+eka,ekaa
+kala,kalaa
+sata,sataa
+taika,taikaa
+tapa,tapaa
+vaaka,vaakaa
+# -CCV
 arka,arkaa
 jalka,jalkaa
-kala,kalaa
 iskä,iskää
 lanka,lankaa
-lika,likaa
-taika,taikaa
 takka,takkaa
-vaaka,vaakaa
 vehka,vehkaa
 velka,velkaa
 vihta,vihtaa
@@ -137,43 +169,71 @@ virka,virkaa
 kahdeksan,kahdeksaa
 koira,koiraa
 nälkä,nälkää
+poika,poikaa
 seitsemän,seitsemää
 yhdeksän,yhdeksää
 ylkä,ylkää
 
 # declension 11
+käpälä,käpälää
 omena,omenaa
 
 # declension 12
 kulkija,kulkijaa
+ritilä,ritilää
 
 # declension 13
 katiska,katiskaa
+siivilä,siivilää
 
 # declension 14
 solakka,solakkaa
+ötökkä,ötökkää
 
 # declension 15
 korkea,korkeaa,korkeata
+äreä,äreätä,äreää
 
 # declension 16
 idempi,idempää
+kumpi,kumpaa
 vanhempi,vanhempaa
 
 # declension 17
+hynttyy,hynttyytä
 vapaa,vapaata
 
 # declension 18
 maa,maata
+tii,tiitä
 
 # declension 19
 suo,suota
+yö,yötä
 
 # declension 20
 filee,fileetä
+nugaa,nugaata
 
-# declension 21
+# declension 21 (all except "kungfu", "taxfree")
+brasserie,brasserieta
+brie,brietä
+bébé,bébétä
+cha-cha-cha,cha-cha-chata
+clou,clouta
+coupé,coupéta
+cowboy,cowboyta
+fondue,fondueta,fonduetä
+gay,gayta,gaytä
+gray,grayta,graytä
+jersey,jerseytä,jerseyä
+jockey,jockeyta,jockeytä
+moiré,moiréta
+playboy,playboyta
+reggae,reggaeta,reggaetä
 rosé,roséta
+speedway,speedwayta,speedwaytä
+spray,sprayta,spraytä
 
 # declension 22 (all)
 beignet,beignet'tä
