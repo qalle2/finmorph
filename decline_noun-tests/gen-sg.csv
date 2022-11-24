@@ -49,6 +49,42 @@ siitake,siitaken,siitakkeen
 tanhua,tanhuan
 uksi,uksen
 
+# homonyms distinguished by consonant gradation in some cases
+haiku,haikun,haiun
+koto,kodon,koton
+lento,lennon,lenton
+mutu,mudun,mutun
+parka,paran,parkan
+raita,raidan,raitan
+säkä,säkän,sään
+tutti,tutin,tuttin
+veto,vedon,veton
+vika,vian,vikan
+
+# optional consonant gradation (no change in meaning) in some cases
+bourette,boureten,bouretten
+huti,hudin,hutin
+häive,häipeen,häiveen
+kuti,kudin,kutin
+leuku,leu'un,leukun
+loota,loodan,lootan
+lunki,lungin,lunkin
+mutu,mudun,mutun
+myky,mykyn,myvyn
+mökä,mökän,möän
+nahka,nahan,nahkan
+nuti,nudin,nutin
+peti,pedin,petin
+pop,popin
+ringette,ringeten,ringetten
+seljanka,seljangan,seljankan
+sinfonietta,sinfonietan,sinfoniettan
+tuhka,tuhan,tuhkan
+uhka,uhan,uhkan
+vihko,vihkon,vihon
+viive,viipeen,viiveen
+vinaigrette,vinaigreten,vinaigretten
+
 # declension 1
 # -VkV
 koko,koon
@@ -63,10 +99,10 @@ korko,koron
 palko,palon
 pilkku,pilkun
 sisko,siskon
+sähkö,sähkön
 sänky,sängyn
 tikku,tikun
 verkko,verkon
-vihko,vihon
 # -VpV
 rapu,ravun
 söpö,söpön
@@ -464,7 +500,6 @@ polte,poltteen
 # -ve
 aave,aaveen
 lieve,liepeen
-viive,viipeen,viiveen
 
 # declension 49 (all)
 # -e

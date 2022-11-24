@@ -49,6 +49,42 @@ siitake,siitakea,siitaketta
 tanhua,tanhuaa,tanhuata
 uksi,uksea,usta
 
+# homonyms distinguished by consonant gradation in some cases
+haiku,haikua
+koto,kotoa
+lento,lentoa
+mutu,mutua
+parka,parkaa
+raita,raitaa
+säkä,säkää
+tutti,tuttia
+veto,vetoa
+vika,vikaa
+
+# optional consonant gradation (no change in meaning) in some cases
+bourette,bourettea
+huti,hutia
+häive,häivettä
+kuti,kutia
+leuku,leukua
+loota,lootaa
+lunki,lunkia
+mutu,mutua
+myky,mykyä
+mökä,mökää
+nahka,nahkaa
+nuti,nutia
+peti,petiä
+pop,popia,poppia
+ringette,ringetteä
+seljanka,seljankaa
+sinfonietta,sinfoniettaa
+tuhka,tuhkaa
+uhka,uhkaa
+vihko,vihkoa
+viive,viivettä
+vinaigrette,vinaigrettea
+
 # declension 1
 # -VkV
 koko,kokoa
@@ -63,10 +99,10 @@ korko,korkoa
 palko,palkoa
 pilkku,pilkkua
 sisko,siskoa
+sähkö,sähköä
 sänky,sänkyä
 tikku,tikkua
 verkko,verkkoa
-vihko,vihkoa
 # -VpV
 rapu,rapua
 söpö,söpöä
@@ -464,7 +500,6 @@ polte,poltetta
 # -ve
 aave,aavetta
 lieve,lievettä
-viive,viivettä
 
 # declension 49 (all)
 # -e

@@ -122,6 +122,7 @@ _CONS_GRAD_WEAKEN = (
     ("nk([aeiouyäö])$",               r"ng\1"),   # -nkV
     ("ylkä$",                         r"yljä"),   # -ylkä
     ("([lr])ke$",                     r"\1je"),   # -lke/-rke
+    ("euku$",                         "eu'u"),    # -euku
     ("([uy])k([uy])$",                r"\1v\2"),  # -UkU
     ("([aeiouyäöhlr])k([aeiouyäö])$", r"\1\2"),   # -VkV/-hkV/-lkV/-rkV
     # p
@@ -262,7 +263,8 @@ def _decline_gen_sg(word, decl, consGrad):
         # strengthening
         word = _consonant_gradation(word, True)
     elif consGrad and not (
-        origWord in ("alpi", "helpi") and decl == 5
+        origWord == "pop"
+        or origWord in ("alpi", "helpi") and decl == 5
         or origWord == "siitake" and decl == 8
     ) or decl in (27, 28, 31, 36, 37, 40, 45, 46):
         # weakening
@@ -350,14 +352,33 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
     else:
         endingVowels = "a"
 
-    # there are multiple forms of some words (optional consonant gradation)
+    # add a duplicate with consonant gradation undone for some words
+    words = (word,)
+    # all cases except nominative singular and partitive singular
     if not (case in ("nom", "par") and number == "sg"):
-        if origWord == "viive":
+        if origWord in ("häive", "viive"):
+            # p -> v
             words = (word, word[:-3] + "v" + word[-2:])
-        else:
-            words = (word,)
-    else:
-        words = (word,)
+    # essive singular, illative singular, partitive singular
+    if case in ("ess", "ill", "par") and number == "sg":
+        if origWord == "pop":
+            # p -> pp
+            words = (word, word[:-2] + "pp" + word[-1])
+    # cases that behave like genitive singular
+    if number == "pl" and case == "nom" or number == "sg" \
+    and case in ("gen", "tra", "ine", "ela", "ade", "abl", "all", "abe"):
+        if origWord in ("leuku", "lunki", "myky", "seljanka"):
+            # '/g/v -> k
+            words = (word, word[:-2] + "k" + word[-1])
+        elif origWord in ("haiku", "mökä", "nahka", "parka", "säkä", "tuhka", "uhka", "vihko", "vika"):
+            # nothing -> k
+            words = (word, word[:-1] + "k" + word[-1])
+        elif origWord in ("huti", "koto", "kuti", "lento", "loota", "mutu", "nuti", "peti", "raita", "veto"):
+            # d -> t
+            words = (word, word[:-2] + "t" + word[-1])
+        elif origWord in ("bourette", "ringette", "sinfonietta", "tutti", "vinaigrette"):
+            # t -> tt
+            words = (word, word[:-2] + "tt" + word[-1])
     del word
 
     # append case/number endings and generate words

@@ -49,6 +49,42 @@ siitake,siitakena,siitakkeena
 tanhua,tanhuana
 uksi,uksena
 
+# homonyms distinguished by consonant gradation in some cases
+haiku,haikuna
+koto,kotona
+lento,lentona
+mutu,mutuna
+parka,parkana
+raita,raitana
+säkä,säkänä
+tutti,tuttina
+veto,vetona
+vika,vikana
+
+# optional consonant gradation (no change in meaning) in some cases
+bourette,bourettena
+huti,hutina
+häive,häipeenä,häiveenä
+kuti,kutina
+leuku,leukuna
+loota,lootana
+lunki,lunkina
+mutu,mutuna
+myky,mykynä
+mökä,mökänä
+nahka,nahkana
+nuti,nutina
+peti,petinä
+pop,popina,poppina
+ringette,ringettenä
+seljanka,seljankana
+sinfonietta,sinfoniettana
+tuhka,tuhkana
+uhka,uhkana
+vihko,vihkona
+viive,viipeenä,viiveenä
+vinaigrette,vinaigrettena
+
 # declension 1
 # -VkV
 koko,kokona
@@ -63,10 +99,10 @@ korko,korkona
 palko,palkona
 pilkku,pilkkuna
 sisko,siskona
+sähkö,sähkönä
 sänky,sänkynä
 tikku,tikkuna
 verkko,verkkona
-vihko,vihkona
 # -VpV
 rapu,rapuna
 söpö,söpönä
@@ -464,7 +500,6 @@ polte,poltteena
 # -ve
 aave,aaveena
 lieve,liepeenä
-viive,viipeenä,viiveenä
 
 # declension 49 (all)
 # -e
