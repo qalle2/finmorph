@@ -350,78 +350,85 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
     else:
         endingVowels = "a"
 
-    # append case/number endings and generate words
-    if case == "nom" and number == "sg":
-        yield word
-    elif number == "pl" and case == "nom" or number == "sg" \
-    and case in ("gen", "tra", "ine", "ela", "ade", "abl", "all", "abe"):
-        # many case/number combinations that resemble genitive singular
+    # there are multiple forms of some words (optional consonant gradation)
+    if not (case in ("nom", "par") and number == "sg"):
         if origWord == "viive":
             words = (word, word[:-3] + "v" + word[-2:])
         else:
             words = (word,)
-        ending = GEN_SG_LIKE_ENDINGS[case]
+    else:
+        words = (word,)
+    del word
+
+    # append case/number endings and generate words
+    if case == "nom" and number == "sg":
+        yield from words
+    elif number == "pl" and case == "nom" or number == "sg" \
+    and case in ("gen", "tra", "ine", "ela", "ade", "abl", "all", "abe"):
+        # many case/number combinations that resemble genitive singular
         if case in ("nom", "gen", "tra", "all"):
-            yield from (w + ending for w in words)
+            yield from (f"{w}{GEN_SG_LIKE_ENDINGS[case]}" for w in words)
         else:
-            for word in words:
-                yield from (word + ending + v for v in endingVowels)
+            yield from (
+                f"{w}{GEN_SG_LIKE_ENDINGS[case]}{v}"
+                for w in words for v in endingVowels
+            )
     elif case == "ess" and number == "sg":
         # essive singular
-        yield from (word + "n" + v for v in endingVowels)
-        if origWord == "viive":
-            yield from (
-                word[:-3] + "v" + word[-2:] + "n" + v for v in endingVowels
-            )
+        yield from (f"{w}n{v}" for w in words for v in endingVowels)
     elif case == "ill" and number == "sg":
         # illative singular
         if decl == 20:
-            yield f"{word}h{word[-1]}n"
-            yield f"{word}seen"
+            yield from (f"{w}h{w[-1]}n" for w in words)
+            yield from (f"{w}seen" for w in words)
         elif decl in (18, 19):
-            yield f"{word}h{word[-1]}n"
+            yield from (f"{w}h{w[-1]}n" for w in words)
         elif decl == 21:
             yield from (
-                f"{word}h{v}n"
-                for v in _ILL_SG_VOWELS_21_22.get(origWord, word[-1])
+                f"{w}h{v}n"
+                for w in words
+                for v in _ILL_SG_VOWELS_21_22.get(origWord, w[-1])
             )
             if origWord == "jersey":
-                yield word + "yn"  # additional
+                yield from (w + "yn" for w in words)  # additional
         elif decl == 22:
-            yield from (
-                f"{word}h{v}n"
-                for v in _ILL_SG_VOWELS_21_22.get(origWord, "e")
-            )
+            for word in words:
+                yield from (
+                    f"{word}h{v}n"
+                    for v in _ILL_SG_VOWELS_21_22.get(origWord, "e")
+                )
         elif decl in (17, 41, 44, 47, 48) \
         or decl == 49 and origWord.endswith("e"):
-            yield word + "seen"
-            if origWord == "viive":
-                yield word[:-3] + "v" + word[-2:] + "seen"  # additional
+            yield from (f"{w}seen" for w in words)
         else:
-            yield word + word[-1] + "n"
+            yield from (f"{w}{w[-1]}n" for w in words)
     elif case == "par" and number == "sg":
         # partitive singular
-        if decl == 15:
-            # e.g. korkeaa/korkeata
-            yield from (word + v for v in endingVowels)
-            yield from (word + "t" + v for v in endingVowels)
-        elif decl == 25:
-            # e.g. toimea/tointa
-            yield from (word + "e" + v for v in endingVowels)
-            yield from (word[:-1] + "nt" + v for v in endingVowels)
+        if decl == 25:
+            # e.g. toimi -> toim -> toimea/tointa
+            yield from (f"{w}e{v}" for w in words for v in endingVowels)
+            yield from (f"{w[:-1]}nt{v}" for w in words for v in endingVowels)
         elif decl == 37:
-            # e.g. vasempaa/vasenta
-            yield from (word[:-1] + "mp" + v + v for v in endingVowels)
-            yield from (word + "t" + v for v in endingVowels)
-        elif decl == 48 or decl == 49 and origWord.endswith("e"):
-            # e.g. hametta, askeletta
-            yield from (word + "tt" + v for v in endingVowels)
-        elif decl == 3 or decl >= 17:
-            yield from (word + "t" + v for v in endingVowels)
-            if origWord == "jersey":
-                yield from (word + v for v in endingVowels)  # additional
+            # e.g. vasen -> vasempaa/vasenta
+            yield from (
+                f"{w[:-1]}mp{2*v}" for w in words for v in endingVowels
+            )
+            yield from (f"{w}t{v}" for w in words for v in endingVowels)
         else:
-            yield from (word + v for v in endingVowels)
+            if decl == 15 or origWord == "jersey":
+                # e.g. korkeaa/korkeata
+                middles = ("t", "")
+            elif decl == 48 or decl == 49 and origWord.endswith("e"):
+                # e.g. hametta, askeletta
+                middles = ("tt",)
+            elif decl == 3 or decl >= 17:
+                middles = ("t",)
+            else:
+                middles = ("",)
+            yield from (
+                f"{w}{m}{v}"
+                for w in words for m in middles for v in endingVowels
+            )
     else:
         sys.exit("This should never happen.")
 
