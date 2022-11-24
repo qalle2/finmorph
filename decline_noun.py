@@ -16,51 +16,6 @@ import noundecl
 # 42=mies, 43=ohut, 44=kevät, 45=kahdeksas, 46=tuhat, 47=kuollut, 48=hame,
 # 49=askel/askele
 
-# regular expressions for consonant gradation;
-# (regex_from, regex_to);
-# notes:
-# - only the first match will be applied
-# - the final consonants and vowels of words have already been changed
-#
-# strong to weak
-_CONS_GRAD_WEAKEN = (
-    # k
-    ("kk([aeiouyäö])$",               r"k\1"),    # -kkV
-    ("nk([aeiouyäö])$",               r"ng\1"),   # -nkV
-    ("ylkä$",                         r"yljä"),   # -ylkä
-    ("([lr])ke$",                     r"\1je"),   # -lke/-rke
-    ("([uy])k([uy])$",                r"\1v\2"),  # -UkU
-    ("([aeiouyäöhlr])k([aeiouyäö])$", r"\1\2"),   # -VkV/-hkV/-lkV/-rkV
-    # p
-    ("pp([aeiouyäö])$",               r"p\1"),    # -ppV
-    ("mp([aeiouyäö])$",               r"mm\1"),   # -mpV
-    ("([aeiouyäölr])p([aeiouyäö])$",  r"\1v\2"),  # -VpV/-lpV/-rpV
-    # t
-    ("tt([aeiouyäö])$",             r"t\1"),     # -ttV
-    ("([lnr])t([aeiouyäö])$",       r"\1\1\2"),  # -ltV/-ntV/-rtV
-    ("([aeiouyäöh])t([aeiouyäö])$", r"\1d\2"),   # -VtV/-htV
-)
-#
-# weak to strong
-_CONS_GRAD_STRENGTHEN = (
-    # k
-    ("([aeiouyäölnr])k(aa|ee)$",   r"\1kk\2"),  # e.g. tikas
-    ("(e)ng(ere)$",                r"\1nk\2"),  # e.g. penger
-    ("([hl])j(ee)$",               r"\1k\2"),   # e.g. hylje
-    ("([aeiouyäöh])(ene|ime)$",    r"\1k\2"),   # e.g. säen
-    ("([aeiouyäö]|ar)(aa|ee|ii)$", r"\1k\2"),   # e.g. ruis
-    # p
-    ("([aeiouyäölmr])p(ee)$",          r"\1pp\2"),  # e.g. ape
-    ("([aeiouyäö])mm(ee|ele|imä|ye)$", r"\1mp\2"),  # e.g. lämmin
-    ("([aeiouyäö])v(aa|ee|ale|ime)$",  r"\1p\2"),   # e.g. taival
-    # t
-    ("([aeiouyäölnr])t(aa|ää|ee|ii|uu)$",     r"\1tt\2"),  # e.g. altis
-    ("([aeiouyäö])t(are|äre|ime|oma|ömä)$",   r"\1tt\2"),  # e.g. heitin
-    (r"([lnr])\1(aa|ää|ee|are|ele|ere|ime)$", r"\1t\2"),   # e.g. kallas
-    ("([aeiouyäöh])d(aa|ee|are|ime)$",        r"\1t\2"),   # e.g. pidin
-    ("(u)(ere)$",                             r"\1t\2"),   # e.g. auer
-)
-
 # regexes for changing final consonants and vowels
 # key = declension, value = ((regex_from, regex_to), ...)
 # note: only the first match will be applied
@@ -154,6 +109,51 @@ _FINAL_VOWEL_CHANGES_GEN_SG_ESS_SG = {
     48: (("([aeiouyäö])$", r"\1\1"),),
 }
 
+# regular expressions for consonant gradation;
+# (regex_from, regex_to);
+# notes:
+# - only the first match will be applied
+# - the final consonants and vowels of words have already been changed
+#
+# strong to weak
+_CONS_GRAD_WEAKEN = (
+    # k
+    ("kk([aeiouyäö])$",               r"k\1"),    # -kkV
+    ("nk([aeiouyäö])$",               r"ng\1"),   # -nkV
+    ("ylkä$",                         r"yljä"),   # -ylkä
+    ("([lr])ke$",                     r"\1je"),   # -lke/-rke
+    ("([uy])k([uy])$",                r"\1v\2"),  # -UkU
+    ("([aeiouyäöhlr])k([aeiouyäö])$", r"\1\2"),   # -VkV/-hkV/-lkV/-rkV
+    # p
+    ("pp([aeiouyäö])$",               r"p\1"),    # -ppV
+    ("mp([aeiouyäö])$",               r"mm\1"),   # -mpV
+    ("([aeiouyäölr])p([aeiouyäö])$",  r"\1v\2"),  # -VpV/-lpV/-rpV
+    # t
+    ("tt([aeiouyäö])$",             r"t\1"),     # -ttV
+    ("([lnr])t([aeiouyäö])$",       r"\1\1\2"),  # -ltV/-ntV/-rtV
+    ("([aeiouyäöh])t([aeiouyäö])$", r"\1d\2"),   # -VtV/-htV
+)
+#
+# weak to strong
+_CONS_GRAD_STRENGTHEN = (
+    # k
+    ("([aeiouyäölnr])k(aa|ee)$",   r"\1kk\2"),  # e.g. tikas
+    ("(e)ng(ere)$",                r"\1nk\2"),  # e.g. penger
+    ("([hl])j(ee)$",               r"\1k\2"),   # e.g. hylje
+    ("([aeiouyäöh])(ene|ime)$",    r"\1k\2"),   # e.g. säen
+    ("([aeiouyäö]|ar)(aa|ee|ii)$", r"\1k\2"),   # e.g. ruis
+    # p
+    ("([aeiouyäölmr])p(ee)$",          r"\1pp\2"),  # e.g. ape
+    ("([aeiouyäö])mm(ee|ele|imä|ye)$", r"\1mp\2"),  # e.g. lämmin
+    ("([aeiouyäö])v(aa|ee|ale|ime)$",  r"\1p\2"),   # e.g. taival
+    # t
+    ("([aeiouyäölnr])t(aa|ää|ee|ii|uu)$",     r"\1tt\2"),  # e.g. altis
+    ("([aeiouyäö])t(are|äre|ime|oma|ömä)$",   r"\1tt\2"),  # e.g. heitin
+    (r"([lnr])\1(aa|ää|ee|are|ele|ere|ime)$", r"\1t\2"),   # e.g. kallas
+    ("([aeiouyäöh])d(aa|ee|are|ime)$",        r"\1t\2"),   # e.g. pidin
+    ("(u)(ere)$",                             r"\1t\2"),   # e.g. auer
+)
+
 # these words allow both "a" and "ä" in their -A endings;
 # (word, declension)
 _BOTH_A_AND_AUML = frozenset((
@@ -225,21 +225,21 @@ _CASES = (
 # grammatical numbers supported (singular, plural)
 _NUMBERS = ("sg", "pl")
 
+def _apply_regex(word, decl, regexes):
+    # regexes: {declension: ((regex_from, regex_to), ...), ...}
+    # only the first matching regex_from will be applied
+
+    for (reFrom, reTo) in regexes.get(decl, ()):
+        if re.search(reFrom, word) is not None:
+            return re.sub(reFrom, reTo, word)
+    return word
+
 def _consonant_gradation(word, strengthen=False):
     # apply consonant gradation
     # strengthen: False = strong to weak, True = weak to strong
 
     regexes = _CONS_GRAD_STRENGTHEN if strengthen else _CONS_GRAD_WEAKEN
     for (reFrom, reTo) in regexes:
-        if re.search(reFrom, word) is not None:
-            return re.sub(reFrom, reTo, word)
-    return word
-
-def _apply_regex(word, decl, regexes):
-    # regexes: {declension: ((regex_from, regex_to), ...), ...}
-    # only the first matching regex_from will be applied
-
-    for (reFrom, reTo) in regexes.get(decl, ()):
         if re.search(reFrom, word) is not None:
             return re.sub(reFrom, reTo, word)
     return word
