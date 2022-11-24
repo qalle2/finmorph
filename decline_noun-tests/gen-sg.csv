@@ -406,6 +406,14 @@ pue,pukeen
 säe,säkeen
 tae,takeen
 yhtye,yhtyeen
+# -de
+sade,sateen
+suhde,suhteen
+# -he
+aihe,aiheen
+valhe,valheen
+venhe,venheen
+virhe,virheen
 # -je
 hylje,hylkeen
 kirje,kirjeen
@@ -420,20 +428,43 @@ ryske,ryskeen
 sähke,sähkeen
 virke,virkkeen
 välke,välkkeen
-# -Ce (not -je, -ke)
-ahne,ahneen
-aihe,aiheen
-ape,appeen
-hame,hameen
+# -le
 helle,helteen
+kahle,kahleen
+säle,säleen
+tisle,tisleen
+# -me
+amme,ammeen
+hame,hameen
+hurme,hurmeen
 ihme,ihmeen
+ilme,ilmeen
 lumme,lumpeen
-ripe,rippeen
-sose,soseen
-suhde,suhteen
+# -ne
+ahne,ahneen
+aine,aineen
+herne,herneen
 tunne,tunteen
-uurre,uurteen
-vuode,vuoteen
+# -pe
+ape,appeen
+kampe,kamppeen
+# -re
+aarre,aarteen
+näre,näreen
+# -se
+ase,aseen
+hilse,hilseen
+katse,katseen
+# -te
+aate,aatteen
+este,esteen
+hynte,hyntteen
+korte,kortteen
+polte,poltteen
+# -ve
+aave,aaveen
+lieve,liepeen
+viive,viipeen,viiveen
 
 # declension 49 (all)
 # -e

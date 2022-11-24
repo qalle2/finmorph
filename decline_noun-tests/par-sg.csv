@@ -406,6 +406,14 @@ pue,puetta
 säe,säettä
 tae,taetta
 yhtye,yhtyettä
+# -de
+sade,sadetta
+suhde,suhdetta
+# -he
+aihe,aihetta
+valhe,valhetta
+venhe,venhettä
+virhe,virhettä
 # -je
 hylje,hyljettä
 kirje,kirjettä
@@ -420,20 +428,43 @@ ryske,ryskettä
 sähke,sähkettä
 virke,virkettä
 välke,välkettä
-# -Ce (not -je, -ke)
-ahne,ahnetta
-aihe,aihetta
-ape,apetta
-hame,hametta
+# -le
 helle,hellettä
+kahle,kahletta
+säle,sälettä
+tisle,tislettä
+# -me
+amme,ammetta
+hame,hametta
+hurme,hurmetta
 ihme,ihmettä
+ilme,ilmettä
 lumme,lummetta
-ripe,ripettä
-sose,sosetta
-suhde,suhdetta
+# -ne
+ahne,ahnetta
+aine,ainetta
+herne,hernettä
 tunne,tunnetta
-uurre,uurretta
-vuode,vuodetta
+# -pe
+ape,apetta
+kampe,kampetta
+# -re
+aarre,aarretta
+näre,närettä
+# -se
+ase,asetta
+hilse,hilsettä
+katse,katsetta
+# -te
+aate,aatetta
+este,estettä
+hynte,hyntettä
+korte,kortetta
+polte,poltetta
+# -ve
+aave,aavetta
+lieve,lievettä
+viive,viivettä
 
 # declension 49 (all)
 # -e

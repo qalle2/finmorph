@@ -406,6 +406,14 @@ pue,pukeena
 säe,säkeenä
 tae,takeena
 yhtye,yhtyeenä
+# -de
+sade,sateena
+suhde,suhteena
+# -he
+aihe,aiheena
+valhe,valheena
+venhe,venheenä
+virhe,virheenä
 # -je
 hylje,hylkeenä
 kirje,kirjeenä
@@ -420,20 +428,43 @@ ryske,ryskeenä
 sähke,sähkeenä
 virke,virkkeenä
 välke,välkkeenä
-# -Ce (not -je, -ke)
-ahne,ahneena
-aihe,aiheena
-ape,appeena
-hame,hameena
+# -le
 helle,helteenä
+kahle,kahleena
+säle,säleenä
+tisle,tisleenä
+# -me
+amme,ammeena
+hame,hameena
+hurme,hurmeena
 ihme,ihmeenä
+ilme,ilmeenä
 lumme,lumpeena
-ripe,rippeenä
-sose,soseena
-suhde,suhteena
+# -ne
+ahne,ahneena
+aine,aineena
+herne,herneenä
 tunne,tunteena
-uurre,uurteena
-vuode,vuoteena
+# -pe
+ape,appeena
+kampe,kamppeena
+# -re
+aarre,aarteena
+näre,näreenä
+# -se
+ase,aseena
+hilse,hilseenä
+katse,katseena
+# -te
+aate,aatteena
+este,esteenä
+hynte,hyntteenä
+korte,kortteena
+polte,poltteena
+# -ve
+aave,aaveena
+lieve,liepeenä
+viive,viipeenä,viiveenä
 
 # declension 49 (all)
 # -e

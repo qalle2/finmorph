@@ -48,11 +48,11 @@ _CONS_GRAD_STRENGTHEN = (
     ("([aeiouyäöh])(ene|ime)$",    r"\1k\2"),   # e.g. säen
     ("([aeiouyäö]|ar)(aa|ee|ii)$", r"\1k\2"),   # e.g. ruis
     # p
-    ("([aeiouyäö])p(ee)$",             r"\1pp\2"),  # e.g. ape
+    ("([aeiouyäöm])p(ee)$",            r"\1pp\2"),  # e.g. ape
     ("([aeiouyäö])mm(ee|ele|imä|ye)$", r"\1mp\2"),  # e.g. lämmin
-    ("([aeiouyäö])v(aa|ale|ime)$",     r"\1p\2"),   # e.g. taival
+    ("([aeiouyäö])v(aa|ee|ale|ime)$",  r"\1p\2"),   # e.g. taival
     # t
-    ("([aeiouyäöln])t(aa|ää|ii|uu)$",         r"\1tt\2"),  # e.g. altis
+    ("([aeiouyäölnr])t(aa|ää|ee|ii|uu)$",     r"\1tt\2"),  # e.g. altis
     ("([aeiouyäö])t(are|äre|ime|oma|ömä)$",   r"\1tt\2"),  # e.g. heitin
     (r"([lnr])\1(aa|ää|ee|are|ele|ere|ime)$", r"\1t\2"),   # e.g. kallas
     ("([aeiouyäöh])d(aa|ee|are|ime)$",        r"\1t\2"),   # e.g. pidin
@@ -185,6 +185,19 @@ _BOTH_A_AND_AUML = frozenset((
     ("menu",       21),
 ))
 
+# endings for cases that behave like genitive singular, without final -A
+GEN_SG_LIKE_ENDINGS = {
+    "nom": "t",
+    "gen": "n",
+    "tra": "ksi",
+    "ine": "ss",
+    "ela": "st",
+    "ade": "ll",
+    "abl": "lt",
+    "all": "lle",
+    "abe": "tt",
+}
+
 # vowels to use in illative singular endings (-hVn) in declensions 21 and 22
 _ILL_SG_VOWELS_21_22 = {
     # 21 (default is final vowel)
@@ -257,11 +270,11 @@ def _decline_gen_sg(word, decl, consGrad):
     word = _apply_regex(word, decl, _FINAL_VOWEL_CHANGES_COMMON)
     word = _apply_regex(word, decl, _FINAL_VOWEL_CHANGES_GEN_SG_ESS_SG)
 
-    # consonant gradation
+    # consonant gradation (consonant gradation data has some errors)
     if (
         consGrad and decl >= 32
         or word == "näime" and decl == 33
-        or word == "puee" and decl == 48
+        or word in ("hyntee", "puee") and decl == 48
         or word == "auere" and decl == 49
     ):
         # strengthening
@@ -272,8 +285,6 @@ def _decline_gen_sg(word, decl, consGrad):
         or word == "siitake" and decl == 8
     ) or decl in (27, 28, 31, 36, 37, 40, 45, 46):
         # weakening
-        # (source data incorrectly handles consonant gradation in words with
-        # more than one declension)
         word = _consonant_gradation(word)
         if word == "aia":
             word = "aja"  # "aika"
@@ -297,8 +308,12 @@ def _decline_ess_sg(word, decl, consGrad):
     word = _apply_regex(word, decl, _FINAL_VOWEL_CHANGES_GEN_SG_ESS_SG)
 
     # strengthening consonant gradation
-    if consGrad and decl >= 32 \
-    or word in ("auere", "näime", "puee"):
+    # (consonant gradation data has some errors)
+    if consGrad and decl >= 32 or (
+        decl == 33 and word == "näime"  # näin
+        or decl == 48 and word in ("hyntee", "puee")  # hynte, pue
+        or decl == 49 and word == "auere"  # auer
+    ):
         word = _consonant_gradation(word, True)
 
     return word
@@ -340,30 +355,27 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
     and case in ("gen", "tra", "ine", "ela", "ade", "abl", "all", "abe"):
         # many case/number combinations that resemble genitive singular
         word = _decline_gen_sg(word, decl, consGrad)
-        word += ("'" if decl == 22 else "")
-        if case == "nom":
-            yield word + "t"
-        elif case == "gen":
-            yield word + "n"
-        elif case == "tra":
-            yield word + "ksi"
-        elif case == "ine":
-            yield from (word + "ss" + v for v in endingVowels)
-        elif case == "ela":
-            yield from (word + "st" + v for v in endingVowels)
-        elif case == "ade":
-            yield from (word + "ll" + v for v in endingVowels)
-        elif case == "abl":
-            yield from (word + "lt" + v for v in endingVowels)
-        elif case == "all":
-            yield word + "lle"
-        elif case == "abe":
-            yield from (word + "tt" + v for v in endingVowels)
+        if decl == 22:
+            words = (word + "'",)
+        elif decl == 48 and word == "viipee":
+            words = (word, word[:-3] + "v" + word[-2:])
+        else:
+            words = (word,)
+        ending = GEN_SG_LIKE_ENDINGS[case]
+        if case in ("nom", "gen", "tra", "all"):
+            yield from (w + ending for w in words)
+        else:
+            for word in words:
+                yield from (word + ending + v for v in endingVowels)
     elif case == "ess" and number == "sg":
         # essive singular
         word = _decline_ess_sg(word, decl, consGrad)
         word += ("'" if decl == 22 else "")
         yield from (word + "n" + v for v in endingVowels)
+        if word == "viipee" and decl == 48:
+            yield from (
+                word[:-3] + "v" + word[-2:] + "n" + v for v in endingVowels
+            )
     elif case == "ill" and number == "sg":
         # illative singular
         word = _decline_ess_sg(word, decl, consGrad)
@@ -386,6 +398,8 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
         elif decl in (17, 41, 44, 47, 48) \
         or decl == 49 and word.endswith("ee"):
             yield word + "seen"
+            if word == "viipee":
+                yield word[:-3] + "v" + word[-2:] + "seen"
         else:
             yield word + word[-1] + "n"
     elif case == "par" and number == "sg":

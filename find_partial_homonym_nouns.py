@@ -7,6 +7,7 @@ from noundecl import get_declensions
 
 # (case, number)
 CASES = (
+    ("nom", "sg"),
     ("nom", "pl"),
     ("gen", "sg"),
     ("tra", "sg"),

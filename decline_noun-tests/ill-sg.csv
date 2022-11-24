@@ -406,6 +406,14 @@ pue,pukeeseen
 säe,säkeeseen
 tae,takeeseen
 yhtye,yhtyeeseen
+# -de
+sade,sateeseen
+suhde,suhteeseen
+# -he
+aihe,aiheeseen
+valhe,valheeseen
+venhe,venheeseen
+virhe,virheeseen
 # -je
 hylje,hylkeeseen
 kirje,kirjeeseen
@@ -420,20 +428,43 @@ ryske,ryskeeseen
 sähke,sähkeeseen
 virke,virkkeeseen
 välke,välkkeeseen
-# -Ce (not -je, -ke)
-ahne,ahneeseen
-aihe,aiheeseen
-ape,appeeseen
-hame,hameeseen
+# -le
 helle,helteeseen
+kahle,kahleeseen
+säle,säleeseen
+tisle,tisleeseen
+# -me
+amme,ammeeseen
+hame,hameeseen
+hurme,hurmeeseen
 ihme,ihmeeseen
+ilme,ilmeeseen
 lumme,lumpeeseen
-ripe,rippeeseen
-sose,soseeseen
-suhde,suhteeseen
+# -ne
+ahne,ahneeseen
+aine,aineeseen
+herne,herneeseen
 tunne,tunteeseen
-uurre,uurteeseen
-vuode,vuoteeseen
+# -pe
+ape,appeeseen
+kampe,kamppeeseen
+# -re
+aarre,aarteeseen
+näre,näreeseen
+# -se
+ase,aseeseen
+hilse,hilseeseen
+katse,katseeseen
+# -te
+aate,aatteeseen
+este,esteeseen
+hynte,hyntteeseen
+korte,kortteeseen
+polte,poltteeseen
+# -ve
+aave,aaveeseen
+lieve,liepeeseen
+viive,viipeeseen,viiveeseen
 
 # declension 49 (all)
 # -e
