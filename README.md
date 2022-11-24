@@ -37,6 +37,11 @@ kuuden
 kuusen
 ```
 
+### find_partial_homonym_nouns.py
+Find partially homonymous inflected nouns. Under construction (the results are incomplete). Slow.
+
+`partial-homonym-nouns.txt` has been generated with this program.
+
 ### noun_consgrad.py
 Argument: a Finnish noun (including adjectives/pronouns/numerals, excluding compounds) in nominative singular. Print the Kotus declension(s) (1-49) and whether consonant gradation applies.
 
@@ -227,8 +232,8 @@ Uninflected words that only occur as non-final parts of compounds, not finally o
 E.g. `hassel` (as in `hasselpähkinä`) but not `hevos`, `pään` or `pää`.
 Under construction (vowel-final words still missing).
 
-### noundecl.md
-Noun declension. Under construction.
+### partial-homonym-nouns.txt
+A list of partially homonymous inflected nouns. Incomplete. Automatically generated with `find_partial_homonym_nouns.py`.
 
 ### plurals.csv
 A list of "plural only" words on the Kotus list.
