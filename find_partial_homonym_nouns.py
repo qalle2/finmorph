@@ -88,6 +88,6 @@ def main():
             l[0] + " " + ",".join(str(d) for d in l[1]) for l in lemmas
         )
 
-        print(f"{allDeclensionsStr:8} {inflected:19} ({lemmasStr})")
+        print(f"{allDeclensionsStr:10} {inflected:19} ({lemmasStr})")
 
 main()
