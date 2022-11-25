@@ -37,6 +37,7 @@ olas,olaana,olaksena
 pallas,pallaksena,paltaana
 rosvous,rosvouksena,rosvoutena
 siivous,siivouksena,siivoutena
+tuomas,tuomaana,tuomaksena
 uros,uroksena,uroona
 vakaus,vakauksena,vakautena
 # other
@@ -394,20 +395,86 @@ kalleus,kalleutena
 äreys,äreytenä
 
 # declension 41
-allas,altaana
-altis,alttiina
-kinnas,kintaana
-mätäs,mättäänä
-ratas,rattaana
-ruis,rukiina
-rynnäs,ryntäänä
-tahdas,tahtaana
-tikas,tikkaana
+# -Vs (not -As, -is)
+ies,ikeenä
+kirves,kirveenä
+ryntys,rynttyynä
 vantus,vanttuuna
+äes,äkeenä
+# -VAs, -Vis
+autuas,autuaana
+ies,ikeenä
+kiuas,kiukaana
+oas,okaana
+ruis,rukiina
+äveriäs,äveriäänä
+# -dAs, -dis
+ahdas,ahtaana
+hidas,hitaana
+# -gAs, -gis
+kangas,kankaana
+köngäs,könkäänä
+# -hAs, -his
+keihäs,keihäänä
+# -jAs, -jis
+uljas,uljaana
+# -kAs, -kis
+kirkas,kirkkaana
+rakas,rakkaana
+raskas,raskaana
+sitkas,sitkaana
+vilkas,vilkkaana
+# -lAs, -lis
+allas,altaana
+aulis,auliina
+kallis,kalliina
+kaplas,kaplaana
+mallas,maltaana
+valas,valaana
+# -mAs, -mis
+armas,armaana
+hammas,hampaana
+ruumis,ruumiina
+valmis,valmiina
+vehmas,vehmaana
+# -nAs, -nis
+ahnas,ahnaana
+kaunis,kauniina
+kinnas,kintaana
+kunnas,kunnaana
+oinas,oinaana
+rynnäs,ryntäänä
+# -pAs, -pis
+opas,oppaana
+rypäs,ryppäänä
+valpas,valppaana
+# -rAs, -ris
+eräs,eräänä
+katras,katraana
+kauris,kauriina
+oras,oraana
+paras,parhaana
 varas,varkaana
 varras,vartaana
-vieras,vieraana
-äes,äkeenä
+# -sAs, -sis
+pensas,pensaana
+porsas,porsaana
+viisas,viisaana
+# -tAs, -tis
+altis,alttiina
+mätäs,mättäänä
+ratas,rattaana
+raitis,raittiina
+rastas,rastaana
+# -vAs, -vis
+eväs,eväänä
+karvas,karvaana
+rahvas,rahvaana
+ryväs,rypäänä
+seiväs,seipäänä
+tiivis,tiiviinä
+varvas,varpaana
+ylväs,ylväänä
 
 # declension 42 (all)
 mies,miehenä

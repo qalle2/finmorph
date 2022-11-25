@@ -37,6 +37,7 @@ olas,olaaseen,olakseen
 pallas,pallakseen,paltaaseen
 rosvous,rosvoukseen,rosvouteen
 siivous,siivoukseen,siivouteen
+tuomas,tuomaaseen,tuomakseen
 uros,urokseen,urooseen
 vakaus,vakaukseen,vakauteen
 # other
@@ -394,20 +395,86 @@ kalleus,kalleuteen
 äreys,äreyteen
 
 # declension 41
-allas,altaaseen
-altis,alttiiseen
-kinnas,kintaaseen
-mätäs,mättääseen
-ratas,rattaaseen
-ruis,rukiiseen
-rynnäs,ryntääseen
-tahdas,tahtaaseen
-tikas,tikkaaseen
+# -Vs (not -As, -is)
+ies,ikeeseen
+kirves,kirveeseen
+ryntys,rynttyyseen
 vantus,vanttuuseen
+äes,äkeeseen
+# -VAs, -Vis
+autuas,autuaaseen
+ies,ikeeseen
+kiuas,kiukaaseen
+oas,okaaseen
+ruis,rukiiseen
+äveriäs,äveriääseen
+# -dAs, -dis
+ahdas,ahtaaseen
+hidas,hitaaseen
+# -gAs, -gis
+kangas,kankaaseen
+köngäs,könkääseen
+# -hAs, -his
+keihäs,keihääseen
+# -jAs, -jis
+uljas,uljaaseen
+# -kAs, -kis
+kirkas,kirkkaaseen
+rakas,rakkaaseen
+raskas,raskaaseen
+sitkas,sitkaaseen
+vilkas,vilkkaaseen
+# -lAs, -lis
+allas,altaaseen
+aulis,auliiseen
+kallis,kalliiseen
+kaplas,kaplaaseen
+mallas,maltaaseen
+valas,valaaseen
+# -mAs, -mis
+armas,armaaseen
+hammas,hampaaseen
+ruumis,ruumiiseen
+valmis,valmiiseen
+vehmas,vehmaaseen
+# -nAs, -nis
+ahnas,ahnaaseen
+kaunis,kauniiseen
+kinnas,kintaaseen
+kunnas,kunnaaseen
+oinas,oinaaseen
+rynnäs,ryntääseen
+# -pAs, -pis
+opas,oppaaseen
+rypäs,ryppääseen
+valpas,valppaaseen
+# -rAs, -ris
+eräs,erääseen
+katras,katraaseen
+kauris,kauriiseen
+oras,oraaseen
+paras,parhaaseen
 varas,varkaaseen
 varras,vartaaseen
-vieras,vieraaseen
-äes,äkeeseen
+# -sAs, -sis
+pensas,pensaaseen
+porsas,porsaaseen
+viisas,viisaaseen
+# -tAs, -tis
+altis,alttiiseen
+mätäs,mättääseen
+ratas,rattaaseen
+raitis,raittiiseen
+rastas,rastaaseen
+# -vAs, -vis
+eväs,evääseen
+karvas,karvaaseen
+rahvas,rahvaaseen
+ryväs,rypääseen
+seiväs,seipääseen
+tiivis,tiiviiseen
+varvas,varpaaseen
+ylväs,ylvääseen
 
 # declension 42 (all)
 mies,mieheen

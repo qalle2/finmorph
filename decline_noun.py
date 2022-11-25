@@ -139,16 +139,16 @@ _CONS_GRAD_WEAKEN = (
 _CONS_GRAD_STRENGTHEN = (
     # k
     ("([aeiouyäölnr])k(aa|ee)$",   r"\1kk\2"),  # e.g. tikas
-    ("(e)ng(ere)$",                r"\1nk\2"),  # e.g. penger
+    ("([aeiouyäö])ng(aa|ää|ere)$", r"\1nk\2"),  # e.g. penger
     ("([hl])j(ee)$",               r"\1k\2"),   # e.g. hylje
     ("([aeiouyäöh])(ene|ime)$",    r"\1k\2"),   # e.g. säen
     ("([aeiouyäö]|ar)(aa|ee|ii)$", r"\1k\2"),   # e.g. ruis
     # p
-    ("([aeiouyäölmr])p(ee)$",          r"\1pp\2"),  # e.g. ape
-    ("([aeiouyäö])mm(ee|ele|imä|ye)$", r"\1mp\2"),  # e.g. lämmin
-    ("([aeiouyäö])v(aa|ee|ale|ime)$",  r"\1p\2"),   # e.g. taival
+    ("([aeiouyäölmr])p(aa|ää|ee)$",        r"\1pp\2"),  # e.g. ape
+    ("([aeiouyäö])mm(aa|ee|ele|imä|ye)$",  r"\1mp\2"),  # e.g. lämmin
+    ("([aeiouyäölr])v(aa|ää|ee|ale|ime)$", r"\1p\2"),   # e.g. taival
     # t
-    ("([aeiouyäölnr])t(aa|ää|ee|ii|uu)$",     r"\1tt\2"),  # e.g. altis
+    ("([aeiouyäölnr])t(aa|ää|ee|ii|uu|yy)$",  r"\1tt\2"),  # e.g. altis
     ("([aeiouyäö])t(are|äre|ime|oma|ömä)$",   r"\1tt\2"),  # e.g. heitin
     (r"([lnr])\1(aa|ää|ee|are|ele|ere|ime)$", r"\1t\2"),   # e.g. kallas
     ("([aeiouyäöh])d(aa|ee|are|ime)$",        r"\1t\2"),   # e.g. pidin
@@ -170,6 +170,19 @@ _BOTH_A_AND_AUML = frozenset((
     ("spray",      21),
     ("port salut", 22),
     ("menu",       21),
+))
+
+# combinations of case/number that behave like genitive singular
+CASES_LIKE_GEN_SG = frozenset((
+    ("nom", "pl"),
+    ("gen", "sg"),
+    ("tra", "sg"),
+    ("ine", "sg"),
+    ("ela", "sg"),
+    ("ade", "sg"),
+    ("abl", "sg"),
+    ("all", "sg"),
+    ("abe", "sg"),
 ))
 
 # endings for cases that behave like genitive singular, without final -A
@@ -217,6 +230,22 @@ _ILL_SG_VOWELS_21_22 = {
     "tournedos":    "o",
 }
 
+# consonant gradation in GenSg and similar cases is optional for these words
+OPTIONAL_CONS_GRAD_GEN_SG = frozenset((
+    "bourette",
+    "haiku", "huti",
+    "koto", "kuti",
+    "lento", "leuku", "loota", "lunki",
+    "mutu", "myky", "mökä",
+    "nahka", "nuti",
+    "parka", "peti",
+    "raita", "ringette",
+    "seljanka", "sinfonietta", "säkä",
+    "tuhka", "tutti",
+    "uhka",
+    "veto", "vihko", "vika", "vinaigrette",
+))
+
 # grammatical cases supported (first 3 letters of each)
 _CASES = (
     "nom", "gen", "par", "ess", "tra", "ine", "ela", "ill", "ade", "abl",
@@ -249,7 +278,6 @@ def _decline_gen_sg(word, decl, consGrad):
     # return inflected form for a case/number that behaves like
     # genitive singular; no case/number ending; e.g. "kaksi" -> "kahde"
 
-    #print(word, decl, consGrad)
     origWord = word
 
     # irregular changes to final consonant and vowel
@@ -259,7 +287,9 @@ def _decline_gen_sg(word, decl, consGrad):
     word = _apply_regex(word, decl, _FINAL_VOWEL_CHANGES_GEN_SG_ESS_SG)
 
     # consonant gradation (consonant gradation data has some errors)
-    if consGrad and decl >= 32 or origWord in ("auer", "hynte", "näin", "pue"):
+    if consGrad and decl >= 32 or origWord in (
+        "auer", "hynte", "näin", "pue", "ryntys"
+    ):
         # strengthening
         word = _consonant_gradation(word, True)
     elif consGrad and not (
@@ -282,7 +312,6 @@ def _decline_ess_sg(word, decl, consGrad):
     # return inflected form for a case/number that behaves like
     # essive singular; no case/number ending; e.g. "kaksi" -> "kahte"
 
-    #print(word, decl, consGrad)
     origWord = word
 
     # irregular changes to final consonant and vowel
@@ -302,8 +331,6 @@ def _decline_par_sg(word, decl, consGrad):
     # return inflected form for a case/number that behaves like
     # partitive singular; no case/number ending; e.g. "kaksi" -> "kaht"
 
-    #print(word, decl, consGrad)
-
     # irregular changes to final consonant and vowel
     word = _apply_regex(word, decl, _FINAL_CONS_CHANGES_COMMON)
     word = _apply_regex(word, decl, _FINAL_CONS_CHANGES_PAR_SG)
@@ -321,71 +348,55 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
     # generate inflected forms of a Finnish noun using specified declension
     # (1-49) and consonant gradation (bool)
 
-    origWord = word
-
-    # make changes before appending case/number ending
-    if case == "nom" and number == "sg":
-        # nominative singular
-        pass
-    elif number == "pl" and case == "nom" or number == "sg" \
-    and case in ("gen", "tra", "ine", "ela", "ade", "abl", "all", "abe"):
-        # many case/number combinations that resemble genitive singular
-        word = _decline_gen_sg(word, decl, consGrad)
-    elif case in ("ess", "ill") and number == "sg":
-        # essive singular, illative singular
-        word = _decline_ess_sg(word, decl, consGrad)
-    elif case == "par" and number == "sg":
-        # partitive singular
-        word = _decline_par_sg(word, decl, consGrad)
-    else:
-        sys.exit("Case/number not implemented.")
-
-    # append apostrophe
-    if decl == 22 and not (case == "nom" and number == "sg"):
-        word += "'"
+    #print(word, decl, consGrad)
 
     # use "a", "ä" or both in -A endings?
-    if (origWord, decl) in _BOTH_A_AND_AUML:
+    if (word, decl) in _BOTH_A_AND_AUML:
         endingVowels = "aä"
     elif re.search(r"^[^aáou]+$", word) is not None:
         endingVowels = "ä"
     else:
         endingVowels = "a"
 
-    # add a duplicate with consonant gradation undone for some words
-    words = (word,)
-    # all cases except nominative singular and partitive singular
-    if not (case in ("nom", "par") and number == "sg"):
-        if origWord in ("häive", "viive"):
-            # p -> v
-            words = (word, word[:-3] + "v" + word[-2:])
-    # essive singular, illative singular, partitive singular
-    if case in ("ess", "ill", "par") and number == "sg":
-        if origWord == "pop":
-            # p -> pp
-            words = (word, word[:-2] + "pp" + word[-1])
-    # cases that behave like genitive singular
-    if number == "pl" and case == "nom" or number == "sg" \
-    and case in ("gen", "tra", "ine", "ela", "ade", "abl", "all", "abe"):
-        if origWord in ("leuku", "lunki", "myky", "seljanka"):
-            # '/g/v -> k
-            words = (word, word[:-2] + "k" + word[-1])
-        elif origWord in ("haiku", "mökä", "nahka", "parka", "säkä", "tuhka", "uhka", "vihko", "vika"):
-            # nothing -> k
-            words = (word, word[:-1] + "k" + word[-1])
-        elif origWord in ("huti", "koto", "kuti", "lento", "loota", "mutu", "nuti", "peti", "raita", "veto"):
-            # d -> t
-            words = (word, word[:-2] + "t" + word[-1])
-        elif origWord in ("bourette", "ringette", "sinfonietta", "tutti", "vinaigrette"):
-            # t -> tt
-            words = (word, word[:-2] + "tt" + word[-1])
-    del word
+    # make changes before appending case/number ending
+    if case == "nom" and number == "sg":
+        inflected = word
+    elif (case, number) in CASES_LIKE_GEN_SG:
+        inflected = _decline_gen_sg(word, decl, consGrad)
+    elif case in ("ess", "ill") and number == "sg":
+        inflected = _decline_ess_sg(word, decl, consGrad)
+    elif case == "par" and number == "sg":
+        inflected = _decline_par_sg(word, decl, consGrad)
+    else:
+        sys.exit("Case/number not implemented.")
+
+    # add variants of inflected form and store all in a tuple
+    if (case, number) in CASES_LIKE_GEN_SG \
+    and word in OPTIONAL_CONS_GRAD_GEN_SG:
+        words = (inflected, word)
+    elif word in ("häive", "viive") and not (case == "par" and number == "sg"):
+        words = (inflected, word + "e")
+    elif word == "paras" and not (case == "par" and number == "sg"):
+        words = ("parhaa",)
+    elif word == "pop" and case in ("ess", "ill", "par") and number == "sg":
+        words = (inflected, "poppi")
+    elif word == "ryntys" and case in ("ess", "ill") and number == "sg":
+        words = ("rynttyy",)
+    elif word == "tuomas" and case == "ill" and number == "sg":
+        words = (inflected, word[:-1] + "k")
+    elif word == "tuomas" and not (case in ("nom", "par") and number == "sg"):
+        words = (inflected, word[:-1] + "kse")
+    else:
+        words = (inflected,)
+
+    # append apostrophe
+    if decl == 22 and not (case == "nom" and number == "sg"):
+        words = tuple(f"{w}'" for w in words)
 
     # append case/number endings and generate words
     if case == "nom" and number == "sg":
         yield from words
-    elif number == "pl" and case == "nom" or number == "sg" \
-    and case in ("gen", "tra", "ine", "ela", "ade", "abl", "all", "abe"):
+    elif (case, number) in CASES_LIKE_GEN_SG:
         # many case/number combinations that resemble genitive singular
         if case in ("nom", "gen", "tra", "all"):
             yield from (f"{w}{GEN_SG_LIKE_ENDINGS[case]}" for w in words)
@@ -408,18 +419,18 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
             yield from (
                 f"{w}h{v}n"
                 for w in words
-                for v in _ILL_SG_VOWELS_21_22.get(origWord, w[-1])
+                for v in _ILL_SG_VOWELS_21_22.get(word, w[-1])
             )
-            if origWord == "jersey":
+            if word == "jersey":
                 yield from (w + "yn" for w in words)  # additional
         elif decl == 22:
-            for word in words:
+            for w in words:
                 yield from (
-                    f"{word}h{v}n"
-                    for v in _ILL_SG_VOWELS_21_22.get(origWord, "e")
+                    f"{w}h{v}n"
+                    for v in _ILL_SG_VOWELS_21_22.get(word, "e")
                 )
         elif decl in (17, 41, 44, 47, 48) \
-        or decl == 49 and origWord.endswith("e"):
+        or decl == 49 and word.endswith("e"):
             yield from (f"{w}seen" for w in words)
         else:
             yield from (f"{w}{w[-1]}n" for w in words)
@@ -436,10 +447,10 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
             )
             yield from (f"{w}t{v}" for w in words for v in endingVowels)
         else:
-            if decl == 15 or origWord == "jersey":
+            if decl == 15 or word == "jersey":
                 # e.g. korkeaa/korkeata
                 middles = ("t", "")
-            elif decl == 48 or decl == 49 and origWord.endswith("e"):
+            elif decl == 48 or decl == 49 and word.endswith("e"):
                 # e.g. hametta, askeletta
                 middles = ("tt",)
             elif decl == 3 or decl >= 17:

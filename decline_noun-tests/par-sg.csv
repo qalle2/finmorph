@@ -37,6 +37,7 @@ olas,olasta
 pallas,pallasta
 rosvous,rosvousta,rosvoutta
 siivous,siivousta,siivoutta
+tuomas,tuomasta
 uros,urosta
 vakaus,vakausta,vakautta
 # other
@@ -394,20 +395,86 @@ kalleus,kalleutta
 äreys,äreyttä
 
 # declension 41
-allas,allasta
-altis,altista
-kinnas,kinnasta
-mätäs,mätästä
-ratas,ratasta
-ruis,ruista
-rynnäs,rynnästä
-tahdas,tahdasta
-tikas,tikasta
+# -Vs (not -As, -is)
+ies,iestä
+kirves,kirvestä
+ryntys,ryntystä
 vantus,vantusta
+äes,äestä
+# -VAs, -Vis
+autuas,autuasta
+ies,iestä
+kiuas,kiuasta
+oas,oasta
+ruis,ruista
+äveriäs,äveriästä
+# -dAs, -dis
+ahdas,ahdasta
+hidas,hidasta
+# -gAs, -gis
+kangas,kangasta
+köngäs,köngästä
+# -hAs, -his
+keihäs,keihästä
+# -jAs, -jis
+uljas,uljasta
+# -kAs, -kis
+kirkas,kirkasta
+rakas,rakasta
+raskas,raskasta
+sitkas,sitkasta
+vilkas,vilkasta
+# -lAs, -lis
+allas,allasta
+aulis,aulista
+kallis,kallista
+kaplas,kaplasta
+mallas,mallasta
+valas,valasta
+# -mAs, -mis
+armas,armasta
+hammas,hammasta
+ruumis,ruumista
+valmis,valmista
+vehmas,vehmasta
+# -nAs, -nis
+ahnas,ahnasta
+kaunis,kaunista
+kinnas,kinnasta
+kunnas,kunnasta
+oinas,oinasta
+rynnäs,rynnästä
+# -pAs, -pis
+opas,opasta
+rypäs,rypästä
+valpas,valpasta
+# -rAs, -ris
+eräs,erästä
+katras,katrasta
+kauris,kaurista
+oras,orasta
+paras,parasta
 varas,varasta
 varras,varrasta
-vieras,vierasta
-äes,äestä
+# -sAs, -sis
+pensas,pensasta
+porsas,porsasta
+viisas,viisasta
+# -tAs, -tis
+altis,altista
+mätäs,mätästä
+ratas,ratasta
+raitis,raitista
+rastas,rastasta
+# -vAs, -vis
+eväs,evästä
+karvas,karvasta
+rahvas,rahvasta
+ryväs,ryvästä
+seiväs,seivästä
+tiivis,tiivistä
+varvas,varvasta
+ylväs,ylvästä
 
 # declension 42 (all)
 mies,miestä
