@@ -7,6 +7,7 @@ _TEST_DIR = "decline_noun-tests"  # read test files from here
 
 # (case, number)
 _ALL_TESTS = (
+    ("nom", "sg"),
     ("nom", "pl"),
     ("gen", "sg"),
     ("tra", "sg"),
@@ -46,7 +47,12 @@ def run_test(case, number):
     number: e.g. 'sg'
     return: number of words tested"""
 
-    words = _read_csv(case, number)  # {NomSg: (inflected, ...), ...}
+    if case == "nom" and number == "sg":
+        # {NomSg: (NomSg,), ...}
+        words = dict((w, (w,)) for w in _read_csv("gen", "sg"))
+    else:
+        # {NomSg: (inflected, ...), ...}
+        words = _read_csv(case, number)
 
     for word in words:
         result = tuple(sorted(set(

@@ -173,7 +173,7 @@ _BOTH_A_AND_AUML = frozenset((
 ))
 
 # combinations of case/number that behave like genitive singular
-CASES_LIKE_GEN_SG = frozenset((
+_CASES_LIKE_GEN_SG = frozenset((
     ("nom", "pl"),
     ("gen", "sg"),
     ("tra", "sg"),
@@ -186,7 +186,7 @@ CASES_LIKE_GEN_SG = frozenset((
 ))
 
 # endings for cases that behave like genitive singular, without final -A
-GEN_SG_LIKE_ENDINGS = {
+_GEN_SG_LIKE_ENDINGS = {
     "nom": "t",
     "gen": "n",
     "tra": "ksi",
@@ -231,7 +231,7 @@ _ILL_SG_VOWELS_21_22 = {
 }
 
 # consonant gradation in GenSg and similar cases is optional for these words
-OPTIONAL_CONS_GRAD_GEN_SG = frozenset((
+_OPTIONAL_CONS_GRAD_GEN_SG = frozenset((
     "bourette",
     "haiku", "huti",
     "koto", "kuti",
@@ -254,6 +254,23 @@ _CASES = (
 
 # grammatical numbers supported (singular, plural)
 _NUMBERS = ("sg", "pl")
+
+# currently supported combinations of (case, number)
+_SUPPORTED_CASES = (
+    ("nom", "sg"),
+    ("nom", "pl"),
+    ("gen", "sg"),
+    ("par", "sg"),
+    ("ess", "sg"),
+    ("tra", "sg"),
+    ("ine", "sg"),
+    ("ela", "sg"),
+    ("ill", "sg"),
+    ("ade", "sg"),
+    ("abl", "sg"),
+    ("all", "sg"),
+    ("abe", "sg"),
+)
 
 def _apply_regex(word, decl, regexes):
     # regexes: {declension: ((regex_from, regex_to), ...), ...}
@@ -361,22 +378,24 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
     # make changes before appending case/number ending
     if case == "nom" and number == "sg":
         inflected = word
-    elif (case, number) in CASES_LIKE_GEN_SG:
+    elif (case, number) in _CASES_LIKE_GEN_SG:
         inflected = _decline_gen_sg(word, decl, consGrad)
     elif case in ("ess", "ill") and number == "sg":
         inflected = _decline_ess_sg(word, decl, consGrad)
     elif case == "par" and number == "sg":
         inflected = _decline_par_sg(word, decl, consGrad)
     else:
-        sys.exit("Case/number not implemented.")
+        sys.exit("Error: this should never happen.")
 
     # add variants of inflected form and store all in a tuple
-    if (case, number) in CASES_LIKE_GEN_SG \
-    and word in OPTIONAL_CONS_GRAD_GEN_SG:
+    if (case, number) in _CASES_LIKE_GEN_SG \
+    and word in _OPTIONAL_CONS_GRAD_GEN_SG:
         words = (inflected, word)
-    elif word in ("häive", "viive") and not (case == "par" and number == "sg"):
+    elif word in ("häive", "viive") \
+    and not (case in ("nom", "par") and number == "sg"):
         words = (inflected, word + "e")
-    elif word == "paras" and not (case == "par" and number == "sg"):
+    elif word == "paras" \
+    and not (case in ("nom", "par") and number == "sg"):
         words = ("parhaa",)
     elif word == "pop" and case in ("ess", "ill", "par") and number == "sg":
         words = (inflected, "poppi")
@@ -396,13 +415,13 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
     # append case/number endings and generate words
     if case == "nom" and number == "sg":
         yield from words
-    elif (case, number) in CASES_LIKE_GEN_SG:
+    elif (case, number) in _CASES_LIKE_GEN_SG:
         # many case/number combinations that resemble genitive singular
         if case in ("nom", "gen", "tra", "all"):
-            yield from (f"{w}{GEN_SG_LIKE_ENDINGS[case]}" for w in words)
+            yield from (f"{w}{_GEN_SG_LIKE_ENDINGS[case]}" for w in words)
         else:
             yield from (
-                f"{w}{GEN_SG_LIKE_ENDINGS[case]}{v}"
+                f"{w}{_GEN_SG_LIKE_ENDINGS[case]}{v}"
                 for w in words for v in endingVowels
             )
     elif case == "ess" and number == "sg":
@@ -471,24 +490,40 @@ def decline_noun(word, case, number):
         yield from _decline_noun_specific(word, decl, consGrad, case, number)
 
 def main():
-    if len(sys.argv) != 4:
+    if len(sys.argv) == 2:
+        word = sys.argv[1]
+        allCases = True
+    elif len(sys.argv) == 4:
+        (word, case, number) = sys.argv[1:]
+        if case not in _CASES:
+            sys.exit("Invalid case.")
+        if number not in _NUMBERS:
+            sys.exit("Invalid number.")
+        if (case, number) not in _SUPPORTED_CASES:
+            sys.exit("Unsupported combination of case and number.")
+        allCases = False
+    else:
         sys.exit(
-            "Decline a Finnish noun. Arguments: NOUN CASE NUMBER. Cases: "
-            + ", ".join(_CASES) + ". Numbers: " + ", ".join(_NUMBERS) + "."
+            "Decline a Finnish noun. Arguments: NOUN [CASE NUMBER]. Cases: "
+            + ", ".join(_CASES) + ". Numbers: " + ", ".join(_NUMBERS) + ". "
+            + "If case & number omitted, print all supported combinations."
         )
 
-    (word, case, number) = sys.argv[1:]
-    if case not in _CASES:
-        sys.exit("Invalid case.")
-    if number not in _NUMBERS:
-        sys.exit("Invalid number.")
-
-    declinedNouns = set(decline_noun(word, case, number))
-    if not declinedNouns:
-        sys.exit("Unrecognized noun.")
-
-    for noun in sorted(declinedNouns):
-        print(noun)
+    if allCases:
+        for (case, number) in _SUPPORTED_CASES:
+            declinedNouns = set(decline_noun(word, case, number))
+            if not declinedNouns:
+                sys.exit("Unrecognized noun.")
+            print(
+                case.title() + number.title() + ": "
+                + ", ".join(sorted(declinedNouns))
+            )
+    else:
+        declinedNouns = set(decline_noun(word, case, number))
+        if not declinedNouns:
+            sys.exit("Unrecognized noun.")
+        for noun in sorted(declinedNouns):
+            print(noun)
 
 if __name__ == "__main__":
     main()
