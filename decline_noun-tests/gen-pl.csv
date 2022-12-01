@@ -1,0 +1,615 @@
+# more than one declension (all)
+# 5/other
+alpi,alpien
+csárdás,csárdáksien,csárdásien,csárdásten
+helpi,helpien
+kaihi,kaihien
+karhi,karhien
+kuori,kuorien,kuorten
+kuskus,kuskuksien,kuskusien,kuskusten
+kymi,kymien
+lahti,lahtien
+laki,lakien
+ori,orien,oriiden
+palvi,palvien
+peitsi,peisten,peitsien
+ripsi,ripsien
+saksi,saksien
+sini,sinien
+sioux,sioux'iden,siouxien
+syli,sylien
+viini,viinien,viinten
+vuori,vuorien,vuorten
+vyyhti,vyyhtien
+# 9/other
+aneurysma,aneurysmien,aneurysmojen
+kysta,kystien,kystojen
+lyyra,lyyrien,lyyrojen
+puola,puolien,puolojen
+# 39/other
+ahtaus,ahtauksien,ahtausten
+havas,hapaiden,havaksien,havasten
+kallas,kallaksien,kallasten,kaltaiden
+karvaus,karvauksien,karvausten
+koiras,koiraiden,koiraksien,koirasten
+kymmenes,kymmeneksien,kymmenensien,kymmenesten
+olas,olaiden,olaksien,olasten
+pallas,pallaksien,pallasten,paltaiden
+rosvous,rosvouksien,rosvousten
+siivous,siivouksien,siivousten
+tuomas,tuomaiden,tuomaksien,tuomasten
+uros,uroiden,uroksien,urosten
+vakaus,vakauksien,vakausten
+# other
+caddie,caddieiden,caddiejen
+hapsi,hapsien,hasten
+humala,humalien,humaloiden
+kuusi,kuusien,kuusten
+menu,menuiden,menujen
+siitake,siitakejen,siitakkeiden
+tanhua,tanhuiden,tanhuoiden
+uksi,uksien
+
+# homonyms distinguished by consonant gradation in some cases
+haiku,haikujen
+koto,kotojen
+lento,lentojen
+mutu,mutujen
+parka,parkojen
+raita,raitojen
+säkä,säkien
+tutti,tuttien
+veto,vetojen
+vika,vikojen
+
+# optional consonant gradation (no change in meaning) in some cases
+bourette,bourettejen
+huti,hutien
+häive,häipeiden,häiveiden
+kuti,kutien
+leuku,leukujen
+loota,lootien
+lunki,lunkien
+mutu,mutujen
+myky,mykyjen
+mökä,mökien
+nahka,nahkojen
+nuti,nutien
+peti,petien
+pop,popien,poppien
+ringette,ringettejen
+seljanka,seljankojen
+sinfonietta,sinfoniettojen
+tuhka,tuhkien
+uhka,uhkien
+vihko,vihkojen
+viive,viipeiden,viiveiden
+vinaigrette,vinaigrettejen
+
+# declension 1
+# -VkV
+koko,kokojen
+kyky,kykyjen
+laku,lakujen
+suku,sukujen
+# -CkV
+hehku,hehkujen
+katku,katkujen
+kinkku,kinkkujen
+korko,korkojen
+palko,palkojen
+pilkku,pilkkujen
+sisko,siskojen
+sähkö,sähköjen
+sänky,sänkyjen
+tikku,tikkujen
+verkko,verkkojen
+# -VpV
+rapu,rapujen
+söpö,söpöjen
+# -CpV
+helppo,helppojen
+kirppu,kirppujen
+kumpu,kumpujen
+orpo,orpojen
+temppu,temppujen
+vappu,vappujen
+# -VtV
+auto,autojen
+etu,etujen
+# -CtV
+ehto,ehtojen
+lanttu,lanttujen
+murto,murtojen
+pelto,peltojen
+rento,rentojen
+torttu,torttujen
+tyttö,tyttöjen
+veltto,velttojen
+# -CV (not -kV, -pV, -tV)
+valo,valojen
+vilu,vilujen
+äly,älyjen
+
+# declension 2
+palvelu,palveluiden,palvelujen
+väestö,väestöiden,väestöjen
+
+# declension 3
+valtio,valtioiden
+yhtiö,yhtiöiden
+
+# declension 4
+laatikko,laatikkojen,laatikoiden
+älykkö,älykköjen,älyköiden
+
+# declension 5
+lux,luxien
+risti,ristien
+šakki,šakkien
+wok,wokien
+vouti,voutien
+
+# declension 6
+lumen,lumeneiden,lumenien
+paperi,papereiden,paperien
+weber,webereiden,weberien
+
+# declension 7
+# -VCV
+läpi,läpien
+ovi,ovien
+piki,pikien
+reki,rekien
+tuki,tukien
+# -CCV
+arki,arkien
+arpi,arpien
+hetki,hetkien
+impi,impien
+jälki,jälkien
+järki,järkien
+kaikki,kaikkien
+kaski,kaskien
+lehti,lehtien
+olki,olkien
+onki,onkien
+soppi,soppien
+
+# declension 8
+jeppe,jeppejen
+nalle,nallejen
+nukke,nukkejen,nukkien
+ope,opejen
+
+# declension 9
+# -VCV
+aika,aikojen
+eka,ekojen
+kala,kalojen
+sata,satojen
+taika,taikojen
+tapa,tapojen
+vaaka,vaakojen
+# -CCV
+arka,arkojen
+jalka,jalkojen
+iskä,isköjen
+lanka,lankojen
+takka,takkojen
+vehka,vehkojen
+velka,velkojen
+vihta,vihtojen
+virka,virkojen
+
+# declension 10
+kahdeksan,kahdeksien
+koira,koirien
+nälkä,nälkien
+poika,poikien
+seitsemän,seitsemien
+yhdeksän,yhdeksien
+ylkä,ylkien
+
+# declension 11
+käpälä,käpälien,käpälöiden,käpälöjen
+omena,omenien,omenoiden,omenojen
+
+# declension 12
+kulkija,kulkijoiden
+ritilä,ritilöiden
+
+# declension 13
+katiska,katiskoiden,katiskojen
+siivilä,siivilöiden,siivilöjen
+
+# declension 14
+solakka,solakkojen,solakoiden
+ötökkä,ötökköjen,ötököiden
+
+# declension 15
+korkea,korkeiden
+äreä,äreiden
+
+# declension 16
+idempi,idempien
+kumpi,kumpien
+vanhempi,vanhempien
+
+# declension 17
+hynttyy,hynttyiden
+vapaa,vapaiden
+
+# declension 18
+maa,maiden
+tii,tiiden
+
+# declension 19
+suo,soiden
+tie,teiden
+yö,öiden
+
+# declension 20
+filee,fileiden
+nugaa,nugaiden
+
+# declension 21 (all except "kungfu", "taxfree")
+brasserie,brasserieiden
+brie,brieiden
+bébé,bébéiden
+cha-cha-cha,cha-cha-chaiden
+clou,clouiden
+coupé,coupéiden
+cowboy,cowboyiden
+fondue,fondueiden
+gay,gayiden
+gray,grayiden
+jersey,jerseyiden
+jockey,jockeyiden
+moiré,moiréiden
+playboy,playboyiden
+reggae,reggaeiden
+rosé,roséiden
+speedway,speedwayiden
+spray,sprayiden
+
+# declension 22 (all)
+beignet,beignet'iden
+bordeaux,bordeaux'iden
+bouquet,bouquet'iden
+buffet,buffet'iden
+gourmet,gourmet'iden
+know-how,know-how'iden
+nougat,nougat'iden
+parfait,parfait'iden
+passepartout,passepartout'iden
+port salut,port salut'iden
+ragoût,ragoût'iden
+show,show'iden
+tournedos,tournedos'iden
+
+# declension 23
+tiili,tiilien
+
+# declension 24
+uni,unien,unten
+
+# declension 25
+toimi,toimien,tointen
+
+# declension 26
+pieni,pienien,pienten
+
+# declension 27
+käsi,käsien,kätten
+
+# declension 28 (all)
+hirsi,hirsien,hirtten
+jälsi,jälsien,jältten
+kansi,kansien,kantten
+karsi,karsien,kartten
+kirsi,kirsien,kirtten
+korsi,korsien,kortten
+kynsi,kynsien,kyntten
+länsi,länsien,läntten
+orsi,orsien,ortten
+parsi,parsien,partten
+ponsi,ponsien,pontten
+pursi,pursien,purtten
+varsi,varsien,vartten
+virsi,virsien,virtten
+
+# declension 29 (all)
+hapsi,hapsien,hasten
+lapsi,lapsien,lasten
+uksi,uksien
+
+# declension 30 (all)
+veitsi,veisten,veitsien
+
+# declension 31 (all)
+haaksi,haaksien
+kaksi,kaksien
+yksi,yksien
+
+# declension 32
+ahven,ahvenien,ahventen
+höyhen,höyhenien,höyhenten
+ien,ienten,ikenien
+jumalatar,jumalatarten,jumalattarien
+jäsen,jäsenien,jäsenten
+kaunotar,kaunotarten,kaunottarien
+kymmenen,kymmenien,kymmenten
+nivel,nivelien,nivelten
+onnetar,onnetarten,onnettarien
+papitar,papitarten,papittarien
+siemen,siemenien,siementen
+sisar,sisarien,sisarten
+syöjätär,syöjätärten,syöjättärien
+sävel,sävelien,sävelten
+
+# declension 33
+annin,anninten,antimien
+avarrin,avarrinten,avartimien
+elin,elimien,elinten
+heitin,heitinten,heittimien
+kytkin,kytkimien,kytkinten
+näin,näinten,näkimien
+otin,otinten,ottimien
+pidin,pidinten,pitimien
+puin,puinten,pukimien
+pyyhin,pyyhinten,pyyhkimien
+raavin,raavinten,raapimien
+sydän,sydämien,sydänten
+uistin,uistimien,uistinten
+ydin,ydinten,ytimien
+
+# declension 34
+alaston,alastomien,alastonten
+onneton,onnetonten,onnettomien
+yötön,yöttömien,yötönten
+
+# declension 35 (all)
+lämmin,lämpimien
+
+# declension 36
+alin,alimpien,alinten
+sisin,sisimpien,sisinten
+uloin,uloimpien,ulointen
+
+# declension 37 (all)
+vasen,vasempien,vasenten
+
+# declension 38
+nainen,naisien,naisten
+osanen,osasien,osasten
+öinen,öisien,öisten
+
+# declension 39
+aines,aineksien,ainesten
+vastaus,vastauksien,vastausten
+varis,variksien,varisten
+yritys,yrityksien,yritysten
+
+# declension 40
+kalleus,kalleuksien
+äreys,äreyksien
+
+# declension 41
+# -Vs (not -As, -is)
+ies,ikeiden
+kirves,kirveiden
+ryntys,rynttyiden
+vantus,vanttuiden
+äes,äkeiden
+# -VAs, -Vis
+autuas,autuaiden
+kiuas,kiukaiden
+oas,okaiden
+ruis,rukiiden
+äveriäs,äveriäiden
+# -dAs, -dis
+ahdas,ahtaiden
+hidas,hitaiden
+# -gAs, -gis
+kangas,kankaiden
+köngäs,könkäiden
+# -hAs, -his
+keihäs,keihäiden
+# -jAs, -jis
+uljas,uljaiden
+# -kAs, -kis
+kirkas,kirkkaiden
+rakas,rakkaiden
+raskas,raskaiden
+sitkas,sitkaiden
+vilkas,vilkkaiden
+# -lAs, -lis
+allas,altaiden
+aulis,auliiden
+kallis,kalliiden
+kaplas,kaplaiden
+mallas,maltaiden
+valas,valaiden
+# -mAs, -mis
+armas,armaiden
+hammas,hampaiden
+ruumis,ruumiiden
+valmis,valmiiden
+vehmas,vehmaiden
+# -nAs, -nis
+ahnas,ahnaiden
+kaunis,kauniiden
+kinnas,kintaiden
+kunnas,kunnaiden
+oinas,oinaiden
+rynnäs,ryntäiden
+# -pAs, -pis
+opas,oppaiden
+rypäs,ryppäiden
+valpas,valppaiden
+# -rAs, -ris
+eräs,eräiden
+katras,katraiden
+kauris,kauriiden
+oras,oraiden
+paras,parhaiden
+varas,varkaiden
+varras,vartaiden
+# -sAs, -sis
+pensas,pensaiden
+porsas,porsaiden
+viisas,viisaiden
+# -tAs, -tis
+altis,alttiiden
+mätäs,mättäiden
+ratas,rattaiden
+raitis,raittiiden
+rastas,rastaiden
+# -vAs, -vis
+eväs,eväiden
+karvas,karvaiden
+rahvas,rahvaiden
+ryväs,rypäiden
+seiväs,seipäiden
+tiivis,tiiviiden
+varvas,varpaiden
+ylväs,ylväiden
+
+# declension 42 (all)
+mies,miehien,miesten
+
+# declension 43
+immyt,impyiden
+ohut,ohuiden
+
+# declension 44 (all)
+kevät,keväiden
+
+# declension 45
+kahdeksas,kahdeksansien
+neljäs,neljänsien
+
+# declension 46 (all)
+tuhat,tuhansien,tuhanten
+
+# declension 47
+kuollut,kuolleiden
+tehnyt,tehneiden
+
+# declension 48
+# -Ve
+aie,aikeiden
+alue,alueiden
+hiue,hiukeiden
+koe,kokeiden
+lippue,lippueiden
+pesue,pesueiden
+pue,pukeiden
+säe,säkeiden
+tae,takeiden
+yhtye,yhtyeiden
+# -de
+sade,sateiden
+suhde,suhteiden
+# -he
+aihe,aiheiden
+valhe,valheiden
+venhe,venheiden
+virhe,virheiden
+# -je
+hylje,hylkeiden
+kirje,kirjeiden
+koje,kojeiden
+lahje,lahkeiden
+sulje,sulkeiden
+# -ke
+hanke,hankkeiden
+jatke,jatkeiden
+leike,leikkeiden
+ryske,ryskeiden
+sähke,sähkeiden
+virke,virkkeiden
+välke,välkkeiden
+# -le
+helle,helteiden
+kahle,kahleiden
+säle,säleiden
+tisle,tisleiden
+# -me
+amme,ammeiden
+hame,hameiden
+hurme,hurmeiden
+ihme,ihmeiden
+ilme,ilmeiden
+lumme,lumpeiden
+# -ne
+ahne,ahneiden
+aine,aineiden
+herne,herneiden
+tunne,tunteiden
+# -pe
+ape,appeiden
+kampe,kamppeiden
+# -re
+aarre,aarteiden
+näre,näreiden
+# -se
+ase,aseiden
+hilse,hilseiden
+katse,katseiden
+# -te
+aate,aatteiden
+este,esteiden
+hynte,hyntteiden
+korte,kortteiden
+polte,poltteiden
+# -ve
+aave,aaveiden
+lieve,liepeiden
+
+# declension 49 (all)
+# -e
+askare,askareiden
+askele,askeleiden
+autere,autereiden
+hepene,hepeneiden
+huhmare,huhmareiden
+kantele,kanteleiden
+kintere,kintereiden
+kyynele,kyyneleiden
+mantere,mantereiden
+murene,mureneiden
+ompele,ompeleiden
+penkere,penkereiden
+petkele,petkeleiden
+pientare,pientareiden
+saivare,saivareiden
+seppele,seppeleiden
+säkene,säkeneiden
+taipale,taipaleiden
+tantere,tantereiden
+utare,utareiden
+vempele,vempeleiden
+# -C
+askar,askarien,askarten
+askel,askelien,askelten
+auer,auerten,auterien
+huhmar,huhmarien,huhmarten
+kannel,kannelten,kantelien
+kinner,kinnerten,kinterien
+kyynel,kyynelien,kyynelten
+manner,mannerten,manterien
+muren,murenien,murenten
+ommel,ommelten,ompelien
+penger,pengerten,penkerien
+petkel,petkelien,petkelten
+piennar,piennarten,pientarien
+saivar,saivarien,saivarten
+sammal,sammalien,sammalten
+seppel,seppelien,seppelten
+säen,säenten,säkenien
+taival,taipalien,taivalten
+tanner,tannerten,tanterien
+udar,udarten,utarien
+vemmel,vemmelten,vempelien

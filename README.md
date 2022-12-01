@@ -26,15 +26,34 @@ CSV file format used in this project:
 ## Programs interesting to the end user
 
 ### decline_noun.py
-Decline a Finnish noun. Arguments: NOUN CASE NUMBER. Cases: nom, gen, par, ess, tra, ine, ela, ill, ade, abl, all, abe, ins. Numbers: sg, pl.
+```
+Decline a Finnish noun. Arguments: NOUN [CASE NUMBER]. Cases: nom, gen, par,
+ess, tra, ine, ela, ill, ade, abl, all, abe, ins. Numbers: sg, pl. If case &
+number omitted, print all supported combinations.
+```
 
 Note: plurals (except for nominative) and instructive have not been implemented yet.
 
-Example:
+Examples:
 ```
 $ python3 decline_noun.py "kuusi" gen sg
 kuuden
 kuusen
+
+$ python3 decline_noun.py "kuusi"
+NomSg: kuusi
+NomPl: kuudet, kuuset
+GenSg: kuuden, kuusen
+ParSg: kuusta, kuutta
+EssSg: kuusena, kuutena
+TraSg: kuudeksi, kuuseksi
+IneSg: kuudessa, kuusessa
+ElaSg: kuudesta, kuusesta
+IllSg: kuuseen, kuuteen
+AdeSg: kuudella, kuusella
+AblSg: kuudelta, kuuselta
+AllSg: kuudelle, kuuselle
+AbeSg: kuudetta, kuusetta
 ```
 
 ### find_partial_homonym_nouns.py
