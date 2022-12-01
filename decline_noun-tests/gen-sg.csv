@@ -203,13 +203,37 @@ vihta,vihdan
 virka,viran
 
 # declension 10
+# -C
 kahdeksan,kahdeksan
-koira,koiran
-nälkä,nälän
-poika,pojan
 seitsemän,seitsemän
 yhdeksän,yhdeksän
+# -VV
+boa,boan
+# -kV
+härkä,härän
+kenkä,kengän
+nälkä,nälän
+oka,oan
+poika,pojan
+sukka,sukan
+säkä,säkän,sään
+toka,tokan
+tuhka,tuhan,tuhkan
 ylkä,yljän
+# -pV
+kompa,komman
+noppa,nopan
+tupa,tuvan
+turpa,turvan
+# -tV
+juhta,juhdan
+kulta,kullan
+mäntä,männän
+rotta,rotan
+setä,sedän
+turta,turran
+# -CV (not -kV, -pV, -tV)
+koira,koiran
 
 # declension 11
 käpälä,käpälän

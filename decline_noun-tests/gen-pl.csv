@@ -203,13 +203,37 @@ vihta,vihtojen
 virka,virkojen
 
 # declension 10
+# -C
 kahdeksan,kahdeksien
-koira,koirien
-nälkä,nälkien
-poika,poikien
 seitsemän,seitsemien
 yhdeksän,yhdeksien
+# -VV
+boa,boien
+# -kV
+härkä,härkien
+kenkä,kenkien
+nälkä,nälkien
+oka,okien
+poika,poikien
+sukka,sukkien
+säkä,säkien
+toka,tokien
+tuhka,tuhkien
 ylkä,ylkien
+# -pV
+kompa,kompien
+noppa,noppien
+tupa,tupien
+turpa,turpien
+# -tV
+juhta,juhtien
+kulta,kultien
+mäntä,mäntien
+rotta,rottien
+setä,setien
+turta,turtien
+# -CV (not -kV, -pV, -tV)
+koira,koirien
 
 # declension 11
 käpälä,käpälien,käpälöiden,käpälöjen

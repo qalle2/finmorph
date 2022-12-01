@@ -533,7 +533,8 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
         if decl in (5, 6, 7, 10, 11, 16, 42, 45, 46) or 23 <= decl <= 40 \
         or decl == 49 and not word.endswith("e"):
             words2 = words
-            if consGrad or decl in (35, 36, 37):  # lämmin, sisin, vasen
+            if consGrad and decl in (32, 33, 34, 49) or decl in (35, 36, 37):
+                # lämmin, sisin, vasen
                 words2 = tuple(_consonant_gradation(w, True) for w in words2)
             #
             if decl in (10, 34, 35, 36, 37):
@@ -573,9 +574,9 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
                 words2 = ("häipee", "häive")
             elif word == "viive":
                 words2 = ("viipee", "viive")
-            elif consGrad and decl <= 14:
+            elif consGrad and decl in (4, 14):
                 words2 = tuple(_consonant_gradation(w) for w in words2)
-            elif consGrad and decl >= 41:
+            elif consGrad and decl in (41, 43, 48):
                 words2 = tuple(_consonant_gradation(w, True) for w in words2)
             #
             if decl == 6:  # paperi, lumen

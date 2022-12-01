@@ -203,13 +203,37 @@ vihta,vihtana
 virka,virkana
 
 # declension 10
+# -C
 kahdeksan,kahdeksana
-koira,koirana
-nälkä,nälkänä
-poika,poikana
 seitsemän,seitsemänä
 yhdeksän,yhdeksänä
+# -VV
+boa,boana
+# -kV
+härkä,härkänä
+kenkä,kenkänä
+nälkä,nälkänä
+oka,okana
+poika,poikana
+sukka,sukkana
+säkä,säkänä
+toka,tokana
+tuhka,tuhkana
 ylkä,ylkänä
+# -pV
+kompa,kompana
+noppa,noppana
+tupa,tupana
+turpa,turpana
+# -tV
+juhta,juhtana
+kulta,kultana
+mäntä,mäntänä
+rotta,rottana
+setä,setänä
+turta,turtana
+# -CV (not -kV, -pV, -tV)
+koira,koirana
 
 # declension 11
 käpälä,käpälänä
