@@ -10,6 +10,7 @@ CASES = (
     ("nom", "sg"),
     ("nom", "pl"),
     ("gen", "sg"),
+    ("gen", "pl"),
     ("tra", "sg"),
     ("ine", "sg"),
     ("ela", "sg"),

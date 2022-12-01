@@ -32,7 +32,7 @@ ess, tra, ine, ela, ill, ade, abl, all, abe, ins. Numbers: sg, pl. If case &
 number omitted, print all supported combinations.
 ```
 
-Note: plurals (except for nominative) and instructive have not been implemented yet.
+Note: plurals (except for nominative and genitive) and instructive have not been implemented yet.
 
 Examples:
 ```
@@ -44,6 +44,7 @@ $ python3 decline_noun.py "kuusi"
 NomSg: kuusi
 NomPl: kuudet, kuuset
 GenSg: kuuden, kuusen
+GenPl: kuusien, kuusten, kuutten
 ParSg: kuusta, kuutta
 EssSg: kuusena, kuutena
 TraSg: kuudeksi, kuuseksi

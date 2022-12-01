@@ -10,7 +10,7 @@ _ALL_TESTS = (
     ("nom", "sg"),
     ("nom", "pl"),
     ("gen", "sg"),
-    #("gen", "pl"),  # under construction
+    ("gen", "pl"),  # under construction
     ("tra", "sg"),
     ("ine", "sg"),
     ("ela", "sg"),

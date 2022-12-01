@@ -43,8 +43,8 @@ vakaus,vakauksien,vakausten
 # other
 caddie,caddieiden,caddiejen
 hapsi,hapsien,hasten
-humala,humalien,humaloiden
-kuusi,kuusien,kuusten
+humala,humalien,humaloiden,humalojen
+kuusi,kuusien,kuusten,kuutten
 menu,menuiden,menujen
 siitake,siitakejen,siitakkeiden
 tanhua,tanhuiden,tanhuoiden
@@ -179,7 +179,7 @@ soppi,soppien
 # declension 8
 jeppe,jeppejen
 nalle,nallejen
-nukke,nukkejen,nukkien
+nukke,nukkejen
 ope,opejen
 
 # declension 9
@@ -345,7 +345,7 @@ onnetar,onnetarten,onnettarien
 papitar,papitarten,papittarien
 siemen,siemenien,siementen
 sisar,sisarien,sisarten
-syöjätär,syöjätärten,syöjättärien
+syöjätär,syöjättärien,syöjätärten
 sävel,sävelien,sävelten
 
 # declension 33
@@ -359,7 +359,7 @@ otin,otinten,ottimien
 pidin,pidinten,pitimien
 puin,puinten,pukimien
 pyyhin,pyyhinten,pyyhkimien
-raavin,raavinten,raapimien
+raavin,raapimien,raavinten
 sydän,sydämien,sydänten
 uistin,uistimien,uistinten
 ydin,ydinten,ytimien

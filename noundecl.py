@@ -139,6 +139,7 @@ _MULTI_DECLENSION_NOUNS = {
     "koiras": (39, 41),
     "olas": (39, 41),
     "pallas": (39, 41),
+    "tuomas": (39, 41),
     "uros": (39, 41),
 }
 
