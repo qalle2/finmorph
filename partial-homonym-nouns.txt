@@ -2135,6 +2135,7 @@ Columns:
 9/39       vitsasta            (vitsa 9 / vitsas 39)
 1/9        viuhkoja            (viuhka 9 / viuhko 1)
 1/9        viuhkojen           (viuhka 9 / viuhko 1)
+18/19      voiden              (voi 18 / vuo 19)
 18/38      voista              (voi 18 / voinen 38)
 18/19      voita               (voi 18 / vuo 19)
 10/38      voittoisia          (voittoinen 38 / voittoisa 10)
