@@ -1,54 +1,68 @@
 # more than one declension (all)
-# 5/other
+# 1/21
+menu,menuhun,menuhyn,menuun
+# 3/8
+caddie,caddieen
+# 5/7
 alpi,alpeen,alpiin
-csárdás,csárdákseen,csárdásiin
 helpi,helpeen,helpiin
 kaihi,kaiheen,kaihiin
 karhi,karheen,karhiin
-kuori,kuoreen,kuoriin
-kuskus,kuskukseen,kuskusiin
 kymi,kymeen,kymiin
 lahti,lahteen,lahtiin
 laki,lakeen,lakiin
-ori,oriin,oriiseen
 palvi,palveen,palviin
-peitsi,peitseen,peitsiin
 ripsi,ripseen,ripsiin
 saksi,sakseen,saksiin
 sini,sineen,siniin
+vyyhti,vyyhteen,vyyhtiin
+# 5/22
 sioux,sioux'hun,siouxiin
+# 5/23
 syli,syleen,syliin
+# 5/26
+kuori,kuoreen,kuoriin
 viini,viineen,viiniin
 vuori,vuoreen,vuoriin
-vyyhti,vyyhteen,vyyhtiin
-# 9/other
+# 5/30
+peitsi,peitseen,peitsiin
+# 5/39
+csárdás,csárdákseen,csárdásiin
+kuskus,kuskukseen,kuskusiin
+# 5/48
+ori,oriin,oriiseen
+# 7/29
+hapsi,hapseen
+uksi,ukseen
+# 8/48
+siitake,siitakeen,siitakkeeseen
+# 9/10
 aneurysma,aneurysmaan
 kysta,kystaan
 lyyra,lyyraan
 puola,puolaan
-# 39/other
+# 10/11
+humala,humalaan
+# 12/15
+tanhua,tanhuaan
+# 24/27
+kuusi,kuuseen,kuuteen
+# 39/40
 ahtaus,ahtaukseen,ahtauteen
-havas,hapaaseen,havakseen
-kallas,kallakseen,kaltaaseen
 karvaus,karvaukseen,karvauteen
-koiras,koiraaseen,koirakseen
-kymmenes,kymmenekseen,kymmenenteen
-olas,olaaseen,olakseen
-pallas,pallakseen,paltaaseen
 rosvous,rosvoukseen,rosvouteen
 siivous,siivoukseen,siivouteen
+vakaus,vakaukseen,vakauteen
+# 39/41
+havas,hapaaseen,havakseen
+kallas,kallakseen,kaltaaseen
+koiras,koiraaseen,koirakseen
+olas,olaaseen,olakseen
+pallas,pallakseen,paltaaseen
 tuomas,tuomaaseen,tuomakseen
 uros,urokseen,urooseen
-vakaus,vakaukseen,vakauteen
-# other
-caddie,caddieen
-hapsi,hapseen
-humala,humalaan
-kuusi,kuuseen,kuuteen
-menu,menuhun,menuhyn,menuun
-siitake,siitakeen,siitakkeeseen
-tanhua,tanhuaan
-uksi,ukseen
+# 39/45
+kymmenes,kymmenekseen,kymmenenteen
 
 # homonyms distinguished by consonant gradation in some cases
 haiku,haikuun

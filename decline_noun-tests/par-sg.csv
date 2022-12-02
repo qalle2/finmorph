@@ -1,54 +1,68 @@
 # more than one declension (all)
-# 5/other
+# 1/21
+menu,menua,menuta,menutä
+# 3/8
+caddie,caddiea,caddieta,caddietä,caddieä
+# 5/7
 alpi,alpea,alpia
-csárdás,csárdásia,csárdásta
 helpi,helpeä,helpiä
 kaihi,kaihea,kaihia
 karhi,karhea,karhia
-kuori,kuoria,kuorta
-kuskus,kuskusia,kuskusta
 kymi,kymeä,kymiä
 lahti,lahtea,lahtia
 laki,lakea,lakia
-ori,oria,oritta
 palvi,palvea,palvia
-peitsi,peistä,peitsiä
 ripsi,ripseä,ripsiä
 saksi,saksea,saksia
 sini,sineä,siniä
+vyyhti,vyyhteä,vyyhtiä
+# 5/22
 sioux,sioux'ta,siouxia
+# 5/23
 syli,syliä,syltä
+# 5/26
+kuori,kuoria,kuorta
 viini,viiniä,viintä
 vuori,vuoria,vuorta
-vyyhti,vyyhteä,vyyhtiä
-# 9/other
+# 5/30
+peitsi,peistä,peitsiä
+# 5/39
+csárdás,csárdásia,csárdásta
+kuskus,kuskusia,kuskusta
+# 5/48
+ori,oria,oritta
+# 7/29
+hapsi,hapsea,hasta
+uksi,uksea,usta
+# 8/48
+siitake,siitakea,siitaketta
+# 9/10
 aneurysma,aneurysmaa
 kysta,kystaa
 lyyra,lyyraa
 puola,puolaa
-# 39/other
+# 10/11
+humala,humalaa
+# 12/15
+tanhua,tanhuaa,tanhuata
+# 24/27
+kuusi,kuusta,kuutta
+# 39/40
 ahtaus,ahtausta,ahtautta
-havas,havasta
-kallas,kallasta
 karvaus,karvausta,karvautta
-koiras,koirasta
-kymmenes,kymmenestä,kymmenettä
-olas,olasta
-pallas,pallasta
 rosvous,rosvousta,rosvoutta
 siivous,siivousta,siivoutta
+vakaus,vakausta,vakautta
+# 39/41
+havas,havasta
+kallas,kallasta
+koiras,koirasta
+olas,olasta
+pallas,pallasta
 tuomas,tuomasta
 uros,urosta
-vakaus,vakausta,vakautta
-# other
-caddie,caddiea,caddieta,caddietä,caddieä
-hapsi,hapsea,hasta
-humala,humalaa
-kuusi,kuusta,kuutta
-menu,menua,menuta,menutä
-siitake,siitakea,siitaketta
-tanhua,tanhuaa,tanhuata
-uksi,uksea,usta
+# 39/45
+kymmenes,kymmenestä,kymmenettä
 
 # homonyms distinguished by consonant gradation in some cases
 haiku,haikua

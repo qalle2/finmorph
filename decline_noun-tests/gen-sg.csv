@@ -1,54 +1,68 @@
 # more than one declension (all)
-# 5/other
+# 1/21
+menu,menun
+# 3/8
+caddie,caddien
+# 5/7
 alpi,alpin,alven
-csárdás,csárdáksen,csárdásin
 helpi,helpin,helven
 kaihi,kaihen,kaihin
 karhi,karhen,karhin
-kuori,kuoren,kuorin
-kuskus,kuskuksen,kuskusin
 kymi,kymen,kymin
 lahti,lahden,lahdin
 laki,laen,lain
-ori,oriin,orin
 palvi,palven,palvin
-peitsi,peitsen,peitsin
 ripsi,ripsen,ripsin
 saksi,saksen,saksin
 sini,sinen,sinin
+vyyhti,vyyhden,vyyhdin
+# 5/22
 sioux,sioux'n,siouxin
+# 5/23
 syli,sylen,sylin
+# 5/26
+kuori,kuoren,kuorin
 viini,viinen,viinin
 vuori,vuoren,vuorin
-vyyhti,vyyhden,vyyhdin
-# 9/other
+# 5/30
+peitsi,peitsen,peitsin
+# 5/39
+csárdás,csárdáksen,csárdásin
+kuskus,kuskuksen,kuskusin
+# 5/48
+ori,oriin,orin
+# 7/29
+hapsi,hapsen
+uksi,uksen
+# 8/48
+siitake,siitaken,siitakkeen
+# 9/10
 aneurysma,aneurysman
 kysta,kystan
 lyyra,lyyran
 puola,puolan
-# 39/other
+# 10/11
+humala,humalan
+# 12/15
+tanhua,tanhuan
+# 24/27
+kuusi,kuuden,kuusen
+# 39/40
 ahtaus,ahtauden,ahtauksen
-havas,hapaan,havaksen
-kallas,kallaksen,kaltaan
 karvaus,karvauden,karvauksen
-koiras,koiraan,koiraksen
-kymmenes,kymmeneksen,kymmenennen
-olas,olaan,olaksen
-pallas,pallaksen,paltaan
 rosvous,rosvouden,rosvouksen
 siivous,siivouden,siivouksen
+vakaus,vakauden,vakauksen
+# 39/41
+havas,hapaan,havaksen
+kallas,kallaksen,kaltaan
+koiras,koiraan,koiraksen
+olas,olaan,olaksen
+pallas,pallaksen,paltaan
 tuomas,tuomaan,tuomaksen
 uros,uroksen,uroon
-vakaus,vakauden,vakauksen
-# other
-caddie,caddien
-hapsi,hapsen
-humala,humalan
-kuusi,kuuden,kuusen
-menu,menun
-siitake,siitaken,siitakkeen
-tanhua,tanhuan
-uksi,uksen
+# 39/45
+kymmenes,kymmeneksen,kymmenennen
 
 # homonyms distinguished by consonant gradation in some cases
 haiku,haikun,haiun

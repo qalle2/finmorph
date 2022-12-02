@@ -1,54 +1,68 @@
 # more than one declension (all)
-# 5/other
+# 1/21
+menu,menuiden,menujen
+# 3/8
+caddie,caddieiden,caddiejen
+# 5/7
 alpi,alpien
-csárdás,csárdáksien,csárdásien,csárdásten
 helpi,helpien
 kaihi,kaihien
 karhi,karhien
-kuori,kuorien,kuorten
-kuskus,kuskuksien,kuskusien,kuskusten
 kymi,kymien
 lahti,lahtien
 laki,lakien
-ori,orien,oriiden
 palvi,palvien
-peitsi,peisten,peitsien
 ripsi,ripsien
 saksi,saksien
 sini,sinien
+vyyhti,vyyhtien
+# 5/22
 sioux,sioux'iden,siouxien
+# 5/23
 syli,sylien
+# 5/26
+kuori,kuorien,kuorten
 viini,viinien,viinten
 vuori,vuorien,vuorten
-vyyhti,vyyhtien
-# 9/other
+# 5/30
+peitsi,peisten,peitsien
+# 5/39
+csárdás,csárdáksien,csárdásien,csárdásten
+kuskus,kuskuksien,kuskusien,kuskusten
+# 5/48
+ori,orien,oriiden
+# 7/29
+hapsi,hapsien,hasten
+uksi,uksien
+# 8/48
+siitake,siitakejen,siitakkeiden
+# 9/10
 aneurysma,aneurysmien,aneurysmojen
 kysta,kystien,kystojen
 lyyra,lyyrien,lyyrojen
 puola,puolien,puolojen
-# 39/other
+# 10/11
+humala,humalien,humaloiden,humalojen
+# 12/15
+tanhua,tanhuiden,tanhuoiden
+# 24/27
+kuusi,kuusien,kuusten,kuutten
+# 39/40
 ahtaus,ahtauksien,ahtausten
-havas,hapaiden,havaksien,havasten
-kallas,kallaksien,kallasten,kaltaiden
 karvaus,karvauksien,karvausten
-koiras,koiraiden,koiraksien,koirasten
-kymmenes,kymmeneksien,kymmenensien,kymmenesten
-olas,olaiden,olaksien,olasten
-pallas,pallaksien,pallasten,paltaiden
 rosvous,rosvouksien,rosvousten
 siivous,siivouksien,siivousten
+vakaus,vakauksien,vakausten
+# 39/41
+havas,hapaiden,havaksien,havasten
+kallas,kallaksien,kallasten,kaltaiden
+koiras,koiraiden,koiraksien,koirasten
+olas,olaiden,olaksien,olasten
+pallas,pallaksien,pallasten,paltaiden
 tuomas,tuomaiden,tuomaksien,tuomasten
 uros,uroiden,uroksien,urosten
-vakaus,vakauksien,vakausten
-# other
-caddie,caddieiden,caddiejen
-hapsi,hapsien,hasten
-humala,humalien,humaloiden,humalojen
-kuusi,kuusien,kuusten,kuutten
-menu,menuiden,menujen
-siitake,siitakejen,siitakkeiden
-tanhua,tanhuiden,tanhuoiden
-uksi,uksien
+# 39/45
+kymmenes,kymmeneksien,kymmenensien,kymmenesten
 
 # homonyms distinguished by consonant gradation in some cases
 haiku,haikujen

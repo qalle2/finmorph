@@ -1,54 +1,68 @@
 # more than one declension (all)
-# 5/other
+# 1/21
+menu,menuna,menunä
+# 3/8
+caddie,caddiena,caddienä
+# 5/7
 alpi,alpena,alpina
-csárdás,csárdáksena,csárdásina
 helpi,helpenä,helpinä
 kaihi,kaihena,kaihina
 karhi,karhena,karhina
-kuori,kuorena,kuorina
-kuskus,kuskuksena,kuskusina
 kymi,kymenä,kyminä
 lahti,lahtena,lahtina
 laki,lakena,lakina
-ori,oriina,orina
 palvi,palvena,palvina
-peitsi,peitsenä,peitsinä
 ripsi,ripsenä,ripsinä
 saksi,saksena,saksina
 sini,sinenä,sininä
+vyyhti,vyyhtenä,vyyhtinä
+# 5/22
 sioux,sioux'na,siouxina
+# 5/23
 syli,sylenä,sylinä
+# 5/26
+kuori,kuorena,kuorina
 viini,viinenä,viininä
 vuori,vuorena,vuorina
-vyyhti,vyyhtenä,vyyhtinä
-# 9/other
+# 5/30
+peitsi,peitsenä,peitsinä
+# 5/39
+csárdás,csárdáksena,csárdásina
+kuskus,kuskuksena,kuskusina
+# 5/48
+ori,oriina,orina
+# 7/29
+hapsi,hapsena
+uksi,uksena
+# 8/48
+siitake,siitakena,siitakkeena
+# 9/10
 aneurysma,aneurysmana
 kysta,kystana
 lyyra,lyyrana
 puola,puolana
-# 39/other
+# 10/11
+humala,humalana
+# 12/15
+tanhua,tanhuana
+# 24/27
+kuusi,kuusena,kuutena
+# 39/40
 ahtaus,ahtauksena,ahtautena
-havas,hapaana,havaksena
-kallas,kallaksena,kaltaana
 karvaus,karvauksena,karvautena
-koiras,koiraana,koiraksena
-kymmenes,kymmeneksenä,kymmenentenä
-olas,olaana,olaksena
-pallas,pallaksena,paltaana
 rosvous,rosvouksena,rosvoutena
 siivous,siivouksena,siivoutena
+vakaus,vakauksena,vakautena
+# 39/41
+havas,hapaana,havaksena
+kallas,kallaksena,kaltaana
+koiras,koiraana,koiraksena
+olas,olaana,olaksena
+pallas,pallaksena,paltaana
 tuomas,tuomaana,tuomaksena
 uros,uroksena,uroona
-vakaus,vakauksena,vakautena
-# other
-caddie,caddiena,caddienä
-hapsi,hapsena
-humala,humalana
-kuusi,kuusena,kuutena
-menu,menuna,menunä
-siitake,siitakena,siitakkeena
-tanhua,tanhuana
-uksi,uksena
+# 39/45
+kymmenes,kymmeneksenä,kymmenentenä
 
 # homonyms distinguished by consonant gradation in some cases
 haiku,haikuna
