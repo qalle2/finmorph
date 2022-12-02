@@ -10,7 +10,7 @@ _ALL_TESTS = (
     ("nom", "sg"),
     ("nom", "pl"),
     ("gen", "sg"),
-    ("gen", "pl"),  # under construction
+    ("gen", "pl"),
     ("tra", "sg"),
     ("ine", "sg"),
     ("ela", "sg"),
@@ -21,6 +21,7 @@ _ALL_TESTS = (
     ("ess", "sg"),
     ("ill", "sg"),
     ("par", "sg"),
+    ("par", "pl"),
 )
 
 def _read_csv(case, number):

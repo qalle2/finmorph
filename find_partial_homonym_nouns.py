@@ -21,6 +21,7 @@ CASES = (
     ("ess", "sg"),
     ("ill", "sg"),
     ("par", "sg"),
+    ("par", "pl"),
 )
 
 def status_msg(msg):

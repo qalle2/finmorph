@@ -32,7 +32,7 @@ ess, tra, ine, ela, ill, ade, abl, all, abe, ins. Numbers: sg, pl. If case &
 number omitted, print all supported combinations.
 ```
 
-Note: plurals (except for nominative and genitive) and instructive have not been implemented yet.
+Note: plurals (except for nominative, genitive and partitive) and instructive have not been implemented yet.
 
 Examples:
 ```
@@ -46,6 +46,7 @@ NomPl: kuudet, kuuset
 GenSg: kuuden, kuusen
 GenPl: kuusien, kuusten, kuutten
 ParSg: kuusta, kuutta
+ParPl: kuusia
 EssSg: kuusena, kuutena
 TraSg: kuudeksi, kuuseksi
 IneSg: kuudessa, kuusessa
