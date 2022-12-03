@@ -1,8 +1,8 @@
 """Decline a Finnish noun."""
 
 import re, sys
-import noun_consgrad
-import noundecl
+from noun_consgrad import get_consonant_gradation
+from noundecl import get_declensions
 
 # C = any consonant, V = any vowel, A = a/ä, O = o/ö, U = u/y
 
@@ -18,53 +18,212 @@ import noundecl
 
 # -----------------------------------------------------------------------------
 
-# regular expressions for consonant gradation;
-# (regex_from, regex_to);
-# notes:
-# - only the first match will be applied
-# - the final consonants and vowels of words have already been changed
+# rules for changing final consonants and vowels
+# - format: declension: ((regex_from, regex_to), ...)
+# - "$" will be appended to regex_from
+# - only the 1st match with regex_from will be applied
+# - consonant gradation will be applied afterwards
+#
+# consonants (for any combination of case/number, keys must be unique)
+_CONSONANTS_ALL = {
+    # -n
+    10: (("n",   ""),),   # kahdeksan
+    32: (("nen", "n"),),  # kymmenen
+    38: (("nen", "s"),),  # nainen
+}
+_CONSONANTS_GEN_SG_ESS_SG_PAR_SG = {
+    # -s
+    40: (("s", "ti"),),  # kalleus
+    # -si
+    27: (("si", "ti"),),  # käsi
+    28: (("si", "ti"),),  # kynsi
+}
+_CONSONANTS_GEN_SG_ESS_SG_GEN_PL = {
+    # -n
+    34: (("n", "m"),),   # onneton
+    35: (("n", "m"),),   # lämmin
+    36: (("n", "mm"),),  # sisin
+    37: (("n", "mm"),),  # vasen
+    # -s
+    41: (("s", ""),),  # vieras
+    # -t
+    43: (("t", ""),),  # ohut
+    44: (("t", ""),),  # kevät
+    47: (("t", ""),),  # kuollut
+}
+_CONSONANTS_GEN_SG_ESS_SG = {
+    # -n
+    33: (("n", "m"),),  # kytkin
+    # -s
+    39: (("s", "ks"),),  # vastaus
+    42: (("s", "h"),),   # mies
+    45: (("s", "nt"),),  # kahdeksas
+    # -si
+    31: (("ksi", "hti"),),  # kaksi
+    # -t
+    46: (("t", "nt"),),  # tuhat
+}
+_CONSONANTS_PAR_SG = {
+    # -mi
+    25: (("mi", "ni"),),  # toimi
+    # -s
+    45: (("s", "t"),),  # kahdeksas
+    # -si
+    29: (("[kp]si", "si"),),  # lapsi
+    30: (("tsi",    "si"),),  # veitsi
+    31: (("ksi",    "hi"),),  # kaksi
+}
+_CONSONANTS_GEN_PL = {
+    # -s
+    40: (("s", "ks"),),  # kalleus
+    45: (("s", "ns"),),  # kahdeksas
+    # -t
+    46: (("t", "ns"),),  # tuhat
+}
+#
+# vowels (for any combination of case/number, keys must be unique)
+_VOWELS_GEN_SG_ESS_SG_PAR_SG = {
+    # -C -> -Ci
+    5: (("([^aeiouyäö])", r"\1i"),),  # risti, rock
+    6: (("([^aeiouyäö])", r"\1i"),),  # paperi, nylon
+    # -i -> -e
+    7: (("i", "e"),),  # ovi
+    # -i -> -A
+    16: (("^([^aou]+)i", r"\1ä"), ("i", "a")),  # vanhempi
+}
+_VOWELS_GEN_SG_ESS_SG_GEN_PL = {
+    # - -> -A
+    34: (("^([^aou]+)", r"\1ä"), ("", "a")),  # onneton
+    35: (("^([^aou]+)", r"\1ä"), ("", "a")),  # lämmin
+    36: (("^([^aou]+)", r"\1ä"), ("", "a")),  # sisin
+    37: (("^([^aou]+)", r"\1ä"), ("", "a")),  # vasen
+}
+_VOWELS_GEN_SG_ESS_SG = {
+    # -i -> -e
+    23: (("i", "e"),),  # tiili
+    24: (("i", "e"),),  # uni
+    25: (("i", "e"),),  # toimi
+    26: (("i", "e"),),  # pieni
+    27: (("i", "e"),),  # käsi
+    28: (("i", "e"),),  # kynsi
+    29: (("i", "e"),),  # lapsi
+    30: (("i", "e"),),  # veitsi
+    31: (("i", "e"),),  # kaksi
+    40: (("i", "e"),),  # kalleus
+    # - -> -e
+    32: (("", "e"),),  # sisar
+    33: (("", "e"),),  # kytkin
+    38: (("", "e"),),  # nainen
+    39: (("", "e"),),  # vastaus
+    42: (("", "e"),),  # mies
+    43: (("", "e"),),  # ohut
+    45: (("", "e"),),  # kahdeksas
+    46: (("", "e"),),  # tuhat
+    49: (("", "e"),),  # askel, askele
+    # -V -> -VV
+    41: (("([aeiouyäö])", r"\1\1"),),  # vieras
+    44: (("ä",            "ää"),),     # kevät
+    48: (("([eiu])",      r"\1\1"),),  # hame
+    # -U -> -ee
+    47: (("[uy]", "ee"),),  # kuollut
+}
+_VOWELS_PAR_SG_GEN_PL = {
+    # -i -> -
+    23: (("i", ""),),  # tiili
+    24: (("i", ""),),  # uni
+    25: (("i", ""),),  # toimi
+    26: (("i", ""),),  # pieni
+    27: (("i", ""),),  # käsi
+    28: (("i", ""),),  # kynsi
+    29: (("i", ""),),  # lapsi
+    30: (("i", ""),),  # veitsi
+    31: (("i", ""),),  # kaksi
+    40: (("i", ""),),  # kalleus
+}
+_VOWELS_GEN_PL = {
+    # -V -> -
+    5:  (("i",    ""),),   # risti
+    6:  (("i",    ""),),   # paperi
+    7:  (("i",    ""),),   # ovi
+    10: (("a",    ""),),   # koira
+    15: (("[aä]", ""),),   # korkea
+    16: (("i",    ""),),   # vanhempi
+    17: (("[ay]", ""),),   # vapaa
+    18: (("[ai]", ""),),   # maa
+    20: (("[ae]", ""),),   # filee
+    41: (("aa",   "a"),),  # vieras
+    # -A -> -O
+    9:  (("a", "o"), ("ä", "ö")),  # kala
+    11: (("a", "o"), ("ä", "ö")),  # omena
+    12: (("a", "o"), ("ä", "ö")),  # kulkija
+    13: (("a", "o"), ("ä", "ö")),  # katiska
+    14: (("a", "o"), ("ä", "ö")),  # solakka
+    # -ie/-uo/-yö -> -e/-o/-ö
+    19: (("ie", "e"), ("uo", "o"), ("yö", "ö")),  # suo
+    # -U -> -e
+    47: (("[uy]", "e"),),  # kuollut
+}
+
+# rules for consonant gradation
+# - format: (regex_from, regex_to)
+# - "$" will be appended to regex_from
+# - only the 1st match with regex_from will be applied
+# - the final consonants and vowels have already been changed
 #
 # strong to weak
-_CONS_GRAD_WEAKEN = (
+_CONS_GRAD_WEAKEN = tuple((re.compile(f + "$"), t) for (f, t) in (
     # k
-    ("kk([aeiouyäö])$",               r"k\1"),      # -kkV
-    ("nk([aeiouyäö])$",               r"ng\1"),     # -nkV
-    ("ylkä$",                         r"yljä"),     # -ylkä
-    ("([lr])ke$",                     r"\1je"),     # -lke/-rke
-    (r"([aeiouyäö])([aeiouyäö])k\2$", r"\1\2'\2"),  # -VVkV (2nd V = 3rd V)
-    ("([^aeiouyäö][uy])k([uy])$",     r"\1v\2"),    # -CUkU
-    ("([aeiouyäöhlr])k([aeiouyäö])$", r"\1\2"),     # -VkV/-hkV/-lkV/-rkV
+    ("kk([aeiouyäö])",               r"k\1"),      # -kkV
+    ("nk([aeiouyäö])",               r"ng\1"),     # -nkV
+    ("ylkä",                         r"yljä"),     # -ylkä
+    ("([lr])ke",                     r"\1je"),     # -lke/-rke
+    (r"([aeiouyäö])([aeiouyäö])k\2", r"\1\2'\2"),  # -VVkV (2nd V = 3rd V)
+    ("([klmps][uy])k([uy])",         r"\1v\2"),    # -CUkU
+    ("([aeiouyäöhlr])k([aeiouyäö])", r"\1\2"),     # -VkV/-hkV/-lkV/-rkV
     # p
-    ("pp([aeiouyäö])$",               r"p\1"),    # -ppV
-    ("mp([aeiouyäö])$",               r"mm\1"),   # -mpV
-    ("([aeiouyäölr])p([aeiouyäö])$",  r"\1v\2"),  # -VpV/-lpV/-rpV
+    ("pp([aeiouyäö])",               r"p\1"),    # -ppV
+    ("mp([aeiouyäö])",               r"mm\1"),   # -mpV
+    ("([aeiouyäölr])p([aeiouyäö])",  r"\1v\2"),  # -VpV/-lpV/-rpV
     # t
-    ("tt([aeiouyäö])$",             r"t\1"),     # -ttV
-    ("([lnr])t([aeiouyäö])$",       r"\1\1\2"),  # -ltV/-ntV/-rtV
-    ("([aeiouyäöh])t([aeiouyäö])$", r"\1d\2"),   # -VtV/-htV
-)
+    ("tt([aeiouyäö])",             r"t\1"),     # -ttV
+    ("([lnr])t([aeiouyäö])",       r"\1\1\2"),  # -ltV/-ntV/-rtV
+    ("([aeiouyäöh])t([aeiouyäö])", r"\1d\2"),   # -VtV/-htV
+))
 #
 # weak to strong
-_CONS_GRAD_STRENGTHEN = (
+_CONS_GRAD_STRENGTHEN = tuple((re.compile(f + "$"), t) for (f, t) in (
     # k
-    ("([aeiouyäölnr])k(aa?|ee?)$",        r"\1kk\2"),  # tikas
-    ("([aeiouyäö])ng(aa?|ää?|ere?)$",     r"\1nk\2"),  # penger
-    ("([hl])j(ee?)$",                     r"\1k\2"),   # hylje
-    ("([aeiouyäöh])(ene?|ime|in)$",       r"\1k\2"),   # säen
-    ("([aeiouyäö]|ar)(aa|ee|ii)$",        r"\1k\2"),   # ies
-    ("(iu)([ae])$",                       r"\1k\2"),   # kiuas
-    ("^([a-zäö]?[aeiouyäö]|var)([aei])$", r"\1k\2"),   # ruis
+    ("([aeiouyäölnr])k(aa?|ee?)",               r"\1kk\2"),  # tikas
+    ("([aeiouyäö])ng(aa?|ää?|ere?)",            r"\1nk\2"),  # penger
+    ("([hl])j(ee?)",                            r"\1k\2"),   # hylje
+    ("([aeiouyäöh])(ene?|ime|in)",              r"\1k\2"),   # säen
+    ("([aeiouyäö]|ar)(aa|ee|ii)",               r"\1k\2"),   # ies
+    ("(iu)([ae])",                              r"\1k\2"),   # kiuas
+    ("(^[^aeiouyäö]?[aeiouyäö]|ai|var)([aei])", r"\1k\2"),   # ruis
     # p
-    ("([aeiouyäölmr])p(aa?|ää?|ee?)$",               r"\1pp\2"),  # ape
-    ("([aeiouyäö])mm(aa?|ää?|ee?|yy?|ele?|imä|ye)$", r"\1mp\2"),  # lämmin
-    ("([aeiouyäölr])v(aa?|ää?|ee?|[ai][lmn]e?)$",    r"\1p\2"),   # taival
+    ("([aeiouyäölm])p(aa?|ää?|ee?)",                r"\1pp\2"),  # ape
+    ("([aeiouyäö])mm(aa?|ää?|ee?|yy?|ele?|imä|ye)", r"\1mp\2"),  # lämmin
+    ("([aeiouyäölr])v(aa?|ää?|ee?|[ai][lmn]e?)",    r"\1p\2"),   # taival
     # t
-    ("([aeiouyäölnr])t(aa?|ää?|ee?|ii?|uu?|yy?)$", r"\1tt\2"),  # altis
-    ("([aeiouyäö])t(a|ä|[aäioö][mnr][aäe]?)$",     r"\1tt\2"),  # heitin
-    (r"([lnr])\1(aa?|ää?|ee?|[aei][lmnr]e?)$",     r"\1t\2"),   # kallas
-    ("([aeiouyäöh])d(aa?|ee?|[ai][mnr]e?)$",       r"\1t\2"),   # pidin
-    ("(u)(ere?)$",                                 r"\1t\2"),   # auer
-)
+    (r"([aeiouyäölnr])t(([aeiouyäö])\3?)",    r"\1tt\2"),  # altis
+    ("([aeiouyäö])t([aeiouyäö][mnr][aäe]?)",  r"\1tt\2"),  # heitin, tytär
+    (r"([lnr])\1(aa?|ää?|ee?|[aei][lmnr]e?)", r"\1t\2"),   # kallas
+    ("([aeiouyäöh])d(aa?|ee?|[ai][mnr]e?)",   r"\1t\2"),   # pidin
+    ("(u)(ere?)",                             r"\1t\2"),   # auer
+))
+
+# -----------------------------------------------------------------------------
+
+def _change_endings(word, decl, regexes):
+    # change the final consonant/vowel of a word using a regex
+    # regexes: {declension: ((regex_from, regex_to), ...), ...}
+    # only the first matching regex_from will be applied
+
+    for (reFrom, reTo) in regexes.get(decl, ()):
+        reFrom += "$"
+        if re.search(reFrom, word) is not None:
+            return re.sub(reFrom, reTo, word)
+    return word
 
 def _consonant_gradation(word, strengthen=False):
     # apply consonant gradation to the word
@@ -76,165 +235,6 @@ def _consonant_gradation(word, strengthen=False):
             return re.sub(reFrom, reTo, word)
     return word
 
-# -----------------------------------------------------------------------------
-
-def _change_suffixes(word, decl, regexes):
-    # change the final consonant/vowel of a word using a regex
-    # regexes: {declension: ((regex_from, regex_to), ...), ...}
-    # only the first matching regex_from will be applied
-
-    for (reFrom, reTo) in regexes.get(decl, ()):
-        if re.search(reFrom, word) is not None:
-            return re.sub(reFrom, reTo, word)
-    return word
-
-# changes to final consonants;
-# declension: ((regex_from, regex_to), ...); only 1st match will be applied
-_CONSONANTS_GEN_ESS_PAR = {
-    # -n
-    10: (("n$",   ""),),   # kahdeksan
-    32: (("nen$", "n"),),  # kymmenen
-    38: (("nen$", "s"),),  # nainen
-}
-_CONSONANTS_GEN_SG_ESS_SG_PAR_SG = {
-    # -s, -si
-    27: (("si$", "ti"),),  # käsi
-    28: (("si$", "ti"),),  # kynsi
-    40: (("s$",  "ti"),),  # kalleus
-}
-_CONSONANTS_GEN_SG_ESS_SG_GEN_PL_PAR_PL = {
-    # -n
-    34: (("n$", "m"),),   # onneton
-    35: (("n$", "m"),),   # lämmin
-    36: (("n$", "mm"),),  # sisin
-    37: (("n$", "mm"),),  # vasen
-    # -s
-    41: (("s$", ""),),  # vieras
-    # -t
-    43: (("t$", ""),),  # ohut
-    44: (("t$", ""),),  # kevät
-    47: (("t$", ""),),  # kuollut
-}
-_CONSONANTS_GEN_SG_ESS_SG = {
-    # -n
-    33: (("n$", "m"),),  # kytkin
-    # -s, -si
-    31: (("ksi$", "hti"),),  # kaksi
-    39: (("s$",   "ks"),),   # vastaus
-    42: (("s$",   "h"),),    # mies
-    45: (("s$",   "nt"),),   # kahdeksas
-    # -t
-    46: (("t$", "nt"),),  # tuhat
-}
-_CONSONANTS_PAR_SG = {
-    # -mi
-    25: (("mi$", "ni"),),  # toimi
-    # -s, -si
-    29: (("[kp]si$", "si"),),  # lapsi
-    30: (("tsi$",    "si"),),  # veitsi
-    31: (("ksi$",    "hi"),),  # kaksi
-    45: (("s$",      "t"),),   # kahdeksas
-}
-_CONSONANTS_GEN_PL_PAR_PL = {
-    # -s
-    40: (("s$", "ks"),),  # kalleus
-    45: (("s$", "ns"),),  # kahdeksas
-    # -t
-    46: (("t$", "ns"),),  # tuhat
-}
-
-# changes to final vowels;
-# declension: ((regex_from, regex_to), ...); only 1st match will be applied
-_VOWELS_GEN_SG_ESS_SG_PAR_SG = {
-    # -C -> -Ci
-    5: (("([^aeiouyäö])$", r"\1i"),),  # risti, rock
-    6: (("([^aeiouyäö])$", r"\1i"),),  # paperi, nylon
-    # -i -> -e
-    7: (("i$", "e"),),  # ovi
-    # -i -> -A
-    16: (("^([^aou]+)i$", r"\1ä"), ("i$", "a")),  # vanhempi
-}
-_VOWELS_GEN_SG_ESS_SG_GEN_PL_PAR_PL = {
-    # - -> -A
-    34: (("^([^aou]+)$", r"\1ä"), ("$", "a")),  # onneton
-    35: (("^([^aou]+)$", r"\1ä"), ("$", "a")),  # lämmin
-    36: (("^([^aou]+)$", r"\1ä"), ("$", "a")),  # sisin
-    37: (("^([^aou]+)$", r"\1ä"), ("$", "a")),  # vasen
-}
-_VOWELS_GEN_SG_ESS_SG = {
-    # -i -> -e
-    23: (("i$", "e"),),  # tiili
-    24: (("i$", "e"),),  # uni
-    25: (("i$", "e"),),  # toimi
-    26: (("i$", "e"),),  # pieni
-    27: (("i$", "e"),),  # käsi
-    28: (("i$", "e"),),  # kynsi
-    29: (("i$", "e"),),  # lapsi
-    30: (("i$", "e"),),  # veitsi
-    31: (("i$", "e"),),  # kaksi
-    40: (("i$", "e"),),  # kalleus
-    # - -> -e
-    32: (("$", "e"),),  # sisar
-    33: (("$", "e"),),  # kytkin
-    38: (("$", "e"),),  # nainen
-    39: (("$", "e"),),  # vastaus
-    42: (("$", "e"),),  # mies
-    43: (("$", "e"),),  # ohut
-    45: (("$", "e"),),  # kahdeksas
-    46: (("$", "e"),),  # tuhat
-    49: (("$", "e"),),  # askel, askele
-    # -V -> -VV
-    41: (("([aeiouyäö])$", r"\1\1"),),  # vieras
-    44: (("([aeiouyäö])$", r"\1\1"),),  # kevät
-    48: (("([aeiouyäö])$", r"\1\1"),),  # hame
-    # -U -> -ee
-    47: (("[uy]$", "ee"),),  # kuollut
-}
-_VOWELS_PAR_SG_GEN_PL_PAR_PL = {
-    # -i -> -
-    23: (("i$", ""),),  # tiili
-    24: (("i$", ""),),  # uni
-    25: (("i$", ""),),  # toimi
-    26: (("i$", ""),),  # pieni
-    27: (("i$", ""),),  # käsi
-    28: (("i$", ""),),  # kynsi
-    29: (("i$", ""),),  # lapsi
-    30: (("i$", ""),),  # veitsi
-    31: (("i$", ""),),  # kaksi
-    40: (("i$", ""),),  # kalleus
-}
-_VOWELS_GEN_PL_PAR_PL = {
-    # -V -> -
-    7:  (("i$",    ""),),   # ovi
-    10: (("a$",    ""),),   # koira
-    15: (("[aä]$", ""),),   # korkea
-    16: (("i$",    ""),),   # vanhempi
-    17: (("[ay]$", ""),),   # vapaa
-    18: (("[ai]$", ""),),   # maa
-    20: (("[ae]$", ""),),   # filee
-    41: (("aa$",   "a"),),  # vieras
-    # -A -> -O
-    9:  (("a$", "o"), ("ä$", "ö")),  # kala
-    11: (("a$", "o"), ("ä$", "ö")),  # omena
-    12: (("a$", "o"), ("ä$", "ö")),  # kulkija
-    13: (("a$", "o"), ("ä$", "ö")),  # katiska
-    14: (("a$", "o"), ("ä$", "ö")),  # solakka
-    # -ie/-uo/-yö -> -e/-o/-ö
-    19: (("ie$", "e"), ("uo$", "o"), ("yö$", "ö")),  # suo
-    # -U -> -e
-    47: (("[uy]$", "e"),),  # kuollut
-}
-_VOWELS_GEN_PL = {
-    # -i -> -
-    5: (("i$", ""),),  # risti
-    6: (("i$", ""),),  # paperi
-}
-_VOWELS_PAR_PL = {
-    # -i -> -e, -C -> -Ce
-    5: (("i$", "e"), ("([^aeiouyäö])$", r"\1e")),  # risti, rock
-    6: (("i$", "e"), ("([^aeiouyäö])$", r"\1e")),  # paperi, nylon
-}
-
 def _decline_gen_sg(word, decl, consGrad):
     # return inflected form for a case/number that behaves like
     # genitive singular; no case/number ending; e.g. "kaksi" -> "kahde"
@@ -242,13 +242,16 @@ def _decline_gen_sg(word, decl, consGrad):
     origWord = word
 
     # irregular changes to final consonant and vowel
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_ESS_PAR)
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_SG_ESS_SG_GEN_PL_PAR_PL)
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_SG_ESS_SG_PAR_SG)
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_SG_ESS_SG)
-    word = _change_suffixes(word, decl, _VOWELS_GEN_SG_ESS_SG_PAR_SG)
-    word = _change_suffixes(word, decl, _VOWELS_GEN_SG_ESS_SG_GEN_PL_PAR_PL)
-    word = _change_suffixes(word, decl, _VOWELS_GEN_SG_ESS_SG)
+    word = _change_endings(
+        word, decl,
+        _CONSONANTS_ALL | _CONSONANTS_GEN_SG_ESS_SG_PAR_SG
+        | _CONSONANTS_GEN_SG_ESS_SG_GEN_PL | _CONSONANTS_GEN_SG_ESS_SG
+    )
+    word = _change_endings(
+        word, decl,
+        _VOWELS_GEN_SG_ESS_SG_PAR_SG | _VOWELS_GEN_SG_ESS_SG_GEN_PL
+        | _VOWELS_GEN_SG_ESS_SG
+    )
 
     # consonant gradation
     if consGrad and decl >= 32:
@@ -269,18 +272,19 @@ def _decline_ess_sg(word, decl, consGrad):
     # return inflected form for a case/number that behaves like
     # essive singular; no case/number ending; e.g. "kaksi" -> "kahte"
 
-    origWord = word
-
     # irregular changes to final consonant and vowel
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_ESS_PAR)
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_SG_ESS_SG_PAR_SG)
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_SG_ESS_SG_GEN_PL_PAR_PL)
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_SG_ESS_SG)
-    word = _change_suffixes(word, decl, _VOWELS_GEN_SG_ESS_SG_PAR_SG)
-    word = _change_suffixes(word, decl, _VOWELS_GEN_SG_ESS_SG_GEN_PL_PAR_PL)
-    word = _change_suffixes(word, decl, _VOWELS_GEN_SG_ESS_SG)
+    word = _change_endings(
+        word, decl,
+        _CONSONANTS_ALL | _CONSONANTS_GEN_SG_ESS_SG_PAR_SG
+        | _CONSONANTS_GEN_SG_ESS_SG_GEN_PL | _CONSONANTS_GEN_SG_ESS_SG
+    )
+    word = _change_endings(
+        word, decl,
+        _VOWELS_GEN_SG_ESS_SG_PAR_SG | _VOWELS_GEN_SG_ESS_SG_GEN_PL
+        | _VOWELS_GEN_SG_ESS_SG
+    )
 
-    # strengthening consonant gradation
+    # weak -> strong consonant gradation
     if consGrad and decl >= 32 or decl in (36, 37):
         word = _consonant_gradation(word, True)
 
@@ -291,11 +295,14 @@ def _decline_par_sg(word, decl, consGrad):
     # partitive singular; no case/number ending; e.g. "kaksi" -> "kaht"
 
     # irregular changes to final consonant and vowel
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_ESS_PAR)
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_SG_ESS_SG_PAR_SG)
-    word = _change_suffixes(word, decl, _CONSONANTS_PAR_SG)
-    word = _change_suffixes(word, decl, _VOWELS_GEN_SG_ESS_SG_PAR_SG)
-    word = _change_suffixes(word, decl, _VOWELS_PAR_SG_GEN_PL_PAR_PL)
+    word = _change_endings(
+        word, decl,
+        _CONSONANTS_ALL | _CONSONANTS_GEN_SG_ESS_SG_PAR_SG | _CONSONANTS_PAR_SG
+    )
+    word = _change_endings(
+        word, decl,
+        _VOWELS_GEN_SG_ESS_SG_PAR_SG | _VOWELS_PAR_SG_GEN_PL
+    )
 
     return word
 
@@ -304,28 +311,14 @@ def _decline_gen_pl(word, decl, consGrad):
     # genitive plural; no case/number ending; e.g. "kaksi" -> "kaks"
 
     # irregular changes to final consonant and vowel
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_ESS_PAR)
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_SG_ESS_SG_GEN_PL_PAR_PL)
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_PL_PAR_PL)
-    word = _change_suffixes(word, decl, _VOWELS_GEN_SG_ESS_SG_GEN_PL_PAR_PL)
-    word = _change_suffixes(word, decl, _VOWELS_PAR_SG_GEN_PL_PAR_PL)
-    word = _change_suffixes(word, decl, _VOWELS_GEN_PL_PAR_PL)
-    word = _change_suffixes(word, decl, _VOWELS_GEN_PL)
-
-    return word
-
-def _decline_par_pl(word, decl, consGrad):
-    # return inflected form for a case/number that behaves like
-    # partitive plural; no case/number ending; e.g. "kaksi" -> "kaks"
-
-    # irregular changes to final consonant and vowel
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_ESS_PAR)
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_SG_ESS_SG_GEN_PL_PAR_PL)
-    word = _change_suffixes(word, decl, _CONSONANTS_GEN_PL_PAR_PL)
-    word = _change_suffixes(word, decl, _VOWELS_GEN_SG_ESS_SG_GEN_PL_PAR_PL)
-    word = _change_suffixes(word, decl, _VOWELS_PAR_SG_GEN_PL_PAR_PL)
-    word = _change_suffixes(word, decl, _VOWELS_GEN_PL_PAR_PL)
-    word = _change_suffixes(word, decl, _VOWELS_PAR_PL)
+    word = _change_endings(
+        word, decl,
+        _CONSONANTS_ALL | _CONSONANTS_GEN_SG_ESS_SG_GEN_PL | _CONSONANTS_GEN_PL
+    )
+    word = _change_endings(
+        word, decl,
+        _VOWELS_GEN_SG_ESS_SG_GEN_PL | _VOWELS_PAR_SG_GEN_PL | _VOWELS_GEN_PL
+    )
 
     return word
 
@@ -444,10 +437,8 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
         inflected = _decline_ess_sg(word, decl, consGrad)
     elif case == "par" and number == "sg":
         inflected = _decline_par_sg(word, decl, consGrad)
-    elif case == "gen" and number == "pl":
+    elif case in ("gen", "par") and number == "pl":
         inflected = _decline_gen_pl(word, decl, consGrad)
-    elif case == "par" and number == "pl":
-        inflected = _decline_par_pl(word, decl, consGrad)
     else:
         sys.exit("Error: this should never happen.")
 
@@ -467,10 +458,8 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
     elif word == "pop":
         if case in ("ess", "ill", "par") and number == "sg":
             words.append("poppi")
-        elif case == "gen" and number == "pl":
+        elif case in ("gen", "par") and number == "pl":
             words.append("popp")
-        elif case == "par" and number == "pl":
-            words.append("poppe")
     elif word == "ryntys":
         if case in ("ess", "ill") and number == "sg":
             words = ["rynttyy"]
@@ -548,6 +537,8 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
         or case == "par" and decl in (5, 6):
             if case == "gen":
                 yield from (w + "jen" for w in words)
+            elif decl in (5, 6):
+                yield from (f"{w}ej{v}" for w in words for v in endingVowels)
             else:
                 yield from (f"{w}j{v}" for w in words for v in endingVowels)
         # -iden/-itA
@@ -555,7 +546,9 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
         or 11 <= decl <= 22 and not decl == 16 \
         or decl == 49 and word.endswith("e"):
             words2 = words
-            if word == "häive":
+            if decl == 6:  # paperi, lumen
+                words2 = tuple(re.sub("$", "e", w) for w in words2)
+            elif word == "häive":
                 words2 = ("häipe", "häive")
             elif word == "viive":
                 words2 = ("viipe", "viive")
@@ -565,8 +558,6 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
                 words2 = tuple(_consonant_gradation(w, True) for w in words2)
             #
             if case == "gen":
-                if decl == 6:  # paperi, lumen
-                    words2 = tuple(re.sub("$", "e", w) for w in words2)
                 yield from (w + "iden" for w in words2)
             else:
                 yield from (f"{w}it{v}" for w in words2 for v in endingVowels)
@@ -616,7 +607,8 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
 
 def decline_noun(word, case, number):
     """Generate inflected forms of a Finnish noun. May contain duplicates."""
-    for decl in noundecl.get_declensions(word):
+
+    for decl in get_declensions(word):
         # errors in source data
         if word == "siitake" and decl == 8 \
         or word in ("alpi", "helpi") and decl == 5:
@@ -624,7 +616,7 @@ def decline_noun(word, case, number):
         elif word in ("auer", "hynte", "näin", "pue", "ryntys"):
             consGrad = True
         else:
-            consGrad = noun_consgrad.get_consonant_gradation(word, decl)
+            consGrad = get_consonant_gradation(word, decl)
         yield from _decline_noun_specific(word, decl, consGrad, case, number)
 
 # -----------------------------------------------------------------------------

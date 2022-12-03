@@ -540,6 +540,8 @@ kuollut,kuolleeseen
 tehnyt,tehneeseen
 
 # declension 48
+# -V (not -e)
+kiiru,kiiruuseen
 # -Ve
 aie,aikeeseen
 alue,alueeseen
