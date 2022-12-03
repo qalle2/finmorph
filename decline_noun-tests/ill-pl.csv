@@ -1,0 +1,798 @@
+# more than one declension (all)
+# 1/21
+menu,menuihin
+# 3/8
+caddie,caddieihin
+# 5/7
+alpi,alpeihin,alpiin
+helpi,helpeihin,helpiin
+kaihi,kaiheihin,kaihiin
+karhi,karheihin,karhiin
+kymi,kymeihin,kymiin
+lahti,lahteihin,lahtiin
+laki,lakeihin,lakiin
+palvi,palveihin,palviin
+ripsi,ripseihin,ripsiin
+saksi,sakseihin,saksiin
+sini,sineihin,siniin
+vyyhti,vyyhteihin,vyyhtiin
+# 5/22
+sioux,sioux'ihin,siouxeihin
+# 5/23
+syli,syleihin,syliin
+# 5/26
+kuori,kuoreihin,kuoriin
+viini,viineihin,viiniin
+vuori,vuoreihin,vuoriin
+# 5/30
+peitsi,peitseihin,peitsiin
+# 5/39
+csárdás,csárdáksiin,csárdáseihin
+kuskus,kuskuksiin,kuskuseihin
+# 5/48
+ori,oreihin,oriihin,oriisiin
+# 7/29
+hapsi,hapsiin
+uksi,uksiin
+# 8/48
+siitake,siitakeihin,siitakkeihin,siitakkeisiin
+# 9/10
+aneurysma,aneurysmiin,aneurysmoihin
+kysta,kystiin,kystoihin
+lyyra,lyyriin,lyyroihin
+puola,puoliin,puoloihin
+# 10/11
+humala,humaliin,humaloihin
+# 12/15
+tanhua,tanhuihin,tanhuisiin,tanhuoihin
+# 24/27
+kuusi,kuusiin
+# 39/40
+ahtaus,ahtauksiin
+karvaus,karvauksiin
+rosvous,rosvouksiin
+siivous,siivouksiin
+vakaus,vakauksiin
+# 39/41
+havas,hapaihin,hapaisiin,havaksiin
+kallas,kallaksiin,kaltaihin,kaltaisiin
+koiras,koiraihin,koiraisiin,koiraksiin
+olas,olaihin,olaisiin,olaksiin
+pallas,pallaksiin,paltaihin,paltaisiin
+tuomas,tuomaihin,tuomaisiin,tuomaksiin
+uros,uroihin,uroisiin,uroksiin
+# 39/45
+kymmenes,kymmeneksiin,kymmenensiin
+
+# homonyms distinguished by consonant gradation in some cases
+haiku,haikuihin
+koto,kotoihin
+lento,lentoihin
+mutu,mutuihin
+parka,parkoihin
+raita,raitoihin
+säkä,säkiin
+tutti,tutteihin
+veto,vetoihin
+vika,vikoihin
+
+# optional consonant gradation (no change in meaning) in some cases
+bourette,bouretteihin
+huti,huteihin
+häive,häipeihin,häipeisiin,häiveihin,häiveisiin
+kuti,kuteihin
+leuku,leukuihin
+loota,lootiin
+lunki,lunkeihin
+mutu,mutuihin
+myky,mykyihin
+mökä,mökiin
+nahka,nahkoihin
+nuti,nuteihin
+peti,peteihin
+pop,popeihin,poppeihin
+ringette,ringetteihin
+seljanka,seljankoihin
+sinfonietta,sinfoniettoihin
+tuhka,tuhkiin
+uhka,uhkiin
+vihko,vihkoihin
+viive,viipeihin,viipeisiin,viiveihin,viiveisiin
+vinaigrette,vinaigretteihin
+
+# declension 1
+# -VkV
+koko,kokoihin
+kyky,kykyihin
+laku,lakuihin
+ruoko,ruokoihin
+suku,sukuihin
+tiuku,tiukuihin
+# -CkV
+hehku,hehkuihin
+katku,katkuihin
+kinkku,kinkkuihin
+korko,korkoihin
+palko,palkoihin
+pilkku,pilkkuihin
+sisko,siskoihin
+sähkö,sähköihin
+sänky,sänkyihin
+tikku,tikkuihin
+verkko,verkkoihin
+# -VpV
+rapu,rapuihin
+söpö,söpöihin
+# -CpV
+helppo,helppoihin
+kirppu,kirppuihin
+kumpu,kumpuihin
+orpo,orpoihin
+temppu,temppuihin
+vappu,vappuihin
+# -VtV
+auto,autoihin
+etu,etuihin
+# -CtV
+ehto,ehtoihin
+lanttu,lanttuihin
+murto,murtoihin
+pelto,peltoihin
+rento,rentoihin
+torttu,torttuihin
+tyttö,tyttöihin
+veltto,velttoihin
+# -CV (not -kV, -pV, -tV)
+valo,valoihin
+vilu,viluihin
+äly,älyihin
+
+# declension 2
+palvelu,palveluihin
+väestö,väestöihin
+
+# declension 3
+# -e
+collie,collieihin
+oboe,oboeihin
+# -O
+valtio,valtioihin
+yhtiö,yhtiöihin
+
+# declension 4
+laatikko,laatikkoihin,laatikoihin
+älykkö,älykköihin,älyköihin
+
+# declension 5
+# -ki
+palkki,palkkeihin
+rööki,röökeihin
+šakki,šakkeihin
+vanki,vankeihin
+vouti,vouteihin
+# -pi
+alppi,alppeihin
+hupi,hupeihin
+korppi,korppeihin
+pipi,pipeihin
+# -ti
+koti,koteihin
+pelti,pelteihin
+risti,risteihin
+tunti,tunteihin
+yrtti,yrtteihin
+# -C
+lux,luxeihin
+tag,tageihin
+wok,wokeihin
+
+# declension 6
+# -i
+paperi,papereihin
+saluki,salukeihin
+# -C
+edam,edameihin
+gallup,gallupeihin
+lumen,lumeneihin
+rial,rialeihin
+weber,webereihin
+
+# declension 7
+# -VCV
+läpi,läpiin
+ovi,oviin
+piki,pikiin
+reki,rekiin
+tuki,tukiin
+veli,veljiin
+# -CCV
+arki,arkiin
+arpi,arpiin
+hetki,hetkiin
+impi,impiin
+jälki,jälkiin
+järki,järkiin
+kaikki,kaikkiin
+kaski,kaskiin
+lehti,lehtiin
+olki,olkiin
+onki,onkiin
+soppi,soppiin
+
+# declension 8
+jeppe,jeppeihin
+nalle,nalleihin
+nukke,nukkeihin
+ope,opeihin
+ringette,ringetteihin
+
+# declension 9
+# -kV
+aika,aikoihin
+eka,ekoihin
+iskä,isköihin
+jalka,jalkoihin
+jenkka,jenkkoihin
+lanka,lankoihin
+markka,markkoihin
+nahka,nahkoihin
+taika,taikoihin
+takka,takkoihin
+vaaka,vaakoihin
+vehka,vehkoihin
+velka,velkoihin
+virka,virkoihin
+# -pV
+heppa,heppoihin
+kilpa,kilpoihin
+kimppa,kimppoihin
+tapa,tapoihin
+# -tV
+kysyntä,kysyntöihin
+mitta,mittoihin
+parta,partoihin
+sata,satoihin
+vihta,vihtoihin
+# -CV (not -kV, -pV, -tV)
+kala,kaloihin
+
+# declension 10
+# -C
+kahdeksan,kahdeksiin
+seitsemän,seitsemiin
+yhdeksän,yhdeksiin
+# -VV
+boa,boiin
+# -kV
+härkä,härkiin
+ikä,ikiin
+kenkä,kenkiin
+nälkä,nälkiin
+oka,okiin
+poika,poikiin
+reikä,reikiin
+sukka,sukkiin
+säkä,säkiin
+toka,tokiin
+tuhka,tuhkiin
+ylkä,ylkiin
+# -pV
+kompa,kompiin
+noppa,noppiin
+tupa,tupiin
+turpa,turpiin
+# -tV
+juhta,juhtiin
+kulta,kultiin
+mäntä,mäntiin
+rotta,rottiin
+setä,setiin
+turta,turtiin
+# -CV (not -kV, -pV, -tV)
+koira,koiriin
+
+# declension 11
+judoka,judokiin,judokoihin
+käpälä,käpäliin,käpälöihin
+omena,omeniin,omenoihin
+
+# declension 12
+kulkija,kulkijoihin
+ritilä,ritilöihin
+
+# declension 13
+katiska,katiskoihin
+siivilä,siivilöihin
+
+# declension 14
+navetta,navetoihin,navettoihin
+solakka,solakkoihin,solakoihin
+ulappa,ulapoihin,ulappoihin
+ötökkä,ötökköihin,ötököihin
+
+# declension 15
+ainoa,ainoihin,ainoisiin
+korkea,korkeihin,korkeisiin
+äreä,äreihin,äreisiin
+
+# declension 16
+idempi,idempiin
+kumpi,kumpiin
+vanhempi,vanhempiin
+
+# declension 17
+ehtoo,ehtoihin,ehtoisiin
+hynttyy,hynttyihin,hynttyisiin
+takuu,takuihin,takuisiin
+vapaa,vapaihin,vapaisiin
+
+# declension 18
+jää,jäihin
+jöö,jöihin
+maa,maihin
+rokokoo,rokokoihin
+suu,suihin
+syy,syihin
+tau,tauihin
+tee,teihin
+tii,tiihin
+tiu,tiuihin
+
+# declension 19
+suo,soihin
+tie,teihin
+yö,öihin
+
+# declension 20
+filee,fileihin,fileisiin
+miljöö,miljöihin,miljöisiin
+nugaa,nugaihin,nugaisiin
+raguu,raguihin,raguisiin
+revyy,revyihin,revyisiin
+trikoo,trikoihin,trikoisiin
+
+# declension 21 (all except "kungfu", "taxfree")
+brasserie,brasserieihin
+brie,brieihin
+bébé,bébéihin
+cha-cha-cha,cha-cha-chaihin
+clou,clouihin
+coupé,coupéihin
+cowboy,cowboyihin
+fondue,fondueihin
+gay,gayihin
+gray,grayihin
+jersey,jerseyihin
+jockey,jockeyihin
+moiré,moiréihin
+playboy,playboyihin
+reggae,reggaeihin
+rosé,roséihin
+speedway,speedwayihin
+spray,sprayihin
+
+# declension 22 (all)
+beignet,beignet'ihin
+bordeaux,bordeaux'ihin
+bouquet,bouquet'ihin
+buffet,buffet'ihin
+gourmet,gourmet'ihin
+know-how,know-how'ihin
+nougat,nougat'ihin
+parfait,parfait'ihin
+passepartout,passepartout'ihin
+port salut,port salut'ihin
+ragoût,ragoût'ihin
+show,show'ihin
+tournedos,tournedos'ihin
+
+# declension 23
+lohi,lohiin
+moni,moniin
+tiili,tiiliin
+
+# declension 24
+hiili,hiiliin
+hiiri,hiiriin
+kusi,kusiin
+meri,meriin
+ruuhi,ruuhiin
+uni,uniin
+
+# declension 25 (all)
+liemi,liemiin
+loimi,loimiin
+lumi,lumiin
+luomi,luomiin
+niemi,niemiin
+taimi,taimiin
+toimi,toimiin
+tuomi,tuomiin
+
+# declension 26
+jousi,jousiin
+pieni,pieniin
+puoli,puoliin
+veri,veriin
+ääri,ääriin
+
+# declension 27
+käsi,käsiin
+uusi,uusiin
+
+# declension 28 (all)
+hirsi,hirsiin
+jälsi,jälsiin
+kansi,kansiin
+karsi,karsiin
+kirsi,kirsiin
+korsi,korsiin
+kynsi,kynsiin
+länsi,länsiin
+orsi,orsiin
+parsi,parsiin
+ponsi,ponsiin
+pursi,pursiin
+varsi,varsiin
+virsi,virsiin
+
+# declension 29 (all)
+hapsi,hapsiin
+lapsi,lapsiin
+uksi,uksiin
+
+# declension 30 (all)
+veitsi,veitsiin
+
+# declension 31 (all)
+haaksi,haaksiin
+kaksi,kaksiin
+yksi,yksiin
+
+# declension 32
+# -l
+nivel,niveliin
+# -n
+ahven,ahveniin
+höyhen,höyheniin
+ien,ikeniin
+jäsen,jäseniin
+kymmenen,kymmeniin
+siemen,siemeniin
+# -r
+jumalatar,jumalattariin
+kaunotar,kaunottariin
+onnetar,onnettariin
+papitar,papittariin
+sisar,sisariin
+syöjätär,syöjättäriin
+tytär,tyttäriin
+
+# declension 33
+# -Vin
+avain,avaimiin
+avoin,avoimiin
+eläin,eläimiin
+istuin,istuimiin
+näin,näkimiin
+puin,pukimiin
+# -din
+ydin,ytimiin
+# -hin
+jauhin,jauhimiin
+pyyhin,pyyhkimiin
+# -jin
+suljin,sulkimiin
+# -kin
+kytkin,kytkimiin
+# -lin
+elin,elimiin
+sivellin,siveltimiin
+# -min
+vihmin,vihmimiin
+# -nin
+väännin,vääntimiin
+# -rin
+aterin,aterimiin
+avarrin,avartimiin
+# -sin
+pesin,pesimiin
+# -tin
+heitin,heittimiin
+poltin,polttimiin
+uistin,uistimiin
+# -vin
+kaavin,kaapimiin
+kaivin,kaivimiin
+kalvin,kalvimiin
+raavin,raapimiin
+survin,survimiin
+särvin,särpimiin
+# -Vn (not -in)
+hapan,happamiin
+laidun,laitumiin
+morsian,morsiamiin
+sydän,sydämiin
+
+# declension 34
+# -CtOn
+alaston,alastomiin
+# -VtOn
+ajaton,ajattomiin
+avuton,avuttomiin
+eloton,elottomiin
+laiton,laittomiin
+onneton,onnettomiin
+päätön,päättömiin
+syytön,syyttömiin
+yötön,yöttömiin
+
+# declension 35 (all)
+lämmin,lämpimiin
+
+# declension 36
+alin,alimpiin
+sisin,sisimpiin
+uloin,uloimpiin
+
+# declension 37 (all)
+vasen,vasempiin
+
+# declension 38
+nainen,naisiin
+osanen,osasiin
+öinen,öisiin
+
+# declension 39
+# -VUs
+hius,hiuksiin
+kiveys,kiveyksiin
+makuus,makuuksiin
+putous,putouksiin
+sysäys,sysäyksiin
+vastaus,vastauksiin
+# -VVs (not -VUs)
+hauis,hauiksiin
+iskias,iskiaksiin
+rabies,rabieksiin
+taos,taoksiin
+teos,teoksiin
+# -CVs
+aines,aineksiin
+emäs,emäksiin
+lihas,lihaksiin
+rötös,rötöksiin
+varis,variksiin
+vedos,vedoksiin
+virus,viruksiin
+yritys,yrityksiin
+
+# declension 40
+kalleus,kalleuksiin
+uutuus,uutuuksiin
+äitiys,äitiyksiin
+äreys,äreyksiin
+
+# declension 41
+# -Vs (not -As, -is)
+ies,ikeihin,ikeisiin
+kirves,kirveihin,kirveisiin
+ryntys,rynttyihin,rynttyisiin
+vantus,vanttuihin,vanttuisiin
+äes,äkeihin,äkeisiin
+# -VAs, -Vis
+autuas,autuaihin,autuaisiin
+kiuas,kiukaihin,kiukaisiin
+oas,okaihin,okaisiin
+ruis,rukiihin,rukiisiin
+äveriäs,äveriäihin,äveriäisiin
+# -dAs, -dis
+ahdas,ahtaihin,ahtaisiin
+hidas,hitaihin,hitaisiin
+# -gAs, -gis
+kangas,kankaihin,kankaisiin
+köngäs,könkäihin,könkäisiin
+# -hAs, -his
+keihäs,keihäihin,keihäisiin
+# -jAs, -jis
+uljas,uljaihin,uljaisiin
+# -kAs, -kis
+kirkas,kirkkaihin,kirkkaisiin
+rakas,rakkaihin,rakkaisiin
+raskas,raskaihin,raskaisiin
+sitkas,sitkaihin,sitkaisiin
+vilkas,vilkkaihin,vilkkaisiin
+# -lAs, -lis
+allas,altaihin,altaisiin
+aulis,auliihin,auliisiin
+kallis,kalliihin,kalliisiin
+kaplas,kaplaihin,kaplaisiin
+mallas,maltaihin,maltaisiin
+valas,valaihin,valaisiin
+# -mAs, -mis
+armas,armaihin,armaisiin
+hammas,hampaihin,hampaisiin
+ruumis,ruumiihin,ruumiisiin
+valmis,valmiihin,valmiisiin
+vehmas,vehmaihin,vehmaisiin
+# -nAs, -nis
+ahnas,ahnaihin,ahnaisiin
+kaunis,kauniihin,kauniisiin
+kinnas,kintaihin,kintaisiin
+kunnas,kunnaihin,kunnaisiin
+oinas,oinaihin,oinaisiin
+rynnäs,ryntäihin,ryntäisiin
+# -pAs, -pis
+opas,oppaihin,oppaisiin
+rypäs,ryppäihin,ryppäisiin
+valpas,valppaihin,valppaisiin
+# -rAs, -ris
+eräs,eräihin,eräisiin
+katras,katraihin,katraisiin
+kauris,kauriihin,kauriisiin
+oras,oraihin,oraisiin
+paras,parhaihin,parhaisiin
+varas,varkaihin,varkaisiin
+varras,vartaihin,vartaisiin
+# -sAs, -sis
+pensas,pensaihin,pensaisiin
+porsas,porsaihin,porsaisiin
+viisas,viisaihin,viisaisiin
+# -tAs, -tis
+altis,alttiihin,alttiisiin
+mätäs,mättäihin,mättäisiin
+ratas,rattaihin,rattaisiin
+raitis,raittiihin,raittiisiin
+rastas,rastaihin,rastaisiin
+# -vAs, -vis
+eväs,eväihin,eväisiin
+karvas,karvaihin,karvaisiin
+rahvas,rahvaihin,rahvaisiin
+ryväs,rypäihin,rypäisiin
+seiväs,seipäihin,seipäisiin
+tiivis,tiiviihin,tiiviisiin
+varvas,varpaihin,varpaisiin
+ylväs,ylväihin,ylväisiin
+
+# declension 42 (all)
+mies,miehiin
+
+# declension 43
+immyt,impyihin,impyisiin
+lyhyt,lyhyihin,lyhyisiin
+ohut,ohuihin,ohuisiin
+
+# declension 44 (all)
+kevät,keväihin,keväisiin
+
+# declension 45
+kahdeksas,kahdeksansiin
+neljäs,neljänsiin
+viides,viidensiin
+
+# declension 46 (all)
+tuhat,tuhansiin
+
+# declension 47
+jäänyt,jääneihin,jääneisiin
+kuollut,kuolleihin,kuolleisiin
+tehnyt,tehneihin,tehneisiin
+
+# declension 48
+# -V (not -e)
+kiiru,kiiruihin,kiiruisiin
+# -Ve
+aie,aikeihin,aikeisiin
+alue,alueihin,alueisiin
+hiue,hiukeihin,hiukeisiin
+koe,kokeihin,kokeisiin
+lippue,lippueihin,lippueisiin
+pesue,pesueihin,pesueisiin
+pue,pukeihin,pukeisiin
+säe,säkeihin,säkeisiin
+tae,takeihin,takeisiin
+yhtye,yhtyeihin,yhtyeisiin
+# -de
+sade,sateihin,sateisiin
+suhde,suhteihin,suhteisiin
+# -he
+aihe,aiheihin,aiheisiin
+valhe,valheihin,valheisiin
+venhe,venheihin,venheisiin
+virhe,virheihin,virheisiin
+# -je
+hylje,hylkeihin,hylkeisiin
+kirje,kirjeihin,kirjeisiin
+koje,kojeihin,kojeisiin
+lahje,lahkeihin,lahkeisiin
+sulje,sulkeihin,sulkeisiin
+# -ke
+hanke,hankkeihin,hankkeisiin
+jatke,jatkeihin,jatkeisiin
+leike,leikkeihin,leikkeisiin
+ryske,ryskeihin,ryskeisiin
+sähke,sähkeihin,sähkeisiin
+virke,virkkeihin,virkkeisiin
+välke,välkkeihin,välkkeisiin
+# -le
+helle,helteihin,helteisiin
+kahle,kahleihin,kahleisiin
+säle,säleihin,säleisiin
+tisle,tisleihin,tisleisiin
+# -me
+amme,ammeihin,ammeisiin
+hame,hameihin,hameisiin
+hurme,hurmeihin,hurmeisiin
+ihme,ihmeihin,ihmeisiin
+ilme,ilmeihin,ilmeisiin
+lumme,lumpeihin,lumpeisiin
+# -ne
+ahne,ahneihin,ahneisiin
+aine,aineihin,aineisiin
+herne,herneihin,herneisiin
+tunne,tunteihin,tunteisiin
+# -pe
+ape,appeihin,appeisiin
+kampe,kamppeihin,kamppeisiin
+# -re
+aarre,aarteihin,aarteisiin
+näre,näreihin,näreisiin
+# -se
+ase,aseihin,aseisiin
+hilse,hilseihin,hilseisiin
+katse,katseihin,katseisiin
+# -te
+aate,aatteihin,aatteisiin
+este,esteihin,esteisiin
+hynte,hyntteihin,hyntteisiin
+korte,kortteihin,kortteisiin
+polte,poltteihin,poltteisiin
+# -ve
+aave,aaveihin,aaveisiin
+lieve,liepeihin,liepeisiin
+
+# declension 49 (all)
+# -e
+askare,askareihin,askareisiin
+askele,askeleihin,askeleisiin
+autere,autereihin,autereisiin
+hepene,hepeneihin,hepeneisiin
+huhmare,huhmareihin,huhmareisiin
+kantele,kanteleihin,kanteleisiin
+kintere,kintereihin,kintereisiin
+kyynele,kyyneleihin,kyyneleisiin
+mantere,mantereihin,mantereisiin
+murene,mureneihin,mureneisiin
+ompele,ompeleihin,ompeleisiin
+penkere,penkereihin,penkereisiin
+petkele,petkeleihin,petkeleisiin
+pientare,pientareihin,pientareisiin
+saivare,saivareihin,saivareisiin
+seppele,seppeleihin,seppeleisiin
+säkene,säkeneihin,säkeneisiin
+taipale,taipaleihin,taipaleisiin
+tantere,tantereihin,tantereisiin
+utare,utareihin,utareisiin
+vempele,vempeleihin,vempeleisiin
+# -C
+askar,askariin
+askel,askeliin
+auer,auteriin
+huhmar,huhmariin
+kannel,kanteliin
+kinner,kinteriin
+kyynel,kyyneliin
+manner,manteriin
+muren,mureniin
+ommel,ompeliin
+penger,penkeriin
+petkel,petkeliin
+piennar,pientariin
+saivar,saivariin
+sammal,sammaliin
+seppel,seppeliin
+säen,säkeniin
+taival,taipaliin
+tanner,tanteriin
+udar,utariin
+vemmel,vempeliin

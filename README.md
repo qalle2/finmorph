@@ -32,7 +32,7 @@ ess, tra, ine, ela, ill, ade, abl, all, abe, ins. Numbers: sg, pl. If case &
 number omitted, print all supported combinations.
 ```
 
-Note: plurals (except for nominative, genitive and partitive) and instructive have not been implemented yet.
+These cases have not yet been implemented in plural: essive, translative, inessive, elative, adessive, ablative, allative, abessive, instructive.
 
 Examples:
 ```
@@ -52,6 +52,7 @@ TraSg: kuudeksi, kuuseksi
 IneSg: kuudessa, kuusessa
 ElaSg: kuudesta, kuusesta
 IllSg: kuuseen, kuuteen
+IllPl: kuusiin
 AdeSg: kuudella, kuusella
 AblSg: kuudelta, kuuselta
 AllSg: kuudelle, kuuselle

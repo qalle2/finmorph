@@ -11,17 +11,18 @@ CASES = (
     ("nom", "pl"),
     ("gen", "sg"),
     ("gen", "pl"),
+    ("par", "sg"),
+    ("par", "pl"),
+    ("ess", "sg"),
     ("tra", "sg"),
     ("ine", "sg"),
     ("ela", "sg"),
+    ("ill", "sg"),
+    ("ill", "pl"),
     ("ade", "sg"),
     ("abl", "sg"),
     ("all", "sg"),
     ("abe", "sg"),
-    ("ess", "sg"),
-    ("ill", "sg"),
-    ("par", "sg"),
-    ("par", "pl"),
 )
 
 def status_msg(msg):

@@ -25,20 +25,20 @@ from noundecl import get_declensions
 # - consonant gradation will be applied afterwards
 #
 # consonants (for any combination of case/number, keys must be unique)
-_CONSONANTS_ALL = {
+_CONSONANTS_GEN_SG_PAR_SG_GEN_PL = {
     # -n
     10: (("n",   ""),),   # kahdeksan
     32: (("nen", "n"),),  # kymmenen
     38: (("nen", "s"),),  # nainen
 }
-_CONSONANTS_GEN_SG_ESS_SG_PAR_SG = {
+_CONSONANTS_GEN_SG_PAR_SG = {
     # -s
     40: (("s", "ti"),),  # kalleus
     # -si
     27: (("si", "ti"),),  # käsi
     28: (("si", "ti"),),  # kynsi
 }
-_CONSONANTS_GEN_SG_ESS_SG_GEN_PL = {
+_CONSONANTS_GEN_SG_GEN_PL = {
     # -n
     34: (("n", "m"),),   # onneton
     35: (("n", "m"),),   # lämmin
@@ -51,10 +51,10 @@ _CONSONANTS_GEN_SG_ESS_SG_GEN_PL = {
     44: (("t", ""),),  # kevät
     47: (("t", ""),),  # kuollut
 }
-_CONSONANTS_GEN_SG_ESS_SG = (
-    _CONSONANTS_ALL
-    | _CONSONANTS_GEN_SG_ESS_SG_PAR_SG
-    | _CONSONANTS_GEN_SG_ESS_SG_GEN_PL
+_CONSONANTS_GEN_SG = (  # also _CASES_LIKE_GEN_SG, EssSg, IllSg
+    _CONSONANTS_GEN_SG_PAR_SG_GEN_PL
+    | _CONSONANTS_GEN_SG_PAR_SG
+    | _CONSONANTS_GEN_SG_GEN_PL
     | {
         # -n
         33: (("n", "m"),),  # kytkin
@@ -69,8 +69,8 @@ _CONSONANTS_GEN_SG_ESS_SG = (
     }
 )
 _CONSONANTS_PAR_SG = (
-    _CONSONANTS_ALL
-    | _CONSONANTS_GEN_SG_ESS_SG_PAR_SG
+    _CONSONANTS_GEN_SG_PAR_SG_GEN_PL
+    | _CONSONANTS_GEN_SG_PAR_SG
     | {
         # -mi
         25: (("mi", "ni"),),  # toimi
@@ -82,20 +82,27 @@ _CONSONANTS_PAR_SG = (
         31: (("ksi",    "hi"),),  # kaksi
     }
 )
-_CONSONANTS_GEN_PL = (
-    _CONSONANTS_ALL
-    | _CONSONANTS_GEN_SG_ESS_SG_GEN_PL
+_CONSONANTS_GEN_PL = (  # also PartPl, IllPl
+    _CONSONANTS_GEN_SG_PAR_SG_GEN_PL
+    | _CONSONANTS_GEN_SG_GEN_PL
     | {
+        # -n
+        33: (("n", "m"),),  # kytkin
         # -s
+        39: (("s", "ks"),),  # vastaus
         40: (("s", "ks"),),  # kalleus
+        42: (("s", "h"),),   # mies
         45: (("s", "ns"),),  # kahdeksas
         # -t
         46: (("t", "ns"),),  # tuhat
     }
 )
+del _CONSONANTS_GEN_SG_PAR_SG_GEN_PL
+del _CONSONANTS_GEN_SG_PAR_SG
+del _CONSONANTS_GEN_SG_GEN_PL
 #
 # vowels (for any combination of case/number, keys must be unique)
-_VOWELS_GEN_SG_ESS_SG_PAR_SG = {
+_VOWELS_GEN_SG_PAR_SG = {
     # -C -> -Ci
     5: (("([^aeiouyäö])", r"\1i"),),  # risti, rock
     6: (("([^aeiouyäö])", r"\1i"),),  # paperi, nylon
@@ -104,16 +111,16 @@ _VOWELS_GEN_SG_ESS_SG_PAR_SG = {
     # -i -> -A
     16: (("^([^aou]+)i", r"\1ä"), ("i", "a")),  # vanhempi
 }
-_VOWELS_GEN_SG_ESS_SG_GEN_PL = {
+_VOWELS_GEN_SG_GEN_PL = {
     # - -> -A
     34: (("^([^aou]+)", r"\1ä"), ("", "a")),  # onneton
     35: (("^([^aou]+)", r"\1ä"), ("", "a")),  # lämmin
     36: (("^([^aou]+)", r"\1ä"), ("", "a")),  # sisin
     37: (("^([^aou]+)", r"\1ä"), ("", "a")),  # vasen
 }
-_VOWELS_GEN_SG_ESS_SG = (
-    _VOWELS_GEN_SG_ESS_SG_PAR_SG
-    | _VOWELS_GEN_SG_ESS_SG_GEN_PL
+_VOWELS_GEN_SG = (  # also _CASES_LIKE_GEN_SG, EssSg, IllSg
+    _VOWELS_GEN_SG_PAR_SG
+    | _VOWELS_GEN_SG_GEN_PL
     | {
         # -i -> -e
         23: (("i", "e"),),  # tiili
@@ -158,36 +165,45 @@ _VOWELS_PAR_SG_GEN_PL = {
     40: (("i", ""),),  # kalleus
 }
 _VOWELS_PAR_SG = (
-    _VOWELS_GEN_SG_ESS_SG_PAR_SG
+    _VOWELS_GEN_SG_PAR_SG
     | _VOWELS_PAR_SG_GEN_PL
 )
-_VOWELS_GEN_PL = (
-    _VOWELS_GEN_SG_ESS_SG_GEN_PL
+_VOWELS_GEN_PL_ILL_PL = {
+    5: (("i", "e"), ("([^aeiouyäö])", r"\1e")),  # risti, rock
+    6: (("i", "e"), ("([^aeiouyäö])", r"\1e")),  # paperi, nylon
+    #
+    7:  (("i",          ""),),   # ovi
+    10: (("[aä]",       ""),),   # koira
+    15: (("[aä]",       ""),),   # korkea
+    16: (("i",          ""),),   # vanhempi
+    17: (("[aeiouyäö]", ""),),   # vapaa
+    18: (("[aeiouyäö]", ""),),   # maa
+    20: (("[aeiouyäö]", ""),),   # filee
+    41: (("aa",         "a"),),  # vieras
+    # -A -> -O
+    9:  (("a", "o"), ("ä", "ö")),  # kala
+    11: (("a", "o"), ("ä", "ö")),  # omena
+    12: (("a", "o"), ("ä", "ö")),  # kulkija
+    13: (("a", "o"), ("ä", "ö")),  # katiska
+    14: (("a", "o"), ("ä", "ö")),  # solakka
+    # -ie/-uo/-yö -> -e/-o/-ö
+    19: (("ie", "e"), ("uo", "o"), ("yö", "ö")),  # suo
+    # -U -> -e
+    47: (("[uy]", "e"),),  # kuollut
+}
+_VOWELS_GEN_PL = (  # also PartPl
+    _VOWELS_GEN_SG_GEN_PL
     | _VOWELS_PAR_SG_GEN_PL
-    | {
-        # -V -> -
-        5:  (("i",          ""),),   # risti
-        6:  (("i",          ""),),   # paperi
-        7:  (("i",          ""),),   # ovi
-        10: (("a",          ""),),   # koira
-        15: (("[aä]",       ""),),   # korkea
-        16: (("i",          ""),),   # vanhempi
-        17: (("[aeiouyäö]", ""),),   # vapaa
-        18: (("[aeiouyäö]", ""),),   # maa
-        20: (("[aeiouyäö]", ""),),   # filee
-        41: (("aa",         "a"),),  # vieras
-        # -A -> -O
-        9:  (("a", "o"), ("ä", "ö")),  # kala
-        11: (("a", "o"), ("ä", "ö")),  # omena
-        12: (("a", "o"), ("ä", "ö")),  # kulkija
-        13: (("a", "o"), ("ä", "ö")),  # katiska
-        14: (("a", "o"), ("ä", "ö")),  # solakka
-        # -ie/-uo/-yö -> -e/-o/-ö
-        19: (("ie", "e"), ("uo", "o"), ("yö", "ö")),  # suo
-        # -U -> -e
-        47: (("[uy]", "e"),),  # kuollut
-    }
+    | _VOWELS_GEN_PL_ILL_PL
 )
+_VOWELS_ILL_PL = (
+    _VOWELS_PAR_SG_GEN_PL
+    | _VOWELS_GEN_PL_ILL_PL
+)
+del _VOWELS_GEN_SG_PAR_SG
+del _VOWELS_GEN_SG_GEN_PL
+del _VOWELS_PAR_SG_GEN_PL
+del _VOWELS_GEN_PL_ILL_PL
 
 # rules for consonant gradation
 # - format: (regex_from, regex_to)
@@ -220,15 +236,15 @@ _CONS_GRAD_STRENGTHEN = tuple((re.compile(f + "$"), t) for (f, t) in (
     # k
     ("([aeiouyäölnr])k(aa?|ee?)",               r"\1kk\2"),  # tikas
     ("([aeiouyäö])ng(aa?|ää?|ere?)",            r"\1nk\2"),  # penger
-    ("([hl])j(ee?|ime|in)",                     r"\1k\2"),   # hylje
-    ("([aeiouyäöh])(ene?|ime|in)",              r"\1k\2"),   # säen
+    ("([hl])j(ee?|ime?|in)",                    r"\1k\2"),   # hylje
+    ("([aeiouyäöh])(ene?|ime?|in)",             r"\1k\2"),   # säen
     ("([aeiouyäö]|ar)(aa|ee|ii)",               r"\1k\2"),   # ies
     ("(iu)([ae])",                              r"\1k\2"),   # kiuas
     ("(^[^aeiouyäö]?[aeiouyäö]|ai|var)([aei])", r"\1k\2"),   # ruis
     # p
-    ("([aeiouyäölm])p(aa?|ää?|ee?|ame|an)",         r"\1pp\2"),  # ape
-    ("([aeiouyäö])mm(aa?|ää?|ee?|yy?|ele?|imä|ye)", r"\1mp\2"),  # lämmin
-    ("([aeiouyäölr])v(aa?|ää?|ee?|[ai][lmn]e?)",    r"\1p\2"),   # taival
+    ("([aeiouyäölm])p(aa?|ää?|ee?|ame?|an)",          r"\1pp\2"),  # ape
+    ("([aeiouyäö])mm(aa?|ää?|ee?|yy?|ele?|imä?|ye)?", r"\1mp\2"),  # lämmin
+    ("([aeiouyäölr])v(aa?|ää?|ee?|[ai][lmn]e?)",      r"\1p\2"),   # taival
     # t
     (r"([aeiouyäölnr])t(([aeiouyäö])\3?)",    r"\1tt\2"),  # altis
     ("([aeiouyäöl])t([aeiouyäö][mnr][aäe]?)", r"\1tt\2"),  # heitin, tytär
@@ -258,17 +274,18 @@ def _consonant_gradation(word, strengthen=False):
     for (reFrom, reTo) in regexes:
         if re.search(reFrom, word) is not None:
             return re.sub(reFrom, reTo, word)
+    #sys.exit("No rule found: " + word + " " + str(strengthen))
     return word
 
 def _decline_gen_sg(word, decl, consGrad):
-    # return inflected form for a case/number that behaves like
-    # genitive singular; no case/number ending; e.g. "kaksi" -> "kahde"
+    # return inflected form for cases/numbers in _CASES_LIKE_GEN_SG;
+    # no case/number ending; e.g. "kaksi" -> "kahde"
 
     origWord = word
 
     # irregular changes to final consonant and vowel
-    word = _change_endings(word, _CONSONANTS_GEN_SG_ESS_SG.get(decl, ()))
-    word = _change_endings(word, _VOWELS_GEN_SG_ESS_SG.get(decl, ()))
+    word = _change_endings(word, _CONSONANTS_GEN_SG.get(decl, ()))
+    word = _change_endings(word, _VOWELS_GEN_SG.get(decl, ()))
 
     # consonant gradation
     if consGrad and decl >= 32:
@@ -286,12 +303,12 @@ def _decline_gen_sg(word, decl, consGrad):
     return word
 
 def _decline_ess_sg(word, decl, consGrad):
-    # return inflected form for a case/number that behaves like
-    # essive singular; no case/number ending; e.g. "kaksi" -> "kahte"
+    # return inflected form for essive singular / illative singular;
+    # no case/number ending; e.g. "kaksi" -> "kahte"
 
     # irregular changes to final consonant and vowel
-    word = _change_endings(word, _CONSONANTS_GEN_SG_ESS_SG.get(decl, ()))
-    word = _change_endings(word, _VOWELS_GEN_SG_ESS_SG.get(decl, ()))
+    word = _change_endings(word, _CONSONANTS_GEN_SG.get(decl, ()))
+    word = _change_endings(word, _VOWELS_GEN_SG.get(decl, ()))
 
     # weak -> strong consonant gradation
     if consGrad and decl >= 32 or decl in (36, 37):
@@ -300,8 +317,8 @@ def _decline_ess_sg(word, decl, consGrad):
     return word
 
 def _decline_par_sg(word, decl, consGrad):
-    # return inflected form for a case/number that behaves like
-    # partitive singular; no case/number ending; e.g. "kaksi" -> "kaht"
+    # return inflected form for partitive singular;
+    # no case/number ending; e.g. "kaksi" -> "kaht"
 
     # irregular changes to final consonant and vowel
     word = _change_endings(word, _CONSONANTS_PAR_SG.get(decl, ()))
@@ -310,12 +327,26 @@ def _decline_par_sg(word, decl, consGrad):
     return word
 
 def _decline_gen_pl(word, decl, consGrad):
-    # return inflected form for a case/number that behaves like
-    # genitive plural; no case/number ending; e.g. "kaksi" -> "kaks"
+    # return inflected form for genitive plural / partitive plural;
+    # no case/number ending; e.g. "kaksi" -> "kaks"
 
     # irregular changes to final consonant and vowel
     word = _change_endings(word, _CONSONANTS_GEN_PL.get(decl, ()))
     word = _change_endings(word, _VOWELS_GEN_PL.get(decl, ()))
+
+    return word
+
+def _decline_ill_pl(word, decl, consGrad):
+    # return inflected form for illative plural;
+    # no case/number ending; e.g. "kaksi" -> "kaks"
+
+    # irregular changes to final consonant and vowel
+    word = _change_endings(word, _CONSONANTS_GEN_PL.get(decl, ()))
+    word = _change_endings(word, _VOWELS_ILL_PL.get(decl, ()))
+
+    if consGrad and decl in (32, 33, 34, 35, 41, 43, 48, 49) \
+    or decl in (36, 37):
+        word = _consonant_gradation(word, True)
 
     return word
 
@@ -438,6 +469,8 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
         inflected = _decline_par_sg(word, decl, consGrad)
     elif case in ("gen", "par") and number == "pl":
         inflected = _decline_gen_pl(word, decl, consGrad)
+    elif case == "ill" and number == "pl":
+        inflected = _decline_ill_pl(word, decl, consGrad)
     else:
         sys.exit("Error: this should never happen.")
 
@@ -454,21 +487,29 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
         if not (case in ("nom", "par") and number == "sg"):
             words.append(word + "e")
     elif word == "paras":
-        if case in ("gen", "par") and number == "pl":
+        if case in ("gen", "par", "ill") and number == "pl":
             words = ["parha"]
         elif not (case in ("nom", "par") and number == "sg"):
             words = ["parhaa"]
     elif word == "pop":
         if case in ("ess", "ill", "par") and number == "sg":
             words.append("poppi")
-        elif case in ("gen", "par") and number == "pl":
-            words.append("popp")
+        elif case in ("gen", "ill", "par") and number == "pl":
+            words.append("poppe")
     elif word == "ryntys":
         if case in ("ess", "ill") and number == "sg":
             words = ["rynttyy"]
+    elif word in ("tau", "tiu"):
+        if case == "ill" and number == "pl":
+            words = [word]  # restore
     elif word == "veli":
-        if not (case == "nom" and number == "sg"):
+        if case == "ill" and number == "pl":
+            words = ["velj"]
+        elif not (case == "nom" and number == "sg"):
             words = ["velje"]
+    elif decl in (4, 14):
+        if case == "ill" and number == "pl":
+            words.append(_consonant_gradation(inflected))
     del inflected
 
     # append apostrophe
@@ -538,70 +579,80 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
             yield from (f"{w}t{v}" for w in words for v in endingVowels)
             if word == "jersey":
                 yield word + "ä"
-    elif case in ("gen", "par") and number == "pl":
-        # genitive plural or partitive plural
-        # -jen/-jA
+    elif case in ("gen", "par", "ill") and number == "pl":
+        # genitive plural, partitive plural, illative plural
+        # -jen / -jA / part of -ihin
         if decl in (1, 2, 4, 8, 9, 11, 13, 14) \
         or case == "par" and decl in (5, 6) \
+        or case == "ill" and decl == 5 \
         or word in ("tau", "tiu"):
             words2 = words
-            if word in ("tau", "tiu"):
+            if case in ("gen", "par") and word in ("tau", "tiu"):
                 words2 = (word,)  # restore original
             #
             if case == "gen":
                 yield from (w + "jen" for w in words2)
-            elif decl in (5, 6):
-                yield from (f"{w}ej{v}" for w in words2 for v in endingVowels)
-            else:
+            elif case == "par":
                 yield from (f"{w}j{v}" for w in words2 for v in endingVowels)
-        # -iden/-itA
+            else:
+                yield from (w + "ihin" for w in words2)
+        # -iden, -itA, -isiin, part of -ihin
         if decl in (2, 3, 4, 6, 41, 43, 44, 47, 48) \
         or 11 <= decl <= 22 and not decl == 16 and word not in ("tau", "tiu") \
         or decl == 49 and word.endswith("e"):
             words2 = words
-            if decl == 6:  # paperi, lumen
-                words2 = tuple(re.sub("$", "e", w) for w in words2)
-            elif word == "häive":
+            if word == "häive":
                 words2 = ("häipe", "häive")
             elif word == "viive":
                 words2 = ("viipe", "viive")
-            elif consGrad and decl in (4, 14):
+            elif case in ("gen", "par") and consGrad and decl in (4, 14):
                 words2 = tuple(_consonant_gradation(w) for w in words2)
-            elif consGrad and decl in (41, 43, 48):
+            elif case in ("gen", "par") and consGrad and decl in (41, 43, 48):
                 words2 = tuple(_consonant_gradation(w, True) for w in words2)
             #
             if case == "gen":
                 yield from (w + "iden" for w in words2)
-            else:
+            elif case == "par":
                 yield from (f"{w}it{v}" for w in words2 for v in endingVowels)
-        # -ien/-iA/-ten
+            else:
+                yield from (w + "ihin" for w in words2)
+                # -isiin
+                if decl in (15, 17, 20, 41, 43, 44, 47, 48, 49):
+                    yield from (w + "isiin" for w in words2)
+        # -ien/-iA/-ten/-iin
         if decl in (7, 10, 11, 16, 42, 45, 46) or 23 <= decl <= 40 \
         or decl == 49 and not word.endswith("e") \
         or case == "gen" and decl in (5, 6):
-            # -ien/-iA
             words2 = words
-            if consGrad and decl in (32, 33, 34, 49) or decl in (35, 36, 37):
-                # lämmin, sisin, vasen
-                words2 = tuple(_consonant_gradation(w, True) for w in words2)
-            #
-            if word == "veli":
-                words2 = tuple(re.sub("e$", "", w) for w in words2)
-            elif decl in (10, 34, 35, 36, 37):
-                # koira, onneton, lämmin, sisin, vasen
-                words2 = tuple(re.sub("[aä]$", "", w) for w in words2)
-            elif decl == 11:  # omena
-                words2 = tuple(re.sub("[oö]$", "", w) for w in words2)
-            elif decl == 33:  # kytkin
-                words2 = tuple(re.sub("n$", "m", w) for w in words2)
-            elif decl == 39:  # vastaus
-                words2 = tuple(re.sub("s$", "ks", w) for w in words2)
-            elif decl == 42:  # mies
-                words2 = tuple(re.sub("s$", "h", w) for w in words2)
-            #
+            if case == "ill":
+                if decl == 11:  # omena
+                    words2 = tuple(re.sub("[oö]$", "", w) for w in words2)
+            else:
+                # -ien/-iA
+                if consGrad and decl in (32, 33, 34, 49) \
+                or decl in (35, 36, 37):
+                    # lämmin, sisin, vasen
+                    words2 = tuple(
+                        _consonant_gradation(w, True) for w in words2
+                    )
+                #
+                if word == "veli" or decl in (5, 6):
+                    words2 = tuple(re.sub("e$", "", w) for w in words2)
+                elif decl in (10, 34, 35, 36, 37):
+                    # koira, onneton, lämmin, sisin, vasen
+                    words2 = tuple(re.sub("[aä]$", "", w) for w in words2)
+                elif decl == 11:  # omena
+                    words2 = tuple(re.sub("[oö]$", "", w) for w in words2)
+                elif decl == 33:  # kytkin
+                    words2 = tuple(re.sub("n$", "m", w) for w in words2)
+                elif decl == 42:  # mies
+                    words2 = tuple(re.sub("s$", "h", w) for w in words2)
             if case == "gen":
                 yield from (w + "ien" for w in words2)
-            else:
+            elif case == "par":
                 yield from (f"{w}i{v}" for w in words2 for v in endingVowels)
+            else:
+                yield from (w + "iin" for w in words2)
             # -ten
             if case == "gen" and word != "uksi" \
             and decl not in (5, 6, 7, 10, 11, 16, 23, 31, 35, 40, 45):
@@ -614,6 +665,10 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
                     words2 = tuple(re.sub("m[aä]$", "n", w) for w in words2)
                 elif decl in (36, 37):  # sisin, vasen
                     words2 = tuple(re.sub("mm[aä]$", "n", w) for w in words2)
+                elif decl == 39:  # vastaus
+                    words2 = tuple(re.sub("ks$", "s", w) for w in words2)
+                elif decl == 42:  # mies
+                    words2 = tuple(re.sub("h$", "s", w) for w in words2)
                 elif decl == 46:  # tuhat
                     words2 = tuple(re.sub("ns$", "n", w) for w in words2)
                 yield from (re.sub("m$", "n", w) + "ten" for w in words2)
@@ -654,6 +709,7 @@ CASES_AND_NUMBERS = (
     ("ine", "sg"),
     ("ela", "sg"),
     ("ill", "sg"),
+    ("ill", "pl"),
     ("ade", "sg"),
     ("abl", "sg"),
     ("all", "sg"),
