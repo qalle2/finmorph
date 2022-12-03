@@ -152,6 +152,10 @@ palvelu,palveluita,palveluja
 väestö,väestöitä,väestöjä
 
 # declension 3
+# -e
+collie,collieita
+oboe,oboeita
+# -O
 valtio,valtioita
 yhtiö,yhtiöitä
 
@@ -160,15 +164,37 @@ laatikko,laatikkoja,laatikoita
 älykkö,älykköjä,älyköitä
 
 # declension 5
-lux,luxeja
-risti,ristejä
+# -ki
+palkki,palkkeja
+rööki,röökejä
 šakki,šakkeja
-wok,wokeja
+vanki,vankeja
 vouti,vouteja
+# -pi
+alppi,alppeja
+hupi,hupeja
+korppi,korppeja
+pipi,pipejä
+# -ti
+koti,koteja
+pelti,peltejä
+risti,ristejä
+tunti,tunteja
+yrtti,yrttejä
+# -C
+lux,luxeja
+tag,tageja
+wok,wokeja
 
 # declension 6
-lumen,lumeneita,lumeneja
+# -i
 paperi,papereita,papereja
+saluki,salukeita,salukeja
+# -C
+edam,edameita,edameja
+gallup,gallupeita,gallupeja
+lumen,lumeneita,lumeneja
+rial,rialeita,rialeja
 weber,webereitä,weberejä
 
 # declension 7
@@ -178,6 +204,7 @@ ovi,ovia
 piki,pikiä
 reki,rekiä
 tuki,tukia
+veli,veljiä
 # -CCV
 arki,arkia
 arpi,arpia
@@ -197,26 +224,37 @@ jeppe,jeppejä
 nalle,nalleja
 nukke,nukkeja
 ope,opeja
+ringette,ringettejä
 
 # declension 9
-# -VCV
+# -kV
 aika,aikoja
 eka,ekoja
-kala,kaloja
-sata,satoja
-taika,taikoja
-tapa,tapoja
-vaaka,vaakoja
-# -CCV
-arka,arkoja
-jalka,jalkoja
 iskä,isköjä
+jalka,jalkoja
+jenkka,jenkkoja
 lanka,lankoja
+markka,markkoja
+nahka,nahkoja
+taika,taikoja
 takka,takkoja
+vaaka,vaakoja
 vehka,vehkoja
 velka,velkoja
-vihta,vihtoja
 virka,virkoja
+# -pV
+heppa,heppoja
+kilpa,kilpoja
+kimppa,kimppoja
+tapa,tapoja
+# -tV
+kysyntä,kysyntöjä
+mitta,mittoja
+parta,partoja
+sata,satoja
+vihta,vihtoja
+# -CV (not -kV, -pV, -tV)
+kala,kaloja
 
 # declension 10
 # -C
@@ -254,6 +292,7 @@ turta,turtia
 koira,koiria
 
 # declension 11
+judoka,judokia,judokoita,judokoja
 käpälä,käpäliä,käpälöitä,käpälöjä
 omena,omenia,omenoita,omenoja
 
@@ -266,10 +305,13 @@ katiska,katiskoita,katiskoja
 siivilä,siivilöitä,siivilöjä
 
 # declension 14
+navetta,navetoita,navettoja
 solakka,solakkoja,solakoita
+ulappa,ulapoita,ulappoja
 ötökkä,ötökköjä,ötököitä
 
 # declension 15
+ainoa,ainoita
 korkea,korkeita
 äreä,äreitä
 
@@ -279,12 +321,22 @@ kumpi,kumpia
 vanhempi,vanhempia
 
 # declension 17
+ehtoo,ehtoita
 hynttyy,hynttyitä
+takuu,takuita
 vapaa,vapaita
 
 # declension 18
+jää,jäitä
+jöö,jöitä
 maa,maita
+rokokoo,rokokoita
+suu,suita
+syy,syitä
+tau,tauja
+tee,teitä
 tii,tiitä
+tiu,tiuja
 
 # declension 19
 suo,soita
@@ -293,7 +345,11 @@ yö,öitä
 
 # declension 20
 filee,fileitä
+miljöö,miljöitä
 nugaa,nugaita
+raguu,raguita
+revyy,revyitä
+trikoo,trikoita
 
 # declension 21 (all except "kungfu", "taxfree")
 brasserie,brasserieita
@@ -331,19 +387,38 @@ show,show'ita
 tournedos,tournedos'ita
 
 # declension 23
+lohi,lohia
+moni,monia
 tiili,tiiliä
 
 # declension 24
+hiili,hiiliä
+hiiri,hiiriä
+kusi,kusia
+meri,meriä
+ruuhi,ruuhia
 uni,unia
 
-# declension 25
+# declension 25 (all)
+liemi,liemiä
+loimi,loimia
+lumi,lumia
+luomi,luomia
+niemi,niemiä
+taimi,taimia
 toimi,toimia
+tuomi,tuomia
 
 # declension 26
+jousi,jousia
 pieni,pieniä
+puoli,puolia
+veri,veriä
+ääri,ääriä
 
 # declension 27
 käsi,käsiä
+uusi,uusia
 
 # declension 28 (all)
 hirsi,hirsiä
@@ -375,40 +450,81 @@ kaksi,kaksia
 yksi,yksiä
 
 # declension 32
+# -l
+nivel,niveliä
+# -n
 ahven,ahvenia
 höyhen,höyheniä
 ien,ikeniä
-jumalatar,jumalattaria
 jäsen,jäseniä
-kaunotar,kaunottaria
 kymmenen,kymmeniä
-nivel,niveliä
+siemen,siemeniä
+# -r
+jumalatar,jumalattaria
+kaunotar,kaunottaria
 onnetar,onnettaria
 papitar,papittaria
-siemen,siemeniä
 sisar,sisaria
 syöjätär,syöjättäriä
-sävel,säveliä
+tytär,tyttäriä
 
 # declension 33
-annin,antimia
-avarrin,avartimia
-elin,elimiä
-heitin,heittimiä
-kytkin,kytkimiä
+# -Vin
+avain,avaimia
+avoin,avoimia
+eläin,eläimiä
+istuin,istuimia
 näin,näkimiä
-otin,ottimia
-pidin,pitimiä
 puin,pukimia
-pyyhin,pyyhkimiä
-raavin,raapimia
-sydän,sydämiä
-uistin,uistimia
+# -din
 ydin,ytimiä
+# -hin
+jauhin,jauhimia
+pyyhin,pyyhkimiä
+# -jin
+suljin,sulkimia
+# -kin
+kytkin,kytkimiä
+# -lin
+elin,elimiä
+sivellin,siveltimiä
+# -min
+vihmin,vihmimiä
+# -nin
+väännin,vääntimiä
+# -rin
+aterin,aterimia
+avarrin,avartimia
+# -sin
+pesin,pesimiä
+# -tin
+heitin,heittimiä
+poltin,polttimia
+uistin,uistimia
+# -vin
+kaavin,kaapimia
+kaivin,kaivimia
+kalvin,kalvimia
+raavin,raapimia
+survin,survimia
+särvin,särpimiä
+# -Vn (not -in)
+hapan,happamia
+laidun,laitumia
+morsian,morsiamia
+sydän,sydämiä
 
 # declension 34
+# -CtOn
 alaston,alastomia
+# -VtOn
+ajaton,ajattomia
+avuton,avuttomia
+eloton,elottomia
+laiton,laittomia
 onneton,onnettomia
+päätön,päättömiä
+syytön,syyttömiä
 yötön,yöttömiä
 
 # declension 35 (all)
@@ -428,13 +544,33 @@ osanen,osasia
 öinen,öisiä
 
 # declension 39
-aines,aineksia
+# -VUs
+hius,hiuksia
+kiveys,kiveyksiä
+makuus,makuuksia
+putous,putouksia
+sysäys,sysäyksiä
 vastaus,vastauksia
+# -VVs (not -VUs)
+hauis,hauiksia
+iskias,iskiaksia
+rabies,rabieksia
+taos,taoksia
+teos,teoksia
+# -CVs
+aines,aineksia
+emäs,emäksiä
+lihas,lihaksia
+rötös,rötöksiä
 varis,variksia
+vedos,vedoksia
+virus,viruksia
 yritys,yrityksiä
 
 # declension 40
 kalleus,kalleuksia
+uutuus,uutuuksia
+äitiys,äitiyksiä
 äreys,äreyksiä
 
 # declension 41
@@ -523,6 +659,7 @@ mies,miehiä
 
 # declension 43
 immyt,impyitä
+lyhyt,lyhyitä
 ohut,ohuita
 
 # declension 44 (all)
@@ -531,11 +668,13 @@ kevät,keväitä
 # declension 45
 kahdeksas,kahdeksansia
 neljäs,neljänsiä
+viides,viidensiä
 
 # declension 46 (all)
 tuhat,tuhansia
 
 # declension 47
+jäänyt,jääneitä
 kuollut,kuolleita
 tehnyt,tehneitä
 

@@ -152,6 +152,10 @@ palvelu,palveluna
 väestö,väestönä
 
 # declension 3
+# -e
+collie,colliena
+oboe,oboena
+# -O
 valtio,valtiona
 yhtiö,yhtiönä
 
@@ -160,15 +164,37 @@ laatikko,laatikkona
 älykkö,älykkönä
 
 # declension 5
-lux,luxina
-risti,ristinä
+# -ki
+palkki,palkkina
+rööki,röökinä
 šakki,šakkina
-wok,wokina
+vanki,vankina
 vouti,voutina
+# -pi
+alppi,alppina
+hupi,hupina
+korppi,korppina
+pipi,pipinä
+# -ti
+koti,kotina
+pelti,peltinä
+risti,ristinä
+tunti,tuntina
+yrtti,yrttinä
+# -C
+lux,luxina
+tag,tagina
+wok,wokina
 
 # declension 6
-lumen,lumenina
+# -i
 paperi,paperina
+saluki,salukina
+# -C
+edam,edamina
+gallup,gallupina
+lumen,lumenina
+rial,rialina
 weber,weberinä
 
 # declension 7
@@ -178,6 +204,7 @@ ovi,ovena
 piki,pikenä
 reki,rekenä
 tuki,tukena
+veli,veljenä
 # -CCV
 arki,arkena
 arpi,arpena
@@ -197,26 +224,37 @@ jeppe,jeppenä
 nalle,nallena
 nukke,nukkena
 ope,opena
+ringette,ringettenä
 
 # declension 9
-# -VCV
+# -kV
 aika,aikana
 eka,ekana
-kala,kalana
-sata,satana
-taika,taikana
-tapa,tapana
-vaaka,vaakana
-# -CCV
-arka,arkana
-jalka,jalkana
 iskä,iskänä
+jalka,jalkana
+jenkka,jenkkana
 lanka,lankana
+markka,markkana
+nahka,nahkana
+taika,taikana
 takka,takkana
+vaaka,vaakana
 vehka,vehkana
 velka,velkana
-vihta,vihtana
 virka,virkana
+# -pV
+heppa,heppana
+kilpa,kilpana
+kimppa,kimppana
+tapa,tapana
+# -tV
+kysyntä,kysyntänä
+mitta,mittana
+parta,partana
+sata,satana
+vihta,vihtana
+# -CV (not -kV, -pV, -tV)
+kala,kalana
 
 # declension 10
 # -C
@@ -254,6 +292,7 @@ turta,turtana
 koira,koirana
 
 # declension 11
+judoka,judokana
 käpälä,käpälänä
 omena,omenana
 
@@ -266,10 +305,13 @@ katiska,katiskana
 siivilä,siivilänä
 
 # declension 14
+navetta,navettana
 solakka,solakkana
+ulappa,ulappana
 ötökkä,ötökkänä
 
 # declension 15
+ainoa,ainoana
 korkea,korkeana
 äreä,äreänä
 
@@ -279,12 +321,22 @@ kumpi,kumpana
 vanhempi,vanhempana
 
 # declension 17
+ehtoo,ehtoona
 hynttyy,hynttyynä
+takuu,takuuna
 vapaa,vapaana
 
 # declension 18
+jää,jäänä
+jöö,jöönä
 maa,maana
+rokokoo,rokokoona
+suu,suuna
+syy,syynä
+tau,tauna
+tee,teenä
 tii,tiinä
+tiu,tiuna
 
 # declension 19
 suo,suona
@@ -293,7 +345,11 @@ yö,yönä
 
 # declension 20
 filee,fileenä
+miljöö,miljöönä
 nugaa,nugaana
+raguu,raguuna
+revyy,revyynä
+trikoo,trikoona
 
 # declension 21 (all except "kungfu", "taxfree")
 brasserie,brasseriena
@@ -331,19 +387,38 @@ show,show'na
 tournedos,tournedos'na
 
 # declension 23
+lohi,lohena
+moni,monena
 tiili,tiilenä
 
 # declension 24
+hiili,hiilenä
+hiiri,hiirenä
+kusi,kusena
+meri,merenä
+ruuhi,ruuhena
 uni,unena
 
-# declension 25
+# declension 25 (all)
+liemi,liemenä
+loimi,loimena
+lumi,lumena
+luomi,luomena
+niemi,niemenä
+taimi,taimena
 toimi,toimena
+tuomi,tuomena
 
 # declension 26
+jousi,jousena
 pieni,pienenä
+puoli,puolena
+veri,verenä
+ääri,äärenä
 
 # declension 27
 käsi,kätenä
+uusi,uutena
 
 # declension 28 (all)
 hirsi,hirtenä
@@ -375,40 +450,81 @@ kaksi,kahtena
 yksi,yhtenä
 
 # declension 32
+# -l
+nivel,nivelenä
+# -n
 ahven,ahvenena
 höyhen,höyhenenä
 ien,ikenenä
-jumalatar,jumalattarena
 jäsen,jäsenenä
-kaunotar,kaunottarena
 kymmenen,kymmenenä
-nivel,nivelenä
+siemen,siemenenä
+# -r
+jumalatar,jumalattarena
+kaunotar,kaunottarena
 onnetar,onnettarena
 papitar,papittarena
-siemen,siemenenä
 sisar,sisarena
 syöjätär,syöjättärenä
-sävel,sävelenä
+tytär,tyttärenä
 
 # declension 33
-annin,antimena
-avarrin,avartimena
-elin,elimenä
-heitin,heittimenä
-kytkin,kytkimenä
+# -Vin
+avain,avaimena
+avoin,avoimena
+eläin,eläimenä
+istuin,istuimena
 näin,näkimenä
-otin,ottimena
-pidin,pitimenä
 puin,pukimena
-pyyhin,pyyhkimenä
-raavin,raapimena
-sydän,sydämenä
-uistin,uistimena
+# -din
 ydin,ytimenä
+# -hin
+jauhin,jauhimena
+pyyhin,pyyhkimenä
+# -jin
+suljin,sulkimena
+# -kin
+kytkin,kytkimenä
+# -lin
+elin,elimenä
+sivellin,siveltimenä
+# -min
+vihmin,vihmimenä
+# -nin
+väännin,vääntimenä
+# -rin
+aterin,aterimena
+avarrin,avartimena
+# -sin
+pesin,pesimenä
+# -tin
+heitin,heittimenä
+poltin,polttimena
+uistin,uistimena
+# -vin
+kaavin,kaapimena
+kaivin,kaivimena
+kalvin,kalvimena
+raavin,raapimena
+survin,survimena
+särvin,särpimenä
+# -Vn (not -in)
+hapan,happamana,happamena
+laidun,laitumena
+morsian,morsiamena
+sydän,sydämenä
 
 # declension 34
+# -CtOn
 alaston,alastomana
+# -VtOn
+ajaton,ajattomana
+avuton,avuttomana
+eloton,elottomana
+laiton,laittomana
 onneton,onnettomana
+päätön,päättömänä
+syytön,syyttömänä
 yötön,yöttömänä
 
 # declension 35 (all)
@@ -428,13 +544,33 @@ osanen,osasena
 öinen,öisenä
 
 # declension 39
-aines,aineksena
+# -VUs
+hius,hiuksena
+kiveys,kiveyksenä
+makuus,makuuksena
+putous,putouksena
+sysäys,sysäyksenä
 vastaus,vastauksena
+# -VVs (not -VUs)
+hauis,hauiksena
+iskias,iskiaksena
+rabies,rabieksena
+taos,taoksena
+teos,teoksena
+# -CVs
+aines,aineksena
+emäs,emäksenä
+lihas,lihaksena
+rötös,rötöksenä
 varis,variksena
+vedos,vedoksena
+virus,viruksena
 yritys,yrityksenä
 
 # declension 40
 kalleus,kalleutena
+uutuus,uutuutena
+äitiys,äitiytenä
 äreys,äreytenä
 
 # declension 41
@@ -523,6 +659,7 @@ mies,miehenä
 
 # declension 43
 immyt,impyenä
+lyhyt,lyhyenä
 ohut,ohuena
 
 # declension 44 (all)
@@ -531,11 +668,13 @@ kevät,keväänä
 # declension 45
 kahdeksas,kahdeksantena
 neljäs,neljäntenä
+viides,viidentenä
 
 # declension 46 (all)
 tuhat,tuhantena
 
 # declension 47
+jäänyt,jääneenä
 kuollut,kuolleena
 tehnyt,tehneenä
 

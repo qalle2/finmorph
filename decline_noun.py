@@ -123,7 +123,7 @@ _VOWELS_GEN_SG_ESS_SG = {
     # -V -> -VV
     41: (("([aeiouyäö])", r"\1\1"),),  # vieras
     44: (("ä",            "ää"),),     # kevät
-    48: (("([eiu])",      r"\1\1"),),  # hame
+    48: (("([aeiouyäö])", r"\1\1"),),  # hame
     # -U -> -ee
     47: (("[uy]", "ee"),),  # kuollut
 }
@@ -142,16 +142,16 @@ _VOWELS_PAR_SG_GEN_PL = {
 }
 _VOWELS_GEN_PL = {
     # -V -> -
-    5:  (("i",    ""),),   # risti
-    6:  (("i",    ""),),   # paperi
-    7:  (("i",    ""),),   # ovi
-    10: (("a",    ""),),   # koira
-    15: (("[aä]", ""),),   # korkea
-    16: (("i",    ""),),   # vanhempi
-    17: (("[ay]", ""),),   # vapaa
-    18: (("[ai]", ""),),   # maa
-    20: (("[ae]", ""),),   # filee
-    41: (("aa",   "a"),),  # vieras
+    5:  (("i",          ""),),   # risti
+    6:  (("i",          ""),),   # paperi
+    7:  (("i",          ""),),   # ovi
+    10: (("a",          ""),),   # koira
+    15: (("[aä]",       ""),),   # korkea
+    16: (("i",          ""),),   # vanhempi
+    17: (("[aeiouyäö]", ""),),   # vapaa
+    18: (("[aeiouyäö]", ""),),   # maa
+    20: (("[aeiouyäö]", ""),),   # filee
+    41: (("aa",         "a"),),  # vieras
     # -A -> -O
     9:  (("a", "o"), ("ä", "ö")),  # kala
     11: (("a", "o"), ("ä", "ö")),  # omena
@@ -195,20 +195,20 @@ _CONS_GRAD_STRENGTHEN = tuple((re.compile(f + "$"), t) for (f, t) in (
     # k
     ("([aeiouyäölnr])k(aa?|ee?)",               r"\1kk\2"),  # tikas
     ("([aeiouyäö])ng(aa?|ää?|ere?)",            r"\1nk\2"),  # penger
-    ("([hl])j(ee?)",                            r"\1k\2"),   # hylje
+    ("([hl])j(ee?|ime|in)",                     r"\1k\2"),   # hylje
     ("([aeiouyäöh])(ene?|ime|in)",              r"\1k\2"),   # säen
     ("([aeiouyäö]|ar)(aa|ee|ii)",               r"\1k\2"),   # ies
     ("(iu)([ae])",                              r"\1k\2"),   # kiuas
     ("(^[^aeiouyäö]?[aeiouyäö]|ai|var)([aei])", r"\1k\2"),   # ruis
     # p
-    ("([aeiouyäölm])p(aa?|ää?|ee?)",                r"\1pp\2"),  # ape
+    ("([aeiouyäölm])p(aa?|ää?|ee?|ame|an)",         r"\1pp\2"),  # ape
     ("([aeiouyäö])mm(aa?|ää?|ee?|yy?|ele?|imä|ye)", r"\1mp\2"),  # lämmin
     ("([aeiouyäölr])v(aa?|ää?|ee?|[ai][lmn]e?)",    r"\1p\2"),   # taival
     # t
     (r"([aeiouyäölnr])t(([aeiouyäö])\3?)",    r"\1tt\2"),  # altis
-    ("([aeiouyäö])t([aeiouyäö][mnr][aäe]?)",  r"\1tt\2"),  # heitin, tytär
+    ("([aeiouyäöl])t([aeiouyäö][mnr][aäe]?)", r"\1tt\2"),  # heitin, tytär
     (r"([lnr])\1(aa?|ää?|ee?|[aei][lmnr]e?)", r"\1t\2"),   # kallas
-    ("([aeiouyäöh])d(aa?|ee?|[ai][mnr]e?)",   r"\1t\2"),   # pidin
+    ("([aeiouyäöh])d(aa?|ee?|[aiu][mnr]e?)",  r"\1t\2"),   # pidin
     ("(u)(ere?)",                             r"\1t\2"),   # auer
 ))
 
@@ -423,6 +423,8 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
     # use "a", "ä" or both in -A endings?
     if (word, decl) in _BOTH_A_AND_AUML:
         endingVowels = "aä"
+    elif word in ("meri", "veri") and case == "par" and number == "sg":
+        endingVowels = "a"
     elif re.search(r"^[^aáou]+$", word) is not None:
         endingVowels = "ä"
     else:
@@ -447,6 +449,10 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
     if (case, number) in _CASES_LIKE_GEN_SG \
     and word in _OPTIONAL_CONS_GRAD_GEN_SG:
         words.append(word)
+    elif word == "hapan":
+        if (case, number) in _CASES_LIKE_GEN_SG \
+        or case in ("ess", "ill") and number == "sg":
+            words.append("happama")
     elif word in ("häive", "viive"):
         if not (case in ("nom", "par") and number == "sg"):
             words.append(word + "e")
@@ -463,6 +469,9 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
     elif word == "ryntys":
         if case in ("ess", "ill") and number == "sg":
             words = ["rynttyy"]
+    elif word == "veli":
+        if not (case == "nom" and number == "sg"):
+            words = ["velje"]
     del inflected
 
     # append apostrophe
@@ -517,12 +526,14 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
         # -A
         if decl in (1, 2) or 4 <= decl <= 16:
             yield from (w + v for w in words for v in endingVowels)
-        elif decl == 25:  # toimi
+        elif decl == 25 and word not in ("liemi", "lumi"):  # toimi
             yield from (f"{w[:-1]}me{v}" for w in words for v in endingVowels)
         elif decl == 37:  # vasen
             yield from (
                 f"{w[:-1]}mp{2*v}" for w in words for v in endingVowels
             )
+        elif word == "moni":
+            yield from (f"{w}t{2*v}" for w in words for v in endingVowels)
         # -tA
         if decl == 48 or decl == 49 and word.endswith("e"):  # hame, askel
             yield from (f"{w}tt{v}" for w in words for v in endingVowels)
@@ -534,16 +545,21 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
         # genitive plural or partitive plural
         # -jen/-jA
         if decl in (1, 2, 4, 8, 9, 11, 13, 14) \
-        or case == "par" and decl in (5, 6):
+        or case == "par" and decl in (5, 6) \
+        or word in ("tau", "tiu"):
+            words2 = words
+            if word in ("tau", "tiu"):
+                words2 = (word,)  # restore original
+            #
             if case == "gen":
-                yield from (w + "jen" for w in words)
+                yield from (w + "jen" for w in words2)
             elif decl in (5, 6):
-                yield from (f"{w}ej{v}" for w in words for v in endingVowels)
+                yield from (f"{w}ej{v}" for w in words2 for v in endingVowels)
             else:
-                yield from (f"{w}j{v}" for w in words for v in endingVowels)
+                yield from (f"{w}j{v}" for w in words2 for v in endingVowels)
         # -iden/-itA
         if decl in (2, 3, 4, 6, 41, 43, 44, 47, 48) \
-        or 11 <= decl <= 22 and not decl == 16 \
+        or 11 <= decl <= 22 and not decl == 16 and word not in ("tau", "tiu") \
         or decl == 49 and word.endswith("e"):
             words2 = words
             if decl == 6:  # paperi, lumen
@@ -571,7 +587,9 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
                 # lämmin, sisin, vasen
                 words2 = tuple(_consonant_gradation(w, True) for w in words2)
             #
-            if decl in (10, 34, 35, 36, 37):
+            if word == "veli":
+                words2 = tuple(re.sub("e$", "", w) for w in words2)
+            elif decl in (10, 34, 35, 36, 37):
                 # koira, onneton, lämmin, sisin, vasen
                 words2 = tuple(re.sub("[aä]$", "", w) for w in words2)
             elif decl == 11:  # omena

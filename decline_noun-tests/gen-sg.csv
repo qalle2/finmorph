@@ -152,6 +152,10 @@ palvelu,palvelun
 väestö,väestön
 
 # declension 3
+# -e
+collie,collien
+oboe,oboen
+# -O
 valtio,valtion
 yhtiö,yhtiön
 
@@ -160,15 +164,37 @@ laatikko,laatikon
 älykkö,älykön
 
 # declension 5
-lux,luxin
-risti,ristin
+# -ki
+palkki,palkin
+rööki,röökin
 šakki,šakin
-wok,wokin
+vanki,vangin
 vouti,voudin
+# -pi
+alppi,alpin
+hupi,huvin
+korppi,korpin
+pipi,pipin
+# -ti
+koti,kodin
+pelti,pellin
+risti,ristin
+tunti,tunnin
+yrtti,yrtin
+# -C
+lux,luxin
+tag,tagin
+wok,wokin
 
 # declension 6
-lumen,lumenin
+# -i
 paperi,paperin
+saluki,salukin
+# -C
+edam,edamin
+gallup,gallupin
+lumen,lumenin
+rial,rialin
 weber,weberin
 
 # declension 7
@@ -178,6 +204,7 @@ ovi,oven
 piki,pien
 reki,reen
 tuki,tuen
+veli,veljen
 # -CCV
 arki,arjen
 arpi,arven
@@ -197,26 +224,37 @@ jeppe,jepen
 nalle,nallen
 nukke,nuken
 ope,open
+ringette,ringeten,ringetten
 
 # declension 9
-# -VCV
+# -kV
 aika,ajan
 eka,ekan
-kala,kalan
-sata,sadan
-taika,taian
-tapa,tavan
-vaaka,vaa'an
-# -CCV
-arka,aran
-jalka,jalan
 iskä,iskän
+jalka,jalan
+jenkka,jenkan
 lanka,langan
+markka,markan
+nahka,nahan,nahkan
+taika,taian
 takka,takan
+vaaka,vaa'an
 vehka,vehkan
 velka,velan
-vihta,vihdan
 virka,viran
+# -pV
+heppa,hepan
+kilpa,kilvan
+kimppa,kimpan
+tapa,tavan
+# -tV
+kysyntä,kysynnän
+mitta,mitan
+parta,parran
+sata,sadan
+vihta,vihdan
+# -CV (not -kV, -pV, -tV)
+kala,kalan
 
 # declension 10
 # -C
@@ -254,6 +292,7 @@ turta,turran
 koira,koiran
 
 # declension 11
+judoka,judokan
 käpälä,käpälän
 omena,omenan
 
@@ -266,10 +305,13 @@ katiska,katiskan
 siivilä,siivilän
 
 # declension 14
+navetta,navetan
 solakka,solakan
+ulappa,ulapan
 ötökkä,ötökän
 
 # declension 15
+ainoa,ainoan
 korkea,korkean
 äreä,äreän
 
@@ -279,12 +321,22 @@ kumpi,kumman
 vanhempi,vanhemman
 
 # declension 17
+ehtoo,ehtoon
 hynttyy,hynttyyn
+takuu,takuun
 vapaa,vapaan
 
 # declension 18
+jää,jään
+jöö,jöön
 maa,maan
+rokokoo,rokokoon
+suu,suun
+syy,syyn
+tau,taun
+tee,teen
 tii,tiin
+tiu,tiun
 
 # declension 19
 suo,suon
@@ -293,7 +345,11 @@ yö,yön
 
 # declension 20
 filee,fileen
+miljöö,miljöön
 nugaa,nugaan
+raguu,raguun
+revyy,revyyn
+trikoo,trikoon
 
 # declension 21 (all except "kungfu", "taxfree")
 brasserie,brasserien
@@ -331,19 +387,38 @@ show,show'n
 tournedos,tournedos'n
 
 # declension 23
+lohi,lohen
+moni,monen
 tiili,tiilen
 
 # declension 24
+hiili,hiilen
+hiiri,hiiren
+kusi,kusen
+meri,meren
+ruuhi,ruuhen
 uni,unen
 
-# declension 25
+# declension 25 (all)
+liemi,liemen
+loimi,loimen
+lumi,lumen
+luomi,luomen
+niemi,niemen
+taimi,taimen
 toimi,toimen
+tuomi,tuomen
 
 # declension 26
+jousi,jousen
 pieni,pienen
+puoli,puolen
+veri,veren
+ääri,äären
 
 # declension 27
 käsi,käden
+uusi,uuden
 
 # declension 28 (all)
 hirsi,hirren
@@ -375,40 +450,81 @@ kaksi,kahden
 yksi,yhden
 
 # declension 32
+# -l
+nivel,nivelen
+# -n
 ahven,ahvenen
 höyhen,höyhenen
 ien,ikenen
-jumalatar,jumalattaren
 jäsen,jäsenen
-kaunotar,kaunottaren
 kymmenen,kymmenen
-nivel,nivelen
+siemen,siemenen
+# -r
+jumalatar,jumalattaren
+kaunotar,kaunottaren
 onnetar,onnettaren
 papitar,papittaren
-siemen,siemenen
 sisar,sisaren
 syöjätär,syöjättären
-sävel,sävelen
+tytär,tyttären
 
 # declension 33
-annin,antimen
-avarrin,avartimen
-elin,elimen
-heitin,heittimen
-kytkin,kytkimen
+# -Vin
+avain,avaimen
+avoin,avoimen
+eläin,eläimen
+istuin,istuimen
 näin,näkimen
-otin,ottimen
-pidin,pitimen
 puin,pukimen
-pyyhin,pyyhkimen
-raavin,raapimen
-sydän,sydämen
-uistin,uistimen
+# -din
 ydin,ytimen
+# -hin
+jauhin,jauhimen
+pyyhin,pyyhkimen
+# -jin
+suljin,sulkimen
+# -kin
+kytkin,kytkimen
+# -lin
+elin,elimen
+sivellin,siveltimen
+# -min
+vihmin,vihmimen
+# -nin
+väännin,vääntimen
+# -rin
+aterin,aterimen
+avarrin,avartimen
+# -sin
+pesin,pesimen
+# -tin
+heitin,heittimen
+poltin,polttimen
+uistin,uistimen
+# -vin
+kaavin,kaapimen
+kaivin,kaivimen
+kalvin,kalvimen
+raavin,raapimen
+survin,survimen
+särvin,särpimen
+# -Vn (not -in)
+hapan,happaman,happamen
+laidun,laitumen
+morsian,morsiamen
+sydän,sydämen
 
 # declension 34
+# -CtOn
 alaston,alastoman
+# -VtOn
+ajaton,ajattoman
+avuton,avuttoman
+eloton,elottoman
+laiton,laittoman
 onneton,onnettoman
+päätön,päättömän
+syytön,syyttömän
 yötön,yöttömän
 
 # declension 35 (all)
@@ -428,13 +544,33 @@ osanen,osasen
 öinen,öisen
 
 # declension 39
-aines,aineksen
+# -VUs
+hius,hiuksen
+kiveys,kiveyksen
+makuus,makuuksen
+putous,putouksen
+sysäys,sysäyksen
 vastaus,vastauksen
+# -VVs (not -VUs)
+hauis,hauiksen
+iskias,iskiaksen
+rabies,rabieksen
+taos,taoksen
+teos,teoksen
+# -CVs
+aines,aineksen
+emäs,emäksen
+lihas,lihaksen
+rötös,rötöksen
 varis,variksen
+vedos,vedoksen
+virus,viruksen
 yritys,yrityksen
 
 # declension 40
 kalleus,kalleuden
+uutuus,uutuuden
+äitiys,äitiyden
 äreys,äreyden
 
 # declension 41
@@ -523,6 +659,7 @@ mies,miehen
 
 # declension 43
 immyt,impyen
+lyhyt,lyhyen
 ohut,ohuen
 
 # declension 44 (all)
@@ -531,11 +668,13 @@ kevät,kevään
 # declension 45
 kahdeksas,kahdeksannen
 neljäs,neljännen
+viides,viidennen
 
 # declension 46 (all)
 tuhat,tuhannen
 
 # declension 47
+jäänyt,jääneen
 kuollut,kuolleen
 tehnyt,tehneen
 
