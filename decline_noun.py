@@ -51,35 +51,48 @@ _CONSONANTS_GEN_SG_ESS_SG_GEN_PL = {
     44: (("t", ""),),  # kevät
     47: (("t", ""),),  # kuollut
 }
-_CONSONANTS_GEN_SG_ESS_SG = {
-    # -n
-    33: (("n", "m"),),  # kytkin
-    # -s
-    39: (("s", "ks"),),  # vastaus
-    42: (("s", "h"),),   # mies
-    45: (("s", "nt"),),  # kahdeksas
-    # -si
-    31: (("ksi", "hti"),),  # kaksi
-    # -t
-    46: (("t", "nt"),),  # tuhat
-}
-_CONSONANTS_PAR_SG = {
-    # -mi
-    25: (("mi", "ni"),),  # toimi
-    # -s
-    45: (("s", "t"),),  # kahdeksas
-    # -si
-    29: (("[kp]si", "si"),),  # lapsi
-    30: (("tsi",    "si"),),  # veitsi
-    31: (("ksi",    "hi"),),  # kaksi
-}
-_CONSONANTS_GEN_PL = {
-    # -s
-    40: (("s", "ks"),),  # kalleus
-    45: (("s", "ns"),),  # kahdeksas
-    # -t
-    46: (("t", "ns"),),  # tuhat
-}
+_CONSONANTS_GEN_SG_ESS_SG = (
+    _CONSONANTS_ALL
+    | _CONSONANTS_GEN_SG_ESS_SG_PAR_SG
+    | _CONSONANTS_GEN_SG_ESS_SG_GEN_PL
+    | {
+        # -n
+        33: (("n", "m"),),  # kytkin
+        # -s
+        39: (("s", "ks"),),  # vastaus
+        42: (("s", "h"),),   # mies
+        45: (("s", "nt"),),  # kahdeksas
+        # -si
+        31: (("ksi", "hti"),),  # kaksi
+        # -t
+        46: (("t", "nt"),),  # tuhat
+    }
+)
+_CONSONANTS_PAR_SG = (
+    _CONSONANTS_ALL
+    | _CONSONANTS_GEN_SG_ESS_SG_PAR_SG
+    | {
+        # -mi
+        25: (("mi", "ni"),),  # toimi
+        # -s
+        45: (("s", "t"),),  # kahdeksas
+        # -si
+        29: (("[kp]si", "si"),),  # lapsi
+        30: (("tsi",    "si"),),  # veitsi
+        31: (("ksi",    "hi"),),  # kaksi
+    }
+)
+_CONSONANTS_GEN_PL = (
+    _CONSONANTS_ALL
+    | _CONSONANTS_GEN_SG_ESS_SG_GEN_PL
+    | {
+        # -s
+        40: (("s", "ks"),),  # kalleus
+        45: (("s", "ns"),),  # kahdeksas
+        # -t
+        46: (("t", "ns"),),  # tuhat
+    }
+)
 #
 # vowels (for any combination of case/number, keys must be unique)
 _VOWELS_GEN_SG_ESS_SG_PAR_SG = {
@@ -98,35 +111,39 @@ _VOWELS_GEN_SG_ESS_SG_GEN_PL = {
     36: (("^([^aou]+)", r"\1ä"), ("", "a")),  # sisin
     37: (("^([^aou]+)", r"\1ä"), ("", "a")),  # vasen
 }
-_VOWELS_GEN_SG_ESS_SG = {
-    # -i -> -e
-    23: (("i", "e"),),  # tiili
-    24: (("i", "e"),),  # uni
-    25: (("i", "e"),),  # toimi
-    26: (("i", "e"),),  # pieni
-    27: (("i", "e"),),  # käsi
-    28: (("i", "e"),),  # kynsi
-    29: (("i", "e"),),  # lapsi
-    30: (("i", "e"),),  # veitsi
-    31: (("i", "e"),),  # kaksi
-    40: (("i", "e"),),  # kalleus
-    # - -> -e
-    32: (("", "e"),),  # sisar
-    33: (("", "e"),),  # kytkin
-    38: (("", "e"),),  # nainen
-    39: (("", "e"),),  # vastaus
-    42: (("", "e"),),  # mies
-    43: (("", "e"),),  # ohut
-    45: (("", "e"),),  # kahdeksas
-    46: (("", "e"),),  # tuhat
-    49: (("", "e"),),  # askel, askele
-    # -V -> -VV
-    41: (("([aeiouyäö])", r"\1\1"),),  # vieras
-    44: (("ä",            "ää"),),     # kevät
-    48: (("([aeiouyäö])", r"\1\1"),),  # hame
-    # -U -> -ee
-    47: (("[uy]", "ee"),),  # kuollut
-}
+_VOWELS_GEN_SG_ESS_SG = (
+    _VOWELS_GEN_SG_ESS_SG_PAR_SG
+    | _VOWELS_GEN_SG_ESS_SG_GEN_PL
+    | {
+        # -i -> -e
+        23: (("i", "e"),),  # tiili
+        24: (("i", "e"),),  # uni
+        25: (("i", "e"),),  # toimi
+        26: (("i", "e"),),  # pieni
+        27: (("i", "e"),),  # käsi
+        28: (("i", "e"),),  # kynsi
+        29: (("i", "e"),),  # lapsi
+        30: (("i", "e"),),  # veitsi
+        31: (("i", "e"),),  # kaksi
+        40: (("i", "e"),),  # kalleus
+        # - -> -e
+        32: (("", "e"),),  # sisar
+        33: (("", "e"),),  # kytkin
+        38: (("", "e"),),  # nainen
+        39: (("", "e"),),  # vastaus
+        42: (("", "e"),),  # mies
+        43: (("", "e"),),  # ohut
+        45: (("", "e"),),  # kahdeksas
+        46: (("", "e"),),  # tuhat
+        49: (("", "e"),),  # askel, askele
+        # -V -> -VV
+        41: (("([aeiouyäö])", r"\1\1"),),  # vieras
+        44: (("ä",            "ää"),),     # kevät
+        48: (("([aeiouyäö])", r"\1\1"),),  # hame
+        # -U -> -ee
+        47: (("[uy]", "ee"),),  # kuollut
+    }
+)
 _VOWELS_PAR_SG_GEN_PL = {
     # -i -> -
     23: (("i", ""),),  # tiili
@@ -140,29 +157,37 @@ _VOWELS_PAR_SG_GEN_PL = {
     31: (("i", ""),),  # kaksi
     40: (("i", ""),),  # kalleus
 }
-_VOWELS_GEN_PL = {
-    # -V -> -
-    5:  (("i",          ""),),   # risti
-    6:  (("i",          ""),),   # paperi
-    7:  (("i",          ""),),   # ovi
-    10: (("a",          ""),),   # koira
-    15: (("[aä]",       ""),),   # korkea
-    16: (("i",          ""),),   # vanhempi
-    17: (("[aeiouyäö]", ""),),   # vapaa
-    18: (("[aeiouyäö]", ""),),   # maa
-    20: (("[aeiouyäö]", ""),),   # filee
-    41: (("aa",         "a"),),  # vieras
-    # -A -> -O
-    9:  (("a", "o"), ("ä", "ö")),  # kala
-    11: (("a", "o"), ("ä", "ö")),  # omena
-    12: (("a", "o"), ("ä", "ö")),  # kulkija
-    13: (("a", "o"), ("ä", "ö")),  # katiska
-    14: (("a", "o"), ("ä", "ö")),  # solakka
-    # -ie/-uo/-yö -> -e/-o/-ö
-    19: (("ie", "e"), ("uo", "o"), ("yö", "ö")),  # suo
-    # -U -> -e
-    47: (("[uy]", "e"),),  # kuollut
-}
+_VOWELS_PAR_SG = (
+    _VOWELS_GEN_SG_ESS_SG_PAR_SG
+    | _VOWELS_PAR_SG_GEN_PL
+)
+_VOWELS_GEN_PL = (
+    _VOWELS_GEN_SG_ESS_SG_GEN_PL
+    | _VOWELS_PAR_SG_GEN_PL
+    | {
+        # -V -> -
+        5:  (("i",          ""),),   # risti
+        6:  (("i",          ""),),   # paperi
+        7:  (("i",          ""),),   # ovi
+        10: (("a",          ""),),   # koira
+        15: (("[aä]",       ""),),   # korkea
+        16: (("i",          ""),),   # vanhempi
+        17: (("[aeiouyäö]", ""),),   # vapaa
+        18: (("[aeiouyäö]", ""),),   # maa
+        20: (("[aeiouyäö]", ""),),   # filee
+        41: (("aa",         "a"),),  # vieras
+        # -A -> -O
+        9:  (("a", "o"), ("ä", "ö")),  # kala
+        11: (("a", "o"), ("ä", "ö")),  # omena
+        12: (("a", "o"), ("ä", "ö")),  # kulkija
+        13: (("a", "o"), ("ä", "ö")),  # katiska
+        14: (("a", "o"), ("ä", "ö")),  # solakka
+        # -ie/-uo/-yö -> -e/-o/-ö
+        19: (("ie", "e"), ("uo", "o"), ("yö", "ö")),  # suo
+        # -U -> -e
+        47: (("[uy]", "e"),),  # kuollut
+    }
+)
 
 # rules for consonant gradation
 # - format: (regex_from, regex_to)
@@ -214,12 +239,12 @@ _CONS_GRAD_STRENGTHEN = tuple((re.compile(f + "$"), t) for (f, t) in (
 
 # -----------------------------------------------------------------------------
 
-def _change_endings(word, decl, regexes):
+def _change_endings(word, regexes):
     # change the final consonant/vowel of a word using a regex
-    # regexes: {declension: ((regex_from, regex_to), ...), ...}
+    # regexes: ((regex_from, regex_to), ...)
     # only the first matching regex_from will be applied
 
-    for (reFrom, reTo) in regexes.get(decl, ()):
+    for (reFrom, reTo) in regexes:
         reFrom += "$"
         if re.search(reFrom, word) is not None:
             return re.sub(reFrom, reTo, word)
@@ -242,16 +267,8 @@ def _decline_gen_sg(word, decl, consGrad):
     origWord = word
 
     # irregular changes to final consonant and vowel
-    word = _change_endings(
-        word, decl,
-        _CONSONANTS_ALL | _CONSONANTS_GEN_SG_ESS_SG_PAR_SG
-        | _CONSONANTS_GEN_SG_ESS_SG_GEN_PL | _CONSONANTS_GEN_SG_ESS_SG
-    )
-    word = _change_endings(
-        word, decl,
-        _VOWELS_GEN_SG_ESS_SG_PAR_SG | _VOWELS_GEN_SG_ESS_SG_GEN_PL
-        | _VOWELS_GEN_SG_ESS_SG
-    )
+    word = _change_endings(word, _CONSONANTS_GEN_SG_ESS_SG.get(decl, ()))
+    word = _change_endings(word, _VOWELS_GEN_SG_ESS_SG.get(decl, ()))
 
     # consonant gradation
     if consGrad and decl >= 32:
@@ -273,16 +290,8 @@ def _decline_ess_sg(word, decl, consGrad):
     # essive singular; no case/number ending; e.g. "kaksi" -> "kahte"
 
     # irregular changes to final consonant and vowel
-    word = _change_endings(
-        word, decl,
-        _CONSONANTS_ALL | _CONSONANTS_GEN_SG_ESS_SG_PAR_SG
-        | _CONSONANTS_GEN_SG_ESS_SG_GEN_PL | _CONSONANTS_GEN_SG_ESS_SG
-    )
-    word = _change_endings(
-        word, decl,
-        _VOWELS_GEN_SG_ESS_SG_PAR_SG | _VOWELS_GEN_SG_ESS_SG_GEN_PL
-        | _VOWELS_GEN_SG_ESS_SG
-    )
+    word = _change_endings(word, _CONSONANTS_GEN_SG_ESS_SG.get(decl, ()))
+    word = _change_endings(word, _VOWELS_GEN_SG_ESS_SG.get(decl, ()))
 
     # weak -> strong consonant gradation
     if consGrad and decl >= 32 or decl in (36, 37):
@@ -295,14 +304,8 @@ def _decline_par_sg(word, decl, consGrad):
     # partitive singular; no case/number ending; e.g. "kaksi" -> "kaht"
 
     # irregular changes to final consonant and vowel
-    word = _change_endings(
-        word, decl,
-        _CONSONANTS_ALL | _CONSONANTS_GEN_SG_ESS_SG_PAR_SG | _CONSONANTS_PAR_SG
-    )
-    word = _change_endings(
-        word, decl,
-        _VOWELS_GEN_SG_ESS_SG_PAR_SG | _VOWELS_PAR_SG_GEN_PL
-    )
+    word = _change_endings(word, _CONSONANTS_PAR_SG.get(decl, ()))
+    word = _change_endings(word, _VOWELS_PAR_SG.get(decl, ()))
 
     return word
 
@@ -311,14 +314,8 @@ def _decline_gen_pl(word, decl, consGrad):
     # genitive plural; no case/number ending; e.g. "kaksi" -> "kaks"
 
     # irregular changes to final consonant and vowel
-    word = _change_endings(
-        word, decl,
-        _CONSONANTS_ALL | _CONSONANTS_GEN_SG_ESS_SG_GEN_PL | _CONSONANTS_GEN_PL
-    )
-    word = _change_endings(
-        word, decl,
-        _VOWELS_GEN_SG_ESS_SG_GEN_PL | _VOWELS_PAR_SG_GEN_PL | _VOWELS_GEN_PL
-    )
+    word = _change_endings(word, _CONSONANTS_GEN_PL.get(decl, ()))
+    word = _change_endings(word, _VOWELS_GEN_PL.get(decl, ()))
 
     return word
 
