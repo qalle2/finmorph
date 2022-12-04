@@ -4,17 +4,8 @@ import re, sys
 from noun_consgrad import get_consonant_gradation
 from noundecl import get_declensions
 
-# C = any consonant, V = any vowel, A = a/ä, O = o/ö, U = u/y
-
-# Kotus declensions:
-# 1=valo, 2=palvelu, 3=valtio, 4=laatikko, 5=risti, 6=paperi, 7=ovi, 8=nalle,
-# 9=kala, 10=koira/kahdeksan, 11=omena, 12=kulkija, 13=katiska, 14=solakka,
-# 15=korkea, 16=vanhempi, 17=vapaa, 18=maa, 19=suo, 20=filee, 21=rosé,
-# 22=parfait, 23=tiili, 24=uni, 25=toimi, 26=pieni, 27=käsi, 28=kynsi,
-# 29=lapsi, 30=veitsi, 31=kaksi, 32=sisar/kymmenen, 33=kytkin, 34=onneton,
-# 35=lämmin, 36=sisin, 37=vasen, 38=nainen, 39=vastaus, 40=kalleus, 41=vieras,
-# 42=mies, 43=ohut, 44=kevät, 45=kahdeksas, 46=tuhat, 47=kuollut, 48=hame,
-# 49=askel/askele
+# - C = any consonant, V = any vowel, A = a/ä, O = o/ö, U = u/y
+# - declensions (1-49) are from Kotus
 
 # -----------------------------------------------------------------------------
 
@@ -24,7 +15,7 @@ from noundecl import get_declensions
 # - only the 1st match with regex_from will be applied
 # - consonant gradation will be applied afterwards
 #
-# consonants (for any combination of case/number, keys must be unique)
+# consonants (keys must be unique for any combination of case/number)
 _CONSONANTS_GEN_SG_PAR_SG_GEN_PL = {
     # -n
     10: (("n",   ""),),   # kahdeksan
@@ -101,7 +92,7 @@ del _CONSONANTS_GEN_SG_PAR_SG_GEN_PL
 del _CONSONANTS_GEN_SG_PAR_SG
 del _CONSONANTS_GEN_SG_GEN_PL
 #
-# vowels (for any combination of case/number, keys must be unique)
+# vowels (keys must be unique for any combination of case/number)
 _VOWELS_GEN_SG_PAR_SG = {
     # -C -> -Ci
     5: (("([^aeiouyäö])", r"\1i"),),  # risti, rock
@@ -205,6 +196,46 @@ del _VOWELS_GEN_SG_GEN_PL
 del _VOWELS_PAR_SG_GEN_PL
 del _VOWELS_GEN_PL_ILL_PL
 
+_TEMP = {  # GenPl, PartPl, IllPl (both consonants and vowels)
+    # -V -> -
+    5:  (("i",          ""),),  # risti
+    6:  (("i",          ""),),  # paperi
+    7:  (("i",          ""),),  # ovi
+    10: (("[aä]",       ""),),  # koira
+    11: (("[aä]",       ""),),  # omena
+    15: (("[aä]",       ""),),  # korkea
+    16: (("i",          ""),),  # vanhempi
+    17: (("[aeiouyäö]", ""),),  # vapaa
+    18: (("[aeiouyäö]", ""),),  # maa
+    20: (("[aeiouyäö]", ""),),  # filee
+    23: (("i",          ""),),  # tiili
+    24: (("i",          ""),),  # uni
+    25: (("i",          ""),),  # toimi
+    26: (("i",          ""),),  # pieni
+    27: (("i",          ""),),  # käsi
+    28: (("i",          ""),),  # kynsi
+    29: (("i",          ""),),  # lapsi
+    30: (("i",          ""),),  # veitsi
+    31: (("i",          ""),),  # kaksi
+    # -A -> -O
+    9:  (("a", "o"), ("ä", "ö")),  # kala
+    12: (("a", "o"), ("ä", "ö")),  # kulkija
+    13: (("a", "o"), ("ä", "ö")),  # katiska
+    # -ie/-uo/-yö -> -e/-o/-ö
+    19: (("ie", "e"), ("uo", "o"), ("yö", "ö")),  # suo
+    # -n
+    35: (("n",   "m"),),  # lämmin
+    38: (("nen", "s"),),  # nainen
+    # -s
+    40: (("s", "ks"),),  # kalleus
+    41: (("s", ""),),    # vieras
+    45: (("s", "ns"),),  # kahdeksas
+    # -t
+    43: (("t",     ""),),   # ohut
+    44: (("t",     ""),),   # kevät
+    47: (("[uy]t", "e"),),  # kuollut
+}
+
 # rules for consonant gradation
 # - format: (regex_from, regex_to)
 # - "$" will be appended to regex_from
@@ -242,7 +273,7 @@ _CONS_GRAD_STRENGTHEN = tuple((re.compile(f + "$"), t) for (f, t) in (
     ("(iu)([ae])",                              r"\1k\2"),   # kiuas
     ("(^[^aeiouyäö]?[aeiouyäö]|ai|var)([aei])", r"\1k\2"),   # ruis
     # p
-    ("([aeiouyäölm])p(aa?|ää?|ee?|ame?|an)",          r"\1pp\2"),  # ape
+    ("([aeiouyäölm])p(aa?|ää?|ee?|i|ame?|an)",        r"\1pp\2"),  # ape
     ("([aeiouyäö])mm(aa?|ää?|ee?|yy?|ele?|imä?|ye)?", r"\1mp\2"),  # lämmin
     ("([aeiouyäölr])v(aa?|ää?|ee?|[ai][lmn]e?)",      r"\1p\2"),   # taival
     # t
@@ -333,6 +364,7 @@ def _decline_gen_pl(word, decl, consGrad):
     # irregular changes to final consonant and vowel
     word = _change_endings(word, _CONSONANTS_GEN_PL.get(decl, ()))
     word = _change_endings(word, _VOWELS_GEN_PL.get(decl, ()))
+    #word = _change_endings(word, _TEMP.get(decl, ()))
 
     return word
 
@@ -343,6 +375,7 @@ def _decline_ill_pl(word, decl, consGrad):
     # irregular changes to final consonant and vowel
     word = _change_endings(word, _CONSONANTS_GEN_PL.get(decl, ()))
     word = _change_endings(word, _VOWELS_ILL_PL.get(decl, ()))
+    #word = _change_endings(word, _TEMP.get(decl, ()))
 
     if consGrad and decl in (32, 33, 34, 35, 41, 43, 48, 49) \
     or decl in (36, 37):
@@ -448,230 +481,217 @@ def _decline_noun_specific(word, decl, consGrad, case, number):
     # generate inflected forms of a Finnish noun using specified declension
     # (1-49) and consonant gradation (bool)
 
-    # use "a", "ä" or both in -A endings?
-    if (word, decl) in _BOTH_A_AND_AUML:
-        endingVowels = "aä"
-    elif word in ("meri", "veri") and case == "par" and number == "sg":
-        endingVowels = "a"
-    elif re.search(r"^[^aáou]+$", word) is not None:
-        endingVowels = "ä"
-    else:
-        endingVowels = "a"
-
-    # make changes before appending case/number ending
+    # exit early for nominative singular
     if case == "nom" and number == "sg":
-        inflected = word
-    elif (case, number) in _CASES_LIKE_GEN_SG:
-        inflected = _decline_gen_sg(word, decl, consGrad)
+        yield word
+        return
+
+    # inflect without adding case/number endings
+    if word == "paras" and not (case == "par" and number == "sg"):
+        altWord = "parhas"
+    elif word == "veli":
+        altWord = "velji"
+    else:
+        altWord = word
+    #
+    if (case, number) in _CASES_LIKE_GEN_SG:
+        inflected = [_decline_gen_sg(altWord, decl, consGrad)]
     elif case in ("ess", "ill") and number == "sg":
-        inflected = _decline_ess_sg(word, decl, consGrad)
+        inflected = [_decline_ess_sg(altWord, decl, consGrad)]
     elif case == "par" and number == "sg":
-        inflected = _decline_par_sg(word, decl, consGrad)
+        inflected = [_decline_par_sg(altWord, decl, consGrad)]
     elif case in ("gen", "par") and number == "pl":
-        inflected = _decline_gen_pl(word, decl, consGrad)
+        inflected = [_decline_gen_pl(altWord, decl, consGrad)]
     elif case == "ill" and number == "pl":
-        inflected = _decline_ill_pl(word, decl, consGrad)
+        inflected = [_decline_ill_pl(altWord, decl, consGrad)]
     else:
         sys.exit("Error: this should never happen.")
+    del altWord
 
-    # add variants of inflected form
-    words = [inflected]
+    # add variant with/without consonant gradation
     if (case, number) in _CASES_LIKE_GEN_SG \
     and word in _OPTIONAL_CONS_GRAD_GEN_SG:
-        words.append(word)
-    elif word == "hapan":
-        if (case, number) in _CASES_LIKE_GEN_SG \
-        or case in ("ess", "ill") and number == "sg":
-            words.append("happama")
-    elif word in ("häive", "viive"):
-        if not (case in ("nom", "par") and number == "sg"):
-            words.append(word + "e")
-    elif word == "paras":
-        if case in ("gen", "par", "ill") and number == "pl":
-            words = ["parha"]
-        elif not (case in ("nom", "par") and number == "sg"):
-            words = ["parhaa"]
-    elif word == "pop":
-        if case in ("ess", "ill", "par") and number == "sg":
-            words.append("poppi")
-        elif case in ("gen", "ill", "par") and number == "pl":
-            words.append("poppe")
-    elif word == "ryntys":
-        if case in ("ess", "ill") and number == "sg":
-            words = ["rynttyy"]
-    elif word in ("tau", "tiu"):
-        if case == "ill" and number == "pl":
-            words = [word]  # restore
-    elif word == "veli":
-        if case == "ill" and number == "pl":
-            words = ["velj"]
-        elif not (case == "nom" and number == "sg"):
-            words = ["velje"]
-    elif decl in (4, 14):
-        if case == "ill" and number == "pl":
-            words.append(_consonant_gradation(inflected))
-    del inflected
+        inflected.append(word)
+    elif word in ("häive", "viive") and not (case == "par" and number == "sg"):
+        inflected.append(word + "e")
+    elif word == "pop" and (
+        case in ("ess", "par", "ill") or case == "gen" and number == "pl"
+    ):
+        inflected.extend([_consonant_gradation(i, True) for i in inflected])
+    elif decl in (4, 14) and case == "ill" and number == "pl":
+        # laatikko, solakka
+        inflected.extend([_consonant_gradation(i) for i in inflected])
+    # add irregular variant
+    elif word == "hapan" and (
+        (case, number) in _CASES_LIKE_GEN_SG \
+        or case in ("ess", "ill") and number == "sg"
+    ):
+        inflected.extend([re.sub("e$", "a", i) for i in inflected])
 
     # append apostrophe
-    if decl == 22 and not (case == "nom" and number == "sg"):
-        words = [w + "'" for w in words]
+    if decl == 22:
+        inflected = [i + "'" for i in inflected]
 
-    words = tuple(words)
+    inflected = tuple(inflected)
+    #print(f"{inflected=}, {decl=}, {consGrad=}")
 
-    #print(words, decl, consGrad)
+    # use "a", "ä" or both in -A endings?
+    if (word, decl) in _BOTH_A_AND_AUML:
+        aOrAuml = ("a", "ä")
+    elif word in ("meri", "veri") and case == "par" and number == "sg":
+        aOrAuml = ("a",)
+    elif re.search(r"^[^aáou]+$", word) is not None:
+        aOrAuml = ("ä",)
+    else:
+        aOrAuml = ("a",)
 
     # append case/number endings and generate words
-    if case == "nom" and number == "sg":
-        yield from words
-    elif (case, number) in _CASES_LIKE_GEN_SG:
+    if (case, number) in _CASES_LIKE_GEN_SG:
         # many case/number combinations that resemble genitive singular
         if case in ("nom", "gen", "tra", "all"):
-            yield from (w + _GEN_SG_LIKE_ENDINGS[case] for w in words)
+            yield from (i + _GEN_SG_LIKE_ENDINGS[case] for i in inflected)
         else:
             yield from (
-                w + _GEN_SG_LIKE_ENDINGS[case] + v
-                for w in words for v in endingVowels
+                i + _GEN_SG_LIKE_ENDINGS[case] + a
+                for i in inflected for a in aOrAuml
             )
     elif case == "ess" and number == "sg":
         # essive singular
-        yield from (f"{w}n{v}" for w in words for v in endingVowels)
+        yield from (f"{i}n{a}" for i in inflected for a in aOrAuml)
     elif case == "ill" and number == "sg":
         # illative singular
         if decl == 20:
-            yield from (f"{w}h{w[-1]}n" for w in words)
-            yield from (w + "seen" for w in words)
+            yield from (f"{i}h{i[-1]}n" for i in inflected)
+            yield from (i + "seen" for i in inflected)
         elif decl in (18, 19):
-            yield from (f"{w}h{w[-1]}n" for w in words)
+            yield from (f"{i}h{i[-1]}n" for i in inflected)
         elif decl == 21:
             yield from (
-                f"{w}h{v}n"
-                for w in words for v in _ILL_SG_VOWELS_DECL_21.get(word, w[-1])
+                f"{i}h{v}n"
+                for i in inflected
+                for v in _ILL_SG_VOWELS_DECL_21.get(word, i[-1])
             )
             if word == "jersey":
-                yield from (w + "yn" for w in words)  # additional
+                yield from (i + "yn" for i in inflected)  # additional
         elif decl == 22:
-            for w in words:
+            for i in inflected:
                 yield from (
-                    f"{w}h{v}n" for v in _ILL_SG_VOWELS_DECL_22.get(word, "e")
+                    f"{i}h{v}n" for v in _ILL_SG_VOWELS_DECL_22.get(word, "e")
                 )
         elif decl in (17, 41, 44, 47, 48) \
         or decl == 49 and word.endswith("e"):
-            yield from (w + "seen" for w in words)
+            yield from (i + "seen" for i in inflected)
         else:
-            yield from (f"{w}{w[-1]}n" for w in words)
+            yield from (f"{i}{i[-1]}n" for i in inflected)
     elif case == "par" and number == "sg":
         # partitive singular
         # -A
-        if decl in (1, 2) or 4 <= decl <= 16:
-            yield from (w + v for w in words for v in endingVowels)
+        if decl in (1, 2) or 4 <= decl <= 16:  # valo, palvelu, ...
+            yield from (i + a for i in inflected for a in aOrAuml)
         elif decl == 25 and word not in ("liemi", "lumi"):  # toimi
-            yield from (f"{w[:-1]}me{v}" for w in words for v in endingVowels)
+            yield from (
+                f"{i[:-1]}me{a}" for i in inflected for a in aOrAuml
+            )
         elif decl == 37:  # vasen
             yield from (
-                f"{w[:-1]}mp{2*v}" for w in words for v in endingVowels
+                f"{i[:-1]}mp{2*a}" for i in inflected for a in aOrAuml
             )
         elif word == "moni":
-            yield from (f"{w}t{2*v}" for w in words for v in endingVowels)
+            yield from (f"{i}t{2*a}" for i in inflected for a in aOrAuml)
         # -tA
         if decl == 48 or decl == 49 and word.endswith("e"):  # hame, askel
-            yield from (f"{w}tt{v}" for w in words for v in endingVowels)
-        elif decl in (3, 15) or decl >= 17:
-            yield from (f"{w}t{v}" for w in words for v in endingVowels)
+            yield from (f"{i}tt{a}" for i in inflected for a in aOrAuml)
+        elif decl in (3, 15) or decl >= 17:  # valtio, korkea, ...
+            yield from (f"{i}t{a}" for i in inflected for a in aOrAuml)
             if word == "jersey":
                 yield word + "ä"
     elif case in ("gen", "par", "ill") and number == "pl":
         # genitive plural, partitive plural, illative plural
-        # -jen / -jA / part of -ihin
+        # -jen/-jA/-ihin (some -ihin forms are output elsewhere)
         if decl in (1, 2, 4, 8, 9, 11, 13, 14) \
         or case == "par" and decl in (5, 6) \
-        or case == "ill" and decl == 5 \
-        or word in ("tau", "tiu"):
-            words2 = words
-            if case in ("gen", "par") and word in ("tau", "tiu"):
-                words2 = (word,)  # restore original
-            #
+        or case == "ill" and decl == 5:
             if case == "gen":
-                yield from (w + "jen" for w in words2)
+                yield from (i + "jen" for i in inflected)
             elif case == "par":
-                yield from (f"{w}j{v}" for w in words2 for v in endingVowels)
+                yield from (f"{i}j{a}" for i in inflected for a in aOrAuml)
             else:
-                yield from (w + "ihin" for w in words2)
-        # -iden, -itA, -isiin, part of -ihin
+                yield from (i + "ihin" for i in inflected)
+        # -iden/-itA/-ihin/-isiin (some -ihin forms are output elsewhere)
         if decl in (2, 3, 4, 6, 41, 43, 44, 47, 48) \
-        or 11 <= decl <= 22 and not decl == 16 and word not in ("tau", "tiu") \
+        or 11 <= decl <= 22 and not decl == 16 \
         or decl == 49 and word.endswith("e"):
-            words2 = words
+            infl2 = inflected
             if word == "häive":
-                words2 = ("häipe", "häive")
+                infl2 = ("häipe", "häive")
             elif word == "viive":
-                words2 = ("viipe", "viive")
+                infl2 = ("viipe", "viive")
             elif case in ("gen", "par") and consGrad and decl in (4, 14):
-                words2 = tuple(_consonant_gradation(w) for w in words2)
+                # laatikko, solakka
+                infl2 = tuple(_consonant_gradation(i) for i in infl2)
             elif case in ("gen", "par") and consGrad and decl in (41, 43, 48):
-                words2 = tuple(_consonant_gradation(w, True) for w in words2)
+                infl2 = tuple(_consonant_gradation(i, True) for i in infl2)
             #
             if case == "gen":
-                yield from (w + "iden" for w in words2)
+                yield from (i + "iden" for i in infl2)
             elif case == "par":
-                yield from (f"{w}it{v}" for w in words2 for v in endingVowels)
+                yield from (f"{i}it{a}" for i in infl2 for a in aOrAuml)
             else:
-                yield from (w + "ihin" for w in words2)
+                yield from (i + "ihin" for i in infl2)
                 # -isiin
                 if decl in (15, 17, 20, 41, 43, 44, 47, 48, 49):
-                    yield from (w + "isiin" for w in words2)
+                    yield from (i + "isiin" for i in infl2)
         # -ien/-iA/-ten/-iin
         if decl in (7, 10, 11, 16, 42, 45, 46) or 23 <= decl <= 40 \
         or decl == 49 and not word.endswith("e") \
         or case == "gen" and decl in (5, 6):
-            words2 = words
+            infl2 = inflected
             if case == "ill":
                 if decl == 11:  # omena
-                    words2 = tuple(re.sub("[oö]$", "", w) for w in words2)
+                    infl2 = tuple(re.sub("[oö]$", "", i) for i in infl2)
             else:
                 # -ien/-iA
                 if consGrad and decl in (32, 33, 34, 49) \
                 or decl in (35, 36, 37):
                     # lämmin, sisin, vasen
-                    words2 = tuple(
-                        _consonant_gradation(w, True) for w in words2
-                    )
+                    infl2 = tuple(_consonant_gradation(i, True) for i in infl2)
                 #
                 if word == "veli" or decl in (5, 6):
-                    words2 = tuple(re.sub("e$", "", w) for w in words2)
+                    infl2 = tuple(re.sub("e$", "", i) for i in infl2)
                 elif decl in (10, 34, 35, 36, 37):
                     # koira, onneton, lämmin, sisin, vasen
-                    words2 = tuple(re.sub("[aä]$", "", w) for w in words2)
+                    infl2 = tuple(re.sub("[aä]$", "", i) for i in infl2)
                 elif decl == 11:  # omena
-                    words2 = tuple(re.sub("[oö]$", "", w) for w in words2)
+                    infl2 = tuple(re.sub("[oö]$", "", i) for i in infl2)
                 elif decl == 33:  # kytkin
-                    words2 = tuple(re.sub("n$", "m", w) for w in words2)
+                    infl2 = tuple(re.sub("n$", "m", i) for i in infl2)
                 elif decl == 42:  # mies
-                    words2 = tuple(re.sub("s$", "h", w) for w in words2)
+                    infl2 = tuple(re.sub("s$", "h", i) for i in infl2)
             if case == "gen":
-                yield from (w + "ien" for w in words2)
+                yield from (i + "ien" for i in infl2)
             elif case == "par":
-                yield from (f"{w}i{v}" for w in words2 for v in endingVowels)
+                yield from (f"{i}i{a}" for i in infl2 for a in aOrAuml)
             else:
-                yield from (w + "iin" for w in words2)
+                yield from (i + "iin" for i in infl2)
             # -ten
             if case == "gen" and word != "uksi" \
             and decl not in (5, 6, 7, 10, 11, 16, 23, 31, 35, 40, 45):
-                words2 = words
+                infl2 = inflected
                 if decl in (27, 28):  # käsi, kynsi
-                    words2 = tuple(re.sub("s$", "t", w) for w in words2)
+                    infl2 = tuple(re.sub("s$", "t", i) for i in infl2)
                 elif decl in (29, 30):  # lapsi, veitsi
-                    words2 = tuple(re.sub("[pt]s$", "s", w) for w in words2)
+                    infl2 = tuple(re.sub("[pt]s$", "s", i) for i in infl2)
                 elif decl == 34:  # onneton
-                    words2 = tuple(re.sub("m[aä]$", "n", w) for w in words2)
+                    infl2 = tuple(re.sub("m[aä]$", "n", i) for i in infl2)
                 elif decl in (36, 37):  # sisin, vasen
-                    words2 = tuple(re.sub("mm[aä]$", "n", w) for w in words2)
+                    infl2 = tuple(re.sub("mm[aä]$", "n", i) for i in infl2)
                 elif decl == 39:  # vastaus
-                    words2 = tuple(re.sub("ks$", "s", w) for w in words2)
+                    infl2 = tuple(re.sub("ks$", "s", i) for i in infl2)
                 elif decl == 42:  # mies
-                    words2 = tuple(re.sub("h$", "s", w) for w in words2)
+                    infl2 = tuple(re.sub("h$", "s", i) for i in infl2)
                 elif decl == 46:  # tuhat
-                    words2 = tuple(re.sub("ns$", "n", w) for w in words2)
-                yield from (re.sub("m$", "n", w) + "ten" for w in words2)
+                    infl2 = tuple(re.sub("ns$", "n", i) for i in infl2)
+                yield from (re.sub("m$", "n", i) + "ten" for i in infl2)
     else:
         sys.exit("Error: this should never happen.")
 
@@ -680,8 +700,8 @@ def decline_noun(word, case, number):
 
     for decl in get_declensions(word):
         # errors in source data
-        if word == "siitake" and decl == 8 \
-        or word in ("alpi", "helpi") and decl == 5:
+        if word in ("alpi", "helpi") and decl == 5 \
+        or word == "siitake" and decl == 8:
             consGrad = False
         elif word in ("auer", "hynte", "näin", "pue", "ryntys"):
             consGrad = True
@@ -736,21 +756,11 @@ def main():
             + "If case & number omitted, print all supported combinations."
         )
 
-    if allCases:
-        for (case, number) in CASES_AND_NUMBERS:
-            declinedNouns = set(decline_noun(word, case, number))
-            if not declinedNouns:
-                sys.exit("Unrecognized noun.")
-            print(
-                case.title() + number.title() + ": "
-                + ", ".join(sorted(declinedNouns))
-            )
-    else:
-        declinedNouns = set(decline_noun(word, case, number))
+    for (c, n) in (CASES_AND_NUMBERS if allCases else ((case, number),)):
+        declinedNouns = set(decline_noun(word, c, n))
         if not declinedNouns:
             sys.exit("Unrecognized noun.")
-        for noun in sorted(declinedNouns):
-            print(noun)
+        print(c.title() + n.title() + ": " + ", ".join(sorted(declinedNouns)))
 
 if __name__ == "__main__":
     main()

@@ -2421,6 +2421,8 @@ Columns:
 38/48      terveisiin          (terve 48 / terveinen 38)
 10/39      terästä             (terä 10 / teräs 39)
 38/48      tieteisiin          (tiede 48 / tieteinen 38)
+18         tiiden              (tii 18 / tiu 18)
+18         tiihin              (tii 18 / tiu 18)
 18/23      tiiltä              (tii 18 / tiili 23)
 18/38      tiistaista          (tiistai 18 / tiistainen 38)
 38/48      tiivisteisiin       (tiiviste 48 / tiivisteinen 38)

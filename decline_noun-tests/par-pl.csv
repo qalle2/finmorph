@@ -326,17 +326,17 @@ hynttyy,hynttyitä
 takuu,takuita
 vapaa,vapaita
 
-# declension 18
+# declension 18 (note: for tau, tiu, Kotus forbids plurals other than nom.)
 jää,jäitä
 jöö,jöitä
 maa,maita
 rokokoo,rokokoita
 suu,suita
 syy,syitä
-tau,tauja
+#tau
 tee,teitä
 tii,tiitä
-tiu,tiuja
+#tiu
 
 # declension 19
 suo,soita

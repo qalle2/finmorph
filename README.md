@@ -37,8 +37,7 @@ These cases have not yet been implemented in plural: essive, translative, inessi
 Examples:
 ```
 $ python3 decline_noun.py "kuusi" gen sg
-kuuden
-kuusen
+GenSg: kuuden, kuusen
 
 $ python3 decline_noun.py "kuusi"
 NomSg: kuusi
