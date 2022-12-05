@@ -29,105 +29,93 @@ _CASES_LIKE_GEN_SG = frozenset((
 # - consonant gradation and case/number endings will be applied afterwards
 # - for clarity, avoid making changes here that need to be undone later
 #
-_CHANGES_GEN_SG = {  # also _CASES_LIKE_GEN_SG, EssSg, IllSg; TODO: optimize
-    # -n
-    10: (("n",   ""),),    # kahdeksan
-    33: (("n",   "me"),),  # kytkin
-    38: (("nen", "se"),),  # nainen
-    # -nen/-C -> -ne/-Ce
+_CHANGES_GEN_SG = {  # also _CASES_LIKE_GEN_SG, EssSg, IllSg
+    5:  (("([^aeiouyäö])", r"\1i"),),   # risti, rock
+    6:  (("([^aeiouyäö])", r"\1i"),),   # paperi, nylon
+    7:  (("i",             "e"),),      # ovi
+    10: (("n",             ""),),       # koira, kahdeksan
+    16: (("^([^aou]+)i", r"\1ä"), ("i", "a")),  # vanhempi
+    23: (("i",             "e"),),      # tiili
+    24: (("i",             "e"),),      # uni
+    25: (("i",             "e"),),      # toimi
+    26: (("i",             "e"),),      # pieni
+    27: (("si",            "te"),),     # käsi
+    28: (("si",            "te"),),     # kynsi
+    29: (("i",             "e"),),      # lapsi
+    30: (("i",             "e"),),      # veitsi
+    31: (("ksi",           "hte"),),    # kaksi
     32: (("nen", "ne"), ("([lnr])", r"\1e")),  # sisar, kymmenen
-    # -n -> -mA
+    33: (("n",             "me"),),     # kytkin
     34: (("^([^aou]+)n", r"\1mä"),  ("^([a-zäö]+)n", r"\1ma")),   # onneton
     35: (("^([^aou]+)n", r"\1mä"),  ("^([a-zäö]+)n", r"\1ma")),   # lämmin
     36: (("^([^aou]+)n", r"\1mmä"), ("^([a-zäö]+)n", r"\1mma")),  # sisin
     37: (("^([^aou]+)n", r"\1mmä"), ("^([a-zäö]+)n", r"\1mma")),  # vasen
-    # -s
-    39: (("s", "kse"),),  # vastaus
-    40: (("s", "te"),),   # kalleus
-    42: (("s", "he"),),   # mies
-    45: (("s", "nte"),),  # kahdeksas
-    # -Vs -> -VV
+    38: (("nen",           "se"),),     # nainen
+    39: (("s",             "kse"),),    # vastaus
+    40: (("s",             "te"),),     # kalleus
     41: (("([aeiouyäö])s", r"\1\1"),),  # vieras
-    # -si
-    27: (("si", "te"),),    # käsi
-    28: (("si", "te"),),    # kynsi
-    31: (("ksi", "hte"),),  # kaksi
-    # -t
-    43: (("t",     "e"),),    # ohut
-    44: (("t",     "ä"),),    # kevät
-    46: (("t",     "nte"),),  # tuhat
-    47: (("[uy]t", "ee"),),   # kuollut
-    # -C -> -Ci
-    5: (("([^aeiouyäö])", r"\1i"),),  # risti, rock
-    6: (("([^aeiouyäö])", r"\1i"),),  # paperi, nylon
-    # -V -> -e
-    7:  (("i", "e"),),  # ovi
-    23: (("i", "e"),),  # tiili
-    24: (("i", "e"),),  # uni
-    25: (("i", "e"),),  # toimi
-    26: (("i", "e"),),  # pieni
-    29: (("i", "e"),),  # lapsi
-    30: (("i", "e"),),  # veitsi
-    # -V -> -A
-    16: (("^([^aou]+)i", r"\1ä"), ("i", "a")),  # vanhempi
-    # - -> -e
-    49: (("", "e"),),  # askel, askele
-    # -V -> -VV
-    48: (("([aeiouyäö])", r"\1\1"),),  # hame
+    42: (("s",             "he"),),     # mies
+    43: (("t",             "e"),),      # ohut
+    44: (("t",             "ä"),),      # kevät
+    45: (("s",             "nte"),),    # kahdeksas
+    46: (("t",             "nte"),),    # tuhat
+    47: (("[uy]t",         "ee"),),     # kuollut
+    48: (("([aeiouyäö])",  r"\1\1"),),  # hame
+    49: (("",              "e"),),      # askel, askele
 }
 _CHANGES_PAR_SG = {
-    5:  (("([^aeiouyäö])", r"\1i"),),  # risti, rock   (-C -> -Ci)
-    6:  (("([^aeiouyäö])", r"\1i"),),  # paperi, nylon (-C -> -Ci)
-    7:  (("i",      "e"),),  # ovi
-    10: (("n",      ""),),   # kahdeksan
+    5:  (("([^aeiouyäö])", r"\1i"),),  # risti, rock
+    6:  (("([^aeiouyäö])", r"\1i"),),  # paperi, nylon
+    7:  (("i",             "e"),),     # ovi
+    10: (("n",             ""),),      # koira, kahdeksan
     16: (("^([^aou]+)i", r"\1ä"), ("i", "a")),  # vanhempi
-    23: (("i",      ""),),   # tiili
-    24: (("i",      ""),),   # uni
-    25: (("i",      ""),),   # toimi
-    26: (("i",      ""),),   # pieni
-    27: (("si",     "t"),),  # käsi
-    28: (("si",     "t"),),  # kynsi
-    29: (("[kp]si", "s"),),  # lapsi
-    30: (("tsi",    "s"),),  # veitsi
-    31: (("ksi",    "h"),),  # kaksi
-    32: (("nen",    "n"),),  # kymmenen
-    38: (("nen",    "s"),),  # nainen
-    40: (("s",      "t"),),  # kalleus
-    45: (("s",      "t"),),  # kahdeksas
+    23: (("i",             ""),),      # tiili
+    24: (("i",             ""),),      # uni
+    25: (("i",             ""),),      # toimi
+    26: (("i",             ""),),      # pieni
+    27: (("si",            "t"),),     # käsi
+    28: (("si",            "t"),),     # kynsi
+    29: (("[kp]si",        "s"),),     # lapsi
+    30: (("tsi",           "s"),),     # veitsi
+    31: (("ksi",           "h"),),     # kaksi
+    32: (("nen",           "n"),),     # sisar, kymmenen
+    38: (("nen",           "s"),),     # nainen
+    40: (("s",             "t"),),     # kalleus
+    45: (("s",             "t"),),     # kahdeksas
 }
 _CHANGES_GEN_PL = {  # also PartPl, IllPl
-    5:  (("i",     ""),),    # risti
-    6:  (("i",     ""),),    # paperi
-    7:  (("i",     ""),),    # ovi
+    5:  (("i",          ""),),     # risti, rock
+    6:  (("i",          ""),),     # paperi, nylon
+    7:  (("i",          ""),),     # ovi
     9:  (("a", "o"), ("ä", "ö")),  # kala
-    10: (("[aä]n?", ""),),   # koira, kahdeksan
+    10: (("[aä]n?",     ""),),     # koira, kahdeksan
     12: (("a", "o"), ("ä", "ö")),  # kulkija
     13: (("a", "o"), ("ä", "ö")),  # katiska
     14: (("a", "o"), ("ä", "ö")),  # solakka
-    15: (("[aä]",  ""),),    # korkea
-    16: (("i",     ""),),    # vanhempi
-    17: (("[aeiouyäö]", ""),),  # vapaa
-    18: (("[aeiouyäö]", ""),),  # maa
+    15: (("[aä]",       ""),),     # korkea
+    16: (("i",          ""),),     # vanhempi
+    17: (("[aeiouyäö]", ""),),     # vapaa
+    18: (("[aeiouyäö]", ""),),     # maa
     19: (("ie", "e"), ("uo", "o"), ("yö", "ö")),  # suo
-    20: (("[aeiouyäö]", ""),),  # filee
-    23: (("i",     ""),),    # tiili
-    24: (("i",     ""),),    # uni
-    25: (("i",     ""),),    # toimi
-    26: (("i",     ""),),    # pieni
-    27: (("i",     ""),),    # käsi
-    28: (("i",     ""),),    # kynsi
-    29: (("i",     ""),),    # lapsi
-    30: (("i",     ""),),    # veitsi
-    31: (("i",     ""),),    # kaksi
-    32: (("nen",   "n"),),   # sisar, kymmenen
-    35: (("n",     "m"),),   # lämmin
-    38: (("nen",   "s"),),   # nainen
-    40: (("s",     "ks"),),  # kalleus
-    41: (("s",     ""),),    # vieras
-    43: (("t",     ""),),    # ohut
-    44: (("t",     ""),),    # kevät
-    45: (("s",     "ns"),),  # kahdeksas
-    47: (("[uy]t", "e"),),   # kuollut
+    20: (("[aeiouyäö]", ""),),     # filee
+    23: (("i",          ""),),     # tiili
+    24: (("i",          ""),),     # uni
+    25: (("i",          ""),),     # toimi
+    26: (("i",          ""),),     # pieni
+    27: (("i",          ""),),     # käsi
+    28: (("i",          ""),),     # kynsi
+    29: (("i",          ""),),     # lapsi
+    30: (("i",          ""),),     # veitsi
+    31: (("i",          ""),),     # kaksi
+    32: (("nen",        "n"),),    # sisar, kymmenen
+    35: (("n",          "m"),),    # lämmin
+    38: (("nen",        "s"),),    # nainen
+    40: (("s",          "ks"),),   # kalleus
+    41: (("s",          ""),),     # vieras
+    43: (("t",          ""),),     # ohut
+    44: (("t",          ""),),     # kevät
+    45: (("s",          "ns"),),   # kahdeksas
+    47: (("[uy]t",      "e"),),    # kuollut
 }
 
 def _change_ending(word, decl, case, number):
@@ -165,7 +153,6 @@ def _change_ending(word, decl, case, number):
 # - "$" will be appended to regex_from
 # - only the 1st match with regex_from will be applied
 # - the final consonants and vowels have already been changed
-# - TODO: optimize
 #
 # strong to weak
 _CONS_GRAD_WEAKEN = tuple((re.compile(f + "$"), t) for (f, t) in (
@@ -192,21 +179,21 @@ _CONS_GRAD_STRENGTHEN = tuple((re.compile(f + "$"), t) for (f, t) in (
     # k
     ("([aeiouyäölnr])k(aa?|ee?)",               r"\1kk\2"),  # tikas
     ("([aeiouyäö])ng(aa?|ää?|ere?)",            r"\1nk\2"),  # penger
-    ("([hl])j(ee?|ime?|in)",                    r"\1k\2"),   # hylje
-    ("([aeiouyäöh])(ene?|ime?|in)",             r"\1k\2"),   # säen
+    ("([hl])j(ee?|ime|in)",                     r"\1k\2"),   # hylje
+    ("([aeiouyäöh])(ene?|ime|in)",              r"\1k\2"),   # säen
     ("([aeiouyäö]|ar)(aa|ee|ii)",               r"\1k\2"),   # ies
     ("(iu)([ae])",                              r"\1k\2"),   # kiuas
     ("(^[^aeiouyäö]?[aeiouyäö]|ai|var)([aei])", r"\1k\2"),   # ruis
     # p
-    ("([aeiouyäölm])p(aa?|ää?|ee?|i|ame?|an)",        r"\1pp\2"),  # ape
-    ("([aeiouyäö])mm(aa?|ää?|ee?|yy?|ele?|imä?|ye)?", r"\1mp\2"),  # lämmin
-    ("([aeiouyäölr])v(aa?|ää?|ee?|[ai][lmn]e?)",      r"\1p\2"),   # taival
+    ("([aeiouyäölm])p(aa?|ää?|ee?|i|ame|an)",         r"\1pp\2"),  # ape
+    ("([aeiouyäö])mm(aa?|ää?|ee?|yy?|ye|ele?|imä?)?", r"\1mp\2"),  # lämmin
+    ("([aeiouyäölr])v(aa?|ää?|ee?|ale?|ime|in)",      r"\1p\2"),   # taival
     # t
-    (r"([aeiouyäölnr])t(([aeiouyäö])\3?)",    r"\1tt\2"),  # altis
-    ("([aeiouyäöl])t([aeiouyäö][mnr][aäe]?)", r"\1tt\2"),  # heitin, tytär
-    (r"([lnr])\1(aa?|ää?|ee?|[aei][lmnr]e?)", r"\1t\2"),   # kallas
-    ("([aeiouyäöh])d(aa?|ee?|[aiu][mnr]e?)",  r"\1t\2"),   # pidin
-    ("(u)(ere?)",                             r"\1t\2"),   # auer
+    (r"([aeiouyäölnr])t(([aeiouyäö])\3?)",         r"\1tt\2"),  # altis
+    ("([aeiouyäöl])t(ime|oma|ömä|[ioö]n|[aä]re?)", r"\1tt\2"),  # heitin, tytär
+    (r"([lnr])\1(aa?|ää?|ee?|[ae][lr]e?|ime|in)",  r"\1t\2"),   # kallas
+    ("([aeiouyäöh])d(aa?|ee?|are?|[iu]me|[iu]n)",  r"\1t\2"),   # pidin
+    ("(u)(ere?)",                                  r"\1t\2"),   # auer
 ))
 
 def _consonant_gradation(word, strengthen=False):
