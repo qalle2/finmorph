@@ -117,6 +117,47 @@ _CHANGES_GEN_PL = {  # also PartPl, IllPl
     45: (("s",          "ns"),),   # kahdeksas
     47: (("[uy]t",      "e"),),    # kuollut
 }
+_CHANGES_ESS_PL = {  # pretty similar to the previous dict
+    5:  (("i", "e"), ("([^aeiouyäö])", r"\1e")),  # risti, rock
+    6:  (("i", "e"), ("([^aeiouyäö])", r"\1e")),  # paperi, nylon
+    7:  (("i",          ""),),     # ovi
+    9:  (("a", "o"), ("ä", "ö")),  # kala
+    10: (("[aä]n?",     ""),),     # koira, kahdeksan
+    12: (("a", "o"), ("ä", "ö")),  # kulkija
+    13: (("a", "o"), ("ä", "ö")),  # katiska
+    14: (("a", "o"), ("ä", "ö")),  # solakka
+    15: (("[aä]",       ""),),     # korkea
+    16: (("i",          ""),),     # vanhempi
+    17: (("[aeiouyäö]", ""),),     # vapaa
+    18: (("[aeiouyäö]", ""),),     # maa
+    19: (("ie", "e"), ("uo", "o"), ("yö", "ö")),  # suo
+    20: (("[aeiouyäö]", ""),),     # filee
+    23: (("i",          ""),),     # tiili
+    24: (("i",          ""),),     # uni
+    25: (("i",          ""),),     # toimi
+    26: (("i",          ""),),     # pieni
+    27: (("i",          ""),),     # käsi
+    28: (("i",          ""),),     # kynsi
+    29: (("i",          ""),),     # lapsi
+    30: (("i",          ""),),     # veitsi
+    31: (("i",          ""),),     # kaksi
+    32: (("nen",        "n"),),    # sisar, kymmenen
+    33: (("n",          "m"),),    # kytkin
+    34: (("n",          "m"),),    # onneton
+    35: (("n",          "m"),),    # lämmin
+    36: (("n",          "mm"),),   # sisin
+    37: (("n",          "mm"),),   # vasen
+    38: (("nen",        "s"),),    # nainen
+    39: (("s",          "ks"),),   # vastaus
+    40: (("s",          "ks"),),   # kalleus
+    41: (("s",          ""),),     # vieras
+    42: (("s",          "h"),),    # mies
+    43: (("t",          ""),),     # ohut
+    44: (("t",          ""),),     # kevät
+    45: (("s",          "ns"),),   # kahdeksas
+    46: (("t",          "ns"),),   # tuhat
+    47: (("[uy]t",      "e"),),    # kuollut
+}
 
 def _change_ending(word, decl, case, number):
     # change the ending of the word (before applying consonant gradation or
@@ -136,6 +177,8 @@ def _change_ending(word, decl, case, number):
         changes = _CHANGES_PAR_SG.get(decl, ())
     elif case in ("gen", "par", "ill") and number == "pl":
         changes = _CHANGES_GEN_PL.get(decl, ())
+    elif case == "ess" and number == "pl":
+        changes = _CHANGES_ESS_PL.get(decl, ())
     else:
         sys.exit("error")
 
@@ -179,21 +222,21 @@ _CONS_GRAD_STRENGTHEN = tuple((re.compile(f + "$"), t) for (f, t) in (
     # k
     ("([aeiouyäölnr])k(aa?|ee?)",               r"\1kk\2"),  # tikas
     ("([aeiouyäö])ng(aa?|ää?|ere?)",            r"\1nk\2"),  # penger
-    ("([hl])j(ee?|ime|in)",                     r"\1k\2"),   # hylje
-    ("([aeiouyäöh])(ene?|ime|in)",              r"\1k\2"),   # säen
+    ("([hl])j(ee?|ime?|in)",                    r"\1k\2"),   # hylje
+    ("([aeiouyäöh])(ene?|ime?|in)",             r"\1k\2"),   # säen
     ("([aeiouyäö]|ar)(aa|ee|ii)",               r"\1k\2"),   # ies
     ("(iu)([ae])",                              r"\1k\2"),   # kiuas
     ("(^[^aeiouyäö]?[aeiouyäö]|ai|var)([aei])", r"\1k\2"),   # ruis
     # p
-    ("([aeiouyäölm])p(aa?|ää?|ee?|i|ame|an)",         r"\1pp\2"),  # ape
+    ("([aeiouyäölm])p(aa?|ää?|ee?|i|ame?|an)",        r"\1pp\2"),  # ape
     ("([aeiouyäö])mm(aa?|ää?|ee?|yy?|ye|ele?|imä?)?", r"\1mp\2"),  # lämmin
-    ("([aeiouyäölr])v(aa?|ää?|ee?|ale?|ime|in)",      r"\1p\2"),   # taival
+    ("([aeiouyäölr])v(aa?|ää?|ee?|ale?|ime?|in)",     r"\1p\2"),   # taival
     # t
-    (r"([aeiouyäölnr])t(([aeiouyäö])\3?)",         r"\1tt\2"),  # altis
-    ("([aeiouyäöl])t(ime|oma|ömä|[ioö]n|[aä]re?)", r"\1tt\2"),  # heitin, tytär
-    (r"([lnr])\1(aa?|ää?|ee?|[ae][lr]e?|ime|in)",  r"\1t\2"),   # kallas
-    ("([aeiouyäöh])d(aa?|ee?|are?|[iu]me|[iu]n)",  r"\1t\2"),   # pidin
-    ("(u)(ere?)",                                  r"\1t\2"),   # auer
+    (r"([aeiouyäölnr])t(([aeiouyäö])\3?)",            r"\1tt\2"),  # altis
+    ("([aeiouyäöl])t(ime?|oma?|ömä?|[ioö]n|[aä]re?)", r"\1tt\2"),  # heitin
+    (r"([lnr])\1(aa?|ää?|ee?|[ae][lr]e?|ime?|in)",    r"\1t\2"),   # kallas
+    ("([aeiouyäöh])d(aa?|ee?|are?|[iu]me?|[iu]n)",    r"\1t\2"),   # pidin
+    ("(u)(ere?)",                                     r"\1t\2"),   # auer
 ))
 
 def _consonant_gradation(word, strengthen=False):
@@ -225,7 +268,7 @@ def _consonant_gradation_main(word, inflected, decl, consGrad, case, number):
         elif consGrad and decl in (32, 33, 34, 35, 41, 43, 48, 49):
             # ien, puin, onneton, lämmin, ruis, immyt, ape, askel
             return _consonant_gradation(inflected, True)
-    elif case in ("ess", "ill") and number == "sg":
+    elif case == "ess" or case == "ill" and number == "sg":
         if consGrad and decl in (32, 33, 34, 35, 41, 43, 48, 49) \
         or decl in (36, 37):
             # 36, 37 = sisin, vasen; see above for the rest
@@ -269,9 +312,11 @@ def _get_word_variant(word, inflected, decl, case, number):
     ):
         if case in ("gen", "par", "ill") and number == "pl":
             return "popp"
+        elif case == "ess" and number == "pl":
+            return "poppe"
         else:
             return "poppi"
-    elif decl in (4, 14) and case == "ill" and number == "pl":
+    elif decl in (4, 14) and case in ("ill", "ess") and number == "pl":
         # laatikko, solakka
         return _consonant_gradation(inflected)
     # an irregular variant
@@ -521,6 +566,23 @@ def _get_results_gen_pl(word, inflected, decl, consGrad, case):
                 infl2 = tuple(re.sub("t$", "n", i) for i in infl2)
             yield from (i + "ten" for i in infl2)
 
+def _get_results_ess_pl(word, inflected, decl):
+    # generate results for essive plural
+
+    aOrAuml = _get_a_or_auml(word, decl, "ess", "pl")
+
+    if decl == 11:  # omena
+        yield from (
+            re.sub("a$", "o", re.sub("ä$", "ö", i)) + "in" + a
+            for i in inflected for a in aOrAuml
+        )
+        yield from (
+            re.sub("[aä]$", "", i) + "in" + a
+            for i in inflected for a in aOrAuml
+        )
+    else:
+        yield from (f"{i}in{a}" for i in inflected for a in aOrAuml)
+
 # -----------------------------------------------------------------------------
 
 # supported grammatical cases, numbers and combinations of them
@@ -537,6 +599,7 @@ CASES_AND_NUMBERS = (
     ("par", "sg"),
     ("par", "pl"),
     ("ess", "sg"),
+    ("ess", "pl"),
     ("tra", "sg"),
     ("ine", "sg"),
     ("ela", "sg"),
@@ -602,21 +665,25 @@ def decline_noun_specific(word, decl, consGrad, case, number):
         yield from _get_results_par_sg(word, inflected, decl)
     elif case in ("gen", "par", "ill") and number == "pl":
         yield from _get_results_gen_pl(word, inflected, decl, consGrad, case)
+    elif case == "ess" and number == "pl":
+        yield from _get_results_ess_pl(word, inflected, decl)
     else:
         sys.exit("error")
 
 def decline_noun(word, case, number):
     """Get inflected forms of a Finnish noun. Autodetects declension(s) and
     whether consonant gradation applies.
-    word:     a noun in nominative singular (str)
-    case:     grammatical case (see CASES)
-    number:   grammatical number (see NUMBERS)
-    generate: inflected forms of word"""
+    word:   a noun in nominative singular (str)
+    case:   grammatical case (see CASES)
+    number: grammatical number (see NUMBERS)
+    return: set of inflected forms"""
 
     assert isinstance(word, str)
     assert case in CASES
     assert number in NUMBERS
     assert (case, number) in CASES_AND_NUMBERS
+
+    results = set()
 
     for decl in get_declensions(word):
         # errors in source data or optional consonant gradation
@@ -628,9 +695,11 @@ def decline_noun(word, case, number):
             consGrad = True
         else:
             consGrad = get_consonant_gradation(word, decl)
-        yield from set(
+        results.update(
             decline_noun_specific(word, decl, consGrad, case, number)
         )
+
+    return results
 
 def main():
     if len(sys.argv) == 2:

@@ -1,29 +1,9 @@
 """Test decline_noun.py by comparing the output to test files."""
 
 import os, sys
-import decline_noun
+from decline_noun import decline_noun, CASES_AND_NUMBERS
 
 _TEST_DIR = "decline_noun-tests"  # read test files from here
-
-# (case, number)
-_ALL_TESTS = (
-    ("nom", "sg"),
-    ("nom", "pl"),
-    ("gen", "sg"),
-    ("gen", "pl"),
-    ("par", "sg"),
-    ("par", "pl"),
-    ("ess", "sg"),
-    ("tra", "sg"),
-    ("ine", "sg"),
-    ("ela", "sg"),
-    ("ill", "sg"),
-    ("ill", "pl"),
-    ("ade", "sg"),
-    ("abl", "sg"),
-    ("all", "sg"),
-    ("abe", "sg"),
-)
 
 def _read_csv(case, number):
     # Read test cases from CSV file.
@@ -58,9 +38,7 @@ def run_test(case, number):
         words = _read_csv(case, number)
 
     for word in words:
-        result = tuple(sorted(set(
-            decline_noun.decline_noun(word, case, number)
-        )))
+        result = tuple(sorted(decline_noun(word, case, number)))
         if result != words[word]:
             sys.exit("{}{} of {}: expected {}, got {}".format(
                 case.title(),
@@ -75,12 +53,13 @@ def run_test(case, number):
 def run_all_tests(verbose=False):
     """Run tests for all cases and numbers."""
 
-    for (case, number) in _ALL_TESTS:
-        if verbose:
-            print(f"Running test: {case.title()}{number.title()}")
+    for (case, number) in CASES_AND_NUMBERS:
         wordCnt = run_test(case, number)
         if verbose:
-            print(f"Test passed ({wordCnt} words).")
+            print(
+                f"{case.title()}{number.title()} test passed "
+                f"({wordCnt:3} words)."
+            )
 
 def main():
     print("Testing decline_noun.py...")

@@ -1,0 +1,798 @@
+# more than one declension (all)
+# 1/21
+menu,menuina,menuinä
+# 3/8
+caddie,caddieina,caddieinä
+# 5/7
+alpi,alpeina,alpina
+helpi,helpeinä,helpinä
+kaihi,kaiheina,kaihina
+karhi,karheina,karhina
+kymi,kymeinä,kyminä
+lahti,lahteina,lahtina
+laki,lakeina,lakina
+palvi,palveina,palvina
+ripsi,ripseinä,ripsinä
+saksi,sakseina,saksina
+sini,sineinä,sininä
+vyyhti,vyyhteinä,vyyhtinä
+# 5/22
+sioux,sioux'ina,siouxeina
+# 5/23
+syli,syleinä,sylinä
+# 5/26
+kuori,kuoreina,kuorina
+viini,viineinä,viininä
+vuori,vuoreina,vuorina
+# 5/30
+peitsi,peitseinä,peitsinä
+# 5/39
+csárdás,csárdáksina,csárdáseina
+kuskus,kuskuksina,kuskuseina
+# 5/48
+ori,oreina,oriina
+# 7/29
+hapsi,hapsina
+uksi,uksina
+# 8/48
+siitake,siitakeina,siitakkeina
+# 9/10
+aneurysma,aneurysmina,aneurysmoina
+kysta,kystina,kystoina
+lyyra,lyyrina,lyyroina
+puola,puolina,puoloina
+# 10/11
+humala,humalina,humaloina
+# 12/15
+tanhua,tanhuina,tanhuoina
+# 24/27
+kuusi,kuusina
+# 39/40
+ahtaus,ahtauksina
+karvaus,karvauksina
+rosvous,rosvouksina
+siivous,siivouksina
+vakaus,vakauksina
+# 39/41
+havas,hapaina,havaksina
+kallas,kallaksina,kaltaina
+koiras,koiraina,koiraksina
+olas,olaina,olaksina
+pallas,pallaksina,paltaina
+tuomas,tuomaina,tuomaksina
+uros,uroina,uroksina
+# 39/45
+kymmenes,kymmeneksinä,kymmenensinä
+
+# homonyms distinguished by consonant gradation in some cases
+haiku,haikuina
+koto,kotoina
+lento,lentoina
+mutu,mutuina
+parka,parkoina
+raita,raitoina
+säkä,säkinä
+tutti,tutteina
+veto,vetoina
+vika,vikoina
+
+# optional consonant gradation (no change in meaning) in some cases
+bourette,bouretteina
+huti,huteina
+häive,häipeinä,häiveinä
+kuti,kuteina
+leuku,leukuina
+loota,lootina
+lunki,lunkeina
+mutu,mutuina
+myky,mykyinä
+mökä,mökinä
+nahka,nahkoina
+nuti,nuteina
+peti,peteinä
+pop,popeina,poppeina
+ringette,ringetteinä
+seljanka,seljankoina
+sinfonietta,sinfoniettoina
+tuhka,tuhkina
+uhka,uhkina
+vihko,vihkoina
+viive,viipeinä,viiveinä
+vinaigrette,vinaigretteina
+
+# declension 1
+# -VkV
+koko,kokoina
+kyky,kykyinä
+laku,lakuina
+ruoko,ruokoina
+suku,sukuina
+tiuku,tiukuina
+# -CkV
+hehku,hehkuina
+katku,katkuina
+kinkku,kinkkuina
+korko,korkoina
+palko,palkoina
+pilkku,pilkkuina
+sisko,siskoina
+sähkö,sähköinä
+sänky,sänkyinä
+tikku,tikkuina
+verkko,verkkoina
+# -VpV
+rapu,rapuina
+söpö,söpöinä
+# -CpV
+helppo,helppoina
+kirppu,kirppuina
+kumpu,kumpuina
+orpo,orpoina
+temppu,temppuina
+vappu,vappuina
+# -VtV
+auto,autoina
+etu,etuina
+# -CtV
+ehto,ehtoina
+lanttu,lanttuina
+murto,murtoina
+pelto,peltoina
+rento,rentoina
+torttu,torttuina
+tyttö,tyttöinä
+veltto,velttoina
+# -CV (not -kV, -pV, -tV)
+valo,valoina
+vilu,viluina
+äly,älyinä
+
+# declension 2
+palvelu,palveluina
+väestö,väestöinä
+
+# declension 3
+# -e
+collie,collieina
+oboe,oboeina
+# -O
+valtio,valtioina
+yhtiö,yhtiöinä
+
+# declension 4
+laatikko,laatikkoina,laatikoina
+älykkö,älykköinä,älyköinä
+
+# declension 5
+# -ki
+palkki,palkkeina
+rööki,röökeinä
+šakki,šakkeina
+vanki,vankeina
+vouti,vouteina
+# -pi
+alppi,alppeina
+hupi,hupeina
+korppi,korppeina
+pipi,pipeinä
+# -ti
+koti,koteina
+pelti,pelteinä
+risti,risteinä
+tunti,tunteina
+yrtti,yrtteinä
+# -C
+lux,luxeina
+tag,tageina
+wok,wokeina
+
+# declension 6
+# -i
+paperi,papereina
+saluki,salukeina
+# -C
+edam,edameina
+gallup,gallupeina
+lumen,lumeneina
+rial,rialeina
+weber,webereinä
+
+# declension 7
+# -VCV
+läpi,läpinä
+ovi,ovina
+piki,pikinä
+reki,rekinä
+tuki,tukina
+veli,veljinä
+# -CCV
+arki,arkina
+arpi,arpina
+hetki,hetkinä
+impi,impinä
+jälki,jälkinä
+järki,järkinä
+kaikki,kaikkina
+kaski,kaskina
+lehti,lehtinä
+olki,olkina
+onki,onkina
+soppi,soppina
+
+# declension 8
+jeppe,jeppeinä
+nalle,nalleina
+nukke,nukkeina
+ope,opeina
+ringette,ringetteinä
+
+# declension 9
+# -kV
+aika,aikoina
+eka,ekoina
+iskä,isköinä
+jalka,jalkoina
+jenkka,jenkkoina
+lanka,lankoina
+markka,markkoina
+nahka,nahkoina
+taika,taikoina
+takka,takkoina
+vaaka,vaakoina
+vehka,vehkoina
+velka,velkoina
+virka,virkoina
+# -pV
+heppa,heppoina
+kilpa,kilpoina
+kimppa,kimppoina
+tapa,tapoina
+# -tV
+kysyntä,kysyntöinä
+mitta,mittoina
+parta,partoina
+sata,satoina
+vihta,vihtoina
+# -CV (not -kV, -pV, -tV)
+kala,kaloina
+
+# declension 10
+# -C
+kahdeksan,kahdeksina
+seitsemän,seitseminä
+yhdeksän,yhdeksinä
+# -VV
+boa,boina
+# -kV
+härkä,härkinä
+ikä,ikinä
+kenkä,kenkinä
+nälkä,nälkinä
+oka,okina
+poika,poikina
+reikä,reikinä
+sukka,sukkina
+säkä,säkinä
+toka,tokina
+tuhka,tuhkina
+ylkä,ylkinä
+# -pV
+kompa,kompina
+noppa,noppina
+tupa,tupina
+turpa,turpina
+# -tV
+juhta,juhtina
+kulta,kultina
+mäntä,mäntinä
+rotta,rottina
+setä,setinä
+turta,turtina
+# -CV (not -kV, -pV, -tV)
+koira,koirina
+
+# declension 11
+judoka,judokina,judokoina
+käpälä,käpälinä,käpälöinä
+omena,omenina,omenoina
+
+# declension 12
+kulkija,kulkijoina
+ritilä,ritilöinä
+
+# declension 13
+katiska,katiskoina
+siivilä,siivilöinä
+
+# declension 14
+navetta,navetoina,navettoina
+solakka,solakkoina,solakoina
+ulappa,ulapoina,ulappoina
+ötökkä,ötökköinä,ötököinä
+
+# declension 15
+ainoa,ainoina
+korkea,korkeina
+äreä,äreinä
+
+# declension 16
+idempi,idempinä
+kumpi,kumpina
+vanhempi,vanhempina
+
+# declension 17
+ehtoo,ehtoina
+hynttyy,hynttyinä
+takuu,takuina
+vapaa,vapaina
+
+# declension 18 (note: for tau, tiu, Kotus forbids plurals other than nom.)
+jää,jäinä
+jöö,jöinä
+maa,maina
+rokokoo,rokokoina
+suu,suina
+syy,syinä
+#tau
+tee,teinä
+tii,tiinä
+#tiu
+
+# declension 19
+suo,soina
+tie,teinä
+yö,öinä
+
+# declension 20
+filee,fileinä
+miljöö,miljöinä
+nugaa,nugaina
+raguu,raguina
+revyy,revyinä
+trikoo,trikoina
+
+# declension 21 (all except "kungfu", "taxfree")
+brasserie,brasserieina
+brie,brieinä
+bébé,bébéinä
+cha-cha-cha,cha-cha-chaina
+clou,clouina
+coupé,coupéina
+cowboy,cowboyina
+fondue,fondueina,fondueinä
+gay,gayina,gayinä
+gray,grayina,grayinä
+jersey,jerseyinä
+jockey,jockeyina,jockeyinä
+moiré,moiréina
+playboy,playboyina
+reggae,reggaeina,reggaeinä
+rosé,roséina
+speedway,speedwayina,speedwayinä
+spray,sprayina,sprayinä
+
+# declension 22 (all)
+beignet,beignet'inä
+bordeaux,bordeaux'ina
+bouquet,bouquet'ina
+buffet,buffet'ina,buffet'inä
+gourmet,gourmet'ina
+know-how,know-how'ina
+nougat,nougat'ina
+parfait,parfait'ina
+passepartout,passepartout'ina
+port salut,port salut'ina,port salut'inä
+ragoût,ragoût'ina
+show,show'ina
+tournedos,tournedos'ina
+
+# declension 23
+lohi,lohina
+moni,monina
+tiili,tiilinä
+
+# declension 24
+hiili,hiilinä
+hiiri,hiirinä
+kusi,kusina
+meri,merinä
+ruuhi,ruuhina
+uni,unina
+
+# declension 25 (all)
+liemi,lieminä
+loimi,loimina
+lumi,lumina
+luomi,luomina
+niemi,nieminä
+taimi,taimina
+toimi,toimina
+tuomi,tuomina
+
+# declension 26
+jousi,jousina
+pieni,pieninä
+puoli,puolina
+veri,verinä
+ääri,äärinä
+
+# declension 27
+käsi,käsinä
+uusi,uusina
+
+# declension 28 (all)
+hirsi,hirsinä
+jälsi,jälsinä
+kansi,kansina
+karsi,karsina
+kirsi,kirsinä
+korsi,korsina
+kynsi,kynsinä
+länsi,länsinä
+orsi,orsina
+parsi,parsina
+ponsi,ponsina
+pursi,pursina
+varsi,varsina
+virsi,virsinä
+
+# declension 29 (all)
+hapsi,hapsina
+lapsi,lapsina
+uksi,uksina
+
+# declension 30 (all)
+veitsi,veitsinä
+
+# declension 31 (all)
+haaksi,haaksina
+kaksi,kaksina
+yksi,yksinä
+
+# declension 32
+# -l
+nivel,nivelinä
+# -n
+ahven,ahvenina
+höyhen,höyheninä
+ien,ikeninä
+jäsen,jäseninä
+kymmenen,kymmeninä
+siemen,siemeninä
+# -r
+jumalatar,jumalattarina
+kaunotar,kaunottarina
+onnetar,onnettarina
+papitar,papittarina
+sisar,sisarina
+syöjätär,syöjättärinä
+tytär,tyttärinä
+
+# declension 33
+# -Vin
+avain,avaimina
+avoin,avoimina
+eläin,eläiminä
+istuin,istuimina
+näin,näkiminä
+puin,pukimina
+# -din
+ydin,ytiminä
+# -hin
+jauhin,jauhimina
+pyyhin,pyyhkiminä
+# -jin
+suljin,sulkimina
+# -kin
+kytkin,kytkiminä
+# -lin
+elin,eliminä
+sivellin,siveltiminä
+# -min
+vihmin,vihmiminä
+# -nin
+väännin,vääntiminä
+# -rin
+aterin,aterimina
+avarrin,avartimina
+# -sin
+pesin,pesiminä
+# -tin
+heitin,heittiminä
+poltin,polttimina
+uistin,uistimina
+# -vin
+kaavin,kaapimina
+kaivin,kaivimina
+kalvin,kalvimina
+raavin,raapimina
+survin,survimina
+särvin,särpiminä
+# -Vn (not -in)
+hapan,happamina
+laidun,laitumina
+morsian,morsiamina
+sydän,sydäminä
+
+# declension 34
+# -CtOn
+alaston,alastomina
+# -VtOn
+ajaton,ajattomina
+avuton,avuttomina
+eloton,elottomina
+laiton,laittomina
+onneton,onnettomina
+päätön,päättöminä
+syytön,syyttöminä
+yötön,yöttöminä
+
+# declension 35 (all)
+lämmin,lämpiminä
+
+# declension 36
+alin,alimpina
+sisin,sisimpinä
+uloin,uloimpina
+
+# declension 37 (all)
+vasen,vasempina
+
+# declension 38
+nainen,naisina
+osanen,osasina
+öinen,öisinä
+
+# declension 39
+# -VUs
+hius,hiuksina
+kiveys,kiveyksinä
+makuus,makuuksina
+putous,putouksina
+sysäys,sysäyksinä
+vastaus,vastauksina
+# -VVs (not -VUs)
+hauis,hauiksina
+iskias,iskiaksina
+rabies,rabieksina
+taos,taoksina
+teos,teoksina
+# -CVs
+aines,aineksina
+emäs,emäksinä
+lihas,lihaksina
+rötös,rötöksinä
+varis,variksina
+vedos,vedoksina
+virus,viruksina
+yritys,yrityksinä
+
+# declension 40
+kalleus,kalleuksina
+uutuus,uutuuksina
+äitiys,äitiyksinä
+äreys,äreyksinä
+
+# declension 41
+# -Vs (not -As, -is)
+ies,ikeinä
+kirves,kirveinä
+ryntys,rynttyinä
+vantus,vanttuina
+äes,äkeinä
+# -VAs, -Vis
+autuas,autuaina
+kiuas,kiukaina
+oas,okaina
+ruis,rukiina
+äveriäs,äveriäinä
+# -dAs, -dis
+ahdas,ahtaina
+hidas,hitaina
+# -gAs, -gis
+kangas,kankaina
+köngäs,könkäinä
+# -hAs, -his
+keihäs,keihäinä
+# -jAs, -jis
+uljas,uljaina
+# -kAs, -kis
+kirkas,kirkkaina
+rakas,rakkaina
+raskas,raskaina
+sitkas,sitkaina
+vilkas,vilkkaina
+# -lAs, -lis
+allas,altaina
+aulis,auliina
+kallis,kalliina
+kaplas,kaplaina
+mallas,maltaina
+valas,valaina
+# -mAs, -mis
+armas,armaina
+hammas,hampaina
+ruumis,ruumiina
+valmis,valmiina
+vehmas,vehmaina
+# -nAs, -nis
+ahnas,ahnaina
+kaunis,kauniina
+kinnas,kintaina
+kunnas,kunnaina
+oinas,oinaina
+rynnäs,ryntäinä
+# -pAs, -pis
+opas,oppaina
+rypäs,ryppäinä
+valpas,valppaina
+# -rAs, -ris
+eräs,eräinä
+katras,katraina
+kauris,kauriina
+oras,oraina
+paras,parhaina
+varas,varkaina
+varras,vartaina
+# -sAs, -sis
+pensas,pensaina
+porsas,porsaina
+viisas,viisaina
+# -tAs, -tis
+altis,alttiina
+mätäs,mättäinä
+ratas,rattaina
+raitis,raittiina
+rastas,rastaina
+# -vAs, -vis
+eväs,eväinä
+karvas,karvaina
+rahvas,rahvaina
+ryväs,rypäinä
+seiväs,seipäinä
+tiivis,tiiviinä
+varvas,varpaina
+ylväs,ylväinä
+
+# declension 42 (all)
+mies,miehinä
+
+# declension 43
+immyt,impyinä
+lyhyt,lyhyinä
+ohut,ohuina
+
+# declension 44 (all)
+kevät,keväinä
+
+# declension 45
+kahdeksas,kahdeksansina
+neljäs,neljänsinä
+viides,viidensinä
+
+# declension 46 (all)
+tuhat,tuhansina
+
+# declension 47
+jäänyt,jääneinä
+kuollut,kuolleina
+tehnyt,tehneinä
+
+# declension 48
+# -V (not -e)
+kiiru,kiiruina
+# -Ve
+aie,aikeina
+alue,alueina
+hiue,hiukeina
+koe,kokeina
+lippue,lippueina
+pesue,pesueina
+pue,pukeina
+säe,säkeinä
+tae,takeina
+yhtye,yhtyeinä
+# -de
+sade,sateina
+suhde,suhteina
+# -he
+aihe,aiheina
+valhe,valheina
+venhe,venheinä
+virhe,virheinä
+# -je
+hylje,hylkeinä
+kirje,kirjeinä
+koje,kojeina
+lahje,lahkeina
+sulje,sulkeina
+# -ke
+hanke,hankkeina
+jatke,jatkeina
+leike,leikkeinä
+ryske,ryskeinä
+sähke,sähkeinä
+virke,virkkeinä
+välke,välkkeinä
+# -le
+helle,helteinä
+kahle,kahleina
+säle,säleinä
+tisle,tisleinä
+# -me
+amme,ammeina
+hame,hameina
+hurme,hurmeina
+ihme,ihmeinä
+ilme,ilmeinä
+lumme,lumpeina
+# -ne
+ahne,ahneina
+aine,aineina
+herne,herneinä
+tunne,tunteina
+# -pe
+ape,appeina
+kampe,kamppeina
+# -re
+aarre,aarteina
+näre,näreinä
+# -se
+ase,aseina
+hilse,hilseinä
+katse,katseina
+# -te
+aate,aatteina
+este,esteinä
+hynte,hyntteinä
+korte,kortteina
+polte,poltteina
+# -ve
+aave,aaveina
+lieve,liepeinä
+
+# declension 49 (all)
+# -e
+askare,askareina
+askele,askeleina
+autere,autereina
+hepene,hepeneinä
+huhmare,huhmareina
+kantele,kanteleina
+kintere,kintereinä
+kyynele,kyyneleinä
+mantere,mantereina
+murene,mureneina
+ompele,ompeleina
+penkere,penkereinä
+petkele,petkeleinä
+pientare,pientareina
+saivare,saivareina
+seppele,seppeleinä
+säkene,säkeneinä
+taipale,taipaleina
+tantere,tantereina
+utare,utareina
+vempele,vempeleinä
+# -C
+askar,askarina
+askel,askelina
+auer,auterina
+huhmar,huhmarina
+kannel,kantelina
+kinner,kinterinä
+kyynel,kyynelinä
+manner,manterina
+muren,murenina
+ommel,ompelina
+penger,penkerinä
+petkel,petkelinä
+piennar,pientarina
+saivar,saivarina
+sammal,sammalina
+seppel,seppelinä
+säen,säkeninä
+taival,taipalina
+tanner,tanterina
+udar,utarina
+vemmel,vempelinä

@@ -2,28 +2,8 @@
 # are incomplete). Slow.
 
 import collections, itertools, sys
-from decline_noun import decline_noun
+from decline_noun import decline_noun, CASES_AND_NUMBERS
 from noundecl import get_declensions
-
-# (case, number)
-CASES = (
-    ("nom", "sg"),
-    ("nom", "pl"),
-    ("gen", "sg"),
-    ("gen", "pl"),
-    ("par", "sg"),
-    ("par", "pl"),
-    ("ess", "sg"),
-    ("tra", "sg"),
-    ("ine", "sg"),
-    ("ela", "sg"),
-    ("ill", "sg"),
-    ("ill", "pl"),
-    ("ade", "sg"),
-    ("abl", "sg"),
-    ("all", "sg"),
-    ("abe", "sg"),
-)
 
 def status_msg(msg):
     # print a status message to stderr (won't be redirected to output file)
@@ -41,7 +21,7 @@ def group_lemmas_by_inflected(lemmas):
     # return: {inflected: {lemma, ...}, ...}
 
     lemmasByInflected = {}
-    for (case, number) in CASES:
+    for (case, number) in CASES_AND_NUMBERS:
         status_msg(f"Generating forms: {case.title()}{number.title()}...")
         for lemma in lemmas:
             for inflected in decline_noun(lemma, case, number):
