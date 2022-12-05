@@ -204,8 +204,84 @@ def _consonant_gradation(word, strengthen=False):
     for (reFrom, reTo) in regexes:
         if re.search(reFrom, word) is not None:
             return re.sub(reFrom, reTo, word)
-    #sys.exit("No rule found: " + word + " " + str(strengthen))
     return word
+
+def _consonant_gradation_main(word, inflected, decl, consGrad, case, number):
+    # apply consonant gradation to the word (before appending case/number
+    # endings)
+
+    if (case, number) in _CASES_LIKE_GEN_SG:
+        if consGrad and decl in (1, 4, 5, 7, 8, 9, 10, 14, 16) \
+        or decl in (27, 28, 31, 40, 45, 46):
+            # apu, älykkö, koti, hiki, nukke, sika, itä, ötökkä, kumpi;
+            # käsi, kynsi, kaksi, kalleus, kahdeksas, tuhat
+            if decl == 5 and word == "pop":
+                return inflected
+            elif decl == 9 and word == "aika":
+                return "aja"
+            elif decl == 10 and word == "poika":
+                return "poja"
+            return _consonant_gradation(inflected)
+        elif consGrad and decl in (32, 33, 34, 35, 41, 43, 48, 49):
+            # ien, puin, onneton, lämmin, ruis, immyt, ape, askel
+            return _consonant_gradation(inflected, True)
+    elif case in ("ess", "ill") and number == "sg":
+        if consGrad and decl in (32, 33, 34, 35, 41, 43, 48, 49) \
+        or decl in (36, 37):
+            # 36, 37 = sisin, vasen; see above for the rest
+            return _consonant_gradation(inflected, True)
+    elif case in ("gen", "par", "ill") and number == "pl":
+        if consGrad and decl == 35:  # lämmin
+            return _consonant_gradation(inflected, True)
+
+    return inflected  # no consonant gradation
+
+# -----------------------------------------------------------------------------
+
+# words with optional consonant gradation in _CASES_LIKE_GEN_SG
+_OPTIONAL_CONS_GRAD_GEN_SG = frozenset((
+    "bourette",
+    "haiku", "huti",
+    "koto", "kuti",
+    "lento", "leuku", "loota", "lunki",
+    "mutu", "myky", "mökä",
+    "nahka", "nuti",
+    "parka", "peti",
+    "raita", "ringette",
+    "seljanka", "sinfonietta", "säkä",
+    "tuhka", "tutti",
+    "uhka",
+    "veto", "vihko", "vika", "vinaigrette",
+))
+
+def _get_word_variant(word, inflected, decl, case, number):
+    # return a variant of inflected word or None
+
+    # a variant with/without consonant gradation
+    if (case, number) in _CASES_LIKE_GEN_SG \
+    and word in _OPTIONAL_CONS_GRAD_GEN_SG:
+        return word
+    elif word in ("häive", "viive"):
+        if not (case == "par" and number == "sg"):
+            return _consonant_gradation(inflected, True)
+    elif word == "pop" and (
+        case in ("ess", "par", "ill") or case == "gen" and number == "pl"
+    ):
+        if case in ("gen", "par", "ill") and number == "pl":
+            return "popp"
+        else:
+            return "poppi"
+    elif decl in (4, 14) and case == "ill" and number == "pl":
+        # laatikko, solakka
+        return _consonant_gradation(inflected)
+    # an irregular variant
+    elif word == "hapan" and (
+        (case, number) in _CASES_LIKE_GEN_SG \
+        or case in ("ess", "ill") and number == "sg"
+    ):
+        return "happama"
+
+    return None  # no variant
 
 # -----------------------------------------------------------------------------
 
@@ -472,22 +548,6 @@ CASES_AND_NUMBERS = (
     ("abe", "sg"),
 )
 
-# words with optional consonant gradation in _CASES_LIKE_GEN_SG
-_OPTIONAL_CONS_GRAD_GEN_SG = frozenset((
-    "bourette",
-    "haiku", "huti",
-    "koto", "kuti",
-    "lento", "leuku", "loota", "lunki",
-    "mutu", "myky", "mökä",
-    "nahka", "nuti",
-    "parka", "peti",
-    "raita", "ringette",
-    "seljanka", "sinfonietta", "säkä",
-    "tuhka", "tutti",
-    "uhka",
-    "veto", "vihko", "vika", "vinaigrette",
-))
-
 def decline_noun_specific(word, decl, consGrad, case, number):
     """Get inflected forms of a Finnish noun.
     word:     a noun in nominative singular (str)
@@ -510,60 +570,19 @@ def decline_noun_specific(word, decl, consGrad, case, number):
         return
 
     # change ending (without adding case/number endings)
-    inflected = [_change_ending(word, decl, case, number)]
+    inflected = _change_ending(word, decl, case, number)
 
     # apply consonant gradation
-    if (case, number) in _CASES_LIKE_GEN_SG and (
-        consGrad and decl <= 16 and not word == "pop"
-        or decl in (27, 28, 31, 40, 45, 46)
-    ):
-        # strong to weak
-        if word == "aika":
-            inflected = ["aja"]
-        elif word == "poika":
-            inflected = ["poja"]
-        else:
-            inflected = [_consonant_gradation(inflected[0])]
-    elif (
-        consGrad and decl >= 32 and (
-            (
-                (case, number) in _CASES_LIKE_GEN_SG
-                or case in ("ess", "ill") and number == "sg"
-            )
-            or case in ("gen", "par", "ill") and number == "pl" and decl == 35
-        )
-        or decl in (36, 37) and case in ("ess", "ill") and number == "sg"
-    ):
-        # weak to strong
-        inflected = [_consonant_gradation(inflected[0], True)]
+    inflected = _consonant_gradation_main(
+        word, inflected, decl, consGrad, case, number
+    )
 
-    # add variant with/without consonant gradation
-    if (case, number) in _CASES_LIKE_GEN_SG \
-    and word in _OPTIONAL_CONS_GRAD_GEN_SG:
-        inflected.append(word)
-    elif word in ("häive", "viive"):
-        if case in ("gen", "par", "ill") and number == "pl":
-            inflected.append(re.sub("ve$", "pe", word))
-        elif not (case == "par" and number == "sg"):
-            inflected.append(word + "e")
-    elif word == "pop" and (
-        case in ("ess", "par", "ill") or case == "gen" and number == "pl"
-    ):
-        if case in ("gen", "par", "ill") and number == "pl":
-            inflected.extend([i + i[-1] for i in inflected])
-        else:
-            inflected.extend(
-                [_consonant_gradation(i, True) for i in inflected]
-            )
-    elif decl in (4, 14) and case == "ill" and number == "pl":
-        # laatikko, solakka
-        inflected.extend([_consonant_gradation(i) for i in inflected])
-    # add irregular variant
-    elif word == "hapan" and (
-        (case, number) in _CASES_LIKE_GEN_SG \
-        or case in ("ess", "ill") and number == "sg"
-    ):
-        inflected.extend([re.sub("e$", "a", i) for i in inflected])
+    # add variant if there's one
+    variant = _get_word_variant(word, inflected, decl, case, number)
+    inflected = [inflected]
+    if variant is not None:
+        inflected.append(variant)
+    del variant
 
     # append apostrophe
     if decl == 22:
@@ -600,8 +619,9 @@ def decline_noun(word, case, number):
     assert (case, number) in CASES_AND_NUMBERS
 
     for decl in get_declensions(word):
-        # errors in source data
-        if word in ("alpi", "helpi") and decl == 5 \
+        # errors in source data or optional consonant gradation
+        if word in ("häive", "viive") \
+        or word in ("alpi", "helpi") and decl == 5 \
         or word == "siitake" and decl == 8:
             consGrad = False
         elif word in ("auer", "hynte", "näin", "pue", "ryntys"):
