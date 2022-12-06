@@ -26,17 +26,7 @@ def group_lemmas_by_inflected(lemmas):
         status_msg(f"Generating forms: {case.title()}{number.title()}...")
         for lemma in lemmas:
             for decl in get_declensions(lemma):
-                # errors in source data, or optional consonant gradation
-                # (TODO: fix this in get_consonant_gradation())
-                if lemma in ("häive", "viive") \
-                or lemma in ("alpi", "helpi") and decl == 5 \
-                or lemma == "siitake" and decl == 8:
-                    consGrad = False
-                elif lemma in ("auer", "hynte", "näin", "pue", "ryntys"):
-                    consGrad = True
-                else:
-                    consGrad = get_consonant_gradation(lemma, decl)
-                #
+                consGrad = get_consonant_gradation(lemma, decl)
                 for inflected in (
                     decline_noun_specific(lemma, decl, consGrad, case, number)
                 ):

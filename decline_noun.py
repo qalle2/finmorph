@@ -759,13 +759,8 @@ def decline_noun(word, case, number):
     results = set()
 
     for decl in get_declensions(word):
-        # errors in source data, or optional consonant gradation
-        if word in ("häive", "viive") \
-        or word in ("alpi", "helpi") and decl == 5 \
-        or word == "siitake" and decl == 8:
-            consGrad = False
-        elif word in ("auer", "hynte", "näin", "pue", "ryntys"):
-            consGrad = True
+        if word in ("häive", "viive"):
+            consGrad = False  # optional consonant gradation
         else:
             consGrad = get_consonant_gradation(word, decl)
         results.update(

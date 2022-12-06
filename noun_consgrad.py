@@ -1,146 +1,204 @@
 """Determine whether consonant gradation applies to a Finnish noun."""
 
 import re, sys
-import countsyll, noundecl
+from noundecl import get_declensions, DECLENSION_DESCRIPTIONS
 
-# TODO: print whether NomSg has weak or strong grade
-
-# exceptions to rules - consonant gradation does not apply to these nouns;
-# each item: (declension, noun); sort first by declension, then by noun
-EXCEPTIONS_NO = {
-    (1, "ampu"), (1, "auto"), (1, "bantu"), (1, "city"), (1, "deeku"),
-    (1, "doku"), (1, "foto"), (1, "hutu"), (1, "hötö"), (1, "kurko"),
-    (1, "laku"), (1, "lito"), (1, "moto"), (1, "naku"), (1, "näpy"),
-    (1, "party"), (1, "patu"), (1, "pipo"), (1, "pirtu"), (1, "platy"),
-    (1, "plootu"), (1, "proto"), (1, "royalty"), (1, "rubato"), (1, "saku"),
-    (1, "šinto"), (1, "sotu"), (1, "sökö"), (1, "teku"), (1, "tempo"),
-    (1, "tipu"), (1, "toto"), (1, "vibrato"), (1, "zloty"),
-
-    (5, "graffiti"), (5, "hanti"), (5, "jämtti"), (5, "liti"), (5, "luti"),
-    (5, "pieti"), (5, "preteriti"), (5, "satikuti"), (5, "toti"),
-    (5, "vapiti"),
-
-    (8, "raclette"),
-
-    (9, "akvatinta"), (9, "basilika"), (9, "data"), (9, "delta"),
-    (9, "emerita"), (9, "inka"), (9, "pampa"), (9, "prostata"), (9, "taata"),
-    (9, "tanka"), (9, "toccata"),
-
-    (10, "dorka"), (10, "jytä"), (10, "meikä"), (10, "moka"), (10, "nuuka"),
-    (10, "perestroika"), (10, "poka"), (10, "pökä"), (10, "toka"),
-
-    (33, "kaivin"),
-
-    (41, "kallis"),
-
-    (48, "aave"), (48, "alje"), (48, "haave"), (48, "harre"), (48, "hie"),
-    (48, "hynte"), (48, "hyve"), (48, "ohje"), (48, "ruhje"), (48, "rynte"),
-    (48, "rääpe"), (48, "toive"), (48, "vihje"), (48, "väive"),
+# exceptions to rules;
+# (declension, noun): does_consonant_gradation_apply
+_EXCEPTIONS = {
+    (1, "allegretto"): False,
+    (1, "ampu"): False,
+    (1, "apartamento"): False,
+    (1, "auto"): False,
+    (1, "bantu"): False,
+    (1, "city"): False,
+    (1, "deeku"): False,
+    (1, "doku"): False,
+    (1, "esperanto"): False,
+    (1, "foto"): False,
+    (1, "hötö"): False,
+    (1, "hutu"): False,
+    (1, "kopu"): True,
+    (1, "kupo"): True,
+    (1, "kupu"): True,
+    (1, "kurko"): False,
+    (1, "laku"): False,
+    (1, "lito"): False,
+    (1, "mezzotinto"): False,
+    (1, "moderato"): False,
+    (1, "moto"): False,
+    (1, "naku"): False,
+    (1, "näpy"): False,
+    (1, "party"): False,
+    (1, "patu"): False,
+    (1, "pipo"): False,
+    (1, "pirtu"): False,
+    (1, "pizzicato"): False,
+    (1, "platy"): False,
+    (1, "plootu"): False,
+    (1, "proto"): False,
+    (1, "ropo"): True,
+    (1, "royalty"): False,
+    (1, "rubato"): False,
+    (1, "saku"): False,
+    (1, "šinto"): False,
+    (1, "sökö"): False,
+    (1, "sopu"): True,
+    (1, "sotu"): False,
+    (1, "teku"): False,
+    (1, "telefoto"): False,
+    (1, "tempo"): False,
+    (1, "tipu"): False,
+    (1, "toto"): False,
+    (1, "vibrato"): False,
+    (1, "vihko"): True,
+    (1, "zloty"): False,
+    (5, "alpi"): False,
+    (5, "graffiti"): False,
+    (5, "hanti"): False,
+    (5, "helpi"): False,
+    (5, "hupi"): True,
+    (5, "jämtti"): False,
+    (5, "laki"): True,
+    (5, "liti"): False,
+    (5, "luti"): False,
+    (5, "pelti"): True,
+    (5, "pieti"): False,
+    (5, "pop"): True,
+    (5, "preteriti"): False,
+    (5, "raati"): True,
+    (5, "satikuti"): False,
+    (5, "toti"): False,
+    (5, "vapiti"): False,
+    (5, "vati"): True,
+    (8, "raclette"): False,
+    (9, "akvatinta"): False,
+    (9, "basilika"): False,
+    (9, "data"): False,
+    (9, "delta"): False,
+    (9, "emerita"): False,
+    (9, "hieta"): True,
+    (9, "inka"): False,
+    (9, "lieka"): True,
+    (9, "nahka"): True,
+    (9, "pampa"): False,
+    (9, "prostata"): False,
+    (9, "taata"): False,
+    (9, "tanka"): False,
+    (9, "toccata"): False,
+    (10, "dorka"): False,
+    (10, "jytä"): False,
+    (10, "meikä"): False,
+    (10, "moka"): False,
+    (10, "nuuka"): False,
+    (10, "perestroika"): False,
+    (10, "poka"): False,
+    (10, "pökä"): False,
+    (10, "toka"): False,
+    (10, "tuhka"): True,
+    (10, "uhka"): True,
+    (28, "jälsi"): True,
+    (32, "ien"): True,
+    (33, "hapan"): True,
+    (33, "kaivin"): False,
+    (33, "kerroin"): True,
+    (33, "laidun"): True,
+    (33, "näin"): True,
+    (33, "puin"): True,
+    (33, "pyyhin"): True,
+    (33, "särvin"): True,
+    (35, "lämmin"): True,
+    (39, "havas"): True,
+    (39, "kallas"): True,
+    (39, "pallas"): True,
+    (41, "äes"): True,
+    (41, "havas"): True,
+    (41, "ies"): True,
+    (41, "kallis"): False,
+    (41, "kinnas"): True,
+    (41, "kiuas"): True,
+    (41, "oas"): True,
+    (41, "ruis"): True,
+    (41, "rynnäs"): True,
+    (41, "ryntys"): True,
+    (41, "ryväs"): True,
+    (41, "seiväs"): True,
+    (41, "vannas"): True,
+    (41, "varas"): True,
+    (41, "varvas"): True,
+    (43, "immyt"): True,
+    (48, "aave"): False,
+    (48, "alje"): False,
+    (48, "haave"): False,
+    (48, "harre"): False,
+    (48, "helve"): True,
+    (48, "hie"): False,
+    (48, "hiue"): True,
+    (48, "hyve"): False,
+    (48, "karve"): True,
+    (48, "lumme"): True,
+    (48, "ohje"): False,
+    (48, "pue"): True,
+    (48, "pyyhe"): True,
+    (48, "rääpe"): False,
+    (48, "ruhje"): False,
+    (48, "rynte"): False,
+    (48, "tarve"): True,
+    (48, "toive"): False,
+    (48, "turve"): True,
+    (48, "väive"): False,
+    (48, "vihje"): False,
+    (49, "auer"): True,
+    (49, "kannel"): True,
+    (49, "säen"): True,
 }
 
-# exceptions to rules - consonant gradation applies to these nouns;
-# each item: (declension, noun); sort first by declension, then by noun
-EXCEPTIONS_YES = {
-    (1, "kopu"), (1, "kupo"), (1, "kupu"), (1, "ropo"), (1, "sopu"),
-    (1, "vihko"),
-
-    (5, "hupi"), (5, "laki"), (5, "pelti"), (5, "pop"), (5, "raati"),
-    (5, "vati"),
-
-    (8, "siitake"),
-
-    (9, "hieta"), (9, "lieka"), (9, "nahka"),
-
-    (10, "tuhka"), (10, "uhka"),
-
-    (28, "jälsi"),
-
-    (32, "ien"),
-
-    (33, "hapan"), (33, "kerroin"), (33, "laidun"), (33, "puin"),
-    (33, "pyyhin"), (33, "särvin"),
-
-    (35, "lämmin"),
-
-    (39, "havas"), (39, "kallas"), (39, "pallas"),
-
-    (41, "havas"), (41, "ies"), (41, "kinnas"), (41, "kiuas"), (41, "oas"),
-    (41, "ruis"), (41, "rynnäs"), (41, "ryväs"), (41, "seiväs"),
-    (41, "vannas"), (41, "varas"), (41, "varvas"), (41, "äes"),
-
-    (43, "immyt"),
-
-    (48, "helve"), (48, "hiue"), (48, "karve"), (48, "lumme"), (48, "pyyhe"),
-    (48, "tarve"), (48, "turve"),
-
-    (49, "kannel"), (49, "säen"),
-}
-
-# consonant gradation applies to a noun if the noun and its declension match
-# any of these rules;
-# that is, the order of the rules doesn't matter;
-# each rule: (declension, regex)
-RULES = (
-    # -VV
-    (48, r"[aäio]e$"),
-
-    # -CV (many false positives in decl. 1)
-    (1,  r"( [aeiouyäöklnr]k | [aäeilmpr]p | [aeiouyäöhlnrt]t )[oöuy]$"),
-    (4,  r"kk[oö]$"),
-    (5,  r"( [äey][kp] | [eiouyäö]t | [kn]k | [lp]p | [hnt]t )i$"),
-    (7,  r"( [aeiouyäöklnr]k | p | t )i$"),
-    (8,  r"( kk | pp | tt )e$"),
-    (9,  r"( [aiouyäölr][kpt] | [kn]k | [mp]p | [hnt]t )[aä]$"),
-    (10, r"( [aeiouyäölr][kpt] | [kn]k | [mp]p | [hnt]t )[aä]$"),
-    (14, r"( kk | pp | tt )[aä]$"),
-    (16, r"mpi$"),
-    (48, r"[aeiouyäö][dkptv]e$"),
-    (48, r"( [lnr][kt] | h[dj] | l[jl] | mp | nn | rr )e$"),
-
-    # -C
-    (32, r"[nt][aä]r$"),
-    (33, r"( [aeiouyäö][dtv] | hd | lj | ll | mm | nn | rr | lt )in$$"),
-    (34, r"[aeiouyäö]t[oö]n$"),
-    (41, r"( [aeiouyäölr][dkpt] | hd | ng | ll | mm | rr | nt )[aäiu]s$"),
-    (49, r"( (va|mme)l | [dgn][ae]r )$"),
-)
+# consonant gradation applies to a noun if it matches the regex of its
+# declension; if the declension is not listed, consonant gradation does not
+# apply; key = declension, value = compiled regex
+_RULES = dict((d, re.compile(r, re.VERBOSE)) for (d, r) in (
+    (1,  "( [aeiouyäöklnr]k | [aäeilmpr]p | [aeiouyäöhlnrt]t )[oöuy]$"),
+    (4,  "kk[oö]$"),
+    (5,  "( [äey][kp] | [eiouyäö]t | [kn]k | [lp]p | [hnt]t )i$"),
+    (7,  "( [aeiouyäöklnr]k | p | t )i$"),
+    (8,  "( kk | pp | tt )e$"),
+    (9,  "( [aiouyäölr][kpt] | [kn]k | [mp]p | [hnt]t )[aä]$"),
+    (10, "( [aeiouyäölr][kpt] | [kn]k | [mp]p | [hnt]t )[aä]$"),
+    (14, "( kk | pp | tt )[aä]$"),
+    (16, "mpi$"),
+    (32, "[nt][aä]r$"),
+    (33, "( [aeiouyäö][dtv] | hd | lj | ll | mm | nn | rr | lt )in$$"),
+    (34, "[aeiouyäö]t[oö]n$"),
+    (41, "( [aeiouyäölr][dkpt] | hd | ng | ll | mm | rr | nt )[aäiu]s$"),
+    (48, """
+        ( [aäio]e$ )
+        | ( [aeiouyäö][dkptv]e$ )
+        | ( ( [lnr][kt] | h[dj] | l[jl] | mp | nn | rr )e$ )
+    """),
+    (49, "( (va|mme)l | [dgn][ae]r )$"),
+))
 
 def get_consonant_gradation(noun, decl, useExceptions=True):
-    """Does consonant gradation apply to the noun (str) in the specified
-    declension (int)?
-    return: bool"""
+    """Returns whether consonant gradation applies to a Finnish noun in the
+    specified declension.
+    noun:          str
+    decl:          Kotus declension (1-49)
+    useExceptions: bool; should be True except for testing purposes
+    return:        does consonant gradation apply? (bool)"""
 
-    # TODO: cons. grad of "siitake" should depend on declension; parse XML
-    # better
-
-    if useExceptions:
-        if (decl, noun) in EXCEPTIONS_NO:
-            return False
-        if (decl, noun) in EXCEPTIONS_YES:
-            return True
-
-    # a rule that depends on the number of syllables
-    if decl == 1 and noun.endswith("to") \
-    and countsyll.count_syllables(noun) >= 4:
+    if useExceptions and (decl, noun) in _EXCEPTIONS:
+        return _EXCEPTIONS[(decl, noun)]
+    if decl not in _RULES:
         return False
-
-    return any(
-        decl == d and re.search(r, noun, re.VERBOSE) is not None
-        for (d, r) in RULES
-    )
+    return re.search(_RULES[decl], noun) is not None
 
 def main():
     # print warnings for redundant exceptions
-    for (decl, noun) in sorted(EXCEPTIONS_NO):
-        if not get_consonant_gradation(noun, decl, False):
+    for (decl, noun) in sorted(_EXCEPTIONS):
+        if _EXCEPTIONS[(decl, noun)] \
+        == get_consonant_gradation(noun, decl, False):
             print(
-                f"Redundant 'no' exception: '{noun}' in declension {decl}",
-                file=sys.stderr
-            )
-    for (decl, noun) in sorted(EXCEPTIONS_YES):
-        if get_consonant_gradation(noun, decl, False):
-            print(
-                f"Redundant 'yes' exception: '{noun}' in declension {decl}",
+                f"Redundant exception: '{noun}' in declension {decl}",
                 file=sys.stderr
             )
 
@@ -154,7 +212,7 @@ def main():
     noun = sys.argv[1]
 
     declsAndConsGrads = set()  # {(conjugation, cons_gradation_applies), ...}
-    for decl in noundecl.get_declensions(noun):
+    for decl in get_declensions(noun):
         declsAndConsGrads.add((decl, get_consonant_gradation(noun, decl)))
 
     if not declsAndConsGrads:
@@ -163,7 +221,7 @@ def main():
     for (decl, consGrad) in sorted(declsAndConsGrads):
         print(
             f"Declension {decl} "
-            f'(like "{noundecl.DECLENSION_DESCRIPTIONS[decl]}") '
+            f'(like "{DECLENSION_DESCRIPTIONS[decl]}") '
             + ["without", "with"][consGrad] + " consonant gradation"
         )
 

@@ -30,13 +30,23 @@ else:
 
 if consGradFile is not None:
     # get combinations of word and conjugation to which consonant gradation
-    # applies
+    # applies; e.g. consGradConjugationsByWord["sika"] = {9}
     consGradConjugationsByWord = {}
     for line in util.read_lines(consGradFile):
         fields = line.split(",")
         assert len(fields) >= 2
         consGradConjugationsByWord[fields[0]] \
         = {int(c, 10) for c in fields[1:]}
+
+    # these are errors in the source data; fix them here for now
+    consGradConjugationsByWord["alpi"].remove(5)
+    consGradConjugationsByWord["auer"] = {49}
+    consGradConjugationsByWord["helpi"].remove(5)
+    consGradConjugationsByWord["hynte"] = {48}
+    consGradConjugationsByWord["näin"] = {33}
+    consGradConjugationsByWord["pue"] = {48}
+    consGradConjugationsByWord["ryntys"] = {41}
+    consGradConjugationsByWord["siitake"].remove(8)
 
 wordCount = errorCount = 0
 
@@ -45,7 +55,10 @@ for line in util.read_lines(testFile):
     fields = line.split(",")
     assert len(fields) >= 2
     word = fields[0]
-    conjugations = tuple(int(c, 10) for c in fields[1:])
+    conjugations = set(int(c, 10) for c in fields[1:])
+    if word == "tuomas":
+        conjugations.add(39)  # error in source data as well
+    conjugations = tuple(sorted(conjugations))
 
     if sys.argv[1] in ("n", "v"):
         # test declension/conjugation detection function
@@ -64,16 +77,18 @@ for line in util.read_lines(testFile):
             detectedGradation = detect_gradation(word, conj)
             if detectedGradation \
             and conj not in consGradConjugationsByWord.setdefault(word, set()):
+                word2 = f"'{word}'"
                 print(
-                    f"'{word}' in declension/conjugation {conj}: expected no "
-                    "consonant gradation but got it"
+                    f"{word2:20} in decl./conj. {conj:2}: "
+                    "expected no consonant gradation but got it"
                 )
                 errorCount += 1
             elif not detectedGradation \
             and conj in consGradConjugationsByWord.setdefault(word, set()):
+                word2 = f"'{word}'"
                 print(
-                    f"'{word}' in declension/conjugation {conj}: expected "
-                    "consonant gradation but got none"
+                    f"{word2:20} in decl./conj. {conj:2}: "
+                    "expected consonant gradation but got none"
                 )
                 errorCount += 1
 
