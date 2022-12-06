@@ -288,24 +288,19 @@ def _get_word_variant(word, inflected, decl, case, number):
     elif word in ("häive", "viive"):
         if not (case == "par" and number == "sg"):
             return _consonant_gradation(inflected, True)
-    elif word == "pop" and (
-        case in ("ess", "par", "ill") or case == "gen" and number == "pl"
-    ):
-        if case == "gen" and number == "pl":
+    elif word == "pop":
+        if case in ("ess", "par", "ill"):
+            return "poppi" if number == "sg" else "poppe"
+        elif case == "gen" and number == "pl":
             return "popp"
-        elif case in ("ess", "par", "ill") and number == "pl":
-            return "poppe"
-        else:
-            return "poppi"
-    elif decl in (4, 14) and case in ("ill", "ess") and number == "pl":
-        # laatikko, solakka
-        return _consonant_gradation(inflected)
+    elif decl in (4, 14):  # laatikko, solakka
+        if case in ("ill", "ess") and number == "pl":
+            return _consonant_gradation(inflected)
     # an irregular variant
-    elif word == "hapan" and (
-        (case, number) in _CASES_LIKE_GEN_SG \
-        or case in ("ess", "ill") and number == "sg"
-    ):
-        return "happama"
+    elif word == "hapan":
+        if (case, number) in _CASES_LIKE_GEN_SG \
+        or case in ("ess", "ill") and number == "sg":
+            return "happama"
 
     return None  # no variant
 
@@ -380,12 +375,10 @@ def _get_a_or_auml(word, decl, case, number):
 
     if (word, decl) in _BOTH_A_AND_AUML:
         return ("a", "ä")
-    elif word in ("meri", "veri") and case == "par" and number == "sg":
+    elif re.search(r"^[^aáou]+$", word) is None \
+    or word in ("meri", "veri") and case == "par" and number == "sg":
         return ("a",)
-    elif re.search(r"^[^aáou]+$", word) is not None:
-        return ("ä",)
-    else:
-        return ("a",)
+    return ("ä",)
 
 def _get_results_gen_sg(word, infl, decl, case):
     # generate results for cases/numbers in _CASES_LIKE_GEN_SG
@@ -407,9 +400,8 @@ def _get_results_ess_sg(word, infl, decl):
     yield from (i + "n" + a for i in infl for a in aOrAuml)
 
 _DECL_ILL_SG_VN = frozenset((
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
-    23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40,
-    42, 43, 45, 46
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 23, 24, 25, 26, 27,
+    28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 42, 43, 45, 46
 ))
 _DECL_ILL_SG_HVN = frozenset((18, 19, 20, 21, 22))
 _DECL_ILL_SG_SEEN = frozenset((17, 20, 41, 44, 47, 48))
