@@ -1,9 +1,10 @@
 # Find partially homonymous inflected nouns. Under construction (the results
 # are incomplete). Slow.
 
-import collections, itertools, sys
-from decline_noun import decline_noun, CASES_AND_NUMBERS
+import sys
 from noundecl import get_declensions
+from noun_consgrad import get_consonant_gradation
+from decline_noun import decline_noun_specific, CASES_AND_NUMBERS
 
 def status_msg(msg):
     # print a status message to stderr (won't be redirected to output file)
@@ -18,14 +19,30 @@ def get_lemmas():
 
 def group_lemmas_by_inflected(lemmas):
     # group lemmas by inflected forms
-    # return: {inflected: {lemma, ...}, ...}
+    # return: {inflected: {(declension, lemma), ...}, ...}
 
     lemmasByInflected = {}
     for (case, number) in CASES_AND_NUMBERS:
         status_msg(f"Generating forms: {case.title()}{number.title()}...")
         for lemma in lemmas:
-            for inflected in decline_noun(lemma, case, number):
-                lemmasByInflected.setdefault(inflected, set()).add(lemma)
+            for decl in get_declensions(lemma):
+                # errors in source data, or optional consonant gradation
+                # (TODO: fix this in get_consonant_gradation())
+                if lemma in ("häive", "viive") \
+                or lemma in ("alpi", "helpi") and decl == 5 \
+                or lemma == "siitake" and decl == 8:
+                    consGrad = False
+                elif lemma in ("auer", "hynte", "näin", "pue", "ryntys"):
+                    consGrad = True
+                else:
+                    consGrad = get_consonant_gradation(lemma, decl)
+                #
+                for inflected in (
+                    decline_noun_specific(lemma, decl, consGrad, case, number)
+                ):
+                    lemmasByInflected.setdefault(inflected, set()).add(
+                        (decl, lemma)
+                    )
     return lemmasByInflected
 
 def delete_non_homonyms(lemmasByInflected):
@@ -44,33 +61,26 @@ def main():
     status_msg(f"Homonymous inflected forms: {len(lemmasByInflected)}")
 
     print("Automatically generated with 'find_partial_homonym_nouns.py'.")
-    print("Columns:")
-    print("- declensions of all lemmas (may include incorrect ones)")
-    print("- inflected form")
-    print("- lemmas and their declensions (may include incorrect declensions)")
+    print(
+        "Columns: declensions of all lemmas, inflected form, lemmas and their "
+        "declensions."
+    )
     print()
 
     for inflected in sorted(lemmasByInflected):
-        # e.g. "kuusta" -> {"kuusi": (24, 27), "kuu": (18,)}
-        declensionsByLemma = dict(
-            (l, get_declensions(l)) for l in lemmasByInflected[inflected]
-        )
+        # e.g. lemmasByInflected["kuusta"] = {(18, "kuu"), (24, "kuusi")}
 
-        # e.g. "kuusta" -> (18, 24, 27)
-        allDeclensions = tuple(sorted(set(itertools.chain.from_iterable(
-            declensionsByLemma.values()
-        ))))
-        allDeclensionsStr = "/".join(str(d) for d in allDeclensions)
+        # e.g. (18, 24)
+        allDeclensions = tuple(sorted(set(
+            i[0] for i in lemmasByInflected[inflected]
+        )))
+        allDeclensionsStr = "/".join(format(d, "02") for d in allDeclensions)
 
-        # e.g. "kuusta" -> (("kuu", (18,)), ("kuusi", (24, 27)))
-        lemmas = tuple(
-            (l, declensionsByLemma[l])
-            for l in sorted(lemmasByInflected[inflected])
-        )
+        # e.g. "kuu 18 / kuusi 24"
         lemmasStr = " / ".join(
-            l[0] + " " + ",".join(str(d) for d in l[1]) for l in lemmas
+            f"{l} {d}" for (d, l) in sorted(lemmasByInflected[inflected])
         )
 
-        print(f"{allDeclensionsStr:10} {inflected:19} ({lemmasStr})")
+        print(f"{allDeclensionsStr:11} {inflected:19} ({lemmasStr})")
 
 main()
