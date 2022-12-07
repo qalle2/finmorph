@@ -1,7 +1,7 @@
 """Test decline_noun.py by comparing the output to test files."""
 
 import os, sys
-from decline_noun import decline_noun, CASES_AND_NUMBERS
+from decline_noun import decline_noun, CASES, NUMBERS
 
 _TEST_DIR = "decline_noun-tests"  # read test files from here
 
@@ -53,13 +53,14 @@ def run_test(case, number):
 def run_all_tests(verbose=False):
     """Run tests for all cases and numbers."""
 
-    for (case, number) in CASES_AND_NUMBERS:
-        wordCnt = run_test(case, number)
-        if verbose:
-            print(
-                f"{case.title()}{number.title()} test passed "
-                f"({wordCnt:3} words)."
-            )
+    for case in CASES:
+        for number in (("pl",) if case == "ins" else NUMBERS):
+            wordCnt = run_test(case, number)
+            if verbose:
+                print(
+                    f"{case.title()}{number.title()} test passed "
+                    f"({wordCnt:3} words)."
+                )
 
 def main():
     print("Testing decline_noun.py...")

@@ -4,7 +4,7 @@
 import sys
 from noundecl import get_declensions
 from noun_consgrad import get_consonant_gradation
-from decline_noun import decline_noun_specific, CASES_AND_NUMBERS
+from decline_noun import decline_noun_specific, CASES, NUMBERS
 
 def status_msg(msg):
     # print a status message to stderr (won't be redirected to output file)
@@ -21,8 +21,13 @@ def group_lemmas_by_inflected(lemmas):
     # group lemmas by inflected forms
     # return: {inflected: {(declension, lemma), ...}, ...}
 
+    casesAndNumbers = tuple(
+        (c, n) for c in CASES for n in NUMBERS
+        if not (c == "ins" and n == "sg")
+    )
     lemmasByInflected = {}
-    for (case, number) in CASES_AND_NUMBERS:
+
+    for (case, number) in casesAndNumbers:
         status_msg(f"Generating forms: {case.title()}{number.title()}...")
         for lemma in lemmas:
             for decl in get_declensions(lemma):
@@ -33,6 +38,7 @@ def group_lemmas_by_inflected(lemmas):
                     lemmasByInflected.setdefault(inflected, set()).add(
                         (decl, lemma)
                     )
+
     return lemmasByInflected
 
 def delete_non_homonyms(lemmasByInflected):

@@ -1,0 +1,796 @@
+# more than one declension (all)
+# 1/21
+menu,menuissa,menuissä
+# 3/8
+caddie,caddieissa,caddieissä
+# 5/7
+alpi,alpeissa,alvissa
+helpi,helpeissä,helvissä
+kaihi,kaiheissa,kaihissa
+karhi,karheissa,karhissa
+kymi,kymeissä,kymissä
+lahti,lahdeissa,lahdissa
+laki,laeissa,laissa
+palvi,palveissa,palvissa
+ripsi,ripseissä,ripsissä
+saksi,sakseissa,saksissa
+sini,sineissä,sinissä
+vyyhti,vyyhdeissä,vyyhdissä
+# 5/22
+sioux,sioux'issa,siouxeissa
+# 5/23
+syli,syleissä,sylissä
+# 5/26
+kuori,kuoreissa,kuorissa
+viini,viineissä,viinissä
+vuori,vuoreissa,vuorissa
+# 5/30
+peitsi,peitseissä,peitsissä
+# 5/39
+csárdás,csárdáksissa,csárdáseissa
+kuskus,kuskuksissa,kuskuseissa
+# 5/48
+ori,oreissa,oriissa
+# 7/29
+hapsi,hapsissa
+uksi,uksissa
+# 8/48
+siitake,siitakeissa,siitakkeissa
+# 9/10
+aneurysma,aneurysmissa,aneurysmoissa
+kysta,kystissa,kystoissa
+lyyra,lyyrissa,lyyroissa
+puola,puolissa,puoloissa
+# 10/11
+humala,humalissa,humaloissa
+# 12/15
+tanhua,tanhuissa,tanhuoissa
+# 24/27
+kuusi,kuusissa
+# 39/40
+ahtaus,ahtauksissa
+karvaus,karvauksissa
+rosvous,rosvouksissa
+siivous,siivouksissa
+vakaus,vakauksissa
+# 39/41
+havas,hapaissa,havaksissa
+kallas,kallaksissa,kaltaissa
+koiras,koiraissa,koiraksissa
+olas,olaissa,olaksissa
+pallas,pallaksissa,paltaissa
+tuomas,tuomaissa,tuomaksissa
+uros,uroissa,uroksissa
+# 39/45
+kymmenes,kymmeneksissä,kymmenensissä
+
+# homonyms distinguished by consonant gradation in some cases
+haiku,haikuissa,haiuissa
+koto,kodoissa,kotoissa
+lento,lennoissa,lentoissa
+mutu,muduissa,mutuissa
+parka,parkoissa,paroissa
+raita,raidoissa,raitoissa
+säkä,säissä,säkissä
+tutti,tuteissa,tutteissa
+veto,vedoissa,vetoissa
+vika,vikoissa,vioissa
+
+# optional consonant gradation (no change in meaning) in some cases
+bourette,boureteissa,bouretteissa
+huti,hudeissa,huteissa
+häive,häipeissä,häiveissä
+kuti,kudeissa,kuteissa
+leuku,leu'uissa,leukuissa
+loota,loodissa,lootissa
+lunki,lungeissa,lunkeissa
+myky,mykyissä,myvyissä
+mökä,möissä,mökissä
+nahka,nahkoissa,nahoissa
+nuti,nudeissa,nuteissa
+peti,pedeissä,peteissä
+pop,popeissa
+ringette,ringeteissä,ringetteissä
+seljanka,seljangoissa,seljankoissa
+sinfonietta,sinfonietoissa,sinfoniettoissa
+tuhka,tuhissa,tuhkissa
+uhka,uhissa,uhkissa
+vihko,vihkoissa,vihoissa
+viive,viipeissä,viiveissä
+vinaigrette,vinaigreteissa,vinaigretteissa
+
+# declension 1
+# -VkV
+koko,koissa
+kyky,kyvyissä
+laku,lakuissa
+ruoko,ruo'oissa
+suku,suvuissa
+tiuku,tiu'uissa
+# -CkV
+hehku,hehkuissa
+katku,katkuissa
+kinkku,kinkuissa
+korko,koroissa
+palko,paloissa
+pilkku,pilkuissa
+sisko,siskoissa
+sähkö,sähköissä
+sänky,sängyissä
+tikku,tikuissa
+verkko,verkoissa
+# -VpV
+rapu,ravuissa
+söpö,söpöissä
+# -CpV
+helppo,helpoissa
+kirppu,kirpuissa
+kumpu,kummuissa
+orpo,orvoissa
+temppu,tempuissa
+vappu,vapuissa
+# -VtV
+auto,autoissa
+etu,eduissa
+# -CtV
+ehto,ehdoissa
+lanttu,lantuissa
+murto,murroissa
+pelto,pelloissa
+rento,rennoissa
+torttu,tortuissa
+tyttö,tytöissä
+veltto,veltoissa
+# -CV (not -kV, -pV, -tV)
+valo,valoissa
+vilu,viluissa
+äly,älyissä
+
+# declension 2
+palvelu,palveluissa
+väestö,väestöissä
+
+# declension 3
+# -e
+collie,collieissa
+oboe,oboeissa
+# -O
+valtio,valtioissa
+yhtiö,yhtiöissä
+
+# declension 4
+laatikko,laatikoissa
+älykkö,älyköissä
+
+# declension 5
+# -ki
+palkki,palkeissa
+rööki,röökeissä
+šakki,šakeissa
+vanki,vangeissa
+vouti,voudeissa
+# -pi
+alppi,alpeissa
+hupi,huveissa
+korppi,korpeissa
+pipi,pipeissä
+# -ti
+koti,kodeissa
+pelti,pelleissä
+risti,risteissä
+tunti,tunneissa
+yrtti,yrteissä
+# -C
+lux,luxeissa
+tag,tageissa
+wok,wokeissa
+
+# declension 6
+# -i
+paperi,papereissa
+saluki,salukeissa
+# -C
+edam,edameissa
+gallup,gallupeissa
+lumen,lumeneissa
+rial,rialeissa
+weber,webereissä
+
+# declension 7
+# -VCV
+läpi,lävissä
+ovi,ovissa
+piki,piissä
+reki,reissä
+tuki,tuissa
+veli,veljissä
+# -CCV
+arki,arjissa
+arpi,arvissa
+hetki,hetkissä
+impi,immissä
+jälki,jäljissä
+järki,järjissä
+kaikki,kaikissa
+kaski,kaskissa
+lehti,lehdissä
+olki,oljissa
+onki,ongissa
+soppi,sopissa
+
+# declension 8
+jeppe,jepeissä
+nalle,nalleissa
+nukke,nukeissa
+ope,opeissa
+
+# declension 9
+# -kV
+aika,ajoissa
+eka,ekoissa
+iskä,isköissä
+jalka,jaloissa
+jenkka,jenkoissa
+lanka,langoissa
+markka,markoissa
+nahka,nahkoissa,nahoissa
+taika,taioissa
+takka,takoissa
+vaaka,vaaoissa
+vehka,vehkoissa
+velka,veloissa
+virka,viroissa
+# -pV
+heppa,hepoissa
+kilpa,kilvoissa
+kimppa,kimpoissa
+tapa,tavoissa
+# -tV
+kysyntä,kysynnöissä
+mitta,mitoissa
+parta,parroissa
+sata,sadoissa
+vihta,vihdoissa
+# -CV (not -kV, -pV, -tV)
+kala,kaloissa
+
+# declension 10
+# -C
+kahdeksan,kahdeksissa
+seitsemän,seitsemissä
+yhdeksän,yhdeksissä
+# -VV
+boa,boissa
+# -kV
+härkä,härjissä
+ikä,i'issä
+kenkä,kengissä
+nälkä,nälissä
+oka,oissa
+poika,pojissa
+reikä,rei'issä
+sukka,sukissa
+säkä,säissä,säkissä
+toka,tokissa
+tuhka,tuhissa,tuhkissa
+ylkä,yljissä
+# -pV
+kompa,kommissa
+noppa,nopissa
+tupa,tuvissa
+turpa,turvissa
+# -tV
+juhta,juhdissa
+kulta,kullissa
+mäntä,männissä
+rotta,rotissa
+setä,sedissä
+turta,turrissa
+# -CV (not -kV, -pV, -tV)
+koira,koirissa
+
+# declension 11
+judoka,judokissa,judokoissa
+käpälä,käpälissä,käpälöissä
+omena,omenissa,omenoissa
+
+# declension 12
+kulkija,kulkijoissa
+ritilä,ritilöissä
+
+# declension 13
+katiska,katiskoissa
+siivilä,siivilöissä
+
+# declension 14
+navetta,navetoissa
+solakka,solakoissa
+ulappa,ulapoissa
+ötökkä,ötököissä
+
+# declension 15
+ainoa,ainoissa
+korkea,korkeissa
+äreä,äreissä
+
+# declension 16
+idempi,idemmissä
+kumpi,kummissa
+vanhempi,vanhemmissa
+
+# declension 17
+ehtoo,ehtoissa
+hynttyy,hynttyissä
+takuu,takuissa
+vapaa,vapaissa
+
+# declension 18 (note: for tau, tiu, Kotus forbids plurals other than nom.)
+jää,jäissä
+jöö,jöissä
+maa,maissa
+rokokoo,rokokoissa
+suu,suissa
+syy,syissä
+#tau
+tee,teissä
+tii,tiissä
+#tiu
+
+# declension 19
+suo,soissa
+tie,teissä
+yö,öissä
+
+# declension 20
+filee,fileissä
+miljöö,miljöissä
+nugaa,nugaissa
+raguu,raguissa
+revyy,revyissä
+trikoo,trikoissa
+
+# declension 21 (all except "kungfu", "taxfree")
+brasserie,brasserieissa
+brie,brieissä
+bébé,bébéissä
+cha-cha-cha,cha-cha-chaissa
+clou,clouissa
+coupé,coupéissa
+cowboy,cowboyissa
+fondue,fondueissa,fondueissä
+gay,gayissa,gayissä
+gray,grayissa,grayissä
+jersey,jerseyissä
+jockey,jockeyissa,jockeyissä
+moiré,moiréissa
+playboy,playboyissa
+reggae,reggaeissa,reggaeissä
+rosé,roséissa
+speedway,speedwayissa,speedwayissä
+spray,sprayissa,sprayissä
+
+# declension 22 (all)
+beignet,beignet'issä
+bordeaux,bordeaux'issa
+bouquet,bouquet'issa
+buffet,buffet'issa,buffet'issä
+gourmet,gourmet'issa
+know-how,know-how'issa
+nougat,nougat'issa
+parfait,parfait'issa
+passepartout,passepartout'issa
+port salut,port salut'issa,port salut'issä
+ragoût,ragoût'issa
+show,show'issa
+tournedos,tournedos'issa
+
+# declension 23
+lohi,lohissa
+moni,monissa
+tiili,tiilissä
+
+# declension 24
+hiili,hiilissä
+hiiri,hiirissä
+kusi,kusissa
+meri,merissä
+ruuhi,ruuhissa
+uni,unissa
+
+# declension 25 (all)
+liemi,liemissä
+loimi,loimissa
+lumi,lumissa
+luomi,luomissa
+niemi,niemissä
+taimi,taimissa
+toimi,toimissa
+tuomi,tuomissa
+
+# declension 26
+jousi,jousissa
+pieni,pienissä
+puoli,puolissa
+veri,verissä
+ääri,äärissä
+
+# declension 27
+käsi,käsissä
+uusi,uusissa
+
+# declension 28 (all)
+hirsi,hirsissä
+jälsi,jälsissä
+kansi,kansissa
+karsi,karsissa
+kirsi,kirsissä
+korsi,korsissa
+kynsi,kynsissä
+länsi,länsissä
+orsi,orsissa
+parsi,parsissa
+ponsi,ponsissa
+pursi,pursissa
+varsi,varsissa
+virsi,virsissä
+
+# declension 29 (all)
+hapsi,hapsissa
+lapsi,lapsissa
+uksi,uksissa
+
+# declension 30 (all)
+veitsi,veitsissä
+
+# declension 31 (all)
+haaksi,haaksissa
+kaksi,kaksissa
+yksi,yksissä
+
+# declension 32
+# -l
+nivel,nivelissä
+# -n
+ahven,ahvenissa
+höyhen,höyhenissä
+ien,ikenissä
+jäsen,jäsenissä
+kymmenen,kymmenissä
+siemen,siemenissä
+# -r
+jumalatar,jumalattarissa
+kaunotar,kaunottarissa
+onnetar,onnettarissa
+papitar,papittarissa
+sisar,sisarissa
+syöjätär,syöjättärissä
+tytär,tyttärissä
+
+# declension 33
+# -Vin
+avain,avaimissa
+avoin,avoimissa
+eläin,eläimissä
+istuin,istuimissa
+näin,näkimissä
+puin,pukimissa
+# -din
+ydin,ytimissä
+# -hin
+jauhin,jauhimissa
+pyyhin,pyyhkimissä
+# -jin
+suljin,sulkimissa
+# -kin
+kytkin,kytkimissä
+# -lin
+elin,elimissä
+sivellin,siveltimissä
+# -min
+vihmin,vihmimissä
+# -nin
+väännin,vääntimissä
+# -rin
+aterin,aterimissa
+avarrin,avartimissa
+# -sin
+pesin,pesimissä
+# -tin
+heitin,heittimissä
+poltin,polttimissa
+uistin,uistimissa
+# -vin
+kaavin,kaapimissa
+kaivin,kaivimissa
+kalvin,kalvimissa
+raavin,raapimissa
+survin,survimissa
+särvin,särpimissä
+# -Vn (not -in)
+hapan,happamissa
+laidun,laitumissa
+morsian,morsiamissa
+sydän,sydämissä
+
+# declension 34
+# -CtOn
+alaston,alastomissa
+# -VtOn
+ajaton,ajattomissa
+avuton,avuttomissa
+eloton,elottomissa
+laiton,laittomissa
+onneton,onnettomissa
+päätön,päättömissä
+syytön,syyttömissä
+yötön,yöttömissä
+
+# declension 35 (all)
+lämmin,lämpimissä
+
+# declension 36
+alin,alimmissa
+sisin,sisimmissä
+uloin,uloimmissa
+
+# declension 37 (all)
+vasen,vasemmissa
+
+# declension 38
+nainen,naisissa
+osanen,osasissa
+öinen,öisissä
+
+# declension 39
+# -VUs
+hius,hiuksissa
+kiveys,kiveyksissä
+makuus,makuuksissa
+putous,putouksissa
+sysäys,sysäyksissä
+vastaus,vastauksissa
+# -VVs (not -VUs)
+hauis,hauiksissa
+iskias,iskiaksissa
+rabies,rabieksissa
+taos,taoksissa
+teos,teoksissa
+# -CVs
+aines,aineksissa
+emäs,emäksissä
+lihas,lihaksissa
+rötös,rötöksissä
+varis,variksissa
+vedos,vedoksissa
+virus,viruksissa
+yritys,yrityksissä
+
+# declension 40
+kalleus,kalleuksissa
+uutuus,uutuuksissa
+äitiys,äitiyksissä
+äreys,äreyksissä
+
+# declension 41
+# -Vs (not -As, -is)
+ies,ikeissä
+kirves,kirveissä
+ryntys,rynttyissä
+vantus,vanttuissa
+äes,äkeissä
+# -VAs, -Vis
+autuas,autuaissa
+kiuas,kiukaissa
+oas,okaissa
+ruis,rukiissa
+äveriäs,äveriäissä
+# -dAs, -dis
+ahdas,ahtaissa
+hidas,hitaissa
+# -gAs, -gis
+kangas,kankaissa
+köngäs,könkäissä
+# -hAs, -his
+keihäs,keihäissä
+# -jAs, -jis
+uljas,uljaissa
+# -kAs, -kis
+kirkas,kirkkaissa
+rakas,rakkaissa
+raskas,raskaissa
+sitkas,sitkaissa
+vilkas,vilkkaissa
+# -lAs, -lis
+allas,altaissa
+aulis,auliissa
+kallis,kalliissa
+kaplas,kaplaissa
+mallas,maltaissa
+valas,valaissa
+# -mAs, -mis
+armas,armaissa
+hammas,hampaissa
+ruumis,ruumiissa
+valmis,valmiissa
+vehmas,vehmaissa
+# -nAs, -nis
+ahnas,ahnaissa
+kaunis,kauniissa
+kinnas,kintaissa
+kunnas,kunnaissa
+oinas,oinaissa
+rynnäs,ryntäissä
+# -pAs, -pis
+opas,oppaissa
+rypäs,ryppäissä
+valpas,valppaissa
+# -rAs, -ris
+eräs,eräissä
+katras,katraissa
+kauris,kauriissa
+oras,oraissa
+paras,parhaissa
+varas,varkaissa
+varras,vartaissa
+# -sAs, -sis
+pensas,pensaissa
+porsas,porsaissa
+viisas,viisaissa
+# -tAs, -tis
+altis,alttiissa
+mätäs,mättäissä
+ratas,rattaissa
+raitis,raittiissa
+rastas,rastaissa
+# -vAs, -vis
+eväs,eväissä
+karvas,karvaissa
+rahvas,rahvaissa
+ryväs,rypäissä
+seiväs,seipäissä
+tiivis,tiiviissä
+varvas,varpaissa
+ylväs,ylväissä
+
+# declension 42 (all)
+mies,miehissä
+
+# declension 43
+immyt,impyissä
+lyhyt,lyhyissä
+ohut,ohuissa
+
+# declension 44 (all)
+kevät,keväissä
+
+# declension 45
+kahdeksas,kahdeksansissa
+neljäs,neljänsissä
+viides,viidensissä
+
+# declension 46 (all)
+tuhat,tuhansissa
+
+# declension 47
+jäänyt,jääneissä
+kuollut,kuolleissa
+tehnyt,tehneissä
+
+# declension 48
+# -V (not -e)
+kiiru,kiiruissa
+# -Ve
+aie,aikeissa
+alue,alueissa
+hiue,hiukeissa
+koe,kokeissa
+lippue,lippueissa
+pesue,pesueissa
+pue,pukeissa
+säe,säkeissä
+tae,takeissa
+yhtye,yhtyeissä
+# -de
+sade,sateissa
+suhde,suhteissa
+# -he
+aihe,aiheissa
+valhe,valheissa
+venhe,venheissä
+virhe,virheissä
+# -je
+hylje,hylkeissä
+kirje,kirjeissä
+koje,kojeissa
+lahje,lahkeissa
+sulje,sulkeissa
+# -ke
+hanke,hankkeissa
+jatke,jatkeissa
+leike,leikkeissä
+ryske,ryskeissä
+sähke,sähkeissä
+virke,virkkeissä
+välke,välkkeissä
+# -le
+helle,helteissä
+kahle,kahleissa
+säle,säleissä
+tisle,tisleissä
+# -me
+amme,ammeissa
+hame,hameissa
+hurme,hurmeissa
+ihme,ihmeissä
+ilme,ilmeissä
+lumme,lumpeissa
+# -ne
+ahne,ahneissa
+aine,aineissa
+herne,herneissä
+tunne,tunteissa
+# -pe
+ape,appeissa
+kampe,kamppeissa
+# -re
+aarre,aarteissa
+näre,näreissä
+# -se
+ase,aseissa
+hilse,hilseissä
+katse,katseissa
+# -te
+aate,aatteissa
+este,esteissä
+hynte,hyntteissä
+korte,kortteissa
+polte,poltteissa
+# -ve
+aave,aaveissa
+lieve,liepeissä
+
+# declension 49 (all)
+# -e
+askare,askareissa
+askele,askeleissa
+autere,autereissa
+hepene,hepeneissä
+huhmare,huhmareissa
+kantele,kanteleissa
+kintere,kintereissä
+kyynele,kyyneleissä
+mantere,mantereissa
+murene,mureneissa
+ompele,ompeleissa
+penkere,penkereissä
+petkele,petkeleissä
+pientare,pientareissa
+saivare,saivareissa
+seppele,seppeleissä
+säkene,säkeneissä
+taipale,taipaleissa
+tantere,tantereissa
+utare,utareissa
+vempele,vempeleissä
+# -C
+askar,askarissa
+askel,askelissa
+auer,auterissa
+huhmar,huhmarissa
+kannel,kantelissa
+kinner,kinterissä
+kyynel,kyynelissä
+manner,manterissa
+muren,murenissa
+ommel,ompelissa
+penger,penkerissä
+petkel,petkelissä
+piennar,pientarissa
+saivar,saivarissa
+sammal,sammalissa
+seppel,seppelissä
+säen,säkenissä
+taival,taipalissa
+tanner,tanterissa
+udar,utarissa
+vemmel,vempelissä

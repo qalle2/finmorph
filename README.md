@@ -32,7 +32,7 @@ ess, tra, ine, ela, ill, ade, abl, all, abe, ins. Numbers: sg, pl. If case &
 number omitted, print all supported combinations.
 ```
 
-These cases have not yet been implemented in plural: translative, inessive, elative, adessive, ablative, allative, abessive, instructive.
+Note: instructive singular and comitative are not supported.
 
 Examples:
 ```
@@ -49,14 +49,22 @@ ParPl: kuusia
 EssSg: kuusena, kuutena
 EssPl: kuusina
 TraSg: kuudeksi, kuuseksi
+TraPl: kuusiksi
 IneSg: kuudessa, kuusessa
+InePl: kuusissa
 ElaSg: kuudesta, kuusesta
+ElaPl: kuusista
 IllSg: kuuseen, kuuteen
 IllPl: kuusiin
 AdeSg: kuudella, kuusella
+AdePl: kuusilla
 AblSg: kuudelta, kuuselta
+AblPl: kuusilta
 AllSg: kuudelle, kuuselle
+AllPl: kuusille
 AbeSg: kuudetta, kuusetta
+AbePl: kuusitta
+InsPl: kuusin
 ```
 
 ### find_partial_homonym_nouns.py
