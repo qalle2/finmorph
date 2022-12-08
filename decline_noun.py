@@ -9,30 +9,34 @@ from noundecl import get_declensions
 
 # -----------------------------------------------------------------------------
 
-# combinations of case/number that behave like genitive singular
+# combinations of case/number by which one they behave like
 _CASES_LIKE_GEN_SG = frozenset((
-    ("nom", "pl"),  # kädet
-    ("gen", "sg"),  # käden
-    ("tra", "sg"),  # kädeksi
-    ("ine", "sg"),  # kädessä
-    ("ela", "sg"),  # kädestä
-    ("ade", "sg"),  # kädellä
-    ("abl", "sg"),  # kädeltä
-    ("all", "sg"),  # kädelle
-    ("abe", "sg"),  # kädettä
+    ("nom", "pl"),  # edut
+    ("gen", "sg"),  # edun
+    ("tra", "sg"),  # eduksi
+    ("ine", "sg"),  # edussa
+    ("ela", "sg"),  # edusta
+    ("ade", "sg"),  # edulla
+    ("abl", "sg"),  # edulta
+    ("all", "sg"),  # edulle
+    ("abe", "sg"),  # edutta
 ))
-
-# combinations of case/number that behave like inessive plural
 _CASES_LIKE_INE_PL = frozenset((
-    ("tra", "pl"),  # käsiksi
-    ("ine", "pl"),  # käsissä
-    ("ela", "pl"),  # käsistä
-    ("ade", "pl"),  # käsillä
-    ("abl", "pl"),  # käsiltä
-    ("all", "pl"),  # käsille
-    ("abe", "pl"),  # käsittä
-    ("ins", "pl"),  # käsin
+    ("tra", "pl"),  # eduiksi
+    ("ine", "pl"),  # eduissa
+    ("ela", "pl"),  # eduista
+    ("ade", "pl"),  # eduilla
+    ("abl", "pl"),  # eduilta
+    ("all", "pl"),  # eduille
+    ("abe", "pl"),  # eduitta
+    ("ins", "pl"),  # eduin
 ))
+_CASES_LIKE_PAR_PL = frozenset((
+    ("ess", "pl"),  # etuina
+    ("par", "pl"),  # etuja
+    ("ill", "pl"),  # etuihin
+))
+# not listed above: EssSg, ParSg, IllSg, GenPl
 
 # rules for changing endings of words
 # - format: declension: ((regex_from, regex_to), ...)
@@ -132,7 +136,7 @@ _CHANGES_GEN_PL = _CHANGES_PLURAL_COMMON | {
     6:  (("i", ""),),  # paperi, nylon
 }
 _CHANGES_PAR_PL = _CHANGES_PLURAL_COMMON | {
-    # also IllPl, EssPl, _CASES_LIKE_INE_PL
+    # also _CASES_LIKE_PAR_PL, _CASES_LIKE_INE_PL
     5:  (("i", "e"), ("([^aeiouyäö])", r"\1e")),  # risti, rock
     6:  (("i", "e"), ("([^aeiouyäö])", r"\1e")),  # paperi, nylon
     33: (("n", "m"),),   # kytkin
@@ -145,7 +149,15 @@ _CHANGES_PAR_PL = _CHANGES_PLURAL_COMMON | {
 }
 del _CHANGES_PLURAL_COMMON
 
-def _change_ending(word, decl, case, number):
+def _change_ending(word, changes):
+    # apply the first regex that matches
+    for (regexFrom, regexTo) in changes:
+        regexFrom += "$"
+        if re.search(regexFrom, word) is not None:
+            return re.sub(regexFrom, regexTo, word)
+    return word
+
+def _change_ending_main(word, decl, case, number):
     # change the ending of the word (before applying consonant gradation or
     # adding case/number endings)
 
@@ -163,18 +175,13 @@ def _change_ending(word, decl, case, number):
         changes = _CHANGES_PAR_SG.get(decl, ())
     elif case == "gen" and number == "pl":
         changes = _CHANGES_GEN_PL.get(decl, ())
-    elif case in ("par", "ill", "ess") and number == "pl" \
-    or (case, number) in _CASES_LIKE_INE_PL:
+    elif (case, number) in _CASES_LIKE_INE_PL \
+    or (case, number) in _CASES_LIKE_PAR_PL:
         changes = _CHANGES_PAR_PL.get(decl, ())
     else:
         sys.exit("error")
 
-    # apply the first regex that matches
-    for (regexFrom, regexTo) in changes:
-        regexFrom += "$"
-        if re.search(regexFrom, word) is not None:
-            return re.sub(regexFrom, regexTo, word)
-    return word
+    return _change_ending(word, changes)
 
 # -----------------------------------------------------------------------------
 
@@ -290,16 +297,11 @@ def _consonant_gradation_main(word, inflected, decl, consGrad, case, number):
             return _consonant_gradation(inflected)
         elif consGrad and decl >= 32:
             return _consonant_gradation(inflected, True)
-    elif case == "ess" or case == "ill" and number == "sg":
-        if consGrad and decl >= 32 \
-        or decl in _DECL_ESS_SG_ALWAYS_STRENGTHEN:
+    elif (case, number) in _CASES_LIKE_PAR_PL or case in ("ess", "ill"):
+        if consGrad and decl >= 32 or decl in _DECL_ESS_SG_ALWAYS_STRENGTHEN:
             return _consonant_gradation(inflected, True)
     elif case == "gen" and number == "pl":
         if consGrad and decl == 35:  # lämmin
-            return _consonant_gradation(inflected, True)
-    elif case in ("par", "ill") and number == "pl":
-        if consGrad and decl >= 32 and word not in ("häive", "viive") \
-        or decl in _DECL_ESS_SG_ALWAYS_STRENGTHEN:
             return _consonant_gradation(inflected, True)
 
     return inflected  # no consonant gradation
@@ -319,12 +321,14 @@ def _get_word_variant(word, inflected, decl, case, number):
         if not (case == "par" and number == "sg"):
             return _consonant_gradation(inflected, True)
     elif word == "pop":
+        if (case, number) in _CASES_LIKE_PAR_PL:
+            return "poppe"
         if case in ("ess", "par", "ill"):
-            return "poppi" if number == "sg" else "poppe"
-        elif case == "gen" and number == "pl":
+            return "poppi"
+        if case == "gen" and number == "pl":
             return "popp"
     elif decl in (4, 14):  # laatikko, solakka
-        if case in ("ill", "ess") and number == "pl":
+        if case in ("ess", "ill") and number == "pl":
             return _consonant_gradation(inflected)
     # an irregular variant
     elif word == "hapan":
@@ -380,12 +384,12 @@ def _get_results_gen_sg(word, infl, decl, case):
     # (word = original word, infl = inflected forms with consonant gradation)
 
     if case in ("nom", "gen", "tra", "all"):
-        yield from (i + _GEN_SG_LIKE_ENDINGS[case] for i in infl)
+        endings = (_GEN_SG_LIKE_ENDINGS[case],)
     else:
         aOrAuml = _get_a_or_auml(word, decl, "gen", "sg")
-        yield from (
-            i + _GEN_SG_LIKE_ENDINGS[case] + a for i in infl for a in aOrAuml
-        )
+        endings = tuple(_GEN_SG_LIKE_ENDINGS[case] + a for a in aOrAuml)
+
+    yield from (i + e for i in infl for e in endings)
 
 def _get_results_ess_sg(word, infl, decl):
     # generate results for essive singular
@@ -471,34 +475,36 @@ _DECL_PAR_SG_TA = frozenset((
     34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49
 ))
 
+# changes by declension in partitive singular
+_CHANGES_PAR_SG_TA = {
+    25: (("m", "n"),),   # toimi
+    48: (("",  "t"),),   # hame
+    49: (("e", "et"),),  # askele
+}
+
 def _get_results_par_sg(word, infl, decl):
     # generate results for partitive singular
     # (word = original word, infl = inflected forms with consonant gradation)
 
-    isDecl49b = (decl == 49 and word.endswith("e"))
     aOrAuml = _get_a_or_auml(word, decl, "par", "sg")
 
     # -A
     if (decl in _DECL_PAR_SG_A) != (word in _EXCEPTIONS_PAR_SG_A):
-        if decl == 25:  # toimi
-            yield from (i + "e" + a for i in infl for a in aOrAuml)
-        elif decl == 37:  # vasen
-            yield "vasempaa"
-        elif word == "moni":
+        if word == "moni":
             yield "montaa"
+        elif word == "vasen":
+            yield "vasempaa"
+        elif decl == 25:  # toimi
+            yield from (i + "e" + a for i in infl for a in aOrAuml)
         else:
             yield from (i + a for i in infl for a in aOrAuml)
 
     # -tA
     if decl in _DECL_PAR_SG_TA:
-        if decl == 25:  # toimi
-            yield from (
-                re.sub("m$", "n", i) + "t" + a for i in infl for a in aOrAuml
-            )
-        elif decl == 48 or isDecl49b:  # hame, askele
-            yield from (i + "tt" + a for i in infl for a in aOrAuml)
-        else:
-            yield from (i + "t" + a for i in infl for a in aOrAuml)
+        yield from (
+            _change_ending(i, _CHANGES_PAR_SG_TA.get(decl, ())) + "t" + a
+            for i in infl for a in aOrAuml
+        )
 
 # declensions by ending in genitive plural
 _DECL_GEN_PL_JEN = frozenset((1, 2, 4, 8, 9, 11, 13, 14))
@@ -512,6 +518,30 @@ _DECL_GEN_PL_IEN = frozenset((
 _DECL_GEN_PL_TEN = frozenset((
     24, 25, 26, 27, 28, 29, 30, 32, 33, 34, 36, 37, 38, 39, 42, 46
 ))
+
+# changes by declension in genitive plural
+_CHANGES_GEN_PL_IDEN = {
+    6:  (("", "e"),),              # paperi
+    11: (("a", "o"), ("ä", "ö")),  # omena
+}
+_CHANGES_GEN_PL_IEN = {
+    11: (("[aä]", ""),),    # omena
+    39: (("s",    "ks"),),  # vastaus
+    33: (("n",    "m"),),   # kytkin
+    34: (("n",    "m"),),   # onneton
+    36: (("n",    "mm"),),  # alin
+    37: (("n",    "mm"),),  # vasen
+    42: (("s",    "h"),),   # mies
+    46: (("t",    "ns"),),  # tuhat
+}
+_CHANGES_GEN_PL_TEN = {
+    25: (("m",  "n"),),  # toimi
+    27: (("s",  "t"),),  # käsi
+    28: (("s",  "t"),),  # kynsi
+    29: (("ps", "s"),),  # lapsi
+    30: (("ts", "s"),),  # veitsi
+    46: (("t",  "n"),),  # tuhat
+}
 
 def _get_results_gen_pl(word, infl, decl, consGrad):
     # generate results for genitive plural
@@ -531,59 +561,34 @@ def _get_results_gen_pl(word, infl, decl, consGrad):
 
     # -iden
     if decl in _DECL_GEN_PL_IDEN or isDecl49b:
-        if decl == 6:  # paperi
-            yield from (re.sub("$", "e", i) + "iden" for i in infl)
-        elif decl == 11:  # omena
-            yield from (
-                re.sub("a$", "o", re.sub("ä$", "ö", i)) + "iden" for i in infl
-            )
-        elif consGrad and decl in (4, 14):  # laatikko, solakka
-            yield from (_consonant_gradation(i) + "iden" for i in infl)
+        infl2 = (
+            _change_ending(i, _CHANGES_GEN_PL_IDEN.get(decl, ())) for i in infl
+        )
+        if consGrad and decl in (4, 14):  # laatikko, solakka
+            yield from (_consonant_gradation(i) + "iden" for i in infl2)
         elif consGrad and decl in (41, 43, 48) \
         and word not in ("häive", "viive"):  # vieras, ohut, hame
-            yield from (_consonant_gradation(i, True) + "iden" for i in infl)
+            yield from (_consonant_gradation(i, True) + "iden" for i in infl2)
         else:
-            yield from (i + "iden" for i in infl)
+            yield from (i + "iden" for i in infl2)
 
     # -ien
     if decl in _DECL_GEN_PL_IEN or isDecl49a:
-        if decl == 11:  # omena
-            yield from (re.sub("[aä]$", "", i) + "ien" for i in infl)
-        elif decl == 39:  # vastaus
-            yield from (re.sub("s$", "ks", i) + "ien" for i in infl)
-        elif consGrad and decl in (32, 49):  # sisar, askel
-            yield from (_consonant_gradation(i, True) + "ien" for i in infl)
-        elif consGrad and decl in (33, 34):  # kytkin, onneton
-            yield from (
-                _consonant_gradation(re.sub("n$", "m", i), True) + "ien"
-                for i in infl
-            )
-        elif decl in (33, 34):  # kytkin, onneton
-            yield from (re.sub("n$", "m", i) + "ien" for i in infl)
-        elif decl in (36, 37):  # alin, vasen
-            yield from (
-                _consonant_gradation(re.sub("n$", "mm", i), True) + "ien"
-                for i in infl
-            )
-        elif decl == 42:  # mies
-            yield from (re.sub("s$", "h", i) + "ien" for i in infl)
-        elif decl == 46:  # tuhat
-            yield from (re.sub("t$", "ns", i) + "ien" for i in infl)
+        infl2 = (
+            _change_ending(i, _CHANGES_GEN_PL_IEN.get(decl, ())) for i in infl
+        )
+        if consGrad and decl in (32, 33, 34, 49) or decl in (36, 37):
+            # sisar, kytkin, onneton, askel; alin, vasen
+            yield from (_consonant_gradation(i, True) + "ien" for i in infl2)
         else:
-            yield from (i + "ien" for i in infl)
+            yield from (i + "ien" for i in infl2)
 
     # -ten
     if decl in _DECL_GEN_PL_TEN and word != "uksi" or isDecl49a:
-        if decl == 25:  # toimi
-            yield from (re.sub("m$", "n", i) + "ten" for i in infl)
-        elif decl in (27, 28):  # käsi, kynsi
-            yield from (re.sub("s$", "t", i) + "ten" for i in infl)
-        elif decl in (29, 30):  # lapsi, veitsi
-            yield from (re.sub("[pt]s$", "s", i) + "ten" for i in infl)
-        elif decl == 46:  # tuhat
-            yield from (re.sub("t$", "n", i) + "ten" for i in infl)
-        else:
-            yield from (i + "ten" for i in infl)
+        yield from (
+            _change_ending(i, _CHANGES_GEN_PL_TEN.get(decl, ())) + "ten"
+            for i in infl
+        )
 
 def _get_results_par_pl(word, infl, decl, consGrad):
     # generate results for partitive plural
@@ -665,25 +670,9 @@ def _get_results_ill_pl(word, infl, decl):
         else:
             yield from (i + "iin" for i in infl)
 
-def _get_results_ess_pl(word, infl, decl):
-    # generate results for essive plural
-    # (word = original word, infl = inflected forms with consonant gradation)
-
-    aOrAuml = _get_a_or_auml(word, decl, "ess", "pl")
-
-    if decl == 11:  # omena
-        yield from (
-            re.sub("a$", "o", re.sub("ä$", "ö", i)) + "in" + a
-            for i in infl for a in aOrAuml
-        )
-        yield from (
-            re.sub("[aä]$", "", i) + "in" + a for i in infl for a in aOrAuml
-        )
-    else:
-        yield from (i + "in" + a for i in infl for a in aOrAuml)
-
-# endings for _CASES_LIKE_INE_PL, without final -A
+# endings for _get_results_ine_pl(), without final -A
 _INE_PL_LIKE_ENDINGS = {
+    "ess": "in",
     "tra": "iksi",
     "ine": "iss",
     "ela": "ist",
@@ -695,10 +684,10 @@ _INE_PL_LIKE_ENDINGS = {
 }
 
 def _get_results_ine_pl(word, infl, decl, case):
-    # generate results for cases/numbers in _CASES_LIKE_INE_PL
+    # generate results for cases/numbers in _CASES_LIKE_INE_PL and for
+    # essive plural
     # (word = original word, infl = inflected forms with consonant gradation)
 
-    # get endings, e.g. ("ista", "istä")
     if case in ("tra", "all", "ins"):
         endings = (_INE_PL_LIKE_ENDINGS[case],)
     else:
@@ -747,7 +736,7 @@ def decline_noun_specific(word, decl, consGrad, case, number):
         return
 
     # change ending (without adding case/number endings)
-    inflected = _change_ending(word, decl, case, number)
+    inflected = _change_ending_main(word, decl, case, number)
 
     # apply consonant gradation
     inflected = _consonant_gradation_main(
@@ -783,9 +772,8 @@ def decline_noun_specific(word, decl, consGrad, case, number):
         yield from _get_results_par_pl(word, inflected, decl, consGrad)
     elif case == "ill" and number == "pl":
         yield from _get_results_ill_pl(word, inflected, decl)
-    elif case == "ess" and number == "pl":
-        yield from _get_results_ess_pl(word, inflected, decl)
-    elif (case, number) in _CASES_LIKE_INE_PL:
+    elif (case, number) in _CASES_LIKE_INE_PL \
+    or case == "ess" and number == "pl":
         yield from _get_results_ine_pl(word, inflected, decl, case)
     else:
         sys.exit("error")
