@@ -228,8 +228,10 @@ _CONS_GRAD_STRENGTHEN = tuple((re.compile(f + "$"), t) for (f, t) in (
 _CONS_GRAD_WEAKEN_EXCEPTIONS = {
     "aika":  "aja",
     "aiko":  "ajo",   # aika
+    "hik":   "hi'",   # hiki
     "ik":    "i'",    # ikä
     "nälk":  "näl",   # nälkä
+    "pik":   "pi'",   # piki
     "poika": "poja",
     "poik":  "poj",   # poika
     "reik":  "rei'",  # reikä

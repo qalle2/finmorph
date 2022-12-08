@@ -41,6 +41,7 @@ if consGradFile is not None:
     # these are errors in the source data; fix them here for now
     consGradConjugationsByWord["alpi"].remove(5)
     consGradConjugationsByWord["auer"] = {49}
+    consGradConjugationsByWord["harre"] = {48}
     consGradConjugationsByWord["helpi"].remove(5)
     consGradConjugationsByWord["hynte"] = {48}
     consGradConjugationsByWord["näin"] = {33}

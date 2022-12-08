@@ -130,7 +130,6 @@ _EXCEPTIONS = {
     (48, "aave"): False,
     (48, "alje"): False,
     (48, "haave"): False,
-    (48, "harre"): False,
     (48, "helve"): True,
     (48, "hie"): False,
     (48, "hiue"): True,
