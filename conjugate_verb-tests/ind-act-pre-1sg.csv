@@ -1,0 +1,161 @@
+# homonyms in lemma form, different conjugation or consonant gradation
+# 69/75
+keritä,keritsen,kerkiän
+# 72/74
+isota,isoan,isonen
+sietä,sikenen,sikeän
+tyvetä,tyvenen,tyveän
+# 73
+pokata,pokaan,pokkaan
+tavata,tapaan,tavaan
+
+# more than one conjugation or optional consonant gradation (same meaning)
+# 52
+lohkoa,lohkon,lohon
+# 53/54
+sortaa,sorran
+vuotaa,vuodan
+# 53/56
+maistaa,maistan
+# 61
+pykiä,pyin,pykin
+sulkia,sulin,sulkin
+# 72
+kevetä,kepenen,kevenen
+# 72/74
+aueta,aukean,aukenen
+iljetä,ilkenen,ilkeän
+juljeta,julkean,julkenen
+oieta,oikean,oikenen
+raueta,raukean,raukenen
+sueta,sukean,sukenen
+# 73
+halvata,halpaan,halvaan
+raakata,raakaan,raakkaan
+# 74
+kimmota,kimmoan,kimpoan
+
+# conjugation 52
+hioa,hion
+sanoa,sanon
+säilöä,säilön
+vinkua,vingun
+ärtyä,ärryn
+
+# conjugation 53
+# -tAA
+itää,idän
+johtaa,johdan
+kyntää,kynnän
+muistaa,muistan
+yrittää,yritän
+# -CAA (not -tAA)
+elää,elän
+kuivaa,kuivan
+kylvää,kylvän
+purkaa,puran
+sulaa,sulan
+
+# conjugation 54
+huutaa,huudan
+lentää,lennän
+
+# conjugation 55 (all)
+entää,ennän
+hyytää,hyydän
+häätää,häädän
+kiitää,kiidän
+liitää,liidän
+soutaa,soudan
+yltää,yllän
+
+# conjugation 56
+kaivaa,kaivan
+karttaa,kartan
+
+# conjugation 57 (all)
+kaartaa,kaarran
+kaataa,kaadan
+saartaa,saarran
+
+# conjugation 58
+laskea,lasken
+nylkeä,nyljen
+
+# conjugation 59 (all)
+tuntea,tunnen
+
+# conjugation 60 (all)
+lähteä,lähden
+
+# conjugation 61
+sallia,sallin
+repiä,revin
+
+# conjugation 62
+epäröidä,epäröin
+voida,voin
+
+# conjugation 63 (all)
+jäädä,jään
+myydä,myyn
+saada,saan
+
+# conjugation 64 (all)
+juoda,juon
+luoda,luon
+lyödä,lyön
+myödä,myön
+suoda,suon
+syödä,syön
+tuoda,tuon
+viedä,vien
+
+# conjugation 65 (all)
+käydä,käyn
+
+# conjugation 66
+pestä,pesen
+rohkaista,rohkaisen
+
+# conjugation 67
+kätellä,kättelen
+tulla,tulen
+
+# conjugation 68
+isännöidä,isännöin,isännöitsen
+tupakoida,tupakoin,tupakoitsen
+
+# conjugation 69
+merkitä,merkitsen
+valita,valitsen
+
+# conjugation 70 (all)
+juosta,juoksen
+piestä,pieksen
+syöstä,syöksen
+
+# conjugation 71 (all)
+nähdä,näen
+tehdä,teen
+
+# conjugation 72
+edetä,etenen
+vanheta,vanhenen
+
+# conjugation 73
+salata,salaan
+tykätä,tykkään
+
+# conjugation 74
+katketa,katkean
+pietä,pikeän
+
+# conjugation 75
+peitota,peittoan
+selvitä,selviän
+siitä,sikiän
+
+# conjugation 76 (all)
+taitaa,taidan
+tietää,tiedän
