@@ -25,6 +25,21 @@ CSV file format used in this project:
 
 ## Programs interesting to the end user
 
+### conjugate_verb.py
+```
+Conjugate a Finnish verb. Arguments: VERB MOOD TENSE VOICE [NUMBER [PERSON]].
+Moods: ind/con/pot/imp. Tenses: pre/pst/per. Voices: act/pss. Numbers: sg/pl.
+Persons: 1/2/3.
+```
+
+Note: only indicative present active 1st &amp; 2nd person have been implemented.
+
+Example:
+```
+$ python3 conjugate_verb.py "keritä" ind pre act sg 1
+keritsen, kerkiän
+```
+
 ### decline_noun.py
 ```
 Decline a Finnish noun. Arguments: NOUN [CASE NUMBER]. Cases: nom, gen, par,
