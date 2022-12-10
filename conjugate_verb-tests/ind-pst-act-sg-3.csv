@@ -1,0 +1,159 @@
+# homonyms in lemma form, different conjugation or consonant gradation
+# 69/75
+keritä,keritsi,kerkisi
+# 72/74
+isota,isoni,isosi
+sietä,sikeni,sikesi
+tyvetä,tyveni,tyvesi
+# 73
+pokata,pokasi,pokkasi
+tavata,tapasi,tavasi
+
+# more than one conjugation or optional consonant gradation (same meaning)
+# 52
+lohkoa,lohkoi
+# 53/54
+sortaa,sorsi,sorti
+vuotaa,vuosi,vuoti
+# 61
+pykiä,pyki
+sulkia,sulki
+# 72
+kevetä,kepeni,keveni
+# 72/74
+aueta,aukeni,aukesi
+iljetä,ilkeni,ilkesi
+juljeta,julkeni,julkesi
+oieta,oikeni,oikesi
+raueta,raukeni,raukesi
+sueta,sukeni,sukesi
+# 73
+halvata,halpasi,halvasi
+raakata,raakasi,raakkasi
+# 74
+kimmota,kimmosi,kimposi
+
+# conjugation 52
+hioa,hioi
+sanoa,sanoi
+säilöä,säilöi
+vinkua,vinkui
+ärtyä,ärtyi
+
+# conjugation 53
+# -tAA
+itää,iti
+johtaa,johti
+kyntää,kynti
+muistaa,muisti
+yrittää,yritti
+# -CAA (not -tAA)
+elää,eli
+kuivaa,kuivi
+kylvää,kylvi
+purkaa,purki
+sulaa,suli
+
+# conjugation 54
+huutaa,huusi
+lentää,lensi
+
+# conjugation 55 (all)
+entää,ensi,enti
+hyytää,hyysi,hyyti
+häätää,hääsi,hääti
+kiitää,kiisi,kiiti
+liitää,liisi,liiti
+soutaa,sousi,souti
+yltää,ylsi,ylti
+
+# conjugation 56
+kaivaa,kaivoi
+karttaa,karttoi
+
+# conjugation 57 (all)
+kaartaa,kaarsi,kaartoi
+kaataa,kaasi,kaatoi
+saartaa,saarsi,saartoi
+
+# conjugation 58
+laskea,laski
+nylkeä,nylki
+
+# conjugation 59 (all)
+tuntea,tunsi
+
+# conjugation 60 (all)
+lähteä,lähti,läksi
+
+# conjugation 61
+sallia,salli
+repiä,repi
+
+# conjugation 62
+epäröidä,epäröi
+voida,voi
+
+# conjugation 63 (all)
+jäädä,jäi
+myydä,myi
+saada,sai
+
+# conjugation 64 (all)
+juoda,joi
+luoda,loi
+lyödä,löi
+myödä,möi
+suoda,soi
+syödä,söi
+tuoda,toi
+viedä,vei
+
+# conjugation 65 (all)
+käydä,kävi
+
+# conjugation 66
+pestä,pesi
+rohkaista,rohkaisi
+
+# conjugation 67
+kätellä,kätteli
+tulla,tuli
+
+# conjugation 68
+isännöidä,isännöi,isännöitsi
+tupakoida,tupakoi,tupakoitsi
+
+# conjugation 69
+merkitä,merkitsi
+valita,valitsi
+
+# conjugation 70 (all)
+juosta,juoksi
+piestä,pieksi
+syöstä,syöksi
+
+# conjugation 71 (all)
+nähdä,näki
+tehdä,teki
+
+# conjugation 72
+edetä,eteni
+vanheta,vanheni
+
+# conjugation 73
+salata,salasi
+tykätä,tykkäsi
+
+# conjugation 74
+katketa,katkesi
+pietä,pikesi
+
+# conjugation 75
+peitota,peittosi
+selvitä,selvisi
+siitä,sikisi
+
+# conjugation 76 (all)
+taitaa,taisi
+tietää,tiesi

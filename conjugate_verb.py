@@ -9,11 +9,99 @@ from verbconj import get_conjugations
 
 # -----------------------------------------------------------------------------
 
+# verbs with optional consonant gradation
+_OPTIONAL_CONS_GRAD = frozenset((
+    "halvata", "kevetä", "kimmota", "lohkoa", "pokata", "pykiä", "raakata",
+    "sulkia", "tavata"
+))
+
+# consonant gradation is weak to strong in these conjugations
+_CONJS_STRENGTHEN = frozenset((
+    # rohkaista, tulla, vanheta, salata, katketa, selvitä
+    66, 67, 72, 73, 74, 75
+))
+
+# -----------------------------------------------------------------------------
+
+# rules for consonant gradation
+# - format: (regex_from, regex_to)
+# - "$" will be appended to regex_from
+# - only the 1st match with regex_from will be applied
+# - the ending will be changed afterwards
+#
+# strong to weak (happens before -VA)
+_CONS_GRAD_WEAKEN = tuple((re.compile(f + "$"), t) for (f, t) in (
+    # k
+    ("kk([aeiouyäö][aä])",               r"k\1"),    # -kkVA
+    ("nk([aeiouyäö][aä])",               r"ng\1"),   # -nkVA
+    ("([lr])k(e[aä])",                   r"\1j\2"),  # -lkeA/-rkeA
+    ("([aeiouyäöhlr])k([aeiouyäö][aä])", r"\1\2"),   # V/h/l/r + kVA
+    # p
+    ("pp([aeiouyäö][aä])",              r"p\1"),    # -ppVA
+    ("mp([aeiouyäö][aä])",              r"mm\1"),   # -mpVA
+    ("([aeiouyäölr])p([aeiouyäö][aä])", r"\1v\2"),  # -VpVA/-lpVA/-rpVA
+    # t
+    ("tt([aeiouyäö][aä])",             r"t\1"),     # -ttVA
+    ("([lnr])t([aeiouyäö][aä])",       r"\1\1\2"),  # -ltVA/-ntVA/-rtVA
+    ("([aeiouyäöh])t([aeiouyäö][aä])", r"\1d\2"),   # -VtVA/-htVA
+))
+#
+# weak to strong (happens before -VA/-VtA/-ellA)
+_CONS_GRAD_STRENGTHEN = tuple((re.compile(f + "$"), t) for (f, t) in (
+    # k/p/t -> kk/pp/tt
+    ("([aeiouyäölmnr])([kpt])([aeiouyäö]t?[aä]|ell[aä])", r"\1\2\2\3"),
+    # g/j/- -> k
+    ("ng([aeiouyäö]t?[aä]|ell[aä])",                 r"nk\1"),   # ng
+    ("([hlr])j([aeiouyäö]t?[aä]|ell[aä])",           r"\1k\2"),  # hj/lj/rj
+    ("([aeiouyäö][hlr]?)([aeiouyäö]t?[aä]|ell[aä])", r"\1k\2"),  # V/Vh/Vl/Vr
+    # m/v -> p
+    ("mm([aeiouyäö]t?[aä]|ell[aä])",              r"mp\1"),   # mm
+    ("([aeiouyäölr])v([aeiouyäö]t?[aä]|ell[aä])", r"\1p\2"),  # Vv/lv/rv
+    # d/l/n/r -> t
+    (r"([lnr])\1([aeiouyäö]t?[aä]|ell[aä])",     r"\1t\2"),  # ll/nn/rr
+    ("([aeiouyäöh])d([aeiouyäö]t?[aä]|ell[aä])", r"\1t\2"),  # Vd/hd
+))
+
+_CONS_GRAD_STRENGTHEN_EXCEPTIONS = {
+    # the only conjugation 66 verbs with consonant gradation
+    "häväistä":  "häpäistä",
+    "rangaista": "rankaista",
+    "vavista":   "vapista",
+}
+
+def _consonant_gradation(verb, strengthen=False):
+    # apply consonant gradation to the verb
+    # strengthen: False = strong to weak, True = weak to strong
+
+    if strengthen and verb in _CONS_GRAD_STRENGTHEN_EXCEPTIONS:
+        return _CONS_GRAD_STRENGTHEN_EXCEPTIONS[verb]
+
+    regexes = _CONS_GRAD_STRENGTHEN if strengthen else _CONS_GRAD_WEAKEN
+    for (reFrom, reTo) in regexes:
+        if re.search(reFrom, verb) is not None:
+            return re.sub(reFrom, reTo, verb)
+    sys.exit(f"Failed to apply consonant gradation: {verb=}, {strengthen=}")
+
+def _consonant_gradation_main(verb, conj, mood, tense, voice, person):
+    # generate the verb with/without consonant gradation
+    # (before changing ending)
+
+    if mood == "ind" and tense in ("pre", "pst") and voice == "act" \
+    and (person != "3" or conj in _CONJS_STRENGTHEN):
+        yield _consonant_gradation(verb, conj in _CONJS_STRENGTHEN)
+        if verb in _OPTIONAL_CONS_GRAD:
+            yield verb
+    else:
+        yield verb
+
+# -----------------------------------------------------------------------------
+
 # rules for changing endings of verbs
 # - format: conjugation: ((regex_from, regex_to), ...)
 # - "$" will be appended to regex_from
 # - only the 1st match with regex_from will be applied
-# - consonant gradation and case/number endings will be applied afterwards
+# - consonant gradation has already been applied
+# - number/person endings will be added afterwards
 # - for clarity, avoid making changes here that need to be undone later
 
 _CHANGES_IND_PRE_ACT = {
@@ -33,7 +121,7 @@ _CHANGES_IND_PRE_ACT = {
     65: (("d[aä]",     ""),),     # käydä
     66: (("t[aä]",     "e"),),    # rohkaista
     67: (("[lnr][aä]", "e"),),    # tulla
-    68: (("d[aä]",     ""),),     # tupakoida
+    68: (("d[aä]",     ""),),     # tupakoida + variant tupakoitse
     69: (("t[aä]",     "tse"),),  # valita
     70: (("st[aä]",    "kse"),),  # juosta
     71: (("hd[aä]",    "e"),),    # nähdä
@@ -44,13 +132,43 @@ _CHANGES_IND_PRE_ACT = {
     76: (("[aä]",      ""),),     # taitaa
 }
 
-def _change_ending(verb, conj, mood, tense, voice, number, person):
+_CHANGES_IND_PST_ACT = {
+    52: (("[aä]",       "i"),),    # sanoa
+    53: (("(aa|ää)",    "i"),),    # muistaa
+    54: (("t(aa|ää)",   "si"),),   # huutaa
+    55: (("(aa|ää)",    "i"),),    # soutaa
+    56: (("aa",         "oi"),),   # kaivaa
+    57: (("aa",         "oi"),),   # saartaa
+    58: (("e[aä]",      "i"),),    # laskea
+    59: (("tea",        "si"),),   # tuntea
+    60: (("eä",         "i"),),    # lähteä
+    61: (("i[aä]",      "i"),),    # sallia
+    62: (("d[aä]",      ""),),     # voida
+    63: (("[aäy]d[aä]", "i"),),    # saada
+    64: (("iedä", "ei"), ("uoda", "oi"), ("yödä", "öi")),  # juoda
+    65: (("ydä",        "vi"),),   # käydä
+    66: (("t[aä]",      "i"),),    # rohkaista
+    67: (("[lnr][aä]",  "i"),),    # tulla
+    68: (("d[aä]", ""), ("e", "i")),  # tupakoida + variant tupakoitse
+    69: (("t[aä]",      "tsi"),),  # valita
+    70: (("st[aä]",     "ksi"),),  # juosta
+    71: (("hd[aä]",     "i"),),    # nähdä
+    72: (("t[aä]",      "ni"),),   # vanheta
+    73: (("t[aä]",      "si"),),   # salata
+    74: (("t[aä]",      "si"),),   # katketa
+    75: (("t[aä]",      "si"),),   # selvitä
+    76: (("t(aa|ää)",   "si"),),   # taitaa
+}
+
+def _change_ending(verb, conj, mood, tense, voice):
     # change the ending of the verb (before applying consonant gradation or
-    # adding person/etc. endings)
+    # adding number/person endings)
 
     # get regexes to apply
     if mood == "ind" and tense == "pre" and voice == "act":
         changes = _CHANGES_IND_PRE_ACT.get(conj, ())
+    elif mood == "ind" and tense == "pst" and voice == "act":
+        changes = _CHANGES_IND_PST_ACT.get(conj, ())
     else:
         sys.exit("not implemented")
 
@@ -60,111 +178,6 @@ def _change_ending(verb, conj, mood, tense, voice, number, person):
         if re.search(regexFrom, verb) is not None:
             return re.sub(regexFrom, regexTo, verb)
     return verb
-
-# -----------------------------------------------------------------------------
-
-# rules for consonant gradation
-# - format: (regex_from, regex_to)
-# - "$" will be appended to regex_from
-# - only the 1st match with regex_from will be applied
-# - the ending has already been changed
-#
-# strong to weak
-_CONS_GRAD_WEAKEN = tuple((re.compile(f + "$"), t) for (f, t) in (
-    # k
-    ("kk([aeiouyäö])",               r"k\1"),   # -kkV
-    ("nk([aeiouyäö])",               r"ng\1"),  # -nkV
-    ("([lr])ke",                     r"\1je"),  # -lke/-rke
-    ("([aeiouyäöhlr])k([aeiouyäö])", r"\1\2"),  # -VkV/-hkV/-lkV/-rkV
-    # p
-    ("pp([aeiouyäö])",              r"p\1"),    # -ppV
-    ("mp([aeiouyäö])",              r"mm\1"),   # -mpV
-    ("([aeiouyäölr])p([aeiouyäö])", r"\1v\2"),  # -VpV/-lpV/-rpV
-    # t
-    ("tt([aeiouyäö])",             r"t\1"),     # -ttV
-    ("([lnr])t([aeiouyäö])",       r"\1\1\2"),  # -ltV/-ntV/-rtV
-    ("([aeiouyäöh])t([aeiouyäö])", r"\1d\2"),   # -VtV/-htV
-))
-#
-# weak to strong
-_CONS_GRAD_STRENGTHEN = tuple((re.compile(f + "$"), t) for (f, t) in (
-    # the inflected form may end with:
-    #   -ele (from conjugation 67       -ellA)
-    #   -Vne (from conjugation 72       -VtA)
-    #   -VA  (from conjugation 73/74/75 -VtA)
-    #
-    # k/p/t -> kk/pp/tt
-    ("([aeiouyäölmnr])([kpt])([aeiouyäö](a|ä|ne)|ele)", r"\1\2\2\3"),
-    # g/j/- -> k
-    ("ng([aeiouyäö](a|ä|ne)|ele)",                 r"nk\1"),   # ng
-    ("([hlr])j([aeiouyäö](a|ä|ne)|ele)",           r"\1k\2"),  # hj/lj/rj
-    ("([aeiouyäö][hlr]?)([aeiouyäö](a|ä|ne)|ele)", r"\1k\2"),  # V/Vh/Vl/Vr
-    # m/v -> p
-    ("mm([aeiouyäö](a|ä|ne)|ele)",              r"mp\1"),   # mm
-    ("([aeiouyäölr])v([aeiouyäö](a|ä|ne)|ele)", r"\1p\2"),  # Vv/lv/rv
-    # d/l/n/r -> t
-    (r"([lnr])\1([aeiouyäö](a|ä|ne)|ele)",     r"\1t\2"),  # ll/nn/rr
-    ("([aeiouyäöh])d([aeiouyäö](a|ä|ne)|ele)", r"\1t\2"),  # Vd/hd
-))
-
-_CONS_GRAD_STRENGTHEN_EXCEPTIONS = {
-    # the only conjugation 66 verbs with consonant gradation
-    "häväise":  "häpäise",   # häväistä
-    "rangaise": "rankaise",  # rankaista
-    "vavise":   "vapise",    # vapista
-}
-
-def _consonant_gradation(verb, strengthen=False):
-    # apply consonant gradation to the verb
-    # strengthen: False = strong to weak, True = weak to strong
-
-    if strengthen and verb in _CONS_GRAD_STRENGTHEN_EXCEPTIONS:
-        return _CONS_GRAD_STRENGTHEN_EXCEPTIONS[verb]
-
-    regexes = _CONS_GRAD_STRENGTHEN if strengthen else _CONS_GRAD_WEAKEN
-    for (reFrom, reTo) in regexes:
-        if re.search(reFrom, verb) is not None:
-            return re.sub(reFrom, reTo, verb)
-    return verb
-
-# verbs with optional consonant gradation
-_OPTIONAL_CONS_GRAD = frozenset((
-    "halvata", "kevetä", "kimmota", "lohkoa", "pokata", "pykiä", "raakata",
-    "sulkia", "tavata"
-))
-
-# consonant gradation is weak to strong in these conjugations
-_CONJS_STRENGTHEN = frozenset((
-    # rohkaista, tulla, vanheta, salata, katketa, selvitä
-    66, 67, 72, 73, 74, 75
-))
-
-def _consonant_gradation_main(
-    verb, inflected, conj, mood, tense, voice, person
-):
-    # apply consonant gradation to the verb (before appending case/number
-    # endings)
-
-    if verb in _OPTIONAL_CONS_GRAD:
-        return inflected  # skip for now
-    if mood == "ind" and tense == "pre" and voice == "act" \
-    and (person != "3" or conj in _CONJS_STRENGTHEN):
-        return _consonant_gradation(inflected, conj in _CONJS_STRENGTHEN)
-    return inflected  # no consonant gradation
-
-# -----------------------------------------------------------------------------
-
-def _get_verb_variant(
-    verb, inflected, conj, mood, tense, voice, number, person
-):
-    # return a variant of inflected verb or None
-
-    if verb in _OPTIONAL_CONS_GRAD:
-        # a variant with consonant gradation
-        return _consonant_gradation(inflected, conj in _CONJS_STRENGTHEN)
-    if conj == 68:  # tupakoida
-        return inflected + "tse"
-    return None  # no variant
 
 # -----------------------------------------------------------------------------
 
@@ -182,6 +195,29 @@ _NUMBER_PERSON_ENDINGS = {
     ("pl", "1"): "mme",
     ("pl", "2"): "tte",
 }
+
+def _get_active_forms(inflected, tense, number, person):
+    # generate verbs with case/number endings
+
+    # use "a" or "ä" in -A endings?
+    aOrAuml = "a" if re.search(r"^[^aou]+$", inflected[0]) is None else "ä"
+
+    if person == "3":
+        if number == "sg":
+            if tense == "pre":
+                for i in inflected:
+                    if re.search("[aeiouyäö]i$", i) is not None:
+                        yield i
+                    else:
+                        yield i + i[-1]
+            else:
+                yield from inflected
+        else:
+            yield from (i + "v" + aOrAuml + "t" for i in inflected)
+    else:
+        yield from (
+            i + _NUMBER_PERSON_ENDINGS[(number, person)] for i in inflected
+        )
 
 def conjugate_verb_specific(
     verb, conj, consGrad, mood, tense, voice, number, person
@@ -211,42 +247,34 @@ def conjugate_verb_specific(
     assert (tense == "per") == (person is None)
     assert mood != "imp" or number != "sg" or person != "1"
 
-    # use "a" or "ä" in -A endings?
-    aOrAuml = "a" if re.search(r"^[^aou]+$", verb) is None else "ä"
-
-    # change ending (without adding case/number endings)
-    inflected = _change_ending(verb, conj, mood, tense, voice, number, person)
+    # add variant (tupakoida -> tupakoitse)
+    variants = [verb]
+    if conj == 68:
+        variants.append(re.sub("d[aä]$", "tse", verb))
+    #print("variants:", variants)
 
     # apply consonant gradation
     if consGrad:
-        inflected = _consonant_gradation_main(
-            verb, inflected, conj, mood, tense, voice, person
-        )
+        inflected = []
+        for variant in variants:
+            inflected.extend(_consonant_gradation_main(
+                variant, conj, mood, tense, voice, person
+            ))
+    else:
+        inflected = variants.copy()
+    del variants
+    #print("after cons. grad.:", inflected)
 
-    # add variant if there's one
-    variant = _get_verb_variant(
-        verb, inflected, conj, mood, tense, voice, number, person
+    # change ending (without adding case/number endings)
+    inflected = list(
+        _change_ending(i, conj, mood, tense, voice) for i in inflected
     )
-    inflected = [inflected]
-    if variant is not None:
-        inflected.append(variant)
-    del variant
 
     inflected = tuple(inflected)
-    #print(f"{inflected=}, {conj=}, {consGrad=}")
+    #print(f"{inflected=} {conj=} {consGrad=}")
 
     # append case/number endings and generate verbs
-    if mood == "ind" and tense == "pre" and voice == "act":
-        if person == "3":
-            if number == "sg":
-                ending = inflected[0][-1]
-            else:
-                ending = "v" + aOrAuml + "t"
-        else:
-            ending = _NUMBER_PERSON_ENDINGS[(number, person)]
-        yield from (i + ending for i in inflected)
-    else:
-        sys.exit("not implemented")
+    yield from _get_active_forms(inflected, tense, number, person)
 
 def conjugate_verb(verb, mood, tense, voice, number=None, person=None):
     """Get inflected forms of a Finnish verb. Autodetects conjugation(s) and
@@ -292,6 +320,12 @@ _ALL_FORMS = (
     ("ind", "pre", "act", "pl", "1"),
     ("ind", "pre", "act", "pl", "2"),
     ("ind", "pre", "act", "pl", "3"),
+    ("ind", "pst", "act", "sg", "1"),
+    ("ind", "pst", "act", "sg", "2"),
+    ("ind", "pst", "act", "sg", "3"),
+    ("ind", "pst", "act", "pl", "1"),
+    ("ind", "pst", "act", "pl", "2"),
+    ("ind", "pst", "act", "pl", "3"),
 )
 
 def main():
