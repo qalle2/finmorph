@@ -305,11 +305,12 @@ def main():
             "combinations."
         )
 
+    verb = sys.argv[1]
     if len(sys.argv) >= 5:
-        (verb, mood, tense, voice) = sys.argv[1:5]
-        allForms = True
-    else:
+        (mood, tense, voice) = sys.argv[2:5]
         allForms = False
+    else:
+        allForms = True
     number = sys.argv[5] if len(sys.argv) >= 6 else None
     person = sys.argv[6] if len(sys.argv) >= 7 else None
 

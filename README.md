@@ -27,17 +27,25 @@ CSV file format used in this project:
 
 ### conjugate_verb.py
 ```
-Conjugate a Finnish verb. Arguments: VERB MOOD TENSE VOICE [NUMBER [PERSON]].
+Conjugate a Finnish verb. Arguments: VERB [MOOD TENSE VOICE [NUMBER [PERSON]]].
 Moods: ind/con/pot/imp. Tenses: pre/pst/per. Voices: act/pss. Numbers: sg/pl.
-Persons: 1/2/3.
+Persons: 1/2/3. If 1 argument only, print all supported combinations.
 ```
 
-Note: only indicative present active 1st &amp; 2nd person have been implemented.
+Note: only indicative present active has been implemented.
 
 Example:
 ```
 $ python3 conjugate_verb.py "keritä" ind pre act sg 1
-keritsen, kerkiän
+ind-pre-act-sg-1: keritsen, kerkiän
+
+$ python3 conjugate_verb.py "ottaa"
+ind-pre-act-sg-1: otan
+ind-pre-act-sg-2: otat
+ind-pre-act-sg-3: ottaa
+ind-pre-act-pl-1: otamme
+ind-pre-act-pl-2: otatte
+ind-pre-act-pl-3: ottavat
 ```
 
 ### decline_noun.py
