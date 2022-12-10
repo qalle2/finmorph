@@ -5,12 +5,12 @@ from verb_consgrad import get_consonant_gradation
 from verbconj import get_conjugations
 
 # - C = any consonant, V = any vowel, A = a/ä, O = o/ö, U = u/y
-# - declensions (1-49) are from Kotus
+# - conjugations (52-76) are from Kotus
 
 # -----------------------------------------------------------------------------
 
-# rules for changing endings of words
-# - format: declension: ((regex_from, regex_to), ...)
+# rules for changing endings of verbs
+# - format: conjugation: ((regex_from, regex_to), ...)
 # - "$" will be appended to regex_from
 # - only the 1st match with regex_from will be applied
 # - consonant gradation and case/number endings will be applied afterwards
@@ -114,18 +114,18 @@ _CONS_GRAD_STRENGTHEN_EXCEPTIONS = {
     "vavise":   "vapise",    # vapista
 }
 
-def _consonant_gradation(word, strengthen=False):
-    # apply consonant gradation to the word
+def _consonant_gradation(verb, strengthen=False):
+    # apply consonant gradation to the verb
     # strengthen: False = strong to weak, True = weak to strong
 
-    if strengthen and word in _CONS_GRAD_STRENGTHEN_EXCEPTIONS:
-        return _CONS_GRAD_STRENGTHEN_EXCEPTIONS[word]
+    if strengthen and verb in _CONS_GRAD_STRENGTHEN_EXCEPTIONS:
+        return _CONS_GRAD_STRENGTHEN_EXCEPTIONS[verb]
 
     regexes = _CONS_GRAD_STRENGTHEN if strengthen else _CONS_GRAD_WEAKEN
     for (reFrom, reTo) in regexes:
-        if re.search(reFrom, word) is not None:
-            return re.sub(reFrom, reTo, word)
-    return word
+        if re.search(reFrom, verb) is not None:
+            return re.sub(reFrom, reTo, verb)
+    return verb
 
 # verbs with optional consonant gradation
 _OPTIONAL_CONS_GRAD = frozenset((
@@ -140,14 +140,15 @@ _CONJS_STRENGTHEN = frozenset((
 ))
 
 def _consonant_gradation_main(
-    verb, inflected, conj, mood, tense, voice, number, person
+    verb, inflected, conj, mood, tense, voice, person
 ):
-    # apply consonant gradation to the word (before appending case/number
+    # apply consonant gradation to the verb (before appending case/number
     # endings)
 
     if verb in _OPTIONAL_CONS_GRAD:
         return inflected  # skip for now
-    if mood == "ind" and tense == "pre" and voice == "act" and number != "3":
+    if mood == "ind" and tense == "pre" and voice == "act" \
+    and (person != "3" or conj in _CONJS_STRENGTHEN):
         return _consonant_gradation(inflected, conj in _CONJS_STRENGTHEN)
     return inflected  # no consonant gradation
 
@@ -187,7 +188,7 @@ def conjugate_verb_specific(
 ):
     """Get inflected forms of a Finnish verb.
     verb:     a verb in 1st infinitive (str)
-    decl:     Kotus conjugation (52-76)
+    conj:     Kotus conjugation (52-76)
     consGrad: does consonant gradation apply in certain cases/numbers? (bool)
     mood:     one of MOODS
     tense:    one of TENSES
@@ -206,9 +207,12 @@ def conjugate_verb_specific(
     assert person in PERSONS or person is None
     assert mood == "ind" or tense == "pre"
     assert mood != "imp" or voice == "act"
-    assert (tense == "per") == (person is None)
     assert (voice == "pss") == (number is None)
+    assert (tense == "per") == (person is None)
     assert mood != "imp" or number != "sg" or person != "1"
+
+    # use "a" or "ä" in -A endings?
+    aOrAuml = "a" if re.search(r"^[^aou]+$", verb) is None else "ä"
 
     # change ending (without adding case/number endings)
     inflected = _change_ending(verb, conj, mood, tense, voice, number, person)
@@ -216,7 +220,7 @@ def conjugate_verb_specific(
     # apply consonant gradation
     if consGrad:
         inflected = _consonant_gradation_main(
-            verb, inflected, conj, mood, tense, voice, number, person
+            verb, inflected, conj, mood, tense, voice, person
         )
 
     # add variant if there's one
@@ -231,11 +235,15 @@ def conjugate_verb_specific(
     inflected = tuple(inflected)
     #print(f"{inflected=}, {conj=}, {consGrad=}")
 
-    # append case/number endings and generate words
+    # append case/number endings and generate verbs
     if mood == "ind" and tense == "pre" and voice == "act":
         if person == "3":
-            sys.exit("not implemented")
-        ending = _NUMBER_PERSON_ENDINGS[(number, person)]
+            if number == "sg":
+                ending = inflected[0][-1]
+            else:
+                ending = "v" + aOrAuml + "t"
+        else:
+            ending = _NUMBER_PERSON_ENDINGS[(number, person)]
         yield from (i + ending for i in inflected)
     else:
         sys.exit("not implemented")
@@ -260,8 +268,8 @@ def conjugate_verb(verb, mood, tense, voice, number=None, person=None):
     assert person in PERSONS or person is None
     assert mood == "ind" or tense == "pre"
     assert mood != "imp" or voice == "act"
-    assert (tense == "per") == (person is None)
     assert (voice == "pss") == (number is None)
+    assert (tense == "per") == (person is None)
     assert mood != "imp" or number != "sg" or person != "1"
 
     results = set()
@@ -276,57 +284,73 @@ def conjugate_verb(verb, mood, tense, voice, number=None, person=None):
 
     return results
 
+# all supported combinations of mood, tense, voice, number and person
+_ALL_FORMS = (
+    ("ind", "pre", "act", "sg", "1"),
+    ("ind", "pre", "act", "sg", "2"),
+    ("ind", "pre", "act", "sg", "3"),
+    ("ind", "pre", "act", "pl", "1"),
+    ("ind", "pre", "act", "pl", "2"),
+    ("ind", "pre", "act", "pl", "3"),
+)
+
 def main():
-    if not 5 <= len(sys.argv) <= 7:
+    if len(sys.argv) not in (2, 5, 6, 7):
         sys.exit(
-            "Conjugate a Finnish verb. Arguments: VERB MOOD TENSE VOICE "
-            "[NUMBER [PERSON]]. Moods: " + "/".join(MOODS) + ". Tenses: "
+            "Conjugate a Finnish verb. Arguments: VERB [MOOD TENSE VOICE "
+            "[NUMBER [PERSON]]]. Moods: " + "/".join(MOODS) + ". Tenses: "
             + "/".join(TENSES) + ". Voices: " + "/".join(VOICES) + ". "
             "Numbers: " + "/".join(NUMBERS) + ". Persons: "
-            + "/".join(PERSONS) + "."
+            + "/".join(PERSONS) + ". If 1 argument only, print all supported "
+            "combinations."
         )
 
-    (verb, mood, tense, voice) = sys.argv[1:5]
+    if len(sys.argv) >= 5:
+        (verb, mood, tense, voice) = sys.argv[1:5]
+        allForms = True
+    else:
+        allForms = False
     number = sys.argv[5] if len(sys.argv) >= 6 else None
     person = sys.argv[6] if len(sys.argv) >= 7 else None
 
-    if mood not in MOODS:
-        sys.exit("Invalid mood.")
-    if tense not in TENSES:
-        sys.exit("Invalid tense.")
-    if voice not in VOICES:
-        sys.exit("Invalid voice.")
-    if number is not None and number not in NUMBERS:
-        sys.exit("Invalid number.")
-    if person is not None and person not in PERSONS:
-        sys.exit("Invalid person.")
+    if not allForms:
+        if mood not in MOODS:
+            sys.exit("Invalid mood.")
+        if tense not in TENSES:
+            sys.exit("Invalid tense.")
+        if voice not in VOICES:
+            sys.exit("Invalid voice.")
+        if number is not None and number not in NUMBERS:
+            sys.exit("Invalid number.")
+        if person is not None and person not in PERSONS:
+            sys.exit("Invalid person.")
 
-    if mood != "ind" and tense != "pre":
-        sys.exit(
-            "Can't have past/perfect tense with conditional/potential/"
-            "imperative mood."
-        )
-    if mood == "imp" and voice == "pss":
-        sys.exit("Can't have passive voice with imperative mood.")
-    if (tense == "per") != (person is None):
-        sys.exit(
-            "Person required in present/past tense, forbidden in perfect "
-            "tense."
-        )
-    if (voice == "pss") != (number is None):
-        sys.exit(
-            "Number and person required in active voice, forbidden in passive "
-            "voice."
-        )
-    if mood == "imp" and number == "sg" and person == "1":
-        sys.exit("1st person singular forbidden with imperative mood.")
+        if mood != "ind" and tense != "pre":
+            sys.exit(
+                "Can't have past/perfect tense with conditional/potential/"
+                "imperative mood."
+            )
+        if mood == "imp" and voice == "pss":
+            sys.exit("Can't have passive voice with imperative mood.")
+        if (voice == "pss") != (number is None):
+            sys.exit(
+                "Number required in active voice, forbidden in passive voice."
+            )
+        if (tense == "per") != (person is None):
+            sys.exit(
+                "Person required in present/past tense, forbidden in perfect "
+                "tense."
+            )
+        if mood == "imp" and number == "sg" and person == "1":
+            sys.exit("1st person singular forbidden with imperative mood.")
 
-    conjugatedVerbs = set(
-        conjugate_verb(verb, mood, tense, voice, number, person)
-    )
-    if not conjugatedVerbs:
-        sys.exit("Unrecognized verb.")
-    print(", ".join(sorted(conjugatedVerbs)))
+    forms = _ALL_FORMS if allForms else ((mood, tense, voice, number, person),)
+
+    for form in forms:
+        conjugatedVerbs = set(conjugate_verb(verb, *form))
+        if not conjugatedVerbs:
+            sys.exit("Unrecognized verb.")
+        print("-".join(form) + ": " + ", ".join(sorted(conjugatedVerbs)))
 
 if __name__ == "__main__":
     main()
