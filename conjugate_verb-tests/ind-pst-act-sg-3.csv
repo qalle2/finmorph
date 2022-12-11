@@ -34,18 +34,83 @@ raakata,raakasi,raakkasi
 kimmota,kimmosi,kimposi
 
 # conjugation 52
+# -VVA
 hioa,hioi
-sanoa,sanoi
-säilöä,säilöi
+# -kVA
+aikoa,aikoi
+ilkkua,ilkkui
+halkoa,halkoi
+jatkua,jatkui
+kirkua,kirkui
+kärkkyä,kärkkyi
+mankua,mankui
+rikkoa,rikkoi
+uskoa,uskoi
 vinkua,vinkui
+ähkyä,ähkyi
+# -pVA
+ampua,ampui
+arpoa,arpoi
+elpyä,elpyi
+harppoa,harppoi
+tippua,tippui
+yöpyä,yöpyi
+# -tVA
+pettyä,pettyi
+pinttyä,pinttyi
+ruostua,ruostui
+talttua,talttui
+tarttua,tarttui
+tuntua,tuntui
+yhtyä,yhtyi
+yltyä,yltyi
+äityä,äityi
 ärtyä,ärtyi
+# -hVA
+puhua,puhui
+# -jVA
+kiljua,kiljui
+lahjoa,lahjoi
+lojua,lojui
+ärjyä,ärjyi
+# -lVA
+kellua,kellui
+säilöä,säilöi
+vihloa,vihloi
+# -mVA
+ammua,ammui
+kermoa,kermoi
+kuumua,kuumui
+vihmoa,vihmoi
+# -nVA
+hirnua,hirnui
+sanoa,sanoi
+vannoa,vannoi
+# -rVA
+varoa,varoi
+# -sVA
+asua,asui
+eksyä,eksyi
+katsoa,katsoi
+lipsua,lipsui
+pensoa,pensoi
+tylsyä,tylsyi
+varsoa,varsoi
+# -vVA
+latvoa,latvoi
+nivoa,nivoi
+survoa,survoi
+ulvoa,ulvoi
 
 # conjugation 53
 # -tAA
-itää,iti
+hirttää,hirtti
+inttää,intti
 johtaa,johti
 kyntää,kynti
 muistaa,muisti
+polttaa,poltti
+vetää,veti
 yrittää,yritti
 # -CAA (not -tAA)
 elää,eli
@@ -55,8 +120,13 @@ purkaa,purki
 sulaa,suli
 
 # conjugation 54
+# -tAA
 huutaa,huusi
 lentää,lensi
+murtaa,mursi
+puoltaa,puolsi
+# -CAA (not -tAA)
+lypsää,lypsi
 
 # conjugation 55 (all)
 entää,ensi,enti
@@ -68,8 +138,29 @@ soutaa,sousi,souti
 yltää,ylsi,ylti
 
 # conjugation 56
-kaivaa,kaivoi
+# -kAA
+alkaa,alkoi
+jakaa,jakoi
+jatkaa,jatkoi
+virkkaa,virkkoi
+# -pAA
+tappaa,tappoi
+# -tAA
+ahtaa,ahtoi
+antaa,antoi
+auttaa,auttoi
 karttaa,karttoi
+kastaa,kastoi
+malttaa,malttoi
+raataa,raatoi
+# -CAA (not -kAA, -pAA, -tAA)
+ajaa,ajoi
+jaksaa,jaksoi
+jauhaa,jauhoi
+kaivaa,kaivoi
+nauraa,nauroi
+painaa,painoi
+palaa,paloi
 
 # conjugation 57 (all)
 kaartaa,kaarsi,kaartoi
@@ -77,8 +168,21 @@ kaataa,kaasi,kaatoi
 saartaa,saarsi,saartoi
 
 # conjugation 58
+# -keA
+itkeä,itki
 laskea,laski
+lukea,luki
 nylkeä,nylki
+särkeä,särki
+tunkea,tunki
+# -peA
+kylpeä,kylpi
+rypeä,rypi
+# -teA
+päteä,päti
+# -CeA (not -keA, -peA, -teA)
+imeä,imi
+kaitsea,kaitsi
 
 # conjugation 59 (all)
 tuntea,tunsi
@@ -87,8 +191,45 @@ tuntea,tunsi
 lähteä,lähti,läksi
 
 # conjugation 61
-sallia,salli
+# -kiA
+hankkia,hankki
+hylkiä,hylki
+kukkia,kukki
+matkia,matki
+nykiä,nyki
+onkia,onki
+pilkkiä,pilkki
+pyrkiä,pyrki
+röhkiä,röhki
+urkkia,urkki
+vihkiä,vihki
+yskiä,yski
+# -piA
+empiä,empi
+hörppiä,hörppi
+kalppia,kalppi
+oppia,oppi
+pomppia,pomppi
 repiä,repi
+silpiä,silpi
+särpiä,särpi
+# -tiA
+aistia,aisti
+miettiä,mietti
+sontia,sonti
+sotia,soti
+tenttiä,tentti
+vahtia,vahti
+# -CiA (not -kiA, -piA, -tiA)
+fudia,fudi
+kyniä,kyni
+luovia,luovi
+omia,omi
+periä,peri
+pesiä,pesi
+sallia,salli
+sohia,sohi
+syrjiä,syrji
 
 # conjugation 62
 epäröidä,epäröi
@@ -117,7 +258,36 @@ pestä,pesi
 rohkaista,rohkaisi
 
 # conjugation 67
+# -ellA
+ajella,ajeli
+anella,aneli
+elellä,eleli
+hypellä,hyppeli
+jaella,jakeli
+kannella,kanteli
+kartella,kartteli
+kierrellä,kierteli
+kohdella,kohteli
+kysellä,kyseli
 kätellä,kätteli
+kävellä,käveli
+nakella,nakkeli
+niellä,nieli
+ommella,ompeli
+pistellä,pisteli
+poltella,poltteli
+puhella,puheli
+turmella,turmeli
+udella,uteli
+vaellella,vaelteli
+varjella,varjeli
+viljellä,viljeli
+viskellä,viskeli
+# other (not -ellA)
+mennä,meni
+olla,oli
+piillä,piili
+purra,puri
 tulla,tuli
 
 # conjugation 68
@@ -138,21 +308,193 @@ nähdä,näki
 tehdä,teki
 
 # conjugation 72
+# -VVtA
+kyetä,kykeni
+toeta,tokeni
+# -CVtA
 edetä,eteni
+enetä,eneni
+hapata,happani
+harveta,harveni
+helpota,helpponi
+hiljetä,hiljeni
+huveta,hupeni
+jyrketä,jyrkkeni
+kalveta,kalpeni
+kiinnetä,kiinteni
+koveta,koveni
+kuohketa,kuohkeni
+loitota,loittoni
+lämmetä,lämpeni
+oheta,oheni
+parata,parani
+rohjeta,rohkeni
+selvetä,selveni
+synketä,synkkeni
+tarjeta,tarkeni
+tiuketa,tiukkeni
+tyhmetä,tyhmeni
+tylsetä,tylseni
+vahveta,vahveni
+valjeta,valkeni
 vanheta,vanheni
+yletä,yleni
 
 # conjugation 73
-salata,salasi
+# -VAtA
+iätä,ikäsi
+maata,makasi
+niiata,niiasi
+# -bAtA
+lobata,lobbasi
+sambata,sambasi
+# -dAtA
+aidata,aitasi
+bodata,bodasi
+tähdätä,tähtäsi
+# -fAtA
+golfata,golfasi
+# -gAtA
+digata,diggasi
+hengata,hengasi
+joogata,joogasi
+vängätä,vänkäsi
+# -hAtA
+kyhätä,kyhäsi
+murhata,murhasi
+uhata,uhkasi
+# -jAtA
+harjata,harjasi
+hyljätä,hylkäsi
+linjata,linjasi
+nojata,nojasi
+ohjata,ohjasi
+peljätä,pelkäsi
+# -kAtA
+donkata,donkkasi
+hölkätä,hölkkäsi
+irkata,irkkasi
+meuhkata,meuhkasi
+safkata,safkasi
+tiskata,tiskasi
 tykätä,tykkäsi
+vatkata,vatkasi
+# -lAtA
+tallata,tallasi
+tilata,tilasi
+tislata,tislasi
+tuhlata,tuhlasi
+vallata,valtasi
+# -mAtA
+hämätä,hämäsi
+pummata,pummasi
+surmata,surmasi
+temmata,tempasi
+# -nAtA
+hinata,hinasi
+purnata,purnasi
+rynnätä,ryntäsi
+ynnätä,ynnäsi
+# -pAtA
+hörpätä,hörppäsi
+jelpata,jelppasi
+kipata,kippasi
+vispata,vispasi
+ympätä,ymppäsi
+# -rAtA
+kerrata,kertasi
+pörrätä,pörräsi
+uhrata,uhrasi
+varata,varasi
+# -sAtA
+osata,osasi
+tyssätä,tyssäsi
+# -tAtA
+futata,futasi
+kryptata,kryptasi
+liftata,liftasi
+mitata,mittasi
+päntätä,pänttäsi
+pultata,pulttasi
+startata,starttasi
+testata,testasi
+# -vAtA
+kuvata,kuvasi
+kaivata,kaipasi
+rasvata,rasvasi
+kelvata,kelpasi
+solvata,solvasi
+värvätä,värväsi
 
 # conjugation 74
-katketa,katkesi
+# -VVtA
+koota,kokosi
 pietä,pikesi
+# -dVtA
+kadota,katosi
+vyyhdetä,vyyhtesi
+# -gVtA
+ängetä,änkesi
+# -hVtA
+uhota,uhosi
+# -jVtA
+haljeta,halkesi
+herjetä,herkesi
+lohjeta,lohkesi
+tajuta,tajusi
+tarjota,tarjosi
+öljytä,öljysi
+# -kVtA
+kaikota,kaikkosi
+katketa,katkesi
+# -lVtA
+hillota,hillosi
+älytä,älysi
+# -mVtA
+kammeta,kampesi
+kammota,kammosi
+kumota,kumosi
+# -nVtA
+innota,intosi
+könytä,könysi
+# -pVtA
+upota,upposi
+pumputa,pumppusi
+silputa,silppusi
+# -rVtA
+erota,erosi
+irrota,irtosi
+# -sVtA
+mesota,mesosi
+# -tVtA
+lotota,lottosi
+ristetä,ristesi
+# -vVtA
+hävetä,häpesi
+sivuta,sivusi
+turvota,turposi
 
 # conjugation 75
-peitota,peittosi
-selvitä,selvisi
+# -VVtA
 siitä,sikisi
+# -CVtA
+aallota,aaltosi
+bingota,bingosi
+diskota,diskosi
+haluta,halusi
+hävitä,hävisi
+kohuta,kohusi
+kärytä,kärysi
+lassota,lassosi
+lastuta,lastusi
+lyijytä,lyijysi
+lymytä,lymysi
+lämmitä,lämpisi
+muodota,muotosi
+peitota,peittosi
+pöllytä,pöllysi
+ryöpytä,ryöppysi
+selvitä,selvisi
 
 # conjugation 76 (all)
 taitaa,taisi

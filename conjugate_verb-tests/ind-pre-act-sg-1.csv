@@ -34,18 +34,83 @@ raakata,raakaan,raakkaan
 kimmota,kimmoan,kimpoan
 
 # conjugation 52
+# -VVA
 hioa,hion
-sanoa,sanon
-säilöä,säilön
+# -kVA
+aikoa,aion
+ilkkua,ilkun
+halkoa,halon
+jatkua,jatkun
+kirkua,kirun
+kärkkyä,kärkyn
+mankua,mangun
+rikkoa,rikon
+uskoa,uskon
 vinkua,vingun
+ähkyä,ähkyn
+# -pVA
+ampua,ammun
+arpoa,arvon
+elpyä,elvyn
+harppoa,harpon
+tippua,tipun
+yöpyä,yövyn
+# -tVA
+pettyä,petyn
+pinttyä,pintyn
+ruostua,ruostun
+talttua,taltun
+tarttua,tartun
+tuntua,tunnun
+yhtyä,yhdyn
+yltyä,yllyn
+äityä,äidyn
 ärtyä,ärryn
+# -hVA
+puhua,puhun
+# -jVA
+kiljua,kiljun
+lahjoa,lahjon
+lojua,lojun
+ärjyä,ärjyn
+# -lVA
+kellua,kellun
+säilöä,säilön
+vihloa,vihlon
+# -mVA
+ammua,ammun
+kermoa,kermon
+kuumua,kuumun
+vihmoa,vihmon
+# -nVA
+hirnua,hirnun
+sanoa,sanon
+vannoa,vannon
+# -rVA
+varoa,varon
+# -sVA
+asua,asun
+eksyä,eksyn
+katsoa,katson
+lipsua,lipsun
+pensoa,penson
+tylsyä,tylsyn
+varsoa,varson
+# -vVA
+latvoa,latvon
+nivoa,nivon
+survoa,survon
+ulvoa,ulvon
 
 # conjugation 53
 # -tAA
-itää,idän
+hirttää,hirtän
+inttää,intän
 johtaa,johdan
 kyntää,kynnän
 muistaa,muistan
+polttaa,poltan
+vetää,vedän
 yrittää,yritän
 # -CAA (not -tAA)
 elää,elän
@@ -55,8 +120,13 @@ purkaa,puran
 sulaa,sulan
 
 # conjugation 54
+# -tAA
 huutaa,huudan
 lentää,lennän
+murtaa,murran
+puoltaa,puollan
+# -CAA (not -tAA)
+lypsää,lypsän
 
 # conjugation 55 (all)
 entää,ennän
@@ -68,8 +138,29 @@ soutaa,soudan
 yltää,yllän
 
 # conjugation 56
-kaivaa,kaivan
+# -kAA
+alkaa,alan
+jakaa,jaan
+jatkaa,jatkan
+virkkaa,virkan
+# -pAA
+tappaa,tapan
+# -tAA
+ahtaa,ahdan
+antaa,annan
+auttaa,autan
 karttaa,kartan
+kastaa,kastan
+malttaa,maltan
+raataa,raadan
+# -CAA (not -kAA, -pAA, -tAA)
+ajaa,ajan
+jaksaa,jaksan
+jauhaa,jauhan
+kaivaa,kaivan
+nauraa,nauran
+painaa,painan
+palaa,palan
 
 # conjugation 57 (all)
 kaartaa,kaarran
@@ -77,8 +168,21 @@ kaataa,kaadan
 saartaa,saarran
 
 # conjugation 58
+# -keA
+itkeä,itken
 laskea,lasken
+lukea,luen
 nylkeä,nyljen
+särkeä,särjen
+tunkea,tungen
+# -peA
+kylpeä,kylven
+rypeä,ryven
+# -teA
+päteä,päden
+# -CeA (not -keA, -peA, -teA)
+imeä,imen
+kaitsea,kaitsen
 
 # conjugation 59 (all)
 tuntea,tunnen
@@ -87,8 +191,45 @@ tuntea,tunnen
 lähteä,lähden
 
 # conjugation 61
-sallia,sallin
+# -kiA
+hankkia,hankin
+hylkiä,hyljin
+kukkia,kukin
+matkia,matkin
+nykiä,nyin
+onkia,ongin
+pilkkiä,pilkin
+pyrkiä,pyrin
+röhkiä,röhkin
+urkkia,urkin
+vihkiä,vihin
+yskiä,yskin
+# -piA
+empiä,emmin
+hörppiä,hörpin
+kalppia,kalpin
+oppia,opin
+pomppia,pompin
 repiä,revin
+silpiä,silvin
+särpiä,särvin
+# -tiA
+aistia,aistin
+miettiä,mietin
+sontia,sonnin
+sotia,sodin
+tenttiä,tentin
+vahtia,vahdin
+# -CiA (not -kiA, -piA, -tiA)
+fudia,fudin
+kyniä,kynin
+luovia,luovin
+omia,omin
+periä,perin
+pesiä,pesin
+sallia,sallin
+sohia,sohin
+syrjiä,syrjin
 
 # conjugation 62
 epäröidä,epäröin
@@ -117,7 +258,36 @@ pestä,pesen
 rohkaista,rohkaisen
 
 # conjugation 67
+# -ellA
+ajella,ajelen
+anella,anelen
+elellä,elelen
+hypellä,hyppelen
+jaella,jakelen
+kannella,kantelen
+kartella,karttelen
+kierrellä,kiertelen
+kohdella,kohtelen
+kysellä,kyselen
 kätellä,kättelen
+kävellä,kävelen
+nakella,nakkelen
+niellä,nielen
+ommella,ompelen
+pistellä,pistelen
+poltella,polttelen
+puhella,puhelen
+turmella,turmelen
+udella,utelen
+vaellella,vaeltelen
+varjella,varjelen
+viljellä,viljelen
+viskellä,viskelen
+# other (not -ellA)
+mennä,menen
+olla,olen
+piillä,piilen
+purra,puren
 tulla,tulen
 
 # conjugation 68
@@ -138,21 +308,193 @@ nähdä,näen
 tehdä,teen
 
 # conjugation 72
+# -VVtA
+kyetä,kykenen
+toeta,tokenen
+# -CVtA
 edetä,etenen
+enetä,enenen
+hapata,happanen
+harveta,harvenen
+helpota,helpponen
+hiljetä,hiljenen
+huveta,hupenen
+jyrketä,jyrkkenen
+kalveta,kalpenen
+kiinnetä,kiintenen
+koveta,kovenen
+kuohketa,kuohkenen
+loitota,loittonen
+lämmetä,lämpenen
+oheta,ohenen
+parata,paranen
+rohjeta,rohkenen
+selvetä,selvenen
+synketä,synkkenen
+tarjeta,tarkenen
+tiuketa,tiukkenen
+tyhmetä,tyhmenen
+tylsetä,tylsenen
+vahveta,vahvenen
+valjeta,valkenen
 vanheta,vanhenen
+yletä,ylenen
 
 # conjugation 73
-salata,salaan
+# -VAtA
+iätä,ikään
+maata,makaan
+niiata,niiaan
+# -bAtA
+lobata,lobbaan
+sambata,sambaan
+# -dAtA
+aidata,aitaan
+bodata,bodaan
+tähdätä,tähtään
+# -fAtA
+golfata,golfaan
+# -gAtA
+digata,diggaan
+hengata,hengaan
+joogata,joogaan
+vängätä,vänkään
+# -hAtA
+kyhätä,kyhään
+murhata,murhaan
+uhata,uhkaan
+# -jAtA
+harjata,harjaan
+hyljätä,hylkään
+linjata,linjaan
+nojata,nojaan
+ohjata,ohjaan
+peljätä,pelkään
+# -kAtA
+donkata,donkkaan
+hölkätä,hölkkään
+irkata,irkkaan
+meuhkata,meuhkaan
+safkata,safkaan
+tiskata,tiskaan
 tykätä,tykkään
+vatkata,vatkaan
+# -lAtA
+tallata,tallaan
+tilata,tilaan
+tislata,tislaan
+tuhlata,tuhlaan
+vallata,valtaan
+# -mAtA
+hämätä,hämään
+pummata,pummaan
+surmata,surmaan
+temmata,tempaan
+# -nAtA
+hinata,hinaan
+purnata,purnaan
+rynnätä,ryntään
+ynnätä,ynnään
+# -pAtA
+hörpätä,hörppään
+jelpata,jelppaan
+kipata,kippaan
+vispata,vispaan
+ympätä,ymppään
+# -rAtA
+kerrata,kertaan
+pörrätä,pörrään
+uhrata,uhraan
+varata,varaan
+# -sAtA
+osata,osaan
+tyssätä,tyssään
+# -tAtA
+futata,futaan
+kryptata,kryptaan
+liftata,liftaan
+mitata,mittaan
+päntätä,pänttään
+pultata,pulttaan
+startata,starttaan
+testata,testaan
+# -vAtA
+kuvata,kuvaan
+kaivata,kaipaan
+rasvata,rasvaan
+kelvata,kelpaan
+solvata,solvaan
+värvätä,värvään
 
 # conjugation 74
-katketa,katkean
+# -VVtA
+koota,kokoan
 pietä,pikeän
+# -dVtA
+kadota,katoan
+vyyhdetä,vyyhteän
+# -gVtA
+ängetä,änkeän
+# -hVtA
+uhota,uhoan
+# -jVtA
+haljeta,halkean
+herjetä,herkeän
+lohjeta,lohkean
+tajuta,tajuan
+tarjota,tarjoan
+öljytä,öljyän
+# -kVtA
+kaikota,kaikkoan
+katketa,katkean
+# -lVtA
+hillota,hilloan
+älytä,älyän
+# -mVtA
+kammeta,kampean
+kammota,kammoan
+kumota,kumoan
+# -nVtA
+innota,intoan
+könytä,könyän
+# -pVtA
+upota,uppoan
+pumputa,pumppuan
+silputa,silppuan
+# -rVtA
+erota,eroan
+irrota,irtoan
+# -sVtA
+mesota,mesoan
+# -tVtA
+lotota,lottoan
+ristetä,risteän
+# -vVtA
+hävetä,häpeän
+sivuta,sivuan
+turvota,turpoan
 
 # conjugation 75
-peitota,peittoan
-selvitä,selviän
+# -VVtA
 siitä,sikiän
+# -CVtA
+aallota,aaltoan
+bingota,bingoan
+diskota,diskoan
+haluta,haluan
+hävitä,häviän
+kohuta,kohuan
+kärytä,käryän
+lassota,lassoan
+lastuta,lastuan
+lyijytä,lyijyän
+lymytä,lymyän
+lämmitä,lämpiän
+muodota,muotoan
+peitota,peittoan
+pöllytä,pöllyän
+ryöpytä,ryöppyän
+selvitä,selviän
 
 # conjugation 76 (all)
 taitaa,taidan

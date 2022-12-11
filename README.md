@@ -37,7 +37,7 @@ Note: only indicative present active has been implemented.
 Example:
 ```
 $ python3 conjugate_verb.py "keritä" ind pre act sg 1
-ind-pre-act-sg-1: keritsen, kerkiän
+ind-pre-act-sg-1: kerkiän, keritsen
 
 $ python3 conjugate_verb.py "ottaa"
 ind-pre-act-sg-1: otan
@@ -46,6 +46,12 @@ ind-pre-act-sg-3: ottaa
 ind-pre-act-pl-1: otamme
 ind-pre-act-pl-2: otatte
 ind-pre-act-pl-3: ottavat
+ind-pst-act-sg-1: otin
+ind-pst-act-sg-2: otit
+ind-pst-act-sg-3: otti
+ind-pst-act-pl-1: otimme
+ind-pst-act-pl-2: otitte
+ind-pst-act-pl-3: ottivat
 ```
 
 ### decline_noun.py
