@@ -3,12 +3,10 @@
 # note: A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant
 
 import re, sys
-import countsyll
 
 # a typical verb in each conjugation;
 # forms: infinitive, 1SG present, 3SG past, 3SG conditional, 3SG imperative,
-# singular perfect, passive past;
-# exception: for 77/78, only some third person forms
+# singular perfect, passive past
 CONJUGATION_DESCRIPTIONS = {
     52: "sano|a, -n, -i, -isi, -koon, -nut, -ttiin",
     53: "muis|taa, -tan, -ti, -taisi, -takoon, -tanut, -tettiin",
@@ -35,8 +33,6 @@ CONJUGATION_DESCRIPTIONS = {
     74: "katke|ta, -an, -si, -(a)isi, -tkoon, -nnut, -ttiin",
     75: "selvi|tä, -än, -si, -äisi, -tköön, -nnyt, -ttiin",
     76: "tai|taa, -dan, -si, -taisi, -takoon, -nnut/-tanut, -dettiin",
-    77: "kumajaa, kumaji, kumajaisi",
-    78: "kaikaa, kaikaisi",
 }
 
 # key = verb, value = tuple of conjugations
@@ -62,184 +58,230 @@ _MULTI_CONJUGATION_VERBS = {
     "sueta": (72, 74),
 }
 
-# exceptions to rules (key = noun, value = conjugation);
-# order: first by syllable count, then by ending, then by conjugation, then
-# alphabetically;
-# note: if there are more than one line of words per conjugation, separate
-#     them with empty comment lines ("#") for readability
+# exceptions to rules (verb: conjugation)
 _EXCEPTIONS = {
-    # === disyllabic ===
+    "elää": 53,
+    "kuivaa": 53,
+    "kylvää": 53,
+    "kyntää": 53,
+    "purkaa": 53,
+    "sulaa": 53,
 
-    # -tAA
-    "kyntää": 53, "taustaa": 53,
-    #
-    "huutaa": 54, "löytää": 54, "pyytää": 54,
-    #
-    "entää": 55, "häätää": 55, "hyytää": 55, "kiitää": 55, "liitää": 55,
-    "soutaa": 55, "yltää": 55,
-    #
-    "antaa": 56, "kantaa": 56,
-    #
-    "kaartaa": 57, "kaataa": 57, "saartaa": 57,
-    #
-    "taitaa": 76, "tietää": 76,
+    "huutaa": 54,
+    "lypsää": 54,
+    "löytää": 54,
+    "pieksää": 54,
+    "pyytää": 54,
 
-    # -AA (not -tAA)
-    "kuivaa": 53, "purkaa": 53, "sulaa": 53,
-    #
-    "lypsää": 54, "pieksää": 54,
-    #
-    "jaksaa": 56, "maksaa": 56, "virkkaa": 56,
+    # all the verbs in this conjugation
+    "entää": 55,
+    "hyytää": 55,
+    "häätää": 55,
+    "kiitää": 55,
+    "liitää": 55,
+    "soutaa": 55,
+    "yltää": 55,
 
-    # -CA
-    "käydä": 65,
-    "kaita": 69,
-    "nähdä": 71, "tehdä": 71,
-    "koota": 74, "pietä": 74,
-    "siitä": 75,
+    "ahtaa": 56,
+    "alkaa": 56,
+    "antaa": 56,
+    "auttaa": 56,
+    "haistaa": 56,
+    "jakaa": 56,
+    "jaksaa": 56,
+    "jatkaa": 56,
+    "kantaa": 56,
+    "kastaa": 56,
+    "kattaa": 56,
+    "laistaa": 56,
+    "mahtaa": 56,
+    "maksaa": 56,
+    "mataa": 56,
+    "maustaa": 56,
+    "paistaa": 56,
+    "sataa": 56,
+    "virkkaa": 56,
 
-    # === trisyllabic ===
+    # all the verbs in this conjugation
+    "kaartaa": 57,
+    "kaataa": 57,
+    "saartaa": 57,
 
-    # -VA
-    "tuntea": 59,
-    "lähteä": 60,
+    "tuntea": 59,  # the only verb in this conjugation
+
+    "lähteä": 60,  # the only verb in this conjugation
+
     "säikkyä": 61,
 
-    # -AtA
-    "hapata": 72, "mädätä": 72, "parata": 72,
+    "hälinöidä": 62,
 
-    # -eta
-    "haljeta": 74, "kammeta": 74, "kasketa": 74, "katketa": 74, "korveta": 74,
-    "laueta": 74, "lohjeta": 74, "loveta": 74, "lumeta": 74, "noeta": 74,
-    "poiketa": 74, "puhjeta": 74, "ratketa": 74, "ruveta": 74, "saveta": 74,
+    "käydä": 65,  # the only verb in this conjugation
+
+    # all the verbs in this conjugation
+    "ahkeroida": 68,
+    "aprikoida": 68,
+    "aterioida": 68,
+    "haravoida": 68,
+    "hekumoida": 68,
+    "hihhuloida": 68,
+    "ikävöidä": 68,
+    "ilakoida": 68,
+    "ilkamoida": 68,
+    "kapaloida": 68,
+    "kapinoida": 68,
+    "karkeloida": 68,
+    "keikaroida": 68,
+    "kekkaloida": 68,
+    "kekkuloida": 68,
+    "kihelmöidä": 68,
+    "kipenöidä": 68,
+    "kipunoida": 68,
+    "koheloida": 68,
+    "kuutioida": 68,
+    "kyynelöidä": 68,
+    "käpälöidä": 68,
+    "kärhämöidä": 68,
+    "liehakoida": 68,
+    "luennoida": 68,
+    "mankeloida": 68,
+    "mellakoida": 68,
+    "metelöidä": 68,
+    "murkinoida": 68,
+    "pakinoida": 68,
+    "patikoida": 68,
+    "pokkuroida": 68,
+    "pomiloida": 68,
+    "pullikoida": 68,
+    "rettelöidä": 68,
+    "seppelöidä": 68,
+    "sukuloida": 68,
+    "teikaroida": 68,
+    "tupakoida": 68,
+    "urakoida": 68,
+    "vihannoida": 68,
+
+    "hillitä": 69,
+    "häiritä": 69,
+    "villitä": 69,
+
+    "hapata": 72,
+    "heikota": 72,
+    "helpota": 72,
+    "hienota": 72,
+    "huonota": 72,
+    "kehnota": 72,
+    "leudota": 72,
+    "loitota": 72,
+    "mädätä": 72,
+    "paksuta": 72,
+    "parata": 72,
+    "ulota": 72,
+
+    "haljeta": 74,
+    "herjetä": 74,
+    "hirvetä": 74,
+    "hymytä": 74,
+    "hyrskytä": 74,
+    "hävetä": 74,
+    "höyrytä": 74,
+    "kammeta": 74,
+    "kasketa": 74,
+    "katketa": 74,
+    "kehjetä": 74,
+    "keretä": 74,
+    "kerjetä": 74,
+    "kiivetä": 74,
+    "kivetä": 74,
+    "korveta": 74,
+    "laueta": 74,
+    "livetä": 74,
+    "lohjeta": 74,
+    "loveta": 74,
+    "lumeta": 74,
+    "noeta": 74,
+    "pietä": 74,
+    "poiketa": 74,
+    "puhjeta": 74,
+    "ratketa": 74,
+    "revetä": 74,
+    "ruveta": 74,
+    "saveta": 74,
+    "teljetä": 74,
     "tuketa": 74,
+    "vyyhdetä": 74,
+    "älytä": 74,
+    "öljytä": 74,
 
-    # -etä
-    "herjetä": 74, "hirvetä": 74, "hävetä": 74, "kehjetä": 74, "keretä": 74,
-    "kerjetä": 74, "kiivetä": 74, "kivetä": 74, "livetä": 74, "revetä": 74,
-    "teljetä": 74, "vyyhdetä": 74,
-    #
+    "aallota": 75,
+    "bingota": 75,
+    "diskota": 75,
+    "haluta": 75,
+    "hamuta": 75,
+    "hulmuta": 75,
+    "kohuta": 75,
+    "lassota": 75,
+    "lastuta": 75,
+    "liesuta": 75,
+    "lietsuta": 75,
+    "loimuta": 75,
+    "loiskuta": 75,
+    "meluta": 75,
+    "muodota": 75,
     "nimetä": 75,
-
-    # -itA
-    "häiritä": 69, "hillitä": 69, "villitä": 69,
+    "nujuta": 75,
+    "peitota": 75,
+    "piiluta": 75,
+    "röyhytä": 75,
     "solmita": 75,
 
-    # -ota
-    "heikota": 72, "helpota": 72, "hienota": 72, "huonota": 72, "kehnota": 72,
-    "leudota": 72, "loitota": 72, "ulota": 72,
-    #
-    "aallota": 75, "bingota": 75, "diskota": 75, "lassota": 75, "muodota": 75,
-    "peitota": 75,
-
-    # -uta
-    "paksuta": 72,
-    #
-    "haluta": 75, "hamuta": 75, "hulmuta": 75, "kohuta": 75, "lastuta": 75,
-    "liesuta": 75, "lietsuta": 75, "loimuta": 75, "loiskuta": 75, "meluta": 75,
-    "nujuta": 75, "piiluta": 75,
-
-    # -ytä
-    "hymytä": 74, "hyrskytä": 74, "höyrytä": 74, "älytä": 74, "öljytä": 74,
-    "röyhytä": 75,
-
-    # === quadrisyllabic and longer ===
-
-    # -VA
-    "hilsehtiä": 52,  # 61 according to Wiktionary
-    "pörhistyä": 61,  # 52 according to Wiktionary
-
-    # -OidA
-    "ahkeroida": 68, "aprikoida": 68, "aterioida": 68, "emännöidä": 68,
-    "haravoida": 68, "heilimöidä": 68, "hekumoida": 68, "hihhuloida": 68,
-    "ikävöidä": 68, "ilakoida": 68, "ilkamoida": 68, "isännöidä": 68,
-    "kapaloida": 68, "kapinoida": 68, "karkeloida": 68, "keikaroida": 68,
-    "kekkaloida": 68, "kekkuloida": 68, "kihelmöidä": 68, "kipenöidä": 68,
-    "kipinöidä": 68, "kipunoida": 68, "koheloida": 68, "kuutioida": 68,
-    "kyynelöidä": 68, "käpälöidä": 68, "kärhämöidä": 68, "käräjöidä": 68,
-    "liehakoida": 68, "liikennöidä": 68, "luennoida": 68, "mankeloida": 68,
-    "mellakoida": 68, "metelöidä": 68, "murkinoida": 68, "pakinoida": 68,
-    "patikoida": 68, "pokkuroida": 68, "pomiloida": 68, "pullikoida": 68,
-    "rettelöidä": 68, "rähinöidä": 68, "seppelöidä": 68, "sukuloida": 68,
-    "teikaroida": 68, "tupakoida": 68, "urakoida": 68, "vihannoida": 68,
-    "viheriöidä": 68,
+    # all the verbs in this conjugation
+    "taitaa": 76,
+    "tietää": 76,
 }
 
-# note: rules in _RULES_2SYLL etc.:
+# rules for detecting the conjugation
+# - format: (conjugation, regex)
 # - sort by ending (first those that end with -AA, then others that end with
 #   -A, etc.; all vowels before consonants)
-# - each regex should match at least three verbs
 # - tip: use a command like this to search for patterns:
 #       grep "ENDING," verbs.csv | python3 text-util/grouplines.py -7
 
-# rules for disyllabic verbs (conjugation, regex)
-_RULES_2SYLL = (
-    # -AA
-    (54, r"[lnr]t( aa | ää )$"),            # -(l/n/r)tAA
-    (56, r"a[iu]?[lr]?[hst]?taa$"),         # -a(i/u/-)(l/r/-)(h/s/t/-)taa
+_RULES = tuple((c, re.compile(r, re.VERBOSE)) for (c, r) in (
+    # -CAA (53 must be last)
+    (54, "[lnr] t(aa|ää)$"),
+    (56, "( aa | a[ai]h | aas | a[ailr]t )taa$ | [hjlnprv]aa$"),
+    (53, "t(aa|ää)$"),
 
-    (53, r"( [ltv]ää | taa )$"),            # -lää/-tAA/-vää
-    (56, r"( [hjlnprv]aa | a[lt]?kaa )$"),  # -(h/j/l/n/p/r/v)aa; -a(l/t/-)kaa
-    (78, r"[mks]( aa | ää )$"),             # -(kms)AA
+    # -VA (not -AA)
+    (52, "[oöuy][aä]$"),
+    (58, "e[aä]$"),
+    (61, "i[aä]$"),
 
-    # -dA
-    (63, r"( aa | ää | yy )d[aä]$"),   # -AAdA/-yydä
-    (64, r"( ie | uo | yö )d[aä]$"),   # -iedA/-UOdA
-    (62, r"id[aä]$"),                  # -idA
+    # -dA (68 must be before 62)
+    (68, "(im|in|nn|ri|äj) öidä$"),
+    (62, "[aouö]i d[aä]$"),
+    (63, "(aa|ää|yy) d[aä]$"),
+    (64, "(ie|uo|yö) d[aä]$"),
+    (71, "hdä$"),
 
-    # -VtA
-    (73, r"aata$"),                    # -aata
+    # -VtA (74 must be before 72 and 75; 69 must be before 75)
+    (69, "( ita | [dkt]itä )$"),
+    (73, "(ata|ätä)$"),
+    (74, "( [dg]eta | [gt]etä | [oöu]t[aä] | [hn]ytä )$"),
+    (72, "et[aä]$"),
+    (75, "[iy]tä$"),
 
-    # other
-    (70, r"( ie | uo | yö )st[aä]$"),  # -iestA/-UOstA
-    (66, r"st[aä]$"),                  # -stA
-    (67, r"( ll | nn | rr )[aä]$"),    # -llA/-nnA/-rrA
-)
+    # -stA (70 must be before 66)
+    (70, "(ie|uo|yö) st[aä]$"),
+    (66, "st[aä]$"),
 
-# rules for trisyllabic verbs (conjugation, regex)
-_RULES_3SYLL = (
-    # -VA
-    (77, r"j( aa | ää )$"),       # -jAA
-    (53, r"[hst]t( aa | ää )$"),  # -(h/s/t)tAA
-    (54, r"[lnr]t( aa | ää )$"),  # -(l/n/r)tAA
-    (58, r"e[aä]$"),              # -eA
-    (61, r"i[aä]$"),              # -iA
-    (52, r"[oöuy][aä]$"),         # -OA/-UA
-
-    # -VtA
-    (73, r"[aä]t[aä]$"),            # -AtA
-    (74, r"(deta|get[aä]|tetä)$"),  # -deta/-getA/-tetä
-    (72, r"et[aä]$"),               # -etA (many are cnj. 74 instead)
-    (69, r"( ita | [dkt]itä )$"),   # -ita/-(d/k/t)itä
-    (74, r"([oöu]|hy|ny)t[aä]$"),   # -(O/u/hy/ny)tA (many are 72/75 instead)
-    (75, r"[iy]tä$"),               # -itä/-ytä
-
-    # other
-    (62, r"[oö]id[aä]$"),  # -OidA
-    (66, r"ist[aä]$"),     # -istA
-    (67, r"[ei]ll[aä]$"),  # -ellA/-illA
-    (72, r"nee$"),         # -nee
-)
-
-# rules for quadrisyllabic and longer verbs (conjugation, regex)
-_RULES_4SYLL = (
-    # -VA
-    (53, r"( is | [iuy]t )t( aa | ää )$"),  # -istAA/-ittAA/-UttAA
-    (54, r"nt( aa | ää )$"),                # -ntAA
-    (61, r"( ks | eht )i[aä]$"),            # -ksiA/-ehtiA
-    (52, r"( ks | t )( ua | yä )$"),        # -ksUA/-tUA
-
-    # -VCA
-    (62, r"[oö]id[aä]$"),  # -OidA (many are conj. 68 instead)
-    (73, r"[aä]t[aä]$"),   # -AtA
-
-    # -CCA
-    (67, r"( e | ai )ll[aä]$"),  # -ellA/-ailla
-)
+    # -CA (not -tA)
+    (67, "(ll|nn|rr) [aä]$"),
+))
 
 def get_conjugations(verb, useExceptions=True):
     """verb: a Finnish verb in infinitive
-    return: a tuple of 0-2 Kotus conjugations (each 52-78)"""
+    return: a tuple of 0-2 Kotus conjugations (each 52-76)"""
 
     verb = verb.strip("'- ")
 
@@ -254,14 +296,9 @@ def get_conjugations(verb, useExceptions=True):
         except KeyError:
             pass
 
-    rules = [
-        (), _RULES_2SYLL, _RULES_3SYLL, _RULES_4SYLL
-    ][countsyll.count_syllables(verb)-1]
-
-    for (conjugation, regex) in rules:
-        if re.search(regex, verb, re.VERBOSE) is not None:
+    for (conjugation, regex) in _RULES:
+        if regex.search(verb) is not None:
             return (conjugation,)
-
     return ()
 
 def _check_redundant_exceptions():
@@ -277,7 +314,7 @@ def main():
     if len(sys.argv) != 2:
         sys.exit(
             "Argument: a Finnish verb (not a compound) in the infinitive. "
-            "Print the Kotus conjugation(s) (52-78)."
+            "Print the Kotus conjugation(s) (52-76)."
         )
     verb = sys.argv[1]
 

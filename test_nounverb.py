@@ -59,6 +59,9 @@ for line in util.read_lines(testFile):
     conjugations = set(int(c, 10) for c in fields[1:])
     if word == "tuomas":
         conjugations.add(39)  # error in source data as well
+    conjugations.difference_update({77, 78})  # non-full conjugation
+    if not conjugations:
+        continue
     conjugations = tuple(sorted(conjugations))
 
     if sys.argv[1] in ("n", "v"):
