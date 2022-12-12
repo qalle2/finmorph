@@ -10,6 +10,7 @@ FORMS = (
     # mood, tense, voice, number/None, person/None
     ("ind", "pre", "act", "sg", "1"),
     ("ind", "pst", "act", "sg", "3"),
+    ("con", "pre", "act", "sg", "3"),
 )
 
 def _read_csv(mood, tense, voice, number, person):

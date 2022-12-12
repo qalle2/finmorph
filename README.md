@@ -32,26 +32,32 @@ Moods: ind/con/pot/imp. Tenses: pre/pst/per. Voices: act/pss. Numbers: sg/pl.
 Persons: 1/2/3. If 1 argument only, print all supported combinations.
 ```
 
-Note: only indicative present active has been implemented.
+Note: only indicative present active, indicative past active and conditional active have been implemented.
 
 Example:
 ```
 $ python3 conjugate_verb.py "keritä" ind pre act sg 1
 ind-pre-act-sg-1: kerkiän, keritsen
 
-$ python3 conjugate_verb.py "ottaa"
-ind-pre-act-sg-1: otan
-ind-pre-act-sg-2: otat
-ind-pre-act-sg-3: ottaa
-ind-pre-act-pl-1: otamme
-ind-pre-act-pl-2: otatte
-ind-pre-act-pl-3: ottavat
-ind-pst-act-sg-1: otin
-ind-pst-act-sg-2: otit
-ind-pst-act-sg-3: otti
-ind-pst-act-pl-1: otimme
-ind-pst-act-pl-2: otitte
-ind-pst-act-pl-3: ottivat
+$ python3 conjugate_verb.py "soutaa"
+ind-pre-act-sg-1: soudan
+ind-pre-act-sg-2: soudat
+ind-pre-act-sg-3: soutaa
+ind-pre-act-pl-1: soudamme
+ind-pre-act-pl-2: soudatte
+ind-pre-act-pl-3: soutavat
+ind-pst-act-sg-1: soudin, sousin
+ind-pst-act-sg-2: soudit, sousit
+ind-pst-act-sg-3: sousi, souti
+ind-pst-act-pl-1: soudimme, sousimme
+ind-pst-act-pl-2: souditte, sousitte
+ind-pst-act-pl-3: sousivat, soutivat
+con-pre-act-sg-1: soutaisin
+con-pre-act-sg-2: soutaisit
+con-pre-act-sg-3: soutaisi
+con-pre-act-pl-1: soutaisimme
+con-pre-act-pl-2: soutaisitte
+con-pre-act-pl-3: soutaisivat
 ```
 
 ### decline_noun.py
@@ -202,6 +208,9 @@ Creates the subdirectory `generated-lists/` and generates these files under it:
 * `compositives.txt`: words that occur as non-final parts of compounds (not finally or alone) (~2,900 words)
 
 Also generates `stats-compound.txt` and `stats-nounverb.txt` under the current directory (see [text files](#text-files)).
+
+### test_conjugate_verb.py
+Test `conjugate_verb.py`. No arguments.
 
 ### test_decline_noun.py
 Test `decline_noun.py`. No arguments.
