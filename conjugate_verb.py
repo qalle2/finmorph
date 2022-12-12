@@ -133,24 +133,18 @@ def _get_variants(verb, infl, conj, mood, tense):
     # return variants of verb in a tuple
     # infl: verb with consonant gradation, e.g. soutaa or soudaa
 
-    if mood == M_IND:
-        if conj == 55 and tense == T_PST:
+    if mood == M_IND and tense == T_PST:
+        if conj == 55:
             # soutaa
             return (infl, re.sub("t(aa|ää)$", r"s\1", verb))
-        if conj == 57 and tense == T_PST:
+        if conj == 57:
             # saartaa
-            return (re.sub("aa$", r"oi", infl), re.sub("taa$", "si", verb))
-        if conj == 60 and tense == T_PST:
+            return (re.sub("aa$", r"o", infl), re.sub("taa$", "s", verb))
+        if conj == 60:
             # lähteä
-            return (infl, "läksi")
-        if conj == 68:
-            # tupakoida
-            return (infl, re.sub("d[aä]$", "ts", verb))
+            return (infl, "läks")
 
     if mood == M_CON:
-        if conj == 68:
-            # tupakoida
-            return (infl, re.sub("d[aä]$", "ts", verb))
         if conj == 74:
             # katketa
             return (infl, re.sub("t([aä])$", r"\1", infl))
@@ -160,117 +154,110 @@ def _get_variants(verb, infl, conj, mood, tense):
 # -----------------------------------------------------------------------------
 
 # rules for changing endings of verbs
-# - format: conjugation: ((regex_from, regex_to), ...)
+# - format: conjugation: (regex_from, regex_to)
 # - "$" will be appended to regex_from
-# - only the 1st match with regex_from will be applied
 # - consonant gradation has already been applied
 # - variant forms have already been added
 # - conditional/number/person endings will be added afterwards
 # - for clarity, avoid making changes here that need to be undone later
 
 _CHANGES_IND_PRE_ACT = {
-    52: (("[aä]",      ""),),     # sanoa
-    53: (("[aä]",      ""),),     # muistaa
-    54: (("[aä]",      ""),),     # huutaa
-    55: (("[aä]",      ""),),     # soutaa
-    56: (("[aä]",      ""),),     # kaivaa
-    57: (("[aä]",      ""),),     # saartaa
-    58: (("[aä]",      ""),),     # laskea
-    59: (("[aä]",      ""),),     # tuntea
-    60: (("[aä]",      ""),),     # lähteä
-    61: (("[aä]",      ""),),     # sallia
-    62: (("d[aä]",     ""),),     # voida
-    63: (("d[aä]",     ""),),     # saada
-    64: (("d[aä]",     ""),),     # juoda
-    65: (("d[aä]",     ""),),     # käydä
-    66: (("t[aä]",     "e"),),    # rohkaista
-    67: (("[lnr][aä]", "e"),),    # tulla
-    68: (("d[aä]", ""), ("", "e")),  # tupakoida, tupakoits
-    69: (("t[aä]",     "tse"),),  # valita
-    70: (("st[aä]",    "kse"),),  # juosta
-    71: (),                       # nähdä
-    72: (("t[aä]",     "ne"),),   # vanheta
-    73: (("ta", "a"), ("tä", "ä")),  # salata
-    74: (("ta", "a"), ("tä", "ä")),  # katketa
-    75: (("ta", "a"), ("tä", "ä")),  # selvitä
-    76: (("[aä]",      ""),),     # taitaa
+    52: ("[aä]",      ""),     # sanoa
+    53: ("[aä]",      ""),     # muistaa
+    54: ("[aä]",      ""),     # huutaa
+    55: ("[aä]",      ""),     # soutaa
+    56: ("a",         ""),     # kaivaa
+    57: ("a",         ""),     # saartaa
+    58: ("[aä]",      ""),     # laskea
+    59: ("a",         ""),     # tuntea
+    60: ("ä",         ""),     # lähteä
+    61: ("[aä]",      ""),     # sallia
+    62: ("d[aä]",     ""),     # voida
+    63: ("d[aä]",     ""),     # saada
+    64: ("d[aä]",     ""),     # juoda
+    65: ("d[aä]",     ""),     # käydä
+    66: ("t[aä]",     "e"),    # rohkaista
+    67: ("[lnr][aä]", "e"),    # tulla
+    68: ("d[aä]",     ""),     # tupakoida
+    69: ("t[aä]",     "tse"),  # valita
+    70: ("st[aä]",    "kse"),  # juosta
+    # 71 nähdä
+    72: ("t[aä]",     "ne"),   # vanheta
+    73: ("t([aä])",   r"\1"),  # salata
+    74: ("t([aä])",   r"\1"),  # katketa
+    75: ("t([aä])",   r"\1"),  # selvitä
+    76: ("[aä]",      ""),     # taitaa
 }
 
-_CHANGES_IND_PST_ACT = {
-    52: (("[aä]",         "i"),),    # sanoa
-    53: (("(aa|ää)",      "i"),),    # muistaa
-    54: (("[dst](aa|ää)", "si"),),   # huutaa
-    55: (("(aa|ää)",      "i"),),    # soutaa
-    56: (("aa",           "oi"),),   # kaivaa
-    57: (),                          # saartaa
-    58: (("e[aä]",        "i"),),    # laskea
-    59: (("tea",          "si"),),   # tuntea
-    60: (("eä",           "i"),),    # lähteä
-    61: (("i[aä]",        "i"),),    # sallia
-    62: (("d[aä]",        ""),),     # voida
-    63: (("[aäy]d[aä]",   "i"),),    # saada
-    64: (("iedä", "ei"), ("uoda", "oi"), ("yödä", "öi")),  # juoda
-    65: (("ydä",          "vi"),),   # käydä
-    66: (("t[aä]",        "i"),),    # rohkaista
-    67: (("[lnr][aä]",    "i"),),    # tulla
-    68: (("d[aä]", ""), ("", "i")),  # tupakoida, tupakoits
-    69: (("t[aä]",        "tsi"),),  # valita
-    70: (("st[aä]",       "ksi"),),  # juosta
-    71: (),                          # nähdä
-    72: (("t[aä]",        "ni"),),   # vanheta
-    73: (("t[aä]",        "si"),),   # salata
-    74: (("t[aä]",        "si"),),   # katketa
-    75: (("t[aä]",        "si"),),   # selvitä
-    76: (("t(aa|ää)",     "si"),),   # taitaa
+_CHANGES_PAST_COND = {
+    # common to ind-pst-act and con-pre-act; a temporary dict
+    52: ("[aä]",       ""),    # sanoa
+    58: ("e[aä]",      ""),    # laskea
+    60: ("eä",         ""),    # lähteä
+    61: ("i[aä]",      ""),    # sallia
+    62: ("id[aä]",     ""),    # voida
+    63: ("[aäy]d[aä]", ""),    # saada
+    64: ("[iuy]([eoö])d[aä]", r"\1"),  # juoda
+    65: ("ydä",        "v"),   # käydä
+    66: ("t[aä]",      ""),    # rohkaista
+    67: ("[lnr][aä]",  ""),    # tulla
+    68: ("id[aä]",     ""),    # tupakoida
+    69: ("t[aä]",      "ts"),  # valita
+    70: ("st[aä]",     "ks"),  # juosta
+    # 71 nähdä
+    72: ("t[aä]",      "n"),   # vanheta
 }
-
-_CHANGES_CON_PRE_ACT = {
-    52: (("[aä]",       ""),),     # sanoa
-    53: (("[aä]",       ""),),     # muistaa
-    54: (("[aä]",       ""),),     # huutaa
-    55: (("[aä]",       ""),),     # soutaa
-    56: (("[aä]",       ""),),     # kaivaa
-    57: (("[aä]",       ""),),     # saartaa
-    58: (("e[aä]",      ""),),     # laskea
-    59: (("e[aä]",      ""),),     # tuntea
-    60: (("e[aä]",      ""),),     # lähteä
-    61: (("i[aä]",      ""),),     # sallia
-    62: (("id[aä]",     ""),),     # voida
-    63: (("[aäy]d[aä]", ""),),     # saada
-    64: (("iedä", "e"), ("uoda", "o"), ("yödä", "ö")),  # juoda
-    65: (("yd[aä]",     "v"),),    # käydä
-    66: (("t[aä]",      ""),),     # rohkaista
-    67: (("[lnr][aä]",  ""),),     # tulla
-    68: (("id[aä]",     ""),),     # tupakoida, tupakoits
-    69: (("t[aä]",      "ts"),),   # valita
-    70: (("st[aä]",     "ks"),),   # juosta
-    71: (),                        # nähdä
-    72: (("t[aä]",      "n"),),    # vanheta
-    73: (("t[aä]",      ""),),     # salata
-    74: (("t[aä]",      ""),),     # katketa
-    75: (("t([aä])",    r"\1"),),  # selvitä
-    76: (("[aä]",       ""),),     # taitaa
+_CHANGES_IND_PST_ACT = _CHANGES_PAST_COND | {
+    53: ("(aa|ää)",     ""),   # muistaa
+    54: ("[st](aa|ää)", "s"),  # huutaa
+    55: ("(aa|ää)",     ""),   # soutaa
+    56: ("aa",          "o"),  # kaivaa
+    # 57 saartaa
+    59: ("tea",         "s"),  # tuntea
+    73: ("t[aä]",       "s"),  # salata
+    74: ("t[aä]",       "s"),  # katketa
+    75: ("t[aä]",       "s"),  # selvitä
+    76: ("t(aa|ää)",    "s"),  # taitaa
 }
+_CHANGES_CON_PRE_ACT = _CHANGES_PAST_COND | {
+    53: ("[aä]",    ""),     # muistaa
+    54: ("[aä]",    ""),     # huutaa
+    55: ("[aä]",    ""),     # soutaa
+    56: ("a",       ""),     # kaivaa
+    57: ("a",       ""),     # saartaa
+    59: ("ea",      ""),     # tuntea
+    73: ("t[aä]",   ""),     # salata
+    74: ("t[aä]",   ""),     # katketa
+    75: ("t([aä])", r"\1"),  # selvitä
+    76: ("[aä]",    ""),     # taitaa
+}
+del _CHANGES_PAST_COND
 
 def _change_ending(verb, conj, mood, tense, voice):
     # change the ending of the verb (before applying consonant gradation or
     # adding number/person endings)
 
     # get regexes to apply
-    if mood == M_IND and tense == T_PRE and voice == V_ACT:
-        changes = _CHANGES_IND_PRE_ACT.get(conj, ())
-    elif mood == M_IND and tense == T_PST and voice == V_ACT:
-        changes = _CHANGES_IND_PST_ACT.get(conj, ())
-    elif mood == M_CON and tense == T_PRE and voice == V_ACT:
+    if mood == M_IND and voice == V_ACT:
+        if tense == T_PRE:
+            changes = _CHANGES_IND_PRE_ACT.get(conj, None)
+        elif tense == T_PST:
+            changes = _CHANGES_IND_PST_ACT.get(conj, None)
+        else:
+            sys.exit("not implemented")
+    elif mood == M_CON and voice == V_ACT:
         changes = _CHANGES_CON_PRE_ACT.get(conj, ())
     else:
         sys.exit("not implemented")
 
-    # apply the first regex that matches
-    for (regexFrom, regexTo) in changes:
-        regexFrom += "$"
-        if re.search(regexFrom, verb) is not None:
-            return re.sub(regexFrom, regexTo, verb)
+    if changes is None:
+        return verb
+
+    # apply the regex
+    (regexFrom, regexTo) = changes
+    regexFrom += "$"
+    if re.search(regexFrom, verb) is not None:
+        return re.sub(regexFrom, regexTo, verb)
     return verb
 
 # -----------------------------------------------------------------------------
@@ -333,8 +320,15 @@ def conjugate_verb_specific(
     assert (tense == T_PER) == (person is None)
     assert mood != M_IMP or number != N_SG or person != P_1
 
-    if conj == 71:
-        # conjugate nähdä/tehdä like conjugation 58 (lukea)
+    if conj == 68:
+        # tupakoida: recursively get the variant "tupakoitsea", a conjugation
+        # 58 (lukea) verb; also proceed with current verb
+        yield from conjugate_verb_specific(
+            re.sub("d([aä])$", r"tse\1", verb),
+            58, consGrad, mood, tense, voice, number, person
+        )
+    elif conj == 71:
+        # nähdä: conjugate like "näkeä", a conjugation 58 (lukea) verb
         verb = re.sub("hdä$", "keä", verb)
         conj = 58
         consGrad = True
@@ -355,7 +349,10 @@ def conjugate_verb_specific(
         _change_ending(i, conj, mood, tense, voice) for i in inflected
     )
 
-    if mood == M_CON and tense == T_PRE and voice == V_ACT:
+    # add the ending that's common to all conjugations
+    if mood == M_IND and tense == T_PST and voice == V_ACT:
+        inflected = tuple(i + "i" for i in inflected)
+    elif mood == M_CON and tense == T_PRE and voice == V_ACT:
         inflected = tuple(i + "isi" for i in inflected)
 
     #print(f"{inflected=} {conj=} {consGrad=}")
