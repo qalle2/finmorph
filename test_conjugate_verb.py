@@ -1,26 +1,33 @@
 """Test conjugate_verb.py by comparing the output to test files."""
 
 import os, sys
-from conjugate_verb import conjugate_verb
+from conjugate_verb import *
 
-_TEST_DIR = "conjugate_verb-tests"  # read test files from here
+TEST_DIR = "conjugate_verb-tests"  # read test files from here
 
 # verb forms to test
 FORMS = (
     # mood, tense, voice, number/None, person/None
-    ("ind", "pre", "act", "sg", "1"),
-    ("ind", "pst", "act", "sg", "3"),
-    ("con", "pre", "act", "sg", "3"),
+    (M_IND, T_PRE, V_ACT, N_SG, P_1),
+    (M_IND, T_PRE, V_ACT, N_SG, P_3),
+    (M_IND, T_PST, V_ACT, N_SG, P_1),
+    (M_IND, T_PST, V_ACT, N_SG, P_3),
+    (M_IND, T_PRE, V_ACT, N_SG, P_3),
 )
 
-def _read_csv(mood, tense, voice, number, person):
+def format_test_name(verbForm):
+    # verbForm: a tuple from FORMS
+    return "-".join(ITEM_NAMES[i] for i in verbForm)
+
+def read_csv(verbForm):
     # Read test cases from CSV file.
     # each line ([] = optional): NomSg,inflected[,inflected...];
     #     inflected forms must be in alphabetical (Unicode) order
+    # verbForm: a tuple from FORMS
     # return: {NomSg: (inflected, ...), ...}
 
-    filename = "-".join((mood, tense, voice, number, person)) + ".csv"
-    path = os.path.join(_TEST_DIR, filename)
+    filename = format_test_name(verbForm) + ".csv"
+    path = os.path.join(TEST_DIR, filename)
     verbs = {}
 
     with open(path, "rt", encoding="utf8") as handle:
@@ -34,23 +41,17 @@ def _read_csv(mood, tense, voice, number, person):
                 verbs[items[0]] = tuple(items[1:])
     return verbs
 
-def run_test(mood, tense, voice, number, person):
+def run_test(verbForm):
     # Run a test. Return number of verbs tested.
+    # verbForm: a tuple from FORMS
 
-    #if case == "nom" and number == "sg":
-    #    # {NomSg: (NomSg,), ...}
-    #    verbs = dict((w, (w,)) for w in _read_csv("gen", "sg"))
-
-    # {NomSg: (inflected, ...), ...}
-    verbs = _read_csv(mood, tense, voice, number, person)
+    verbs = read_csv(verbForm)  # {NomSg: (inflected, ...), ...}
 
     for verb in verbs:
-        result = tuple(sorted(
-            conjugate_verb(verb, mood, tense, voice, number, person)
-        ))
+        result = tuple(sorted(conjugate_verb(verb, *verbForm)))
         if result != verbs[verb]:
             sys.exit(
-                "-".join((mood, tense, voice, number, person)) + " of "
+                format_test_name(verbForm) + " of "
                 + verb + ": expected " + "/".join(verbs[verb]) + ", got "
                 + "/".join(result)
             )
@@ -60,10 +61,10 @@ def run_test(mood, tense, voice, number, person):
 def main():
     print("Testing conjugate_verb.py...")
 
-    for form in FORMS:
-        verbCnt = run_test(*form)
+    for verbForm in FORMS:
+        verbCnt = run_test(verbForm)
         print(
-            "-".join(form) + f" test passed ({verbCnt:3} verbs)."
+            format_test_name(verbForm) + f" test passed ({verbCnt:3} verbs)."
         )
 
     print("All tests passed.")

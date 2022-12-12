@@ -7,6 +7,42 @@ from verbconj import get_conjugations
 # - C = any consonant, V = any vowel, A = a/ä, O = o/ö, U = u/y
 # - conjugations (52-76) are from Kotus
 
+# enumerate internal names for grammatical moods, tenses, voices, numbers and
+# persons
+(
+    M_IND, M_CON, M_POT, M_IMP,
+    T_PRE, T_PST, T_PER,
+    V_ACT, V_PSS,
+    N_SG, N_PL,
+    P_1, P_2, P_3,
+) = range(14)
+
+# group moods etc.
+# indicative, conditional, potential, imperative
+MOODS   = (M_IND, M_CON, M_POT, M_IMP)
+TENSES  = (T_PRE, T_PST, T_PER)  # present, past, perfect
+VOICES  = (V_ACT, V_PSS)         # active, passive
+NUMBERS = (N_SG,  N_PL)          # singular, plural
+PERSONS = (P_1, P_2, P_3)        # first, second, third
+
+# names of moods etc. for input/output
+ITEM_NAMES = {
+    M_IND: "ind",
+    M_CON: "con",
+    M_POT: "pot",
+    M_IMP: "imp",
+    T_PRE: "pre",
+    T_PST: "pst",
+    T_PER: "per",
+    V_ACT: "act",
+    V_PSS: "pss",
+    N_SG:  "sg",
+    N_PL:  "pl",
+    P_1:   "1",
+    P_2:   "2",
+    P_3:   "3",
+}
+
 # -----------------------------------------------------------------------------
 
 # consonant gradation is weak to strong in these conjugations
@@ -83,10 +119,10 @@ def _consonant_gradation_main(verb, conj, mood, tense, voice, person):
 
     strengthen = conj in _CONJS_STRENGTHEN
     if (
-        mood == "ind" and tense in ("pre", "pst") and voice == "act"
-        and (person != "3" or strengthen)
+        mood == M_IND and tense in (T_PRE, T_PST) and voice == V_ACT
+        and (person != P_3 or strengthen)
         or
-        mood == "con" and voice == "act" and strengthen
+        mood == M_CON and voice == V_ACT and strengthen
     ):
         return _consonant_gradation(verb, strengthen)
     return verb
@@ -97,21 +133,21 @@ def _get_variants(verb, infl, conj, mood, tense):
     # return variants of verb in a tuple
     # infl: verb with consonant gradation, e.g. soutaa or soudaa
 
-    if mood == "ind":
-        if conj == 55 and tense == "pst":
+    if mood == M_IND:
+        if conj == 55 and tense == T_PST:
             # soutaa
             return (infl, re.sub("t(aa|ää)$", r"s\1", verb))
-        if conj == 57 and tense == "pst":
+        if conj == 57 and tense == T_PST:
             # saartaa
             return (re.sub("aa$", r"oi", infl), re.sub("taa$", "si", verb))
-        if conj == 60 and tense == "pst":
+        if conj == 60 and tense == T_PST:
             # lähteä
             return (infl, "läksi")
         if conj == 68:
             # tupakoida
             return (infl, re.sub("d[aä]$", "ts", verb))
 
-    if mood == "con":
+    if mood == M_CON:
         if conj == 68:
             # tupakoida
             return (infl, re.sub("d[aä]$", "ts", verb))
@@ -221,11 +257,11 @@ def _change_ending(verb, conj, mood, tense, voice):
     # adding number/person endings)
 
     # get regexes to apply
-    if mood == "ind" and tense == "pre" and voice == "act":
+    if mood == M_IND and tense == T_PRE and voice == V_ACT:
         changes = _CHANGES_IND_PRE_ACT.get(conj, ())
-    elif mood == "ind" and tense == "pst" and voice == "act":
+    elif mood == M_IND and tense == T_PST and voice == V_ACT:
         changes = _CHANGES_IND_PST_ACT.get(conj, ())
-    elif mood == "con" and tense == "pre" and voice == "act":
+    elif mood == M_CON and tense == T_PRE and voice == V_ACT:
         changes = _CHANGES_CON_PRE_ACT.get(conj, ())
     else:
         sys.exit("not implemented")
@@ -239,19 +275,11 @@ def _change_ending(verb, conj, mood, tense, voice):
 
 # -----------------------------------------------------------------------------
 
-# supported grammatical moods, tenses, voices, numbers and persons
-# indicative, imperative, conditional, potential
-MOODS   = ("ind", "con", "pot", "imp")
-TENSES  = ("pre", "pst", "per")   # present, past, perfect
-VOICES  = ("act", "pss")          # active, passive
-NUMBERS = ("sg",  "pl")           # singular, plural
-PERSONS = ("1", "2", "3")         # first, second, third
-
 _NUMBER_PERSON_ENDINGS = {
-    ("sg", "1"): "n",
-    ("sg", "2"): "t",
-    ("pl", "1"): "mme",
-    ("pl", "2"): "tte",
+    (N_SG, P_1): "n",
+    (N_SG, P_2): "t",
+    (N_PL, P_1): "mme",
+    (N_PL, P_2): "tte",
 }
 
 _IS_FINAL_VOWEL_LONG = re.compile(
@@ -264,15 +292,15 @@ def _get_active_forms(inflected, mood, tense, number, person):
     # use "a" or "ä" in -A endings?
     aOrAuml = "a" if re.search(r"^[^aou]+$", inflected[0]) is None else "ä"
 
-    if mood == "ind" and tense == "pre" and number == "sg" and person == "3":
+    if mood == M_IND and tense == T_PRE and number == N_SG and person == P_3:
         # lengthen final vowel if possible
         yield from (
             i + i[-1] if _IS_FINAL_VOWEL_LONG.search(i) is None else i
             for i in inflected
         )
     else:
-        if person == "3":
-            ending = "" if number == "sg" else "v" + aOrAuml + "t"
+        if person == P_3:
+            ending = "" if number == N_SG else "v" + aOrAuml + "t"
         else:
             ending = _NUMBER_PERSON_ENDINGS[(number, person)]
         yield from (i + ending for i in inflected)
@@ -299,11 +327,11 @@ def conjugate_verb_specific(
     assert voice  in VOICES
     assert number in NUMBERS or number is None
     assert person in PERSONS or person is None
-    assert mood == "ind" or tense == "pre"
-    assert mood != "imp" or voice == "act"
-    assert (voice == "pss") == (number is None)
-    assert (tense == "per") == (person is None)
-    assert mood != "imp" or number != "sg" or person != "1"
+    assert mood == M_IND or tense == T_PRE
+    assert mood != M_IMP or voice == V_ACT
+    assert (voice == V_PSS) == (number is None)
+    assert (tense == T_PER) == (person is None)
+    assert mood != M_IMP or number != N_SG or person != P_1
 
     if conj == 71:
         # conjugate nähdä/tehdä like conjugation 58 (lukea)
@@ -327,7 +355,7 @@ def conjugate_verb_specific(
         _change_ending(i, conj, mood, tense, voice) for i in inflected
     )
 
-    if mood == "con" and tense == "pre" and voice == "act":
+    if mood == M_CON and tense == T_PRE and voice == V_ACT:
         inflected = tuple(i + "isi" for i in inflected)
 
     #print(f"{inflected=} {conj=} {consGrad=}")
@@ -359,11 +387,11 @@ def conjugate_verb(verb, mood, tense, voice, number=None, person=None):
     assert voice  in VOICES
     assert number in NUMBERS or number is None
     assert person in PERSONS or person is None
-    assert mood == "ind" or tense == "pre"
-    assert mood != "imp" or voice == "act"
-    assert (voice == "pss") == (number is None)
-    assert (tense == "per") == (person is None)
-    assert mood != "imp" or number != "sg" or person != "1"
+    assert mood == M_IND or tense == T_PRE
+    assert mood != M_IMP or voice == V_ACT
+    assert (voice == V_PSS) == (number is None)
+    assert (tense == T_PER) == (person is None)
+    assert mood != M_IMP or number != N_SG or person != P_1
 
     results = set()
 
@@ -386,47 +414,61 @@ def conjugate_verb(verb, mood, tense, voice, number=None, person=None):
 
 # all supported combinations of mood, tense, voice, number and person
 _ALL_FORMS = (
-    ("ind", "pre", "act", "sg", "1"),
-    ("ind", "pre", "act", "sg", "2"),
-    ("ind", "pre", "act", "sg", "3"),
-    ("ind", "pre", "act", "pl", "1"),
-    ("ind", "pre", "act", "pl", "2"),
-    ("ind", "pre", "act", "pl", "3"),
-    ("ind", "pst", "act", "sg", "1"),
-    ("ind", "pst", "act", "sg", "2"),
-    ("ind", "pst", "act", "sg", "3"),
-    ("ind", "pst", "act", "pl", "1"),
-    ("ind", "pst", "act", "pl", "2"),
-    ("ind", "pst", "act", "pl", "3"),
-    ("con", "pre", "act", "sg", "1"),
-    ("con", "pre", "act", "sg", "2"),
-    ("con", "pre", "act", "sg", "3"),
-    ("con", "pre", "act", "pl", "1"),
-    ("con", "pre", "act", "pl", "2"),
-    ("con", "pre", "act", "pl", "3"),
+    (M_IND, T_PRE, V_ACT, N_SG, P_1),
+    (M_IND, T_PRE, V_ACT, N_SG, P_2),
+    (M_IND, T_PRE, V_ACT, N_SG, P_3),
+    (M_IND, T_PRE, V_ACT, N_PL, P_1),
+    (M_IND, T_PRE, V_ACT, N_PL, P_2),
+    (M_IND, T_PRE, V_ACT, N_PL, P_3),
+    (M_IND, T_PST, V_ACT, N_SG, P_1),
+    (M_IND, T_PST, V_ACT, N_SG, P_2),
+    (M_IND, T_PST, V_ACT, N_SG, P_3),
+    (M_IND, T_PST, V_ACT, N_PL, P_1),
+    (M_IND, T_PST, V_ACT, N_PL, P_2),
+    (M_IND, T_PST, V_ACT, N_PL, P_3),
+    (M_CON, T_PRE, V_ACT, N_SG, P_1),
+    (M_CON, T_PRE, V_ACT, N_SG, P_2),
+    (M_CON, T_PRE, V_ACT, N_SG, P_3),
+    (M_CON, T_PRE, V_ACT, N_PL, P_1),
+    (M_CON, T_PRE, V_ACT, N_PL, P_2),
+    (M_CON, T_PRE, V_ACT, N_PL, P_3),
 )
+
+def _items_to_str(items):
+    # format a list of e.g. moods
+    return "/".join(ITEM_NAMES[i] for i in items)
 
 def main():
     if len(sys.argv) not in (2, 5, 6, 7):
         sys.exit(
-            "Conjugate a Finnish verb. Arguments: VERB [MOOD TENSE VOICE "
-            "[NUMBER [PERSON]]]. Moods: " + "/".join(MOODS) + ". Tenses: "
-            + "/".join(TENSES) + ". Voices: " + "/".join(VOICES) + ". "
-            "Numbers: " + "/".join(NUMBERS) + ". Persons: "
-            + "/".join(PERSONS) + ". If 1 argument only, print all supported "
-            "combinations."
+            "Conjugate a Finnish verb. "
+            "Arguments: VERB [MOOD TENSE VOICE [NUMBER [PERSON]]]. "
+            f"Moods: {_items_to_str(MOODS)}. "
+            f"Tenses: {_items_to_str(TENSES)}. "
+            f"Voices: {_items_to_str(VOICES)}. "
+            f"Numbers: {_items_to_str(NUMBERS)}. "
+            f"Persons: {_items_to_str(PERSONS)}. "
+            "If 1 argument only, print all supported combinations."
         )
 
     verb = sys.argv[1]
-    if len(sys.argv) >= 5:
-        (mood, tense, voice) = sys.argv[2:5]
-        allForms = False
-    else:
-        allForms = True
-    number = sys.argv[5] if len(sys.argv) >= 6 else None
-    person = sys.argv[6] if len(sys.argv) >= 7 else None
+    (mood, tense, voice, number, person) \
+    = sys.argv[2:] + (7 - len(sys.argv)) * [None]
 
-    if not allForms:
+    # "ind" -> M_IND etc.
+    argToItem = dict((v, k) for (k, v) in ITEM_NAMES.items())
+    try:
+        (mood, tense, voice, number, person) = (
+            None if a is None else argToItem[a]
+            for a in (mood, tense, voice, number, person)
+        )
+    except KeyError:
+        sys.exit("Unrecognized argument (mood/tense/etc.).")
+    del argToItem
+
+    if mood is None:
+        formsToPrint = _ALL_FORMS
+    else:
         if mood not in MOODS:
             sys.exit("Invalid mood.")
         if tense not in TENSES:
@@ -438,34 +480,37 @@ def main():
         if person is not None and person not in PERSONS:
             sys.exit("Invalid person.")
 
-        if mood != "ind" and tense != "pre":
+        if mood != M_IND and tense != T_PRE:
             sys.exit(
                 "Can't have past/perfect tense with conditional/potential/"
                 "imperative mood."
             )
-        if mood == "imp" and voice == "pss":
+        if mood == M_IMP and voice == V_PSS:
             sys.exit("Can't have passive voice with imperative mood.")
-        if (voice == "pss") != (number is None):
+        if (voice == V_PSS) != (number is None):
             sys.exit(
                 "Number required in active voice, forbidden in passive voice."
             )
-        if (tense == "per") != (person is None):
+        if (tense == T_PER) != (person is None):
             sys.exit(
                 "Person required in present/past tense, forbidden in perfect "
                 "tense."
             )
-        if mood == "imp" and number == "sg" and person == "1":
+        if mood == M_IMP and number == N_SG and person == P_1:
             sys.exit("1st person singular forbidden with imperative mood.")
 
-    forms = _ALL_FORMS if allForms else ((mood, tense, voice, number, person),)
+        formsToPrint = ((mood, tense, voice, number, person),)
 
-    for form in forms:
-        # print variants sorted by length
+    for form in formsToPrint:
+        # sort variants by length
         conjugatedVerbs = sorted(conjugate_verb(verb, *form))
         conjugatedVerbs.sort(key=lambda v: len(v))
         if not conjugatedVerbs:
             sys.exit("Unrecognized verb.")
-        print("-".join(form) + ": " + ", ".join(conjugatedVerbs))
+        print(
+            "-".join(ITEM_NAMES[i] for i in form) + ": "
+            + ", ".join(conjugatedVerbs)
+        )
 
 if __name__ == "__main__":
     main()
