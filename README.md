@@ -216,8 +216,10 @@ Test `conjugate_verb.py`. No arguments.
 Test `decline_noun.py`. No arguments.
 
 ### test-nounverb.py
-Argument: which program to test ('n'=noundecl.py, 'v'=verbconj.py, 'nc'=noun_consgrad.py,
-'vc'=verb_consgrad.py).
+```
+Argument: which program to test ('n'=noundecl.py, 'v'=verbconj.py,
+'ng'=noun_consgrad.py, 'vg'=verb_consgrad.py).
+```
 
 Needs files created by `extract.sh`.
 

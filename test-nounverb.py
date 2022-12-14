@@ -1,101 +1,188 @@
+# test noundecl.py, verbconj.py, noun_consgrad.py or verb_consgrad.py
+
 import sys
-import util
+from noundecl import get_declensions
+from verbconj import get_conjugations
+from noun_consgrad import get_consonant_gradation as get_cons_grad_noun
+from verb_consgrad import get_consonant_gradation as get_cons_grad_verb
 
-if len(sys.argv) != 2:
-    sys.exit(
-        "Argument: which program to test ('n'=noundecl.py, 'v'=verbconj.py, "
-        "'nc'=noun_consgrad.py, 'vc'=verb_consgrad.py)."
-    )
+CONS_GRAD_FILE = "generated-lists/words-consgrad.csv"
 
-# get declension/conjugation function and list of words to test
-if sys.argv[1] in ("n", "nc"):
-    from noundecl import get_declensions as detect_conjugation
-    testFile = "generated-lists/nouns.csv"
-elif sys.argv[1] in ("v", "vc"):
-    from verbconj import get_conjugations as detect_conjugation
-    testFile = "generated-lists/verbs.csv"
-else:
-    sys.exit("Invalid argument.")
+def read_csv(file_):
+    # generate lines from a CSV file as tuples of fields
+    with open(file_, "rt", encoding="utf8") as handle:
+        handle.seek(0)
+        for line in handle:
+            line = line.rstrip("\n")
+            fields = line.split(",")
+            if len(fields) < 2:
+                sys.exit("Invalid CSV line:" + line)
+            yield tuple(fields)
 
-# get consonant gradation detection function and list of words to which
-# consonant gradation applies
-if sys.argv[1] == "nc":
-    from noun_consgrad import get_consonant_gradation as detect_gradation
-    consGradFile = "generated-lists/words-consgrad.csv"
-elif sys.argv[1] == "vc":
-    from verb_consgrad import get_consonant_gradation as detect_gradation
-    consGradFile = "generated-lists/words-consgrad.csv"
-else:
-    consGradFile = None
+def run_test_n():
+    # test noundecl.py
 
-if consGradFile is not None:
-    # get combinations of word and conjugation to which consonant gradation
-    # applies; e.g. consGradConjugationsByWord["sika"] = {9}
-    consGradConjugationsByWord = {}
-    for line in util.read_lines(consGradFile):
-        fields = line.split(",")
-        assert len(fields) >= 2
-        consGradConjugationsByWord[fields[0]] \
-        = {int(c, 10) for c in fields[1:]}
+    wordCount = errorCount = 0
 
-    # these are errors in the source data; fix them here for now
-    consGradConjugationsByWord["alpi"].remove(5)
-    consGradConjugationsByWord["auer"] = {49}
-    consGradConjugationsByWord["harre"] = {48}
-    consGradConjugationsByWord["helpi"].remove(5)
-    consGradConjugationsByWord["hynte"] = {48}
-    consGradConjugationsByWord["näin"] = {33}
-    consGradConjugationsByWord["pue"] = {48}
-    consGradConjugationsByWord["ryntys"] = {41}
-    consGradConjugationsByWord["siitake"].remove(8)
+    for fields in read_csv("generated-lists/nouns.csv"):
+        # get word and correct declensions
+        word = fields[0]
+        decls = set(int(c, 10) for c in fields[1:])
+        if word == "tuomas":
+            decls.add(39)  # error in source data; fix here for now
+        decls = tuple(sorted(decls))
 
-wordCount = errorCount = 0
-
-for line in util.read_lines(testFile):
-    # get word and correct declensions/conjugations
-    fields = line.split(",")
-    assert len(fields) >= 2
-    word = fields[0]
-    conjugations = set(int(c, 10) for c in fields[1:])
-    if word == "tuomas":
-        conjugations.add(39)  # error in source data as well
-    conjugations.difference_update({77, 78})  # non-full conjugation
-    if not conjugations:
-        continue
-    conjugations = tuple(sorted(conjugations))
-
-    if sys.argv[1] in ("n", "v"):
-        # test declension/conjugation detection function
-        detectedConjugations = detect_conjugation(word)
-        if detectedConjugations != conjugations:
+        detectedDecls = get_declensions(word)
+        if detectedDecls != decls:
             print(
-                f"'{word}': expected declension(s)/conjugation(s) "
-                + "/".join(str(c) for c in sorted(conjugations))
+                f"'{word}': expected declension(s) "
+                + "/".join(str(c) for c in sorted(decls))
                 + ", got "
-                + "/".join(str(c) for c in sorted(detectedConjugations))
+                + "/".join(str(c) for c in sorted(detectedDecls))
             )
             errorCount += 1
-    else:
-        # mode "nc" or "vc"; test consonant gradation detection function
-        for conj in detect_conjugation(word):
-            detectedGradation = detect_gradation(word, conj)
-            if detectedGradation \
-            and conj not in consGradConjugationsByWord.setdefault(word, set()):
+        wordCount += 1
+
+    return (wordCount, errorCount)
+
+def run_test_v():
+    # test verbconj.py
+
+    wordCount = errorCount = 0
+
+    for fields in read_csv("generated-lists/verbs.csv"):
+        # get word and correct conjugations
+        word = fields[0]
+        conjs = set(int(c, 10) for c in fields[1:])
+        conjs.difference_update({77, 78})  # verbs with non-full conj.
+        if not conjs:
+            continue
+        conjs = tuple(sorted(conjs))
+
+        detectedConjs = get_conjugations(word)
+        if detectedConjs != conjs:
+            print(
+                f"'{word}': expected conjugation(s) "
+                + "/".join(str(c) for c in sorted(conjs))
+                + ", got "
+                + "/".join(str(c) for c in sorted(detectedConjs))
+            )
+            errorCount += 1
+        wordCount += 1
+
+    return (wordCount, errorCount)
+
+def get_cons_grad_data(test):
+    # get declensions/conjugations to which consonant gradation applies
+    conjsByWord = {}
+    for fields in read_csv(CONS_GRAD_FILE):
+        conjsByWord[fields[0]] = {int(c, 10) for c in fields[1:]}
+
+    if test == "ng":
+        # these are errors in the source data; fix them here for now
+        conjsByWord["alpi"].remove(5)
+        conjsByWord["auer"] = {49}
+        conjsByWord["harre"] = {48}
+        conjsByWord["helpi"].remove(5)
+        conjsByWord["hynte"] = {48}
+        conjsByWord["näin"] = {33}
+        conjsByWord["pue"] = {48}
+        conjsByWord["ryntys"] = {41}
+        conjsByWord["siitake"].remove(8)
+
+    return conjsByWord
+
+def run_test_ng():
+    # test noun_consgrad.py
+
+    declsByWord = get_cons_grad_data("ng")
+    wordCount = errorCount = 0
+
+    for fields in read_csv("generated-lists/nouns.csv"):
+        # get word and correct declensions
+        word = fields[0]
+        decls = set(int(c, 10) for c in fields[1:])
+        if word == "tuomas":
+            decls.add(39)  # error in source data; fix here for now
+        decls = tuple(sorted(decls))
+
+        for decl in get_declensions(word):
+            detectedGrad = get_cons_grad_noun(word, decl)
+            if detectedGrad \
+            and decl not in declsByWord.setdefault(word, set()):
                 word2 = f"'{word}'"
                 print(
-                    f"{word2:20} in decl./conj. {conj:2}: "
+                    f"{word2:20} in declension {decl:2}: "
                     "expected no consonant gradation but got it"
                 )
                 errorCount += 1
-            elif not detectedGradation \
-            and conj in consGradConjugationsByWord.setdefault(word, set()):
+            elif not detectedGrad \
+            and decl in declsByWord.setdefault(word, set()):
                 word2 = f"'{word}'"
                 print(
-                    f"{word2:20} in decl./conj. {conj:2}: "
+                    f"{word2:20} in declension {decl:2}: "
+                    "expected consonant gradation but got none"
+                )
+                errorCount += 1
+        wordCount += 1
+
+    return (wordCount, errorCount)
+
+def run_test_vg():
+    # test verb_consgrad.py
+
+    conjsByWord = get_cons_grad_data("nv")
+    wordCount = errorCount = 0
+
+    for fields in read_csv("generated-lists/verbs.csv"):
+        # get word and correct conjugations
+        word = fields[0]
+        conjs = set(int(c, 10) for c in fields[1:])
+        conjs.difference_update({77, 78})  # verbs with non-full conj.
+        if not conjs:
+            continue
+        conjs = tuple(sorted(conjs))
+
+        for conj in get_conjugations(word):
+            detectedGrad = get_cons_grad_verb(word, conj)
+            if detectedGrad \
+            and conj not in conjsByWord.setdefault(word, set()):
+                word2 = f"'{word}'"
+                print(
+                    f"{word2:20} in conjugation {conj:2}: "
+                    "expected no consonant gradation but got it"
+                )
+                errorCount += 1
+            elif not detectedGrad \
+            and conj in conjsByWord.setdefault(word, set()):
+                word2 = f"'{word}'"
+                print(
+                    f"{word2:20} in conjugation {conj:2}: "
                     "expected consonant gradation but got none"
                 )
                 errorCount += 1
 
-    wordCount += 1
+    return (wordCount, errorCount)
 
-print(f"Words: {wordCount}, errors: {errorCount}")
+def main():
+    if len(sys.argv) != 2:
+        sys.exit(
+            "Argument: which program to test ('n'=noundecl.py, "
+            "'v'=verbconj.py, 'ng'=noun_consgrad.py, 'vg'=verb_consgrad.py)."
+        )
+    test = sys.argv[1]
+
+    if test == "n":
+        (wordCount, errorCount) = run_test_n()
+    elif test == "v":
+        (wordCount, errorCount) = run_test_v()
+    elif test == "ng":
+        (wordCount, errorCount) = run_test_ng()
+    elif test == "vg":
+        (wordCount, errorCount) = run_test_vg()
+    else:
+        sys.exit("Invalid argument.")
+
+    print(f"Words: {wordCount}, errors: {errorCount}")
+
+main()
