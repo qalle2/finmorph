@@ -102,7 +102,7 @@ AbePl: kuusitta
 InsPl: kuusin
 ```
 
-### find_partial_homonym_nouns.py
+### find-partial-homonym-nouns.py
 Find partially homonymous inflected nouns. Under construction (the results are incomplete). Slow.
 
 `partial-homonym-nouns.txt` has been generated with this program.
@@ -119,7 +119,7 @@ Declension 27 (like "käsi, käden, -en/kätten, kättä, -ä, käteen, -in") wi
 consonant gradation
 ```
 
-Needs `noundecl.py` and `countsyll.py`. Can be tested with `test_nounverb.py`.
+Needs `noundecl.py` and `countsyll.py`. Can be tested with `test-nounverb.py`.
 
 ### noundecl.py
 Argument: a Finnish noun (including adjectives/pronouns/numerals, excluding compounds) in nominative singular. Print the Kotus declension(s) (1-49).
@@ -131,7 +131,7 @@ Declension 24 (like "un|i, -en, -ien/-ten, -ta, -ia, -een, -iin")
 Declension 27 (like "käsi, käden, -en/kätten, kättä, -ä, käteen, -in")
 ```
 
-Needs `countsyll.py`. Can be tested with `test_nounverb.py`.
+Needs `countsyll.py`. Can be tested with `test-nounverb.py`.
 
 ### verb_consgrad.py
 Argument: a Finnish verb (not a compound) in the infinitive. Print the Kotus conjugation(s) (52-78) and whether consonant gradation applies.
@@ -145,7 +145,7 @@ Conjugation 75 (like "selvi|tä, -än, -si, -äisi, -tköön, -nnyt, -ttiin") wi
 consonant gradation
 ```
 
-Needs `verbconj.py`. Can be tested with `test_nounverb.py`.
+Needs `verbconj.py`. Can be tested with `test-nounverb.py`.
 
 ### verbconj.py
 Argument: a Finnish verb (not a compound) in the infinitive. Print the Kotus conjugation(s) (52-78).
@@ -157,7 +157,7 @@ Conjugation 69 (like "vali|ta, -tsen, -tsi, -tsisi, -tkoon, -nnut, -ttiin")
 Conjugation 75 (like "selvi|tä, -än, -si, -äisi, -tköön, -nnyt, -ttiin")
 ```
 
-Needs `countsyll.py`. Can be tested with `test_nounverb.py`.
+Needs `countsyll.py`. Can be tested with `test-nounverb.py`.
 
 ### countsyll.py
 Count the number of syllables in a Finnish word. Argument: word
@@ -209,24 +209,24 @@ Creates the subdirectory `generated-lists/` and generates these files under it:
 
 Also generates `stats-compound.txt` and `stats-nounverb.txt` under the current directory (see [text files](#text-files)).
 
-### test_conjugate_verb.py
+### test-conjugate_verb.py
 Test `conjugate_verb.py`. No arguments.
 
-### test_decline_noun.py
+### test-decline_noun.py
 Test `decline_noun.py`. No arguments.
 
-### test_nounverb.py
+### test-nounverb.py
 Argument: which program to test ('n'=noundecl.py, 'v'=verbconj.py, 'nc'=noun_consgrad.py,
 'vc'=verb_consgrad.py).
 
 Needs files created by `extract.sh`.
 
-### test_splitcomp.py
+### test-splitcomp.py
 Test `splitcomp.py` against known single words and compounds.
 
 Requires `generated-lists/words.csv` which can be generated with `extract.sh`.
 
-### validate_compounds.py
+### validate-compounds.py
 Validate `compounds.txt` and `generated-lists/words.csv`.
 
 ## Programs even less interesting to the end user
@@ -239,19 +239,19 @@ Read Kotus XML file, print distinct words and their declensions/conjugations (0-
 ### finals.py
 Get words that occur as finals of compounds. Print them and their declensions/conjugations in CSV format. Arguments: wordCsvFile compoundListFile
 
-### csv_combine.py
+### csv-combine.py
 Arguments: one or more CSV files. For each distinct word, print a CSV line with all declensions/conjugations occurring with that word in the files.
 
-### replace_plurals.py
+### replace-plurals.py
 Arguments: CSV file with words and declensions/conjugations, CSV file with plurals and singulars. Print words and declensions/conjugations in CSV format, with plurals replaced with singulars.
 
-### strip_compounds.py
+### strip-compounds.py
 Arguments: CSV file with words and declensions/conjugations, list file with compounds. Print CSV lines without those that contain a compound.
 
-### filter_by_conjugation.py
+### filter-by-conjugation.py
 Arguments: CSV file with words and declensions/conjugations, first declension/conjugation, last declension/conjugation. Print lines that contain declensions/conjugations within that range.
 
-### filter_by_syllcnt.py
+### filter-by-syllcnt.py
 Arguments: CSV file, syllable count (1-4; 4=4 or more). Print lines containing a word with that many syllables.
 
 ### nonfinals.py
@@ -260,10 +260,10 @@ Print words that only occur as non-final parts of compounds (not final). Argumen
 ### compositives.py
 Print words that only occur as non-final parts of compounds (not final or alone). Arguments: compound list file, word CSV file
 
-### stats_compound.py
+### stats-compound.py
 Print a table of compound counts by number of parts and number of letters. Argument: compound list file.
 
-### stats_nounverb.py
+### stats-nounverb.py
 Print a table of noun/verb counts by declension/conjugation, syllable count and ending. Argument: CSV file with words (no compounds).
 
 ### util.py
@@ -301,7 +301,7 @@ E.g. `hassel` (as in `hasselpähkinä`) but not `hevos`, `pään` or `pää`.
 Under construction (vowel-final words still missing).
 
 ### partial-homonym-nouns.txt
-A list of partially homonymous inflected nouns. Incomplete. Automatically generated with `find_partial_homonym_nouns.py`.
+A list of partially homonymous inflected nouns. Incomplete. Automatically generated with `find-partial-homonym-nouns.py`.
 
 ### plurals.csv
 A list of "plural only" words on the Kotus list.
