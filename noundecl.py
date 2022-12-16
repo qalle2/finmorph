@@ -576,177 +576,154 @@ _EXCEPTIONS = {
     # === Trisyllabic ===
 
     # -VV
-    "aaloe": 3,
-    "collie": 3,
-    "embryo": 3,
-    "lassie": 3,
-    "oboe": 3,
-    "zombie": 3,
-    #
     "feijoa": 10,
     #
-    "apnea": 12,
-    "hebrea": 12,
-    "heprea": 12,
-    "idea": 12,
     "pallea": 12,
     "urea": 12,
     #
     "media": 13,
     #
-    "ainoa": 15,
-    #
-    "homssantuu": 18,
-    "kanapee": 18,
-    "munaskuu": 18,
-    "pelakuu": 18,
-    "rokokoo": 18,
-    "tenkkapoo": 18,
-    #
     "brasserie": 21,
 
-    # -Ca
+    # -ba/-da/-fa/-ha/-sa
     "alfalfa": 9,
     "ameba": 9,
-    "antiikva": 9,
-    "aortta": 9,
-    "canasta": 9,
-    "chinchilla": 9,
-    "dilemma": 9,
-    "ekseema": 9,
-    "guava": 9,
-    "kimaira": 9,
-    "koala": 9,
     "marimba": 9,
-    "nautiikka": 9,
-    "papilla": 9,
-    "prostata": 9,
-    "regatta": 9,
-    "ruustinna": 9,
-    "sialma": 9,
-    "sinsilla": 9,
-    "tequila": 9,
-    "tiaara": 9,
-    "toccata": 9,
-    "tonsilla": 9,
     #
-    "amfora": 10,
-    "ankara": 10,
-    "avara": 10,
-    "gallona": 10,
-    "hankala": 10,
-    "huuhdonta": 10,
-    "ihana": 10,
-    "jumala": 10,
-    "kamala": 10,
-    "katala": 10,
+    "pomada": 10,
+    #
+    "prinsessa": 13,
+    "reseda": 13,
+    "vernissa": 13,
+    #
+    "cha-cha-cha": 21,
+
+    # -ja
+    "apaja": 11,
+    #
+    "mantilja": 13,
+    "papaija": 13,
+    "vanilja": 13,
+
+    # -ka
+    "nautiikka": 9,
+    #
+    "paprika": 12,
+
+    # -la
     "kavala": 10,
-    "kolonna": 10,
-    "kumara": 10,
-    "leijona": 10,
-    "madonna": 10,
-    "matala": 10,
     "nokkela": 10,
     "ovela": 10,
-    "pomada": 10,
-    "reskontra": 10,
     "sukkela": 10,
-    "tukala": 10,
     #
-    "ahava": 11,
-    "algebra": 11,
-    "apaja": 11,
-    "hapera": 11,
-    "harava": 11,
-    "hatara": 11,
-    "hattara": 11,
+    "vankila": 12,
+    #
+    "apila": 13,
+    "kampela": 13,
+    "sikala": 13,
+    "takila": 13,
+
+    # -ma
+    "dilemma": 9,
+    "ekseema": 9,
+    "sialma": 9,
+    #
     "hekuma": 11,
-    "hutera": 11,
-    "itara": 11,
-    "judoka": 11,
-    "kihara": 11,
+    "paatsama": 11,
+    "probleema": 11,
+    "ödeema": 11,
+    #
+    "salama": 12,
+    #
+    "karisma": 13,
+    "maailma": 13,
+    "suurima": 13,
+
+    # -na
+    "ruustinna": 9,
+    #
+    "gallona": 10,
+    "ihana": 10,
+    "leijona": 10,
+    #
     "lattana": 11,
-    "leukoija": 11,
-    "mahatma": 11,
     "maruna": 11,
-    "mimoosa": 11,
     "murena": 11,
     "ohrana": 11,
     "omena": 11,
-    "orpana": 11,
-    "paatsama": 11,
-    "papana": 11,
-    "pipana": 11,
-    "poppana": 11,
-    "probleema": 11,
-    "sikkara": 11,
     "sikuna": 11,
-    "tomera": 11,
-    "vanttera": 11,
-    "ödeema": 11,
     #
+    "haapana": 12,
     "harppuuna": 12,
-    "kamera": 12,
-    "kolera": 12,
-    "littera": 12,
-    "ooppera": 12,
-    "paprika": 12,
-    "passiiva": 12,
-    "salama": 12,
+    "keppana": 12,
+    "pirpana": 12,
     #
     "aivina": 13,
-    "aktiiva": 13,
-    "apila": 13,
     "arina": 13,
-    "artikla": 13,
-    "gerbera": 13,
-    "hetaira": 13,
     "ipana": 13,
     "kahina": 13,
-    "kampela": 13,
-    "karisma": 13,
-    "ketara": 13,
-    "kitara": 13,
     "kohina": 13,
     "kopina": 13,
     "kuhina": 13,
-    "maailma": 13,
-    "madeira": 13,
-    "manila": 13,
-    "mantilja": 13,
     "marina": 13,
-    "matara": 13,
     "maukuna": 13,
-    "meduusa": 13,
-    "papaija": 13,
     "paukkina": 13,
     "perenna": 13,
     "piekana": 13,
     "porina": 13,
-    "prinsessa": 13,
     "rahina": 13,
     "ramina": 13,
     "reppana": 13,
-    "reseda": 13,
     "retsina": 13,
     "ruutana": 13,
-    "sairaala": 13,
-    "sikala": 13,
-    "sikkura": 13,
     "smetana": 13,
-    "suurima": 13,
-    "takila": 13,
-    "taverna": 13,
-    "tempera": 13,
     "tuoksina": 13,
+
+    # -ra
+    "kimaira": 9,
+    "tiaara": 9,
+    #
+    "amfora": 10,
+    "ankara": 10,
+    "avara": 10,
+    "kumara": 10,
+    "kupera": 10,
+    "reskontra": 10,
+    "uuttera": 10,
+    #
+    "hapera": 11,
+    "hatara": 11,
+    "hattara": 11,
+    "hutera": 11,
+    "itara": 11,
+    "sikkara": 11,
+    "tomera": 11,
+    "vanttera": 11,
+    #
+    "gerbera": 13,
+    "hetaira": 13,
+    "ketara": 13,
+    "kitara": 13,
+    "madeira": 13,
+    "matara": 13,
+    "sikkura": 13,
+    "tempera": 13,
     "vaahtera": 13,
-    "vanilja": 13,
-    "vernissa": 13,
-    "viola": 13,
+
+    # -ta
+    "canasta": 9,
+    "prostata": 9,
+    "toccata": 9,
     #
-    "ulappa": 14,
+    "huuhdonta": 10,
+
+    # -va
+    "ahava": 11,
+    "harava": 11,
     #
-    "cha-cha-cha": 21,
+    "passiiva": 12,
+    #
+    "aktiiva": 13,
 
     # -Cä
     "emäntä": 10,
@@ -1375,25 +1352,67 @@ _RULES_2SYLL = tuple((d, re.compile(r, re.VERBOSE)) for (d, r) in (
     ( 5, "[bcdfghjklmnpqrštvwxzž]$"),
 ))
 
-# TODO: optimize the rest
-
 # rules for trisyllabic nouns (declension, regex)
 _RULES_3SYLL = tuple((d, re.compile(r, re.VERBOSE)) for (d, r) in (
-    # -VV (455 nouns, 22 exceptions)
-    ( 3, "[aäei][oö]$"),
-    (12, "[iuy][aä]$"),
-    (15, "e[aä]$"),
-    (18, "[aeiouyäö]i$"),
+    # -VV (455 nouns, 5 exceptions)
+    ( 3, "( [io]e | [aäei][oö] | yo )$"),
+    (12, "( (d|n|br|pr)ea | [iuy][aä] )$"),
+    (15, "( e[aä] | oa )$"),
+    (18, "( pee | [aeu]i | oo | uu )$"),
     (20, "ee$"),
     (48, "[uy]e$"),
 
-    # -Ca (1504 nouns, 135 exceptions)
-    ( 9, "( d | nk | ss | nt | (ee|ii|uu)tt )a$"),
-    (10, "( [aou]ja | ma | o[ou]na | era | isa | va )$"),
-    (11, "ona$"),
-    (14, "(kk|tt)a$"),
-    (13, "( [gkt] | ll | (ee|ii|[lu]u|[ag]i)n | uur | ts )a$"),
-    (12, "[jlnr]a$"),
+    # TODO: optimize the rest
+
+    # -da/-ga/-pa/-va (161 nouns, 6 exceptions)
+    ( 9, "(d|uav|kv)a$"),
+    (10, "( [^u]a | [^i]i | [eour] )va$"),
+    (13, "(ed|g)a$"),
+    (14, "ppa$"),
+
+    # -ja (292 nouns, 4 exceptions)
+    (10, "[aou]ja$"),
+    (11, "oija$"),
+    (12, "( [^o]i | l | n )ja$"),
+
+    # -ka (224 nouns, 2 exceptions)
+    ( 9, "nka$"),
+    (11, "oka$"),
+    (13, "[aeihs]ka$"),
+    (14, "kka$"),
+
+    # -la (103 nouns, 9 exceptions)
+    ( 9, "( oa | ui | [hps]il )la$"),
+    (13, "( aa | ni | k | [ei]l | io )la$"),
+    (12, "( (nd|rj|[kor]k|im|n|pp|r|rs|[lnt]t|v)[aei] | [^i]o | u )la$"),
+    (10, "[kmtv]ala$"),
+
+    # -ma (173 nouns, 11 exceptions)
+    (10, "[aeioul]ma$"),
+    (11, "(ee|t) ma$"),
+
+    # -na (172 nouns, 34 exceptions)
+    (10, "o[oun]na$"),
+    (11, "( pa | [^o]o )na$"),
+    (12, "( [^p]an | [^aig]in | [kprt]un )a$"),
+    (13, "( ee | [aig]i | [lu]u | r )na$"),
+
+    # -ra (83 nouns, 26 exceptions)
+    (10, "[kv]era$"),
+    (11, "(ha|b) ra$"),
+    (12, "( [kmsptv]a | [lmpt]e | go | [^u]u )ra$"),
+    (13, "uura$"),
+
+    # -sa (73 nouns, 2 exceptions)
+    ( 9, "issa$"),
+    (10, "isa$"),
+    (11, "osa$"),
+    (13, "(t|uu) sa$"),
+
+    # -ta (219 nouns, 4 exceptions)
+    ( 9, "( n | (ga|ee|ii|r|uu)t )ta$"),
+    (13, "(e|i|is|us) ta$"),
+    (14, "[hmv][aeo] tta$"),
 
     # -Cä (520 nouns, 23 exceptions)
     ( 9, "( d | nk | ss | nt | (ee|ii|uu)tt )[aä]$"),
