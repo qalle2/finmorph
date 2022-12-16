@@ -656,28 +656,20 @@ _EXCEPTIONS = {
     "haapana": 12,
     "harppuuna": 12,
     "keppana": 12,
+    "nahina": 12,
     "pirpana": 12,
     #
-    "aivina": 13,
     "arina": 13,
     "ipana": 13,
-    "kahina": 13,
     "kohina": 13,
     "kopina": 13,
     "kuhina": 13,
     "marina": 13,
-    "maukuna": 13,
     "paukkina": 13,
-    "perenna": 13,
-    "piekana": 13,
     "porina": 13,
-    "rahina": 13,
-    "ramina": 13,
     "reppana": 13,
     "retsina": 13,
-    "ruutana": 13,
     "smetana": 13,
-    "tuoksina": 13,
 
     # -ra
     "kimaira": 9,
@@ -688,23 +680,18 @@ _EXCEPTIONS = {
     "avara": 10,
     "kumara": 10,
     "kupera": 10,
-    "reskontra": 10,
     "uuttera": 10,
     #
     "hapera": 11,
-    "hatara": 11,
-    "hattara": 11,
-    "hutera": 11,
-    "itara": 11,
     "sikkara": 11,
     "tomera": 11,
-    "vanttera": 11,
+    #
+    "kattara": 12,
+    "littera": 12,
     #
     "gerbera": 13,
-    "hetaira": 13,
     "ketara": 13,
     "kitara": 13,
-    "madeira": 13,
     "matara": 13,
     "sikkura": 13,
     "tempera": 13,
@@ -1362,8 +1349,6 @@ _RULES_3SYLL = tuple((d, re.compile(r, re.VERBOSE)) for (d, r) in (
     (20, "ee$"),
     (48, "[uy]e$"),
 
-    # TODO: optimize the rest
-
     # -da/-ga/-pa/-va (161 nouns, 6 exceptions)
     ( 9, "(d|uav|kv)a$"),
     (10, "( [^u]a | [^i]i | [eour] )va$"),
@@ -1391,17 +1376,19 @@ _RULES_3SYLL = tuple((d, re.compile(r, re.VERBOSE)) for (d, r) in (
     (10, "[aeioul]ma$"),
     (11, "(ee|t) ma$"),
 
-    # -na (172 nouns, 34 exceptions)
-    (10, "o[oun]na$"),
-    (11, "( pa | [^o]o )na$"),
-    (12, "( [^p]an | [^aig]in | [kprt]un )a$"),
-    (13, "( ee | [aig]i | [lu]u | r )na$"),
+    # -na (172 nouns, 26 exceptions)
+    (10, "( [ao]n | o[ou] ) na$"),
+    (11, "(pa|o) na$"),
+    (13, "( (ek|ut)a | ee | (a|g|ah|i|am|ks|iv)i | en | (uk|l|u)u | r )na$"),
+    (12, "na$"),
 
-    # -ra (83 nouns, 26 exceptions)
-    (10, "[kv]era$"),
-    (11, "(ha|b) ra$"),
-    (12, "( [kmsptv]a | [lmpt]e | go | [^u]u )ra$"),
-    (13, "uura$"),
+    # -ra (83 nouns, 20 exceptions)
+    (10, "(fa|ke|ve|t)ra$"),
+    (11, "(ha|ta|b|te)ra$"),
+    (13, "(i|uu)ra$"),
+    (12, "ra$"),
+
+    # TODO: optimize the rest
 
     # -sa (73 nouns, 2 exceptions)
     ( 9, "issa$"),
