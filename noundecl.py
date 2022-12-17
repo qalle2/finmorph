@@ -1,4 +1,4 @@
-"""Get the Kotus declension of a Finnish noun."""
+"""Get the declensions of a Finnish noun."""
 
 # Note: A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant.
 
@@ -715,22 +715,12 @@ _EXCEPTIONS = {
     # -Cä
     "emäntä": 10,
     "isäntä": 10,
-    "jäkälä": 10,
-    "peeärrä": 10,
-    "pykälä": 10,
     #
-    "kiverä": 11,
-    "käkkärä": 11,
-    "käpälä": 11,
-    "kärhämä": 11,
-    "lättänä": 11,
-    "mäkärä": 11,
-    "säkkärä": 11,
-    "täkänä": 11,
     "veiterä": 11,
     "äpärä": 11,
     #
     "jäkkärä": 12,
+    "räkälä": 12,
     "väkkärä": 12,
     #
     "kärinä": 13,
@@ -741,95 +731,49 @@ _EXCEPTIONS = {
     "siivilä": 13,
 
     # -Ce
-    "à la carte": 8,
-    "agaave": 8,
-    "andante": 8,
-    "beagle": 8,
-    "beguine": 8,
-    "bouillabaisse": 8,
-    "bourgogne": 8,
-    "charlotte russe": 8,
-    "chenille": 8,
-    "chippendale": 8,
-    "college": 8,
-    "cum laude": 8,
-    "empire": 8,
-    "ensemble": 8,
-    "entrecôte": 8,
-    "force majeure": 8,
-    "freelance": 8,
     "ginger ale": 8,
-    "image": 8,
-    "karate": 8,
-    "kurare": 8,
     "ladylike": 8,
-    "lasagne": 8,
-    "mobile": 8,
-    "open house": 8,
-    "poste restante": 8,
-    "promille": 8,
-    "ratatouille": 8,
     "tabbule": 8,
-    "vivace": 8,
     #
     "jäntere": 48,
     #
     "askare": 49,
     "askele": 49,
-    "huhmare": 49,
     "kantele": 49,
-    "kyynele": 49,
     "petkele": 49,
-    "pientare": 49,
-    "saivare": 49,
     "taipale": 49,
-    "utare": 49,
 
     # -Ci
-    "aatami": 5,
     "afgaani": 5,
-    "afääri": 5,
     "alleeli": 5,
     "biennaali": 5,
-    "bordyyri": 5,
-    "brodyyri": 5,
-    "brosyyri": 5,
     "butaani": 5,
-    "dipoli": 5,
     "doktriini": 5,
     "etaani": 5,
     "eteeni": 5,
+    "etruski": 5,
     "fenkoli": 5,
-    "fenoli": 5,
     "fertiili": 5,
     "fibriini": 5,
     "fosfori": 5,
-    "gaeli": 5,
     "gerbiili": 5,
     "gluteeni": 5,
-    "guldeni": 5,
     "humaani": 5,
     "imaami": 5,
-    "japani": 5,
     "jasmiini": 5,
     "joriini": 5,
     "kaimaani": 5,
     "kajaali": 5,
     "karbiini": 5,
     "kardaani": 5,
-    "kašmiri": 5,
     "kefiiri": 5,
+    "ketoni": 5,
     "kiniini": 5,
-    "klausuuli": 5,
-    "koktaili": 5,
     "konsiili": 5,
     "koraali": 5,
     "Koraani": 5,
     "korpraali": 5,
-    "kosini": 5,
-    "kreoli": 5,
     "kretliini": 5,
-    "kvartääri": 5,
     "kvasaari": 5,
     "labiili": 5,
     "lantaani": 5,
@@ -838,103 +782,84 @@ _EXCEPTIONS = {
     "ligniini": 5,
     "likvori": 5,
     "lojaali": 5,
-    "lysoli": 5,
     "mangaani": 5,
-    "martini": 5,
-    "matami": 5,
     "membraani": 5,
-    "mentoli": 5,
+    "mesoni": 5,
     "metaani": 5,
     "migreeni": 5,
     "modaali": 5,
     "moguli": 5,
-    "mongoli": 5,
     "monstrumi": 5,
     "morfiini": 5,
-    "noduuli": 5,
-    "nomini": 5,
     "oktaani": 5,
     "oopiumi": 5,
     "orgaani": 5,
+    "otsoni": 5,
     "paapuuri": 5,
     "palsami": 5,
-    "panini": 5,
     "patiini": 5,
     "pedaali": 5,
     "pendeli": 5,
     "pepsiini": 5,
     "pineeni": 5,
     "pluraali": 5,
-    "podsoli": 5,
     "porfiini": 5,
-    "porfyyri": 5,
     "primaari": 5,
-    "primääri": 5,
     "profaani": 5,
     "profiili": 5,
     "propaani": 5,
+    "protoni": 5,
+    "pyloni": 5,
     "rabbiini": 5,
     "retliini": 5,
     "reviiri": 5,
     "risiini": 5,
     "rutiini": 5,
-    "salami": 5,
     "samaani": 5,
+    "šamaani": 5,
     "sampaani": 5,
-    "satyyri": 5,
     "seireeni": 5,
     "strykniini": 5,
     "syaani": 5,
     "sykliini": 5,
+    "sykloni": 5,
     "tanniini": 5,
-    "tapani": 5,
-    "tatami": 5,
     "teiini": 5,
     "toksiini": 5,
     "triennaali": 5,
     "tyyrpuuri": 5,
-    "vigvami": 5,
     "viriili": 5,
     "vulgaari": 5,
-    "vulgääri": 5,
-    "šamaani": 5,
     #
     "antenni": 6,
     "atolli": 6,
     "atomi": 6,
-    "basenji": 6,
     "basilli": 6,
-    "betoni": 6,
-    "biisoni": 6,
     "biljardi": 6,
     "bisarri": 6,
-    "bosoni": 6,
-    "buzuki": 6,
     "daktyyli": 6,
-    "detalji": 6,
     "entsyymi": 6,
     "flanelli": 6,
     "foneemi": 6,
-    "fotoni": 6,
+    "frisyyri": 6,
     "gaselli": 6,
-    "gibboni": 6,
     "glukoosi": 6,
-    "haaremi": 6,
     "hampuusi": 6,
     "hotelli": 6,
-    "ikoni": 6,
     "kanjoni": 6,
-    "kantoni": 6,
-    "kardoni": 6,
     "karpaasi": 6,
-    "kinuski": 6,
+    "kivääri": 6,
     "kolhoosi": 6,
     "kommuuni": 6,
-    "kondomi": 6,
+    "konsoli": 6,
     "koturni": 6,
-    "leptoni": 6,
+    "kumppani": 6,
+    "kupoli": 6,
     "likööri": 6,
-    "meloni": 6,
+    "linoli": 6,
+    "marttyyri": 6,
+    "misääri": 6,
+    "moduuli": 6,
     "monsuuni": 6,
     "monttööri": 6,
     "motelli": 6,
@@ -943,21 +868,14 @@ _EXCEPTIONS = {
     "neuroosi": 6,
     "oliivi": 6,
     "pakaasi": 6,
-    "peijooni": 6,
-    "pekoni": 6,
-    "piisoni": 6,
     "plantaasi": 6,
     "pogromi": 6,
     "poliisi": 6,
-    "ponttoni": 6,
     "proteesi": 6,
     "putelli": 6,
     "refleksi": 6,
-    "sabloni": 6,
-    "saluki": 6,
     "sardelli": 6,
     "serviisi": 6,
-    "sirkoni": 6,
     "sirtaki": 6,
     "sotiisi": 6,
     "sottiisi": 6,
@@ -966,31 +884,24 @@ _EXCEPTIONS = {
     "sypressi": 6,
     "systeemi": 6,
     "taifuuni": 6,
-    "teutoni": 6,
     "tienesti": 6,
     "toteemi": 6,
     "trapetsi": 6,
     "tribuuni": 6,
     "trotyyli": 6,
-    "tsinuski": 6,
     "turkoosi": 6,
+    "turnyyri": 6,
     "ukaasi": 6,
-    "valloni": 6,
     "valööri": 6,
+    "vampyyri": 6,
     "vinyyli": 6,
     "viskoosi": 6,
     "volyymi": 6,
-    "zirkoni": 6,
     "zoonoosi": 6,
     "äksiisi": 6,
 
     # -Co
-    "allegro": 1,
-    "crescendo": 1,
-    "embargo": 1,
-    "flamenco": 1,
-    "flamingo": 1,
-    "guano": 1,
+    "hampaisto": 1,
     "kalusto": 1,
     "kojeisto": 1,
     "koneikko": 1,
@@ -1000,46 +911,40 @@ _EXCEPTIONS = {
     "laitteisto": 1,
     "lajisto": 1,
     "lasisto": 1,
-    "libido": 1,
     "munkisto": 1,
     "murteisto": 1,
     "naisisto": 1,
     "oikeisto": 1,
-    "piano": 1,
+    "parhaisto": 1,
+    "pensaisto": 1,
+    "poikaisto": 1,
     "pojisto": 1,
     "praktikko": 1,
     "raiteisto": 1,
-    "rubato": 1,
+    "rattaisto": 1,
     "ruovisto": 1,
     "ruususto": 1,
     "saraikko": 1,
     "sombrero": 1,
     "vaihteisto": 1,
-    "vibrato": 1,
     "virasto": 1,
 
     # -Cö
     "hyllystö": 1,
     "käyrästö": 1,
     "lehdistö": 1,
-    "lepistö": 1,
     "linssistö": 1,
     "lähistö": 1,
     "merkistö": 1,
     "pillistö": 1,
-    "pylväistö": 1,
-    "sisältö": 1,
+    "syvänkö": 1,
     "testistö": 1,
-    "tyypistö": 1,
     "väylästö": 1,
+    "ylänkö": 1,
 
     # -CU
-    "heavy": 1,
     "huitaisu": 1,
-    "jiujitsu": 1,
-    "karibu": 1,
     "kyhäily": 1,
-    "treasury": 1,
 
     # -n
     "charleston": 5,
@@ -1388,40 +1293,62 @@ _RULES_3SYLL = tuple((d, re.compile(r, re.VERBOSE)) for (d, r) in (
     (13, "(i|uu)ra$"),
     (12, "ra$"),
 
-    # TODO: optimize the rest
-
     # -sa (73 nouns, 2 exceptions)
     ( 9, "issa$"),
     (10, "isa$"),
     (11, "osa$"),
-    (13, "(t|uu) sa$"),
+    (13, "(t|uu)sa$"),
 
     # -ta (219 nouns, 4 exceptions)
     ( 9, "( n | (ga|ee|ii|r|uu)t )ta$"),
     (13, "(e|i|is|us) ta$"),
     (14, "[hmv][aeo] tta$"),
 
-    # -Cä (520 nouns, 23 exceptions)
-    ( 9, "( d | nk | ss | nt | (ee|ii|uu)tt )[aä]$"),
-    (10, "( [äöy]jä | elä | mä | ärä | erä | isä | vä )$"),
-    (14, "(kk|tt)ä$"),
-    (13, "( [gkt] | ll | (ee|ii|[lu]u|[ag]i)n | uur | ts )ä$"),
-    (12, "[jlnr]ä$"),
+    # -Cä (520 nouns, 13 exceptions)
+    ( 9, "ntä$"),
+    (11, "( päl | häm | [kt]än | (ve|kä)r )ä$"),
+    (12, "( ij | (i|y|mä)l | n | yr )ä$"),
+    (13, "(sk|st)ä$"),
+    (14, "kkä$"),
+    (10, "[jlmrsv]ä$"),
 
-    # -Ce (476 nouns, 41 exceptions)
-    ( 8, "tte$"),
-    (49, "(pel|en|er)e$"),
+    # -Ce (476 nouns, 9 exceptions)
+    ( 8, """
+        (
+        c | ud | g | (da|b|g|bi|[iu]l)l | (g|ui)n | (ra|i|u)r | s
+        | (ra|[nôrt])t | v
+        )e$
+    """),
+    (49, "( [np]el | en | ([mtv]a|e)r )e$"),
     (48, "[bcdfghjklmnpqrsštvwxzž]e$"),
 
-    # -Ci (2083 nouns, 196 exceptions)
-    ( 6, "( [aäeiou]l | [au]m | [aäei]n | [aäeiouy]r )i$"),
-    (16, "[eo]mpi$"),
+    # -Ci (2083 nouns, 154 exceptions)
+    ( 6, """(
+        [ln]j
+        | ( [lz]u | us )k
+        | ( [aä] | [^a]e | ii | [bdikorv]o | [^u]u )l
+        | ( [ahjrs]a | re | do | u )m
+        | ( [am]a | [^d]e | [fhik]i | [bdklost]o | ä )n
+        | ( [aeou] | ii | [^y]y | [^ä]ä )r
+    )i$"""),
+    (16, "mpi$"),
     ( 5, "[bcdfghjklmnpqrsštvwxzž]i$"),
 
-    # -CO/-CU (1161 nouns, 51 exceptions)
-    ( 1, "( (nk|nt|tt)[oö] | aisto | t[uy] )$"),
-    ( 4, "kk[oö]$"),
-    ( 2, "[bcdfghjklmnpqrsštvwxzž][oöuy]$"),
+    # -Co (533 nouns, 27 exceptions)
+    ( 1, "( c | (bi|n)d | [nr]g | nk | [iu]an | gr | ([br]a|n|t)t )o$"),
+    ( 4, "kko$"),
+    ( 2, "[bcdfghjklmnpqrsštvwxzž]o$"),
+
+    # -Cö (136 nouns, 11 exceptions)
+    ( 1, "( [lnt] | [pä]is )tö$"),
+    ( 4, "kkö$"),
+    ( 2, "[bcdfghjklmnpqrsštvwxzž]ö$"),
+
+    # -CU (492 nouns, 2 exceptions)
+    ( 1, "( (b|its|t)u | [rtv]y )$"),
+    ( 2, "[bcdfghjklmnpqrsštvwxzž][uy]$"),
+
+    # TODO: optimize the rest
 
     # -C (4427 nouns, 35 exceptions)
     (32, "t[aä]r$"),
@@ -1476,8 +1403,13 @@ _RULES_4SYLL = tuple((d, re.compile(r, re.VERBOSE)) for (d, r) in (
 ))
 
 def get_declensions(noun, useExceptions=True):
-    """noun: a Finnish noun in nominative singular
-    return: a tuple of 0-2 Kotus declensions (each 1-49)"""
+    """Get the Kotus declension(s) of a Finnish noun (including adjectives/
+    pronouns/numerals, excluding compounds).
+    noun:          the noun in nominative singular
+    useExceptions: use True except for testing purposes
+    return:        a tuple of 0-2 declensions (each 1-49)"""
+
+    assert isinstance(noun, str)
 
     noun = noun.strip("'- ")
 
@@ -1512,7 +1444,7 @@ def _check_redundant_exceptions():
         detectedDeclensions = get_declensions(noun, False)
         if detectedDeclensions \
         and _EXCEPTIONS[noun] == list(detectedDeclensions)[0]:
-            print(f'Redundant exception: "{noun}"')
+            print(f"Redundant exception: '{noun}'")
 
 def main():
     _check_redundant_exceptions()
