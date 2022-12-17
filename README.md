@@ -104,9 +104,9 @@ InsPl: kuusin
 ```
 
 ### find-partial-homonyms.py
-Find partially homonymous words (only nouns at the moment). Slow.
+Find partially homonymous inflected nouns and verbs. Slow.
 
-`partial-homonym-nouns.txt` was generated with this program.
+`partial-homonyms.txt` was generated with this program.
 
 ### noun_consgrad.py
 Argument: a Finnish noun (including adjectives/pronouns/numerals, excluding
@@ -326,8 +326,8 @@ Uninflected words that only occur as non-final parts of compounds, not finally
 or alone. E.g. `hassel` (as in `hasselpähkinä`) but not `hevos`, `pään` or
 `pää`. Under construction (vowel-final words still missing).
 
-### partial-homonym-nouns.txt
-A list of partially homonymous inflected nouns. Incomplete. Automatically
+### partial-homonyms.txt
+A list of partially homonymous inflected nouns and verbs. Automatically
 generated with `find-partial-homonyms.py`.
 
 ### plurals.csv
