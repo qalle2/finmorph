@@ -103,11 +103,10 @@ AbePl: kuusitta
 InsPl: kuusin
 ```
 
-### find-partial-homonym-nouns.py
-Find partially homonymous inflected nouns. Under construction (the results are
-incomplete). Slow.
+### find-partial-homonyms.py
+Find partially homonymous words (only nouns at the moment). Slow.
 
-`partial-homonym-nouns.txt` has been generated with this program.
+`partial-homonym-nouns.txt` was generated with this program.
 
 ### noun_consgrad.py
 Argument: a Finnish noun (including adjectives/pronouns/numerals, excluding
@@ -119,8 +118,8 @@ Example:
 $ python3 noun_consgrad.py "kuusi"
 Declension 24 (like "un|i, -en, -ien/-ten, -ta, -ia, -een, -iin") without
 consonant gradation
-Declension 27 (like "käsi, käden, -en/kätten, kättä, -ä, käteen, -in") without
-consonant gradation
+Declension 27 (like "kä|si, -den, -sien/-tten, -ttä, -siä, -teen, -siin")
+without consonant gradation
 ```
 
 Needs `noundecl.py` and `countsyll.py`. Can be tested with `test-nounverb.py`.
@@ -133,7 +132,7 @@ Example:
 ```
 $ python3 noundecl.py "kuusi"
 Declension 24 (like "un|i, -en, -ien/-ten, -ta, -ia, -een, -iin")
-Declension 27 (like "käsi, käden, -en/kätten, kättä, -ä, käteen, -in")
+Declension 27 (like "kä|si, -den, -sien/-tten, -ttä, -siä, -teen, -siin")
 ```
 
 Needs `countsyll.py`. Can be tested with `test-nounverb.py`.
@@ -329,7 +328,7 @@ or alone. E.g. `hassel` (as in `hasselpähkinä`) but not `hevos`, `pään` or
 
 ### partial-homonym-nouns.txt
 A list of partially homonymous inflected nouns. Incomplete. Automatically
-generated with `find-partial-homonym-nouns.py`.
+generated with `find-partial-homonyms.py`.
 
 ### plurals.csv
 A list of "plural only" words on the Kotus list.

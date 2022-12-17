@@ -410,7 +410,7 @@ def conjugate_verb(verb, mood, tense, voice, number=None, person=None):
     return results
 
 # all supported combinations of mood, tense, voice, number and person
-_ALL_FORMS = (
+ALL_FORMS = (
     (M_IND, T_PRE, V_ACT, N_SG, P_1),
     (M_IND, T_PRE, V_ACT, N_SG, P_2),
     (M_IND, T_PRE, V_ACT, N_SG, P_3),
@@ -464,7 +464,7 @@ def main():
     del argToItem
 
     if mood is None:
-        formsToPrint = _ALL_FORMS
+        formsToPrint = ALL_FORMS
     else:
         if mood not in MOODS:
             sys.exit("Invalid mood.")
