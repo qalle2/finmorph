@@ -517,39 +517,27 @@ _EXCEPTIONS = {
     # -n
     "charleston": 5, "maraton": 5,
     #
-    "backgammon": 6, "donjuan": 6, "stadion": 6, "stilleben": 6, "triatlon": 6,
-    #
-    "kahdeksan": 10, "seitsemän": 10, "yhdeksän": 10,
-    #
     "kumpikaan": 16, "kumpikin": 16,
     #
     "kymmenen": 32,
     #
-    "morsian": 33,
-    #
     "parahin": 36,
-
-    # -r
-    "bestseller": 6, "freelancer": 6, "laudatur": 6, "outsider": 6,
-    "rottweiler": 6,
 
     # -s
     "calvados": 5, "marakas": 5, "moussakas": 5,
     #
     "tournedos": 22,
     #
-    "ananas": 39, "iskias": 39,
+    "iskias": 39,
     #
     "vanhurskaus": 40,
     #
-    "kahdeksas": 45, "miljoonas": 45, "seitsemäs": 45, "tuhannes": 45,
-    "yhdeksäs": 45,
+    "tuhannes": 45,
 
-    # -t
-    "passepartout": 22, "port salut": 22,
-
-    # -C (not -n/-r/-s/-t)
+    # -C (not -n/-r/-s)
     "CD-ROM": 5,
+    #
+    "passepartout": 22, "port salut": 22,
 
     # === Quadrisyllabic and longer ===
 
@@ -559,8 +547,6 @@ _EXCEPTIONS = {
     "odysseia": 9,
     #
     "paranoia": 10,
-    #
-    "atsalea": 13, "attasea": 13, "orkidea": 13,
     #
     "politbyroo": 20, "varietee": 20,
 
@@ -643,168 +629,166 @@ _EXCEPTIONS = {
 # The format of the rules is (declension, regex); the first matching regex will
 # determine the declension.
 # Notes:
-# - One rule per declension, except when the declension contains very different
+# - One rule per declension, except when the declension contains different
 #   kinds of words (e.g. -VV and -C).
 # - When rules don't depend on each other, sort them by declension under each
 #   section (-VV etc.).
 # - Each regex should match at least three words.
-# - Use this as the list of all consonants: bcdfghjklmnpqrsštvwxzž (a-z minus
-#   vowels plus š/ž).
 # - Don't use capital letters or punctuation in rules; handle those words as
 #   exceptions.
 
 # rules for monosyllabic nouns (declension, regex)
-_RULES_1SYLL = tuple((d, re.compile(r, re.VERBOSE)) for (d, r) in (
+_RULES_1SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
     # -VV (44 nouns, 3 exceptions)
-    (19, "(ie|uo|yö)$"),
-    (21, "ay$"),
-    (18, "[aeiouyäö]{2}$"),
+    (19, "(ie|uo|yö)"),
+    (21, "ay"),
+    (18, r"([aeiouyäö]) (\1|i|u)"),
 
     # -CV (8 nouns, no exceptions)
-    ( 8, "e$"),
+    ( 8, "e"),
 
     # -C (52 nouns, 10 exceptions)
-    ( 5, "[bcdfghjklmnpqrsštvwxzž]$"),
+    ( 5, "[bcdfghklnprsštxz]"),
 ))
 
 # rules for disyllabic nouns (declension, regex)
-_RULES_2SYLL = tuple((d, re.compile(r, re.VERBOSE)) for (d, r) in (
+_RULES_2SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
     # -VV (107 nouns, 22 exceptions)
-    (17, "(aa|oo|uu)$"),
-    (18, "[ai]i$"),
-    (20, "(ee|öö|yy)$"),
-    (21, "[aeo]y$"),
-    (48, "[aäou]e$"),
+    (17, "(aa|oo|uu)"),
+    (18, "[ai]i"),
+    (20, "(ee|öö|yy)"),
+    (21, "[aeo]y"),
+    (48, "[aäou]e"),
 
     # -Ca (1022 nouns, 6 exceptions)
     (
         9,
         "( [ae] | [aei][iu] | [bcdfghjklmnpqrsštvwxzž]i | ^i )"
-        "[bcdfghjklmnpqrsštvwxzž]+a$"
+        "[bdfghjklmnprsštvzž]+a"
     ),
     (
         10,
         "( [oy] | [ou][iu] | [bcdfghjklmnpqrsštvwxzž]u | ^u )"
-        "[bcdfghjklmnpqrsštvwxzž]+a$"
+        "[bdfghjklmnprstv]+a"
     ),
 
     # -Cä (230 nouns, 3 exceptions)
-    (10, "[hjklmnprstv]ä$"),
+    (10, "[hjklmnprstv]ä"),
 
     # -Ce (409 nouns, 27 exceptions)
-    ( 8, "(c|[ln]d|g|ch|[ak]k|[gyz]l|[ai]m|kn|[êop]p|[aèn]r|ss)e$"),
-    (48, "[bcdfghjklmnpqrsštvwxzž]e$"),
+    ( 8, "(c|[ln]d|g|ch|[ak]k|[gyz]l|[ai]m|kn|[êop]p|[aèn]r|ss)e"),
+    (48, "[dhjklmnprstv]e"),
 
     # -Cé (4 nouns, no exceptions)
-    (21, "[bprs]é$"),
+    (21, "[bprs]é"),
 
     # -Ci (1312 nouns, 120 exceptions)
-    ( 7, "( [lr]h | [elortä]k | [lmrä]p | [lry]v )i$"),
-    (23, "(ii|o|u)hi$"),
-    (25, "(ie|oi|uo)mi$"),
-    (26, "( (ie|uo)[ln] | eer | ous )i$"),
-    (28, "[lnr]si$"),
-    ( 5, "[bcdfghjklmnpqrsštvwxzž]i$"),
+    ( 7, "( [lr]h | [elortä]k | [lmrä]p | [lry]v )i"),
+    (23, "(ii|o|u)hi"),
+    (25, "(ie|oi|uo)mi"),
+    (26, "( (ie|uo)[ln] | eer | ous )i"),
+    (28, "[lnr]si"),
+    ( 5, "[bdfghjklmnprsštvw]i"),
 
     # -CO/-CU (1417 nouns, 3 exceptions)
-    ( 1, "[bcdfghjklmnpqrsštvwxzž][oöuy]$"),
+    ( 1, "[bcdfghjklmnprstvz][oöuy]"),
 
     # -s (1451 nouns, 94 exceptions)
-    (45, "(de|jä)s$"),
-    (40, "( [iu]u | [^v]eu | [^ch]ou | [eiöy]y )s$"),
-    (41, "( a | ä | (ä|rv)e | (aa|au|uu|yy)[lmnr]i | l[mt]i )s$"),
-    (39, "[eioöuy]s$"),
-    ( 5, "s$"),
+    (45, "(de|jä)s"),
+    (40, "( [iu]u | [^v]eu | [^ch]ou | [eiöy]y )s"),
+    (41, "( a | ä | (ä|rv)e | (aa|au|uu|yy)[lmnr]i | l[mt]i )s"),
+    (39, "[eioöuy]s"),
+    ( 5, "s"),
 
     # -C (not -s; 439 nouns, 50 exceptions)
-    ( 6, "( (da|e|ö)m | [bls]on | lup | (ga|[bfhklpstz]e|o)r )$"),
-    (32, "[hmsv]en$"),
-    (33, "in$"),
-    (34, "[aeiouyäö] t[oö]n$"),
-    (38, "nen$"),
-    (47, "(ll|n)[uy]t$"),
-    (43, "[^o][uy]t$"),
-    (49, "( [mv]al | [kmn]el | [är]en | [kmnv]ar | [gnu]er )$"),
-    ( 5, "[bcdfghjklmnpqrštvwxzž]$"),
+    ( 6, "( (da|e|ö)m | [bls]on | lup | (ga|[bfhklpstz]e|o)r )"),
+    (32, "[hmsv]en"),
+    (33, "in"),
+    (34, "[aeiouyäö] t[oö]n"),
+    (38, "nen"),
+    (47, "(ll|n)[uy]t"),
+    (43, "[^o][uy]t"),
+    (49, "( [mv]al | [kmn]el | [är]en | [kmnv]ar | [gnu]er )"),
+    ( 5, "[bcdfghklmnprštx]"),
 ))
 
 # rules for trisyllabic nouns (declension, regex)
-_RULES_3SYLL = tuple((d, re.compile(r, re.VERBOSE)) for (d, r) in (
+_RULES_3SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
     # -VV (455 nouns, 5 exceptions)
-    ( 3, "( [io]e | [aäei][oö] | yo )$"),
-    (12, "( (d|n|br|pr)ea | [iuy][aä] )$"),
-    (15, "( e[aä] | oa )$"),
-    (18, "( pee | [aeu]i | oo | uu )$"),
-    (20, "ee$"),
-    (48, "[uy]e$"),
+    ( 3, "( [io]e | [aäei][oö] | yo )"),
+    (12, "( (d|n|br|pr)ea | [iuy][aä] )"),
+    (15, "( e[aä] | oa )"),
+    (18, "( pee | [aeu]i | oo | uu )"),
+    (20, "ee"),
+    (48, "[uy]e"),
 
     # -da/-ga/-pa/-va (161 nouns, 6 exceptions)
-    ( 9, "(d|uav|kv)a$"),
-    (10, "( [^u]a | [^i]i | [eour] )va$"),
-    (13, "(ed|g)a$"),
-    (14, "ppa$"),
+    ( 9, "(d|uav|kv)a"),
+    (10, "( [^u]a | [^i]i | [eour] )va"),
+    (13, "(ed|g)a"),
+    (14, "ppa"),
 
     # -ja (292 nouns, 4 exceptions)
-    (10, "[aou]ja$"),
-    (11, "oija$"),
-    (12, "( [^o]i | l | n )ja$"),
+    (10, "[aou]ja"),
+    (11, "oija"),
+    (12, "( [^o]i | l | n )ja"),
 
     # -ka (224 nouns, 2 exceptions)
-    ( 9, "nka$"),
-    (11, "oka$"),
-    (13, "[aeihs]ka$"),
-    (14, "kka$"),
+    ( 9, "nka"),
+    (11, "oka"),
+    (13, "[aeihs]ka"),
+    (14, "kka"),
 
     # -la (103 nouns, 9 exceptions)
-    ( 9, "( oa | ui | [hps]il )la$"),
-    (13, "( aa | ni | k | [ei]l | io )la$"),
-    (12, "( (nd|rj|[kor]k|im|n|pp|r|rs|[lnt]t|v)[aei] | [^i]o | u )la$"),
-    (10, "[kmtv]ala$"),
+    ( 9, "( oa | ui | [hps]il )la"),
+    (13, "( aa | ni | k | [ei]l | io )la"),
+    (12, "( (nd|rj|[kor]k|im|n|pp|r|rs|[lnt]t|v)[aei] | [^i]o | u )la"),
+    (10, "[kmtv]ala"),
 
     # -ma (173 nouns, 11 exceptions)
-    (10, "[aeioul]ma$"),
-    (11, "(ee|t) ma$"),
+    (10, "[aeioul]ma"),
+    (11, "(ee|t) ma"),
 
     # -na (172 nouns, 26 exceptions)
-    (10, "( [ao]n | o[ou] ) na$"),
-    (11, "(pa|o) na$"),
-    (13, "( (ek|ut)a | ee | (a|g|ah|i|am|ks|iv)i | en | (uk|l|u)u | r )na$"),
-    (12, "na$"),
+    (10, "( [ao]n | o[ou] ) na"),
+    (11, "(pa|o) na"),
+    (13, "( (ek|ut)a | ee | (a|g|ah|i|am|ks|iv)i | en | (uk|l|u)u | r )na"),
+    (12, "na"),
 
     # -ra (83 nouns, 20 exceptions)
-    (10, "(fa|ke|ve|t)ra$"),
-    (11, "(ha|ta|b|te)ra$"),
-    (13, "(i|uu)ra$"),
-    (12, "ra$"),
+    (10, "(fa|ke|ve|t)ra"),
+    (11, "(ha|ta|b|te)ra"),
+    (13, "(i|uu)ra"),
+    (12, "ra"),
 
     # -sa (73 nouns, 2 exceptions)
-    ( 9, "issa$"),
-    (10, "isa$"),
-    (11, "osa$"),
-    (13, "(t|uu)sa$"),
+    ( 9, "issa"),
+    (10, "isa"),
+    (11, "osa"),
+    (13, "(t|uu)sa"),
 
     # -ta (219 nouns, 4 exceptions)
-    ( 9, "( n | (ga|ee|ii|r|uu)t )ta$"),
-    (13, "(e|i|is|us) ta$"),
-    (14, "[hmv][aeo] tta$"),
+    ( 9, "( n | (ga|ee|ii|r|uu)t )ta"),
+    (13, "(e|i|is|us) ta"),
+    (14, "[hmv][aeo] tta"),
 
     # -Cä (520 nouns, 13 exceptions)
-    ( 9, "ntä$"),
-    (11, "( päl | häm | [kt]än | (ve|kä)r )ä$"),
-    (12, "( ij | (i|y|mä)l | n | yr )ä$"),
-    (13, "(sk|st)ä$"),
-    (14, "kkä$"),
-    (10, "[jlmrsv]ä$"),
+    ( 9, "ntä"),
+    (11, "( päl | häm | [kt]än | (ve|kä)r )ä"),
+    (12, "( ij | (i|y|mä)l | n | yr )ä"),
+    (13, "(sk|st)ä"),
+    (14, "kkä"),
+    (10, "[jlmrsv]ä"),
 
     # -Ce (476 nouns, 9 exceptions)
     ( 8, """
         (
         c | ud | g | (da|b|g|bi|[iu]l)l | (g|ui)n | (ra|i|u)r | s
         | (ra|[nôrt])t | v
-        )e$
+        )e
     """),
-    (49, "( [np]el | en | ([mtv]a|e)r )e$"),
-    (48, "[bcdfghjklmnpqrsštvwxzž]e$"),
+    (49, "( [np]el | en | ([mtv]a|e)r )e"),
+    (48, "[dklnrt]e"),
 
     # -Ci (2083 nouns, 154 exceptions)
     ( 6, """(
@@ -814,76 +798,92 @@ _RULES_3SYLL = tuple((d, re.compile(r, re.VERBOSE)) for (d, r) in (
         | ( [ahjrs]a | re | do | u )m
         | ( [am]a | [^d]e | [fhik]i | [bdklost]o | ä )n
         | ( [aeou] | ii | [^y]y | [^ä]ä )r
-    )i$"""),
-    (16, "mpi$"),
-    ( 5, "[bcdfghjklmnpqrsštvwxzž]i$"),
+    )i"""),
+    (16, "mpi"),
+    ( 5, "[bdfgjklmnprstv]i"),
 
     # -Co (533 nouns, 27 exceptions)
-    ( 1, "( c | (bi|n)d | [nr]g | nk | [iu]an | gr | ([br]a|n|t)t )o$"),
-    ( 4, "kko$"),
-    ( 2, "[bcdfghjklmnpqrsštvwxzž]o$"),
+    ( 1, "( c | (bi|n)d | [nr]g | nk | [iu]an | gr | ([br]a|n|t)t )o"),
+    ( 4, "kko"),
+    ( 2, "[bdghjklmnrstv]o"),
 
     # -Cö (136 nouns, 11 exceptions)
-    ( 1, "( [lnt] | [pä]is )tö$"),
-    ( 4, "kkö$"),
-    ( 2, "[bcdfghjklmnpqrsštvwxzž]ö$"),
+    ( 1, "( [lnt] | [pä]is )tö"),
+    ( 4, "kkö"),
+    ( 2, "[klmrst]ö"),
 
     # -CU (492 nouns, 2 exceptions)
-    ( 1, "( (b|its|t)u | [rtv]y )$"),
-    ( 2, "[bcdfghjklmnpqrsštvwxzž][uy]$"),
+    ( 1, "( (b|its|t)u | [rtv]y )"),
+    ( 2, "[djlrs][uy]"),
 
-    # TODO: optimize the rest
+    # -n (1639 nouns, 6 exceptions)
+    ( 6, "(ua|be|dio|lo|mo)n"),
+    (10, "(sa|ä)n"),
+    (33, "(ia|i)n"),
+    (34, "t[oö]n"),
+    (38, "nen"),
+    ( 5, "n"),
 
-    # -C (4427 nouns, 35 exceptions)
-    (32, "t[aä]r$"),
-    (33, "in$"),
-    (34, "t[oö]n$"),
-    (38, "nen$"),
-    (40, "[ioöuy][uy]s$"),
-    (39, "[eioöuy]s$"),
-    (41, "[aä]s$"),
-    (47, "[ln][uy]t$"),
-    ( 5, "[bcdfghjklmnpqrsštvwxzž]$"),
+    # -r (32 nouns, no exceptions)
+    ( 6, "( [cl]e | ide | tu )r"),
+    (32, "[aä]r"),
+    ( 5, "r"),
+
+    # -s (2701 nouns, 7 exceptions)
+    # could get rid of 1 exception each with these rules:
+    #     -dos = 5, -[^k]ias = 41, -kaus = 40
+    ( 5, "[nst]s"),
+    (40, "[ioöuy][uy]s"),
+    (45, "( (on|s)a | [ms]ä )s"),
+    (41, "( (g|i|k|in|l|u)a | ä )s"),
+    (39, "s"),
+
+    # -C (not -n/-r/-s; 57 nouns, 3 exceptions)
+    (47, "[ln][uy]t"),
+    ( 5, "[cdgklmptvwx]"),
 ))
 
 # rules for quadrisyllabic and longer nouns (declension, regex)
-_RULES_4SYLL = tuple((d, re.compile(r, re.VERBOSE)) for (d, r) in (
-    # -VV (649 nouns, 8 exceptions)
-    ( 3, "[bcdfghjklmnpqrsštvwxzž]i[oö]$"),
-    (12, "[bcdfghjklmnpqrsštvwxzž][ei]a$"),
+_RULES_4SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
+    # -VV (649 nouns, 5 exceptions)
+    ( 3, "i[oö]"),
+    (13, "(id|al|as)ea"),
+    (12, "[ei]a"),
+
+    # TODO: optimize the rest
 
     # -Ca (903 nouns, 34 exceptions)
-    ( 9, "( [air]kka | lla | i[in]na | ssa | ta | ža )$"),
-    (12, "( [lnst]ija | la )$"),
-    (10, "[bcdfghjklmnpqrsštvwxzž]a$"),
+    ( 9, "( [air]kka | lla | i[in]na | ssa | ta | ža )"),
+    (12, "( [lnst]ija | la )"),
+    (10, "[dgjkmnrsv]a"),
 
     # -Cä (275 nouns, 2 exceptions)
-    ( 9, "tä$"),
-    (12, "[lnst]ijä$"),
-    (10, "[bcdfghjklmnpqrsštvwxzž]ä$"),
+    ( 9, "tä"),
+    (12, "[lnst]ijä"),
+    (10, "[jmv]ä"),
 
     # -Ci (2282 nouns, 21 exceptions)
     (
         6,
         "( [gkp]el | [drt]um | [klnptv]ar | [dgknt]er | "
-        "(i|l|s|kt|st|tt)or )i$"
+        "(i|l|s|kt|st|tt)or )i"
     ),
-    ( 5, "[bcdfghjklmnpqrsštvwxzž]i$"),
+    ( 5, "[bdfgklmnprstvz]i"),
 
     # -CO/-CU (627 nouns, 19 exceptions)
-    ( 2, "( m[oö] | l[uy] )$"),
-    ( 4, "[dgjlmnprstv]ikk[oö]$"),
-    ( 1, "[bcdfghjklmnpqrsštvwxzž][oöuy]$"),
+    ( 2, "( m[oö] | l[uy] )"),
+    ( 4, "[dgjlmnprstv]ikk[oö]"),
+    ( 1, "[cdklmnrstz][oöuy]"),
 
     # -C (4573 nouns, 16 exceptions)
-    (32, "t[aä]r$"),
-    (34, "t[oö]n$"),
-    (38, "nen(kin)?$"),
-    (40, "[iuy][uy]s$"),
-    (39, "[eioöuy]s$"),
-    (41, "[aä]s$"),
-    (47, "n[uy]t$"),
-    ( 5, "[bcdfghjklmnpqrsštvwxzž]$"),
+    (32, "t[aä]r"),
+    (34, "t[oö]n"),
+    (38, "nen(kin)?"),
+    (40, "[iuy][uy]s"),
+    (39, "[eioöuy]s"),
+    (41, "[aä]s"),
+    (47, "n[uy]t"),
+    ( 5, "[dghkmnrt]"),
 ))
 
 def get_declensions(noun, useExceptions=True):
