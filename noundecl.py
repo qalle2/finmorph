@@ -149,35 +149,39 @@ _EXCEPTIONS = {
     "bile": 20,
     "hake": 48, "hame": 48, "kare": 48,
 
-    # -Ci
-    "holvi": 5, "kolvi": 5, "kurvi": 5, "loki": 5, "LYHKI": 5, "lärvi": 5,
-    "mansi": 5, "olvi": 5, "orhi": 5, "puomi": 5, "sorvi": 5, "sutki": 5,
-    "tuoli": 5, "varvi": 5,
-    "appi": 7, "haahti": 7, "hanhi": 7, "hanki": 7, "happi": 7, "hauki": 7,
-    "helmi": 7, "henki": 7, "hiki": 7, "kaikki": 7, "kanki": 7, "kaski": 7,
-    "kiiski": 7, "kivi": 7, "koipi": 7, "koski": 7, "lehti": 7, "leski": 7,
-    "lovi": 7, "länki": 7, "nimi": 7, "nummi": 7, "nurmi": 7, "onki": 7,
-    "onni": 7, "ovi": 7, "piki": 7, "poski": 7, "povi": 7, "päitsi": 7,
-    "rupi": 7, "saarni": 7, "saksi": 7, "salmi": 7, "sappi": 7, "savi": 7,
-    "seimi": 7, "siipi": 7, "soppi": 7, "sormi": 7, "suitsi": 7, "suksi": 7,
-    "suomi": 7, "suvi": 7, "sänki": 7, "sääksi": 7, "sääski": 7, "tammi": 7,
-    "tuki": 7, "tuppi": 7, "typpi": 7, "tähti": 7, "vaski": 7, "veli": 7,
-    "viiksi": 7, "vuoksi": 7,
-    "kumpi": 16,
-    "moni": 23, "tiili": 23, "tuli": 23,
-    "hiili": 24, "hiiri": 24, "huuli": 24, "kusi": 24, "meri": 24, "ruuhi": 24,
-    "uni": 24,
-    "lumi": 25, "taimi": 25,
-    "juuri": 26, "kaari": 26, "niini": 26, "nuori": 26, "saari": 26,
-    "suuri": 26, "sääri": 26, "tuuli": 26, "tyyni": 26, "veri": 26,
-    "vieri": 26, "ääni": 26, "ääri": 26,
-    "heisi": 27, "hiisi": 27, "kausi": 27, "kesi": 27, "käsi": 27, "köysi": 27,
-    "liesi": 27, "mesi": 27, "niisi": 27, "paasi": 27, "reisi": 27, "susi": 27,
-    "sysi": 27, "tosi": 27, "täysi": 27, "uusi": 27, "vesi": 27, "viisi": 27,
-    "vuosi": 27,
+    # -ki
+    "LYHKI": 5, "sutki": 5,
+    "hanki": 7, "hauki": 7, "henki": 7, "kaikki": 7, "kanki": 7, "kaski": 7,
+    "kiiski": 7, "leski": 7, "onki": 7, "sääski": 7, "tuki": 7, "vaski": 7,
+
+    # -ri
+    "lieri": 5,
+    "hiiri": 24, "meri": 24,
+    "juuri": 26, "kaari": 26, "nuori": 26, "saari": 26, "suuri": 26,
+    "sääri": 26, "ääri": 26,
+
+    # -si
+    "kreisi": 5, "mansi": 5,
+    "päitsi": 7, "suitsi": 7, "suksi": 7, "sääksi": 7, "viiksi": 7,
+    "vuoksi": 7,
+    "kusi": 24,
+    "hiisi": 27, "käsi": 27, "liesi": 27, "niisi": 27, "paasi": 27, "uusi": 27,
+    "viisi": 27, "vuosi": 27,
     "lapsi": 29,
     "veitsi": 30,
     "haaksi": 31, "kaksi": 31, "yksi": 31,
+
+    # -Ci (not -ki/-ri/-si)
+    "puomi": 5, "tuoli": 5, "varvi": 5,
+    "appi": 7, "haahti": 7, "happi": 7, "helmi": 7, "järvi": 7, "lehti": 7,
+    "nummi": 7, "onni": 7, "ovi": 7, "polvi": 7, "saarni": 7, "salmi": 7,
+    "sappi": 7, "seimi": 7, "soppi": 7, "sormi": 7, "suomi": 7, "suvi": 7,
+    "torvi": 7, "tuppi": 7, "typpi": 7, "tähti": 7, "veli": 7,
+    "kumpi": 16,
+    "tiili": 23,
+    "hiili": 24, "huuli": 24, "ruuhi": 24, "uni": 24,
+    "taimi": 25,
+    "niini": 26, "tuuli": 26, "tyyni": 26, "ääni": 26,
 
     # -CO/-CU
     "go-go": 18,
@@ -219,23 +223,26 @@ _EXCEPTIONS = {
     # -is
     "kallis": 41, "raitis": 41, "tiivis": 41,
 
-    # -VUs
-    "couscous": 5,
-    "kehruus": 39, "kirous": 39, "kiveys": 39, "kokous": 39, "kumous": 39,
-    "linkous": 39, "lumous": 39, "makuus": 39, "patous": 39, "persuus": 39,
-    "pikeys": 39, "poikkeus": 39, "putous": 39, "risteys": 39, "rukous": 39,
-    "tarjous": 39, "tyveys": 39,
+    # -AUs
     "ahnaus": 40, "harmaus": 40, "hartaus": 40, "hauraus": 40, "herraus": 40,
     "hitaus": 40, "hurskaus": 40, "irstaus": 40, "karsaus": 40, "kiivaus": 40,
-    "kirkkaus": 40, "kitsaus": 40, "kuulaus": 40, "kärkkäys": 40, "lahous": 40,
-    "liukkaus": 40, "mahous": 40, "maukkaus": 40, "puhtaus": 40,
-    "raihnaus": 40, "rakkaus": 40, "raskaus": 40, "reippaus": 40,
-    "riettaus": 40, "rikkaus": 40, "runsaus": 40, "sairaus": 40, "suulaus": 40,
-    "työläys": 40, "valppaus": 40, "vapaus": 40, "varkaus": 40, "vauraus": 40,
-    "vehmaus": 40, "viekkaus": 40, "vieraus": 40, "viisaus": 40,
-    "vilkkaus": 40, "vuolaus": 40, "ylväys": 40,
+    "kirkkaus": 40, "kitsaus": 40, "kuulaus": 40, "kärkkäys": 40,
+    "liukkaus": 40, "maukkaus": 40, "puhtaus": 40, "raihnaus": 40,
+    "rakkaus": 40, "raskaus": 40, "reippaus": 40, "riettaus": 40,
+    "rikkaus": 40, "runsaus": 40, "sairaus": 40, "suulaus": 40, "työläys": 40,
+    "valppaus": 40, "vapaus": 40, "varkaus": 40, "vauraus": 40, "vehmaus": 40,
+    "viekkaus": 40, "vieraus": 40, "viisaus": 40, "vilkkaus": 40,
+    "vuolaus": 40, "ylväys": 40,
 
-    # -CUs
+    # -OUs
+    "couscous": 5,
+    "kirous": 39, "kokous": 39, "kumous": 39, "linkous": 39, "lumous": 39,
+    "patous": 39, "putous": 39, "rukous": 39, "tarjous": 39,
+    "lahous": 40, "mahous": 40,
+
+    # -Us (not -AUs/-OUs)
+    "kehruus": 39, "kiveys": 39, "makuus": 39, "persuus": 39, "pikeys": 39,
+    "poikkeus": 39, "risteys": 39, "tyveys": 39,
     "ryntys": 41, "vantus": 41,
 
     # -t
@@ -307,39 +314,51 @@ _EXCEPTIONS = {
     "jäntere": 48,
     "askare": 49, "askele": 49, "kantele": 49, "petkele": 49, "taipale": 49,
 
-    # -Ci
-    "afgaani": 5, "alleeli": 5, "biennaali": 5, "butaani": 5, "doktriini": 5,
-    "etaani": 5, "eteeni": 5, "etruski": 5, "fenkoli": 5, "fertiili": 5,
-    "fibriini": 5, "fosfori": 5, "gerbiili": 5, "gluteeni": 5, "humaani": 5,
-    "imaami": 5, "jasmiini": 5, "joriini": 5, "kaimaani": 5, "kajaali": 5,
-    "karbiini": 5, "kardaani": 5, "kefiiri": 5, "ketoni": 5, "kiniini": 5,
-    "konsiili": 5, "koraali": 5, "Koraani": 5, "korpraali": 5, "kretliini": 5,
-    "kvasaari": 5, "labiili": 5, "lantaani": 5, "laviini": 5, "liaani": 5,
-    "ligniini": 5, "likvori": 5, "lojaali": 5, "mangaani": 5, "membraani": 5,
-    "mesoni": 5, "metaani": 5, "migreeni": 5, "modaali": 5, "moguli": 5,
-    "monstrumi": 5, "morfiini": 5, "oktaani": 5, "oopiumi": 5, "orgaani": 5,
-    "otsoni": 5, "paapuuri": 5, "palsami": 5, "patiini": 5, "pedaali": 5,
-    "pendeli": 5, "pepsiini": 5, "pineeni": 5, "pluraali": 5, "porfiini": 5,
-    "primaari": 5, "profaani": 5, "profiili": 5, "propaani": 5, "protoni": 5,
-    "pyloni": 5, "rabbiini": 5, "retliini": 5, "reviiri": 5, "risiini": 5,
-    "rutiini": 5, "samaani": 5, "šamaani": 5, "sampaani": 5, "seireeni": 5,
-    "strykniini": 5, "syaani": 5, "sykliini": 5, "sykloni": 5, "tanniini": 5,
-    "teiini": 5, "toksiini": 5, "triennaali": 5, "tyyrpuuri": 5, "viriili": 5,
-    "vulgaari": 5,
-    "antenni": 6, "atolli": 6, "atomi": 6, "basilli": 6, "biljardi": 6,
-    "bisarri": 6, "daktyyli": 6, "entsyymi": 6, "flanelli": 6, "foneemi": 6,
-    "frisyyri": 6, "gaselli": 6, "glukoosi": 6, "hampuusi": 6, "hotelli": 6,
-    "kanjoni": 6, "karpaasi": 6, "kivääri": 6, "kolhoosi": 6, "kommuuni": 6,
-    "konsoli": 6, "koturni": 6, "kumppani": 6, "kupoli": 6, "likööri": 6,
-    "linoli": 6, "marttyyri": 6, "misääri": 6, "moduuli": 6, "monsuuni": 6,
-    "monttööri": 6, "motelli": 6, "muslimi": 6, "narkoosi": 6, "neuroosi": 6,
-    "oliivi": 6, "pakaasi": 6, "plantaasi": 6, "pogromi": 6, "poliisi": 6,
-    "proteesi": 6, "putelli": 6, "refleksi": 6, "sardelli": 6, "serviisi": 6,
-    "sirtaki": 6, "sotiisi": 6, "sottiisi": 6, "sovhoosi": 6, "standardi": 6,
-    "sypressi": 6, "systeemi": 6, "taifuuni": 6, "tienesti": 6, "toteemi": 6,
-    "trapetsi": 6, "tribuuni": 6, "trotyyli": 6, "turkoosi": 6, "turnyyri": 6,
-    "ukaasi": 6, "valööri": 6, "vampyyri": 6, "vinyyli": 6, "viskoosi": 6,
-    "volyymi": 6, "zoonoosi": 6, "äksiisi": 6,
+    # -li
+    "alleeli": 5, "biennaali": 5, "fenkoli": 5, "fertiili": 5, "gerbiili": 5,
+    "kajaali": 5, "konsiili": 5, "koraali": 5, "korpraali": 5, "labiili": 5,
+    "lojaali": 5, "modaali": 5, "moguli": 5, "pedaali": 5, "pendeli": 5,
+    "pluraali": 5, "profiili": 5, "triennaali": 5, "viriili": 5,
+    "atolli": 6, "basilli": 6, "daktyyli": 6, "flanelli": 6, "gaselli": 6,
+    "hotelli": 6, "konsoli": 6, "kupoli": 6, "linoli": 6, "moduuli": 6,
+    "motelli": 6, "putelli": 6, "sardelli": 6, "trotyyli": 6, "vinyyli": 6,
+
+    # -mi
+    "imaami": 5, "monstrumi": 5, "oopiumi": 5, "palsami": 5,
+    "atomi": 6, "entsyymi": 6, "foneemi": 6, "muslimi": 6, "pogromi": 6,
+    "systeemi": 6, "toteemi": 6, "volyymi": 6,
+
+    # -ni
+    "afgaani": 5, "butaani": 5, "doktriini": 5, "etaani": 5, "eteeni": 5,
+    "fibriini": 5, "gluteeni": 5, "humaani": 5, "jasmiini": 5, "joriini": 5,
+    "kaimaani": 5, "karbiini": 5, "kardaani": 5, "ketoni": 5, "kiniini": 5,
+    "Koraani": 5, "kretliini": 5, "lantaani": 5, "laviini": 5, "liaani": 5,
+    "ligniini": 5, "mangaani": 5, "membraani": 5, "mesoni": 5, "metaani": 5,
+    "migreeni": 5, "morfiini": 5, "oktaani": 5, "orgaani": 5, "otsoni": 5,
+    "patiini": 5, "pepsiini": 5, "pineeni": 5, "porfiini": 5, "profaani": 5,
+    "propaani": 5, "protoni": 5, "pyloni": 5, "rabbiini": 5, "retliini": 5,
+    "risiini": 5, "rutiini": 5, "samaani": 5, "šamaani": 5, "sampaani": 5,
+    "seireeni": 5, "strykniini": 5, "syaani": 5, "sykliini": 5, "sykloni": 5,
+    "tanniini": 5, "teiini": 5, "toksiini": 5,
+    "antenni": 6, "kanjoni": 6, "kommuuni": 6, "koturni": 6, "kumppani": 6,
+    "monsuuni": 6, "taifuuni": 6, "tribuuni": 6,
+
+    # -ri
+    "fosfori": 5, "kefiiri": 5, "kvasaari": 5, "likvori": 5, "paapuuri": 5,
+    "primaari": 5, "reviiri": 5, "tyyrpuuri": 5, "vulgaari": 5,
+    "bisarri": 6, "frisyyri": 6, "kivääri": 6, "likööri": 6, "marttyyri": 6,
+    "misääri": 6, "monttööri": 6, "turnyyri": 6, "valööri": 6, "vampyyri": 6,
+
+    # -si
+    "glukoosi": 6, "hampuusi": 6, "karpaasi": 6, "kolhoosi": 6, "narkoosi": 6,
+    "neuroosi": 6, "pakaasi": 6, "plantaasi": 6, "poliisi": 6, "proteesi": 6,
+    "refleksi": 6, "serviisi": 6, "sotiisi": 6, "sottiisi": 6, "sovhoosi": 6,
+    "sypressi": 6, "trapetsi": 6, "turkoosi": 6, "ukaasi": 6, "viskoosi": 6,
+    "zoonoosi": 6, "äksiisi": 6,
+
+    # -Ci (not -li/-mi/-ni/-ri/-si)
+    "etruski": 5,
+    "biljardi": 6, "oliivi": 6, "sirtaki": 6, "standardi": 6, "tienesti": 6,
 
     # -Co
     "hampaisto": 1, "kalusto": 1, "kojeisto": 1, "koneikko": 1, "kuidusto": 1,
@@ -455,8 +474,8 @@ _RULES_2SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
     (48, "[aäou]e"),
 
     # -Ca (1022 nouns, 6 exceptions)
-    (10, "( [oy] | [ou][iu] | [bdhjklmnprstv]u | ^u ) [bdfghjklmnprstv]+a"),
-    (9,  "[bdfghjklmnprsštvzž]a"),
+    (10, "( [ou]i | [oy] | (^|[^aei])u ) [bdfghjklmnprstv]+a"),
+    ( 9, "[bdfghjklmnprsštvzž]a"),
 
     # -Cä (230 nouns, 3 exceptions)
     (10, "[hjklmnprstv]ä"),
@@ -468,11 +487,15 @@ _RULES_2SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
     # -Cé (4 nouns, no exceptions)
     (21, "[bprs]é"),
 
-    # -Ci (1312 nouns, 120 exceptions)
-    ( 7, "( [lr]h | [elortä]k | [lmrä]p | [lry]v )i"),
-    (23, "(ii|o|u)hi"),
-    (25, "(ie|oi|uo)mi"),
-    (26, "( (ie|uo)[ln] | eer | ous )i"),
+    # -Ci (1312 nouns, 83 exceptions)
+    ( 7, """(
+        (l|n|är)h | (hi|pi|e|l|än|jo|no|r|os|t|ä)k | (ni|am|ur)m
+        | (ii|oi|l|m|r|ru|ä)p | (sa|ki|al|il|äl|lo|po|ar|ir|y)v
+    )i"""),
+    (23, "(iih|oh|uh|tul|mon)i"),
+    (25, "(ie|oi|uo|lu)mi"),
+    (26, "(iel|uol|ien|uon|er|ous)i"),
+    (27, "(ke|me|ve|ei|to|au|su|sy|äy|öy)si"),
     (28, "[lnr]si"),
     ( 5, "[bdfghjklmnprsštvw]i"),
 
@@ -687,7 +710,7 @@ def _check_redundant_exceptions():
         detectedDeclensions = get_declensions(noun, False)
         if detectedDeclensions \
         and _EXCEPTIONS[noun] == list(detectedDeclensions)[0]:
-            print(f"Redundant exception: '{noun}'")
+            print(f"Redundant exception: '{noun}'", file=sys.stderr)
 
 def main():
     _check_redundant_exceptions()
