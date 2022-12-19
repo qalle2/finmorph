@@ -195,13 +195,12 @@ _EXCEPTIONS = {
     "seppel": 49,
 
     # -n
-    "dralon": 5, "drive-in": 5, "hymen": 5, "kelvin": 5, "pinyin": 5,
-    "kaanon": 6, "lumen": 6, "luumen": 6, "pyton": 6,
-    "hapan": 33, "laidun": 33, "sydän": 33,
+    "drive-in": 5, "kelvin": 5,
+    "lumen": 6, "luumen": 6,
     "lämmin": 35,
-    "alin": 36, "enin": 36, "likin": 36, "lähin": 36, "parhain": 36,
-    "sisin": 36, "taain": 36, "uloin": 36, "vanhin": 36, "ylin": 36,
+    "alin": 36,
     "vasen": 37,
+    "muren": 49, "säen": 49,
 
     # -r
     "sitar": 6,
@@ -502,6 +501,15 @@ _RULES_2SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
     # -CO/-CU (1417 nouns, 3 exceptions)
     ( 1, "[bcdfghjklmnprstvz][oöuy]"),
 
+    # -n (242 nouns, 9 exceptions)
+    ( 6, "(b|[^a]l|an|s|yt) on"),  # -on
+    (32, "(h|[^y]m|s|v) en"),  # -en
+    (36, "(aa|ha|nh|äh|ik|yl|en|lo|is) in"),  # -in
+    (33, "(pa|[^y]i|u|ä) n"),  # -An/-in/-un
+    (34, "( [aiu]to | ö )n"),  # -On
+    (38, "nen"),  # -en
+    ( 5, "n"),
+
     # -s (1451 nouns, 90 exceptions)
     (45, "(de|jä)s"),
     (40, "( [iu]u | [^v]eu | [^ch]ou | [eiöy]y )s"),
@@ -511,16 +519,12 @@ _RULES_2SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
     (39, "[aeiouyäö]s"),
     ( 5, "s"),
 
-    # -C (not -s; 439 nouns, 50 exceptions)
-    ( 6, "( (da|e|ö)m | [bls]on | lup | (ga|[bfhklpstz]e|o)r )"),
-    (32, "[hmsv]en"),
-    (33, "in"),
-    (34, "[aeiouyäö] t[oö]n"),
-    (38, "nen"),
+    # -C (not -n/-s; 237 nouns, 25 exceptions)
+    ( 6, "( (da|e|ö)m | lup | (ga|[^gnšu]e|o)r )"),
     (47, "(ll|n)[uy]t"),
     (43, "[^o][uy]t"),
-    (49, "( [mv]al | [kmn]el | [är]en | [kmnv]ar | [gnu]er )"),
-    ( 5, "[bcdfghklmnprštx]"),
+    (49, "( [mv]al | [kmn]el | [kmnv]ar | [gnu]er )"),
+    ( 5, "[bcdfghklmprštx]"),
 ))
 
 # rules for trisyllabic nouns (declension, regex)
