@@ -131,11 +131,9 @@ _EXCEPTIONS = {
     "boutique": 8, "petanque": 8,
     "dia": 9, "maya": 9,
     "boa": 10,
-    "hynttyy": 17,
-    "frisbee": 18, "huuhaa": 18, "peeaa": 18, "puusee": 18,
-    "nugaa": 20, "raguu": 20, "sampoo": 20, "trikoo": 20, "voodoo": 20,
-    "fondue": 21, "reggae": 21, "tax-free": 21,
-    "aie": 48, "säie": 48,
+    "frisbee": 18, "puusee": 18,
+    "sampoo": 20, "trikoo": 20,
+    "tax-free": 21,
 
     # -CA
     "iskä": 9, "krypta": 9, "lymfa": 9, "nyintä": 9, "ryintä": 9, "suola": 9,
@@ -188,12 +186,6 @@ _EXCEPTIONS = {
     "kung-fu": 21,
     "kiiru": 48,
 
-    # -l
-    "kennel": 5,
-    "diesel": 6, "rial": 6,
-    "nivel": 32, "sävel": 32,
-    "seppel": 49,
-
     # -n
     "drive-in": 5, "kelvin": 5,
     "lumen": 6, "luumen": 6,
@@ -201,11 +193,6 @@ _EXCEPTIONS = {
     "alin": 36,
     "vasen": 37,
     "muren": 49, "säen": 49,
-
-    # -r
-    "sitar": 6,
-    "sisar": 32, "tatar": 32, "tytär": 32,
-    "udar": 49,
 
     # -As
     "aidas": 39, "atlas": 39, "haljas": 39, "harjas": 39, "jalas": 39,
@@ -244,22 +231,23 @@ _EXCEPTIONS = {
     "poikkeus": 39, "risteys": 39, "tyveys": 39,
     "ryntys": 41, "vantus": 41,
 
-    # -t
-    "input": 5, "output": 5,
-    "beignet": 22, "bouquet": 22, "buffet": 22, "gourmet": 22, "nougat": 22,
-    "parfait": 22, "ragoût": 22,
+    # -C (not -n/-s)
+    "kennel": 5,
+    "diesel": 6, "rial": 6,
+    "tatar": 32,
+    "olut": 43,
     "kevät": 44, "venät": 44,
     "tuhat": 46,
-
-    # -C (not -l/-n/-r/-s/-t)
-    "bordeaux": 22, "know-how": 22,
+    "seppel": 49, "udar": 49,
 
     # === Trisyllabic ===
 
     # -VV
     "feijoa": 10,
-    "pallea": 12, "urea": 12,
+    "apnea": 12, "hebrea": 12, "heprea": 12, "idea": 12, "pallea": 12,
+    "urea": 12,
     "media": 13,
+    "kanapee": 18,
     "brasserie": 21,
 
     # -ja
@@ -267,38 +255,48 @@ _EXCEPTIONS = {
     "mantilja": 13, "papaija": 13, "vanilja": 13,
 
     # -la
-    "chinchilla": 9, "papilla": 9, "sinsilla": 9, "tonsilla": 9,
+    "chinchilla": 9, "koala": 9, "papilla": 9, "sinsilla": 9, "tequila": 9,
+    "tonsilla": 9,
     "hankala": 10, "jumala": 10, "kamala": 10, "katala": 10, "kavala": 10,
     "matala": 10, "nokkela": 10, "ovela": 10, "sukkela": 10, "tukala": 10,
-    "apila": 13, "kampela": 13, "sikala": 13, "takila": 13,
+    "apila": 13, "artikla": 13, "kampela": 13, "manila": 13, "sairaala": 13,
+    "sikala": 13, "takila": 13, "viola": 13,
+
+    # -ma
+    "dilemma": 9, "ekseema": 9, "sialma": 9,
+    "hekuma": 11, "mahatma": 11, "ödeema": 11, "paatsama": 11, "probleema": 11,
+    "salama": 12,
+    "karisma": 13, "maailma": 13, "suurima": 13,
 
     # -na
     "ruustinna": 9,
-    "ihana": 10,
-    "jellona": 11, "lattana": 11, "maruna": 11, "murena": 11, "ohrana": 11,
-    "omena": 11, "sikuna": 11,
+    "ihana": 10, "tsasouna": 10,
+    "jellona": 11, "korona": 11, "lattana": 11, "leukoija": 11, "mammona": 11,
+    "maruna": 11, "murena": 11, "ohrana": 11, "omena": 11, "sikuna": 11,
     "haapana": 12, "harppuuna": 12, "keppana": 12, "pirpana": 12,
-    "aivina": 13, "arina": 13, "ipana": 13, "kahina": 13, "kohina": 13,
-    "kopina": 13, "kuhina": 13, "marina": 13, "maukuna": 13, "paukkina": 13,
-    "piekana": 13, "porina": 13, "rahina": 13, "ramina": 13, "reppana": 13,
-    "retsina": 13, "ruutana": 13, "smetana": 13, "tuoksina": 13,
+    "aivina": 13, "aluna": 13, "arina": 13, "ipana": 13, "kahina": 13,
+    "kohina": 13, "kopina": 13, "kuhina": 13, "marina": 13, "maukuna": 13,
+    "paukkina": 13, "perenna": 13, "piekana": 13, "porina": 13, "rahina": 13,
+    "ramina": 13, "reppana": 13, "retsina": 13, "ruutana": 13, "smetana": 13,
+    "taverna": 13, "tuoksina": 13, "ukraina": 13, "vagina": 13,
 
     # -ra
     "kimaira": 9, "tiaara": 9,
-    "amfora": 10, "ankara": 10, "avara": 10, "kumara": 10, "kupera": 10,
-    "uuttera": 10,
-    "hapera": 11, "sikkara": 11, "tomera": 11,
+    "amfora": 10, "ankara": 10, "avara": 10, "kovera": 10, "kumara": 10,
+    "kupera": 10, "reskontra": 10, "uuttera": 10,
+    "algebra": 11, "hapera": 11, "kihara": 11, "sikkara": 11, "tomera": 11,
     "kattara": 12, "littera": 12,
     "gerbera": 13, "ketara": 13, "kitara": 13, "matara": 13, "sikkura": 13,
     "tempera": 13, "vaahtera": 13,
 
-    # -Ca (not -ja/-la/-na/-ra)
-    "ekseema": 9, "nautiikka": 9,
+    # -Ca (not -ja/-la/-ma/-na/-ra)
+    "antiikva": 9, "canasta": 9, "guava": 9, "nautiikka": 9,
     "huuhdonta": 10, "pomada": 10,
-    "ahava": 11, "harava": 11, "hekuma": 11, "paatsama": 11,
-    "paprika": 12, "passiiva": 12, "salama": 12,
-    "vernissa": 13,
-    "navetta": 14, "ometta": 14, "pohatta": 14,
+    "ahava": 11, "harava": 11, "judoka": 11, "mimoosa": 11,
+    "paprika": 12, "passiiva": 12,
+    "aktiiva": 13, "lolita": 13, "meduusa": 13, "peseta": 13, "prinsessa": 13,
+    "reseda": 13, "vernissa": 13,
+    "navetta": 14, "ometta": 14, "pohatta": 14, "savotta": 14, "ulappa": 14,
     "cha-cha-cha": 21,
 
     # -Cä
@@ -382,12 +380,15 @@ _EXCEPTIONS = {
     "parahin": 36,
 
     # -s
-    "marakas": 5, "moussakas": 5,
+    "calvados": 5, "marakas": 5, "moussakas": 5,
     "tournedos": 22,
-    "tuhannes": 45,
+    "ananas": 39, "iskias": 39,
+    "vanhurskaus": 40,
+    "miljoonas": 45, "tuhannes": 45,
 
     # -C (not -n/-s)
     "CD-ROM": 5,
+    "outsider": 6,
     "passepartout": 22, "port salut": 22,
 
     # === Quadrisyllabic and longer ===
@@ -396,13 +397,16 @@ _EXCEPTIONS = {
     "adagio": 1,
     "odysseia": 9,
     "paranoia": 10,
+    "atsalea": 13, "attasea": 13, "orkidea": 13,
     "politbyroo": 20, "varietee": 20,
 
     # -Ca
-    "halveksunta": 10,
+    "akileija": 9,
+    "halveksunta": 10, "kardemumma": 10, "konkkaronkka": 10,
     "marihuana": 11,
-    "ekliptika": 12,
-    "majolika": 13,
+    "anoppila": 12, "ekliptika": 12,
+    "karakteristika": 13, "majolika": 13, "nomenklatuura": 13,
+    "psykofarmaka": 13, "skandinaaviska": 13,
     "estetiikka": 14, "poliklinikka": 14, "psykometriikka": 14,
     "hänenlaisensa": 38,
 
@@ -412,25 +416,36 @@ _EXCEPTIONS = {
     "tragedienne": 8, "ukulele": 8,
     "väkevöite": 48,
 
-    # -Ci
-    "follikkeli": 5, "kateederi": 5, "kollektori": 5, "kompostori": 5,
-    "multippeli": 5, "varistori": 5,
-    "akupunktuuri": 6, "diakoni": 6, "firaabeli": 6, "inspehtori": 6,
-    "prostaglandiini": 6, "reversiibeli": 6, "revolveri": 6, "testosteroni": 6,
-    "unioni": 6, "universumi": 6, "variaabeli": 6,
+    # -ri
+    "editori": 5, "kateederi": 5, "kollektori": 5, "kompostori": 5,
+    "monitori": 5, "reseptori": 5, "varistori": 5,
+    "akupunktuuri": 6, "hiphoppari": 6, "konteineri": 6, "manageri": 6,
+    "revolveri": 6, "spinaakkeri": 6, "trikolori": 6,
+
+    # -Ci (not -ri)
+    "follikkeli": 5, "multippeli": 5,
+    "azerbaidžani": 6, "diakoni": 6, "firaabeli": 6,
+    "liirumlaarumi": 6, "memorandumi": 6,
+    "prostaglandiini": 6, "reversiibeli": 6, "testosteroni": 6,
+    "ubikinoni": 6, "ultimaatumi": 6, "unioni": 6, "universumi": 6,
+    "variaabeli": 6,
     "minunlaiseni": 38, "sinunlaisesi": 38,
 
     # -Co
-    "karkaisimo": 1, "koksittamo": 1, "miljoonikko": 1, "pantomiimikko": 1,
-    "papurikko": 1, "pateetikko": 1, "poleemikko": 1, "poliitikko": 1,
-    "pragmaatikko": 1, "romantikko": 1, "semiootikko": 1, "uskalikko": 1,
-    "katajisto": 2, "koordinaatisto": 2,
-    "kanervikko": 4,
+    "karkaisimo": 1, "keliaakikko": 1, "koksittamo": 1, "kumpareikko": 1,
+    "miljoonikko": 1, "pantomiimikko": 1, "papurikko": 1, "paranooikko": 1,
+    "pateetikko": 1, "poleemikko": 1, "poliitikko": 1, "pragmaatikko": 1,
+    "romantikko": 1, "semiootikko": 1, "untuvikko": 1, "uskalikko": 1,
+    "katajisto": 2, "koordinaatisto": 2, "luettelo": 2,
 
-    # -Cö/-CU/-C
+    # -Cö/-CU
     "elostelu": 1, "istuskelu": 1, "petäjikkö": 1,
+
+    # -C
+    "director musices": 5,
+    "art director": 6,
     "säteilytin": 33,
-    "stradivarius": 39,
+    "stradivarius": 39, "trikomoonas": 39,
 }
 
 # These rules specify how to detect declensions from words, based on how many
@@ -443,228 +458,216 @@ _EXCEPTIONS = {
 # - When rules don't depend on each other, sort them by declension under each
 #   section (-VV etc.).
 # - Each regex should match at least three words.
-# - Don't look at more than the last four letters of the word.
+# - Don't make a rule for one word.
 # - Don't use capital letters or punctuation in rules; handle those words as
 #   exceptions.
 
 # rules for monosyllabic nouns (declension, regex)
 _RULES_1SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
-    # -VV (44 nouns, 3 exceptions)
+    # -VV
     (19, "(ie|uo|yö)"),
     (21, "ay"),
     (18, r"([aeiouyäö]) (\1|i|u)"),
 
-    # -CV (8 nouns, no exceptions)
+    # -CV
     ( 8, "e"),
 
-    # -C (52 nouns, 10 exceptions)
+    # -C
     ( 5, "[bcdfghklnprsštxz]"),
 ))
 
 # rules for disyllabic nouns (declension, regex)
 _RULES_2SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
-    # TODO: these could be still optimized
+    # -VV
+    (18, "(eaa|haa|ai|ii)"),
+    (20, "(gaa|ee|doo|guu|[^t]yy|öö)"),
+    (17, "(aa|oo|uu|yy)"),  # must be after 18, 20
+    (21, "(gae|due|ay|ey|oy)"),
+    (48, "[aiouä]e"),
 
-    # -VV (107 nouns, 22 exceptions)
-    (17, "(aa|oo|uu)"),
-    (18, "[ai]i"),
-    (20, "(ee|öö|yy)"),
-    (21, "[aeo]y"),
-    (48, "[aäou]e"),
-
-    # -Ca (1022 nouns, 6 exceptions)
-    (10, "( [ou]i | [oy] | (^|[^aei])u ) [bdfghjklmnprstv]+a"),
+    # -Ca
+    (10, "(oi|ui|o|^u|[^aei]u|y) [bdfghjklmnprstv]+a"),
     ( 9, "[bdfghjklmnprsštvzž]a"),
 
-    # -Cä (230 nouns, 3 exceptions)
+    # -Cä
     (10, "[hjklmnprstv]ä"),
 
-    # -Ce (409 nouns, 27 exceptions)
-    ( 8, "(c|[ln]d|g|ch|[ak]k|[gyz]l|[ai]m|kn|[êop]p|[aèn]r|ss)e"),
+    # -Ce
+    ( 8, "(c|ld|nd|g|ch|ak|kk|gl|yl|zl|am|im|kn|êp|op|pp|ar|èr|nr|ss) e"),
     (48, "[dhjklmnprstv]e"),
 
-    # -Cé (4 nouns, no exceptions)
+    # -Cé
     (21, "[bprs]é"),
 
-    # -Ci (1312 nouns, 83 exceptions)
+    # -Ci
     ( 7, """(
         (l|n|är)h | (hi|pi|e|l|än|jo|no|r|os|t|ä)k | (ni|am|ur)m
         | (ii|oi|l|m|r|ru|ä)p | (sa|ki|al|il|äl|lo|po|ar|ir|y)v
     )i"""),
-    (23, "(iih|oh|uh|tul|mon)i"),
-    (25, "(ie|oi|uo|lu)mi"),
-    (26, "(iel|uol|ien|uon|er|ous)i"),
-    (27, "(ke|me|ve|ei|to|au|su|sy|äy|öy)si"),
+    (23, "(iih|oh|uh|tul|mon) i"),
+    (25, "(ie|oi|uo|lu) mi"),
+    (26, "(iel|uol|ien|uon|er|ous) i"),
+    (27, "(ke|me|ve|ei|to|au|su|sy|äy|öy) si"),
     (28, "[lnr]si"),
     ( 5, "[bdfghjklmnprsštvw]i"),
 
-    # -CO/-CU (1417 nouns, 3 exceptions)
+    # -CO/-CU
     ( 1, "[bcdfghjklmnprstvz][oöuy]"),
 
-    # -n (242 nouns, 9 exceptions)
-    ( 6, "(b|[^a]l|an|s|yt) on"),  # -on
-    (32, "(h|[^y]m|s|v) en"),  # -en
-    (36, "(aa|ha|nh|äh|ik|yl|en|lo|is) in"),  # -in
-    (33, "(pa|[^y]i|u|ä) n"),  # -An/-in/-un
-    (34, "( [aiu]to | ö )n"),  # -On
-    (38, "nen"),  # -en
-    ( 5, "n"),
+    # -n
+    ( 6, "(b|[^a]l|an|s|yt) on"),
+    (32, "(h|[^y]m|s|v) en"),
+    (36, "(aa|ha|nh|äh|ik|yl|en|lo|is) in"),
+    (33, "(pa|[^y]i|u|ä) n"),  # must be after 36
+    (34, "([aiu]to|ö) n"),
+    (38, "nen"),
+    ( 5, "n"),  # must be the last one
 
-    # -s (1451 nouns, 90 exceptions)
-    (45, "(de|jä)s"),
-    (40, "( [iu]u | [^v]eu | [^ch]ou | [eiöy]y )s"),
+    # -s
+    (40, "( ([^v]e|i|[^ch]o|u)u | [eiyö]y )s"),
     (41, """(
-        [^h]a | (er|yr|[^mr])ä | (ä|rv)e | (aa|au|uu|yy)[lmnr]i | l[mt]i
+        [^h]a | (er|yr|[^jmr])ä | (ä|rv)e | (aa|au|uu|yy)[lmnr]i | l[mt]i
     )s"""),
-    (39, "[aeiouyäö]s"),
-    ( 5, "s"),
+    (45, "(de|jä) s"),
+    (39, "[aeiouyäö]s"),  # must be after 40, 41, 45
+    ( 5, "s"),  # must be the last one
 
-    # -C (not -n/-s; 237 nouns, 25 exceptions)
-    ( 6, "( (da|e|ö)m | lup | (ga|[^gnšu]e|o)r )"),
-    (47, "(ll|n)[uy]t"),
-    (43, "[^o][uy]t"),
-    (49, "( [mv]al | [kmn]el | [kmnv]ar | [gnu]er )"),
-    ( 5, "[bcdfghklmprštx]"),
+    # -C (not -n/-s)
+    ( 6, "( (da|e|ö)m | lup | (ga|ta|[^gnšu]e|o)r )"),
+    (22, "( (ga|[fmnu]e|ai|û)t | w | ux)"),
+    (32, "(vel|sar|är)"),
+    (43, "(hu|ru|[^n]y) t"),
+    (47, "[ln][uy]t"),
+    (49, "[gkmnuv][ae][lr]"),
+    ( 5, "[bcdfghklmprštx]"),  # must be the last one
 ))
 
 # rules for trisyllabic nouns (declension, regex)
 _RULES_3SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
-    # -VV (455 nouns, 5 exceptions)
-    ( 3, "( [io]e | [aäei][oö] | yo )"),
-    (12, "( (d|n|br|pr)ea | [iuy][aä] )"),
-    (15, "( e[aä] | oa )"),
-    (18, "( pee | [aeu]i | oo | uu )"),
+    # -VV
+    ( 3, "(ie|oe|ao|eo|io|yo|iö)"),
+    (12, "(ia|ua|iä)"),
+    (15, "(ea|eä|oa)"),
+    (18, "(ai|ei|ui|oo|uu)"),
     (20, "ee"),
     (48, "[uy]e"),
 
-    # -ja/-la/-na/-ra (650 nouns, 74 exceptions)
+    # -ja/-la/-na/-ra
     # (12 is a good "all the rest" declension for these)
-    ( 9, "(oa|ui)la"),
-    (10, "( [aou]j | (on|jo|lo|oo|ou)n | (ke|ve|t)r )a"),
-    (11, "( oij | (pa|mo|ro)n | (ha|ta|b|te)r )a"),
-    (13, "( (aa|ni|k|l|io)l | (ee|ai|gi|ii|en|r|lu|uu)n | (i|uu)r )a"),
+    (10, "( [aou]j | on?n | ker )a"),
+    (11, "(pan|tar|ter)a"),
+    (13, "( ll | (ee|ii|uu)n | (i|uu)r )a"),
     (12, "[jlnr]a"),
 
-    # -Ca except -ja/-la/-na/-ra (854 nouns, 16 exceptions)
+    # -Ca (not -ja/-la/-na/-ra)
     # (9 and 10 are good "all the rest" declensions for these)
-    (11, "( ok | (ee|t)m | os )a"),
-    (13, """(
-        ed | g | [aeihs]k | (ri|il|s)m | (es|t|uu)s | (e|i|is|us)t | iiv )a
-    """),
-    (14, "(kk|p|ott)a"),
-    ( 9, "( [bdfkt] | (al|m)m | (ua|k)v | ss )a"),
+    (13, "( g | [aeihs]k | ts | st )a"),
+    (14, "kka"),
+    ( 9, "( [bdfkt] | ss )a"),
     (10, "[msv]a"),
 
-    # -Cä (520 nouns, 13 exceptions)
+    # -Cä
     ( 9, "ntä"),
     (11, "( päl | häm | [kt]än | (ve|kä)r )ä"),
     (12, "( ij | (i|y|mä)l | n | yr )ä"),
-    (13, "(sk|st)ä"),
+    (13, "s[kt]ä"),
     (14, "kkä"),
     (10, "[jlmrsv]ä"),
 
-    # -Ce (476 nouns, 9 exceptions)
+    # -Ce
     ( 8, """
         (
-        c | ud | g | (da|b|g|bi|[iu]l)l | (g|ui)n | (ra|i|u)r | s
-        | (ra|[nôrt])t | v
+        c | ud | g | (da|b|g|bi|il|ul)l | (g|ui)n | (ra|i|u)r | s
+        | (ra|n|ô|r|t)t | v
         )e
     """),
-    (49, "( [np]el | en | ([mtv]a|e)r )e"),
+    (49, "( [np]el | en | (ma|ta|va|e)r )e"),
     (48, "[dklnrt]e"),
 
-    # -Ci (2083 nouns, 154 exceptions)
+    # -Ci
     ( 6, """(
         [ln]j
-        | ( [lz]u | us )k
+        | (lu|zu|us) k
         | ( [aä] | [^a]e | ii | [bdikorv]o | [^u]u )l
         | ( [ahjrs]a | re | do | u )m
-        | ( [am]a | [^d]e | [fhik]i | [bdklost]o | ä )n
+        | ( aa | ma | [^d]e | [fhik]i | [bdklost]o | ä )n
         | ( [aeou] | ii | [^y]y | [^ä]ä )r
     )i"""),
     (16, "mpi"),
     ( 5, "[bdfgjklmnprstv]i"),
 
-    # -Co (533 nouns, 27 exceptions)
-    ( 1, "( c | (bi|n)d | [nr]g | nk | [iu]an | gr | ([br]a|n|t)t )o"),
+    # -Co
+    ( 1, "( c | (bi|n)d | [nr]g | nk | [iu]an | gr | (ba|ra|n|t)t )o"),
     ( 4, "kko"),
     ( 2, "[bdghjklmnrstv]o"),
 
-    # -Cö (136 nouns, 11 exceptions)
-    ( 1, "( [lnt] | [pä]is )tö"),
+    # -Cö
+    ( 1, "(l|n|pis|äis|t) tö"),
     ( 4, "kkö"),
     ( 2, "[klmrst]ö"),
 
-    # -CU (492 nouns, 2 exceptions)
+    # -CU
     ( 1, "( (b|its|t)u | [rtv]y )"),
     ( 2, "[djlrs][uy]"),
 
-    # -n (1639 nouns, 6 exceptions)
-    ( 6, "(ua|be|dio|lo|mo)n"),
-    (10, "(sa|ä)n"),
-    (33, "(ia|i)n"),
+    # -n
+    ( 6, "(ua|be|dio|lo|mo) n"),
+    (10, "(sa|ä) n"),
+    (33, "(ia|i) n"),
     (34, "t[oö]n"),
     (38, "nen"),
     ( 5, "n"),
 
-    # -r (32 nouns, no exceptions)
-    ( 6, "( [cl]e | ide | tu )r"),
+    # -r
+    ( 6, "(ce|le|tu) r"),
     (32, "[aä]r"),
     ( 5, "r"),
 
-    # -s (2701 nouns, 4 exceptions)
-    ( 5, "(do|n|s|t)s"),
-    (40, "( kau | [ioöuy][uy] )s"),
-    (45, "( (on|s)a | [ms]ä )s"),
-    (41, "( (g|[^k]i|k|in|l|u)a | ä )s"),
+    # -s
+    ( 5, "[nst]s"),
+    (40, "[ioöuy][uy]s"),
+    (45, "[ms][aä]s"),
+    (41, "[aä]s"),
     (39, "s"),
 
-    # -C (not -n/-r/-s; 57 nouns, 3 exceptions)
+    # -C (not -n/-r/-s)
     (47, "[ln][uy]t"),
     ( 5, "[cdgklmptvwx]"),
 ))
 
 # rules for quadrisyllabic and longer nouns (declension, regex)
 _RULES_4SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
-    # -VV (649 nouns, 5 exceptions)
+    # -VV
     ( 3, "i[oö]"),
-    (13, "(id|al|as)ea"),
     (12, "[ei]a"),
 
-    # -Ca (903 nouns, 8 exceptions)
-    (10, """(
-        o(nd|g|ij|ik|kk|nkk|ll|m|am|im|n|nn|r|s|tt) | u(d|j|m|mm|s)
-        | aj | [bz]ol | (ea|ne|l)m | v
-    )a"""),
-    (12, "( [lnst]ij | (i|to)l )a"),
-    (13, "( (a|ti|s)k | ur )a"),
+    # -Ca
+    (12, "( [^o]ij | tol )a"),
+    (10, "( (o.?|u)[dgjklmnrst] | aj | (ea|ne|l)m | v )a"),
     ( 9, "[djklmnrstž]a"),
 
-    # -Cä (275 nouns, no exceptions)
+    # -Cä
     (12, "[^ö]ijä"),
-    (10, "(j|m|ynt|v)ä"),
+    (10, "(j|m|ynt|v) ä"),
     ( 9, "tä"),
 
-    # -Ci (2282 nouns, 19 exceptions)
-    ( 6, """(
-        [gkp]el | [drt]um | (ža|no)n
-        | [klnptv]ar | [dgknt]er | (i|l|s|kt|st|tt)or
-    )i"""),
+    # -Ci
+    ( 6, "( [gkp]el | [klntv]ar | [dt]er | [ist]or )i"),
     ( 5, "[bdfgklmnprstvz]i"),
 
-    # -CO/-CU (627 nouns, 15 exceptions)
-    ( 2, "( m[oö] | l[uy] | elo )"),
-    ( 4, "[dgjlmnprst]ikk[oö]"),
+    # -CO/-CU
+    ( 2, "(mo|mö|lu|ly)"),
+    ( 4, "kk[oö]"),
     ( 1, "[cdklmnrstz][oöuy]"),
 
-    # -s (1354 nouns, 1 exception)
+    # -s
     (40, "[iuy][uy]s"),
-    (39, "( na | [^c]e | [ioöuy] )s"),
+    (39, "[eioöuy]s"),
     (41, "[aä]s"),
     ( 5, "s"),
 
-    # -C (not -s; 3219 nouns, 1 exception)
-    ( 6, "( rum | (ga|e|cto|u)r )"),
+    # -C (not -s)
+    ( 6, "( rum | (ga|e|u)r )"),
     (32, "[aä]r"),
     (34, "t[oö]n"),
     (38, "[^o]n"),
@@ -709,15 +712,17 @@ def get_declensions(noun, useExceptions=True):
             return (declension,)
     return ()
 
-def _check_redundant_exceptions():
+def _get_redundant_exceptions():
+    # generate words that are unnecessarily on the exceptions list
     for noun in _EXCEPTIONS:
         detectedDeclensions = get_declensions(noun, False)
         if detectedDeclensions \
         and _EXCEPTIONS[noun] == list(detectedDeclensions)[0]:
-            print(f"Redundant exception: '{noun}'", file=sys.stderr)
+            yield noun
 
 def main():
-    _check_redundant_exceptions()
+    for noun in _get_redundant_exceptions():
+        print(f"Redundant exception: '{noun}'", file=sys.stderr)
 
     if len(sys.argv) != 2:
         sys.exit(
