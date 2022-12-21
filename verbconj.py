@@ -3,6 +3,7 @@
 # note: A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant
 
 import re, sys
+from countsyll import count_syllables
 
 # a typical verb in each conjugation;
 # forms: infinitive, 1SG present, 3SG past, 3SG conditional, 3SG imperative,
@@ -58,226 +59,122 @@ _MULTI_CONJUGATION_VERBS = {
     "sueta": (72, 74),
 }
 
-# exceptions to rules (verb: conjugation)
-_EXCEPTIONS = {
-    "elää": 53,
-    "kuivaa": 53,
-    "kylvää": 53,
-    "kyntää": 53,
-    "purkaa": 53,
-    "sulaa": 53,
+# These rules and exceptions specify how to detect the conjugation of a verb,
+# based on how many syllables the verb has (3 means 3 or more).
+# Notes - rules:
+#   - Format: (declension, regex); the first matching regex will determine the
+#     declension.
+#   - "$" is automatically appended to the regexes, so put the whole regex in
+#     parentheses if necessary.
+#   - No more than one rule per declension per ending (e.g. -VV).
+#   - Under each ending (e.g. -VV), if rules don't depend on each other, sort
+#     them by declension.
+#   - Don't hunt for any single verb. If the regex is e.g. [AB]C, each of AC
+#     and BC must match 2 verbs or more. Exception: if [AB] forms a logical
+#     group, like all the vowels, then only [AB]C needs to match 2 verbs or
+#     more.
+# Notes - exceptions:
+#   - Format: verb: declension.
+#   - Order: first by ending, then by declension.
+#   - Begin a new line when declension changes.
 
-    "huutaa": 54,
-    "lypsää": 54,
-    "löytää": 54,
-    "pieksää": 54,
-    "pyytää": 54,
+# rules and exceptions for disyllabic verbs
+_RULES_2SYLL = tuple((c, re.compile(r, re.VERBOSE)) for (c, r) in (
+    # -AA
+    (57, "aartaa$"),
+    (54, "( [lnr]taa | sää | [lnr]tää )$"),  # must be after 57
+    (55, "iitää$"),
+    (56, "( [^t] | at | a[iu]?[hst]t | [lr]tt )aa$"),
+    (53, "(aa|ää)$"),  # must be the last one
 
-    # all the verbs in this conjugation
-    "entää": 55,
-    "hyytää": 55,
-    "häätää": 55,
-    "kiitää": 55,
-    "liitää": 55,
-    "soutaa": 55,
-    "yltää": 55,
-
-    "ahtaa": 56,
-    "alkaa": 56,
-    "antaa": 56,
-    "auttaa": 56,
-    "haistaa": 56,
-    "jakaa": 56,
-    "jaksaa": 56,
-    "jatkaa": 56,
-    "kantaa": 56,
-    "kastaa": 56,
-    "kattaa": 56,
-    "laistaa": 56,
-    "mahtaa": 56,
-    "maksaa": 56,
-    "mataa": 56,
-    "maustaa": 56,
-    "paistaa": 56,
-    "sataa": 56,
-    "virkkaa": 56,
-
-    # all the verbs in this conjugation
-    "kaartaa": 57,
-    "kaataa": 57,
-    "saartaa": 57,
-
-    "tuntea": 59,  # the only verb in this conjugation
-
-    "lähteä": 60,  # the only verb in this conjugation
-
-    "säikkyä": 61,
-
-    "hälinöidä": 62,
-
-    "käydä": 65,  # the only verb in this conjugation
-
-    # all the verbs in this conjugation
-    "ahkeroida": 68,
-    "aprikoida": 68,
-    "aterioida": 68,
-    "haravoida": 68,
-    "hekumoida": 68,
-    "hihhuloida": 68,
-    "ikävöidä": 68,
-    "ilakoida": 68,
-    "ilkamoida": 68,
-    "kapaloida": 68,
-    "kapinoida": 68,
-    "karkeloida": 68,
-    "keikaroida": 68,
-    "kekkaloida": 68,
-    "kekkuloida": 68,
-    "kihelmöidä": 68,
-    "kipenöidä": 68,
-    "kipunoida": 68,
-    "koheloida": 68,
-    "kuutioida": 68,
-    "kyynelöidä": 68,
-    "käpälöidä": 68,
-    "kärhämöidä": 68,
-    "liehakoida": 68,
-    "luennoida": 68,
-    "mankeloida": 68,
-    "mellakoida": 68,
-    "metelöidä": 68,
-    "murkinoida": 68,
-    "pakinoida": 68,
-    "patikoida": 68,
-    "pokkuroida": 68,
-    "pomiloida": 68,
-    "pullikoida": 68,
-    "rettelöidä": 68,
-    "seppelöidä": 68,
-    "sukuloida": 68,
-    "teikaroida": 68,
-    "tupakoida": 68,
-    "urakoida": 68,
-    "vihannoida": 68,
-
-    "hillitä": 69,
-    "häiritä": 69,
-    "villitä": 69,
-
-    "hapata": 72,
-    "heikota": 72,
-    "helpota": 72,
-    "hienota": 72,
-    "huonota": 72,
-    "kehnota": 72,
-    "leudota": 72,
-    "loitota": 72,
-    "mädätä": 72,
-    "paksuta": 72,
-    "parata": 72,
-    "ulota": 72,
-
-    "haljeta": 74,
-    "herjetä": 74,
-    "hirvetä": 74,
-    "hymytä": 74,
-    "hyrskytä": 74,
-    "hävetä": 74,
-    "höyrytä": 74,
-    "kammeta": 74,
-    "kasketa": 74,
-    "katketa": 74,
-    "kehjetä": 74,
-    "keretä": 74,
-    "kerjetä": 74,
-    "kiivetä": 74,
-    "kivetä": 74,
-    "korveta": 74,
-    "laueta": 74,
-    "livetä": 74,
-    "lohjeta": 74,
-    "loveta": 74,
-    "lumeta": 74,
-    "noeta": 74,
-    "pietä": 74,
-    "poiketa": 74,
-    "puhjeta": 74,
-    "ratketa": 74,
-    "revetä": 74,
-    "ruveta": 74,
-    "saveta": 74,
-    "teljetä": 74,
-    "tuketa": 74,
-    "vyyhdetä": 74,
-    "älytä": 74,
-    "öljytä": 74,
-
-    "aallota": 75,
-    "bingota": 75,
-    "diskota": 75,
-    "haluta": 75,
-    "hamuta": 75,
-    "hulmuta": 75,
-    "kohuta": 75,
-    "lassota": 75,
-    "lastuta": 75,
-    "liesuta": 75,
-    "lietsuta": 75,
-    "loimuta": 75,
-    "loiskuta": 75,
-    "meluta": 75,
-    "muodota": 75,
-    "nimetä": 75,
-    "nujuta": 75,
-    "peitota": 75,
-    "piiluta": 75,
-    "röyhytä": 75,
-    "solmita": 75,
-
-    # all the verbs in this conjugation
-    "taitaa": 76,
-    "tietää": 76,
-}
-
-# rules for detecting the conjugation
-# - format: (conjugation, regex)
-# - sort by ending (first those that end with -AA, then others that end with
-#   -A, etc.; all vowels before consonants)
-# - tip: use a command like this to search for patterns:
-#       grep "ENDING," verbs.csv | python3 text-util/grouplines.py -7
-
-_RULES = tuple((c, re.compile(r, re.VERBOSE)) for (c, r) in (
-    # -CAA (53 must be last)
-    (54, "[lnr] t(aa|ää)$"),
-    (56, "( aa | a[ai]h | aas | a[ailr]t )taa$ | [hjlnprv]aa$"),
-    (53, "t(aa|ää)$"),
-
-    # -VA (not -AA)
-    (52, "[oöuy][aä]$"),
-    (58, "e[aä]$"),
-    (61, "i[aä]$"),
-
-    # -dA (68 must be before 62)
-    (68, "(im|in|nn|ri|äj) öidä$"),
-    (62, "[aouö]i d[aä]$"),
+    # -dA
+    (62, "ida$"),
     (63, "(aa|ää|yy) d[aä]$"),
     (64, "(ie|uo|yö) d[aä]$"),
     (71, "hdä$"),
 
-    # -VtA (74 must be before 72 and 75; 69 must be before 75)
-    (69, "( ita | [dkt]itä )$"),
+    # -CA (not -dA)
+    (70, "(ie|uo|yö) st[aä]$"),
+    (66, "st[aä]$"),  # must be after 70
+    (67, "(ll|nn|rr) [aä]$"),
+    (73, "ata$"),
+))
+_EXCEPTIONS_2SYLL = {
+    # -AA
+    "kuivaa": 53, "kyntää": 53, "polttaa": 53, "purkaa": 53, "sulaa": 53,
+    "taustaa": 53,
+    "huutaa": 54, "löytää": 54, "pyytää": 54,
+    "entää": 55, "hyytää": 55, "häätää": 55, "soutaa": 55, "yltää": 55,
+    "antaa": 56, "kantaa": 56,
+    "kaataa": 57,
+    "taitaa": 76, "tietää": 76,
+
+    # -CA
+    "käydä": 65,
+    "kaita": 69,
+    "koota": 74, "pietä": 74,
+    "siitä": 75,
+}
+
+# rules and exceptions for trisyllabic and longer verbs
+_RULES_3SYLL = tuple((c, re.compile(r, re.VERBOSE)) for (c, r) in (
+    # -VA
+    (52, "[oöuy][aä]$"),
+    (53, "[hst]t(aa|ää)$"),
+    (54, "[lnr]t(aa|ää)$"),
+    (58, "e[aä]$"),
+    (61, "i[aä]$"),
+
+    # -dA
+    (68, "nnöidä$"),
+    (62, "[aouö]i d[aä]$"),
+
+    # -VtA
+    (69, "(ita|kitä)$"),
+    (74, "( get[aä] | ivetä | [oöu]t[aä] )$"),
+    (72, "et[aä]$"),  # must be after 74
     (73, "(ata|ätä)$"),
-    (74, "( [dg]eta | [gt]etä | [oöu]t[aä] | [hn]ytä )$"),
-    (72, "et[aä]$"),
     (75, "[iy]tä$"),
 
-    # -stA (70 must be before 66)
-    (70, "(ie|uo|yö) st[aä]$"),
+    # -CA (not -VtA)
     (66, "st[aä]$"),
-
-    # -CA (not -tA)
-    (67, "(ll|nn|rr) [aä]$"),
+    (67, "ll[aä]$"),
 ))
+_EXCEPTIONS_3SYLL = {
+    # -VA
+    "tuntea": 59,
+    "lähteä": 60,
+    "säikkyä": 61,
+
+    # -CA
+    "ahkeroida": 68, "aprikoida": 68, "aterioida": 68, "haravoida": 68,
+    "heilimöidä": 68, "hekumoida": 68, "hihhuloida": 68, "ikävöidä": 68,
+    "ilakoida": 68, "ilkamoida": 68, "kapaloida": 68, "kapinoida": 68,
+    "karkeloida": 68, "keikaroida": 68, "kekkaloida": 68, "kekkuloida": 68,
+    "kihelmöidä": 68, "kipenöidä": 68, "kipinöidä": 68, "kipunoida": 68,
+    "koheloida": 68, "kuutioida": 68, "kyynelöidä": 68, "käpälöidä": 68,
+    "kärhämöidä": 68, "käräjöidä": 68, "liehakoida": 68, "luennoida": 68,
+    "mankeloida": 68, "mellakoida": 68, "metelöidä": 68, "murkinoida": 68,
+    "pakinoida": 68, "patikoida": 68, "pokkuroida": 68, "pomiloida": 68,
+    "pullikoida": 68, "rettelöidä": 68, "rähinöidä": 68, "seppelöidä": 68,
+    "sukuloida": 68, "teikaroida": 68, "tupakoida": 68, "urakoida": 68,
+    "vihannoida": 68, "viheriöidä": 68,
+    "hillitä": 69, "häiritä": 69, "kestitä": 69, "kyyditä": 69, "villitä": 69,
+    "hapata": 72, "heikota": 72, "helpota": 72, "hienota": 72, "huonota": 72,
+    "kehnota": 72, "leudota": 72, "loitota": 72, "mädätä": 72, "paksuta": 72,
+    "parata": 72, "ulota": 72,
+    "haljeta": 74, "herjetä": 74, "hirvetä": 74, "hymytä": 74, "hyrskytä": 74,
+    "hävetä": 74, "höyrytä": 74, "kammeta": 74, "kasketa": 74, "katketa": 74,
+    "kehjetä": 74, "keretä": 74, "kerjetä": 74, "korveta": 74, "könytä": 74,
+    "laueta": 74, "lohjeta": 74, "loveta": 74, "lumeta": 74, "noeta": 74,
+    "poiketa": 74, "puhjeta": 74, "ratketa": 74, "revetä": 74, "ristetä": 74,
+    "ruveta": 74, "saveta": 74, "syyhytä": 74, "teljetä": 74, "todeta": 74,
+    "tuketa": 74, "tähytä": 74, "vyyhdetä": 74, "älytä": 74, "öljytä": 74,
+    "aallota": 75, "bingota": 75, "diskota": 75, "haluta": 75, "hamuta": 75,
+    "hulmuta": 75, "kohuta": 75, "lassota": 75, "lastuta": 75, "liesuta": 75,
+    "lietsuta": 75, "loimuta": 75, "loiskuta": 75, "meluta": 75, "muodota": 75,
+    "nimetä": 75, "nujuta": 75, "peitota": 75, "piiluta": 75, "solmita": 75,
+}
 
 def get_conjugations(verb, useExceptions=True):
     """verb: a Finnish verb in infinitive
@@ -290,26 +187,41 @@ def get_conjugations(verb, useExceptions=True):
     except KeyError:
         pass
 
+    syllCnt = count_syllables(verb)
+
     if useExceptions:
+        if syllCnt == 1:
+            sys.exit("Error: there should be no monosyllabic verbs.")
+        elif syllCnt == 2:
+            exceptions = _EXCEPTIONS_2SYLL
+        else:
+            exceptions = _EXCEPTIONS_3SYLL
         try:
-            return (_EXCEPTIONS[verb],)
+            return (exceptions[verb],)
         except KeyError:
             pass
 
-    for (conjugation, regex) in _RULES:
+    if syllCnt == 2:
+        rules = _RULES_2SYLL
+    else:
+        rules = _RULES_3SYLL
+
+    for (conjugation, regex) in rules:
         if regex.search(verb) is not None:
             return (conjugation,)
     return ()
 
-def _check_redundant_exceptions():
-    for verb in _EXCEPTIONS:
-        detectedConjugations = get_conjugations(verb, False)
-        if detectedConjugations \
-        and _EXCEPTIONS[verb] == list(detectedConjugations)[0]:
-            print(f'Redundant exception: "{verb}"')
+def _get_redundant_exceptions():
+    # generate verbs that are unnecessarily on the exceptions list
+    for excList in (_EXCEPTIONS_2SYLL, _EXCEPTIONS_3SYLL):
+        for verb in excList:
+            detectedConjs = get_conjugations(verb, False)
+            if detectedConjs and excList[verb] == list(detectedConjs)[0]:
+                yield verb
 
 def main():
-    _check_redundant_exceptions()
+    for noun in _get_redundant_exceptions():
+        print(f"Redundant exception: '{noun}'", file=sys.stderr)
 
     if len(sys.argv) != 2:
         sys.exit(
