@@ -27,9 +27,15 @@ def run_test_n():
     for fields in read_csv("generated-lists/nouns.csv"):
         # get word and correct declensions
         word = fields[0]
-        decls = set(int(c, 10) for c in fields[1:])
-        if word == "tuomas":
-            decls.add(39)  # error in source data; fix here for now
+        # fix errors in source data
+        if word == "finaali":
+            decls = {6}
+        elif word == "ilmeinen":
+            decls = {38}
+        else:
+            decls = {int(c, 10) for c in fields[1:]}
+            if word == "tuomas":
+                decls.add(39)
         decls = tuple(sorted(decls))
 
         detectedDecls = get_declensions(word)
@@ -53,8 +59,15 @@ def run_test_v():
     for fields in read_csv("generated-lists/verbs.csv"):
         # get word and correct conjugations
         word = fields[0]
-        conjs = set(int(c, 10) for c in fields[1:])
-        conjs.difference_update({77, 78})  # verbs with non-full conj.
+        if word.endswith("ee"):
+            continue
+        # fix errors in source data
+        if word == "hilsehtiä":
+            conjs = {61}
+        elif word == "pörhistyä":
+            conjs = {52}
+        else:
+            conjs = {int(c, 10) for c in fields[1:]}
         if not conjs:
             continue
         conjs = tuple(sorted(conjs))
@@ -78,17 +91,16 @@ def get_cons_grad_data(test):
     for fields in read_csv(CONS_GRAD_FILE):
         conjsByWord[fields[0]] = {int(c, 10) for c in fields[1:]}
 
+    # fix errors in the source data
     if test == "ng":
-        # these are errors in the source data; fix them here for now
-        conjsByWord["alpi"].remove(5)
         conjsByWord["auer"] = {49}
         conjsByWord["harre"] = {48}
-        conjsByWord["helpi"].remove(5)
         conjsByWord["hynte"] = {48}
         conjsByWord["näin"] = {33}
         conjsByWord["pue"] = {48}
         conjsByWord["ryntys"] = {41}
-        conjsByWord["siitake"].remove(8)
+    else:
+        conjsByWord["hilsehtiä"] = {61}
 
     return conjsByWord
 
@@ -137,8 +149,9 @@ def run_test_vg():
     for fields in read_csv("generated-lists/verbs.csv"):
         # get word and correct conjugations
         word = fields[0]
+        if word.endswith("ee"):
+            continue
         conjs = set(int(c, 10) for c in fields[1:])
-        conjs.difference_update({77, 78})  # verbs with non-full conj.
         if not conjs:
             continue
         conjs = tuple(sorted(conjs))
@@ -161,6 +174,7 @@ def run_test_vg():
                     "expected consonant gradation but got none"
                 )
                 errorCount += 1
+        wordCount += 1
 
     return (wordCount, errorCount)
 

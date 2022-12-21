@@ -107,8 +107,6 @@ _EXCEPTIONS = {
     (33, "pyyhin"): True,
     (33, "särvin"): True,
     (35, "lämmin"): True,  # the only noun in its declension
-    (39, "kallas"): True,
-    (39, "pallas"): True,
     (41, "havas"): True,
     (41, "rynnäs"): True,
     (41, "seiväs"): True,

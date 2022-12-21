@@ -37,7 +37,7 @@ rm generated-lists/temp.csv
 echo "Separating nouns and verbs..."
 python3 filter-by-conjugation.py generated-lists/words.csv 1 49 \
     > generated-lists/nouns.csv
-python3 filter-by-conjugation.py generated-lists/words.csv 52 78 \
+python3 filter-by-conjugation.py generated-lists/words.csv 52 76 \
     > generated-lists/verbs.csv
 
 echo "Grouping by number of syllables..."
