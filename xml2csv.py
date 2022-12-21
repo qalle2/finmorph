@@ -64,47 +64,31 @@ getAllWords = {"a": True, "g": False}[sys.argv[2]]
 
 conjugationsByWord = {}  # word: set of declensions/conjugations
 
-if getAllWords:
-    for line in util.read_lines(sys.argv[1]):
-        assert line.count("</tn>") <= 2
+for line in util.read_lines(sys.argv[1]):
+    assert line.count("</tn>") <= 2
 
-        # only detect number of conjugations, not consonant gradation
-        for regex in (REGEX_NN, REGEX_N, REGEX_NONE):
-            match = regex.search(line)
-            if match is not None:
-                break
-
+    # detect number of conjugations and consonant gradation
+    for regex in (
+        REGEX_YY, REGEX_YN, REGEX_NY, REGEX_NN,
+        REGEX_Y, REGEX_N,
+        REGEX_NONE
+    ):
+        match = regex.search(line)
         if match is not None:
-            word = match.groups()[0].strip("'- ")
-            # save all conjugations
-            conjs = {int(c, 10) for c in match.groups()[1:]}
-            conjugationsByWord.setdefault(word, set()).update(conjs)
-else:
-    for line in util.read_lines(sys.argv[1]):
-        assert line.count("</tn>") <= 2
+            break
 
-        # detect number of conjugations and consonant gradation
-        for regex in (
-            REGEX_YY, REGEX_YN, REGEX_NY, REGEX_NN,
-            REGEX_Y, REGEX_N,
-            REGEX_NONE
-        ):
-            match = regex.search(line)
-            if match is not None:
-                break
-
-        if match is not None \
-        and regex in (REGEX_YY, REGEX_YN, REGEX_NY, REGEX_Y):
-            word = match.groups()[0].strip("'- ")
-            # save conjugations with consonant gradation
-            if regex == REGEX_YN:
-                conjs = match.groups()[1:2]  # 1st only
-            elif regex == REGEX_NY:
-                conjs = match.groups()[2:3]  # 2nd only
-            else:
-                conjs = match.groups()[1:]
-            conjs = {int(c, 10) for c in conjs}
-            conjugationsByWord.setdefault(word, set()).update(conjs)
+    if match is not None \
+    and (getAllWords or regex in (REGEX_YY, REGEX_YN, REGEX_NY, REGEX_Y)):
+        word = match.groups()[0].strip("'- ")
+        # save all conjugations or only those with consonant gradation
+        if not getAllWords and regex == REGEX_YN:
+            conjs = match.groups()[1:2]  # 1st only
+        elif not getAllWords and regex == REGEX_NY:
+            conjs = match.groups()[2:3]  # 2nd only
+        else:
+            conjs = match.groups()[1:]
+        conjs = {int(c, 10) for c in conjs}
+        conjugationsByWord.setdefault(word, set()).update(conjs)
 
 for word in conjugationsByWord:
     print(",".join(
