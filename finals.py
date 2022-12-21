@@ -1,32 +1,38 @@
 import sys
-import util
 
-if len(sys.argv) != 3:
-    sys.exit(
-        "Get words that occur as finals of compounds. Print them and their "
-        "declensions/conjugations in CSV format. Arguments: wordCsvFile "
-        "compoundListFile"
-    )
+def read_lines(filename):
+    with open(filename, "rt", encoding="utf8") as handle:
+        handle.seek(0)
+        yield from (l.rstrip("\n") for l in handle)
 
-(wordCsvFile, compoundListFile) = sys.argv[1:]
+def main():
+    if len(sys.argv) != 3:
+        sys.exit(
+            "Get words that occur as finals of compounds. Print them and "
+            "their declensions/conjugations in CSV format. Arguments: "
+            "wordCsvFile compoundListFile"
+        )
+    (wordFile, compoundFile) = sys.argv[1:]
 
-# map compounds to finals
-compoundToFinal = {}  # e.g. {"putkiyhde": "yhde", ...}
-for word in util.read_lines(compoundListFile):
-    compoundToFinal[word.replace("_", "")] = word.split("_")[-1].strip("'- ")
+    # get the final part for each compound
+    compoundToFinal = {}  # e.g. {"putkiyhde": "yhde", ...}
+    for word in read_lines(compoundFile):
+        compoundToFinal[word.replace("_", "")] \
+        = word.split("_")[-1].strip("'- ")
 
-# get conjugations for finals
-conjugationsByFinal = {}  # e.g. {"yhde": {48}, ...}
-for line in util.read_lines(wordCsvFile):
-    fields = line.split(",")
-    word = fields[0]
-    conjugations = {int(c, 10) for c in fields[1:]} - {50, 51}
+    # get conjugations for finals
+    conjsByFinal = {}  # e.g. {"yhde": {48}, ...}
+    for line in read_lines(wordFile):
+        fields = line.split(",")
+        word = fields[0]
+        if word in compoundToFinal:
+            final = compoundToFinal[word]
+            conjs = {int(c) for c in fields[1:]} - {50, 51}
+            conjsByFinal.setdefault(final, set()).update(conjs)
 
-    if word in compoundToFinal:
-        final = compoundToFinal[word]
-        conjugationsByFinal.setdefault(final, set()).update(conjugations)
+    for final in sorted(conjsByFinal):
+        print(",".join(
+            [final] + [str(c) for c in sorted(conjsByFinal.get(final, {}))]
+        ))
 
-for final in conjugationsByFinal:
-    print(",".join(
-        [final] + [str(c) for c in sorted(conjugationsByFinal.get(final, {}))]
-    ))
+main()

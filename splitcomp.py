@@ -3,17 +3,7 @@
 # TODO: reduce the number of exceptions needed (handle spaces/hyphens better)
 # TODO: reduce the length of word lists needed
 
-# note: don't bother end user with having to download "util.py"
 import itertools, sys
-
-def read_lines(file_):
-    # generate lines from file without newlines
-    try:
-        with open(file_, "rt", encoding="utf8") as handle:
-            handle.seek(0)
-            yield from (l.rstrip("\n") for l in handle)
-    except OSError:
-        sys.exit("Error reading " + file_)
 
 SINGLE_WORDS = {
     # spaces/hyphens
@@ -357,6 +347,11 @@ PART_BLOCKLIST = {
 }
 
 DOUBLE_VOWELS = {"aa", "ee", "ii", "oo", "uu", "yy", "ää", "öö"}
+
+def read_lines(filename):
+    with open(filename, "rt", encoding="utf8") as handle:
+        handle.seek(0)
+        yield from (l.rstrip("\n") for l in handle)
 
 NON_FINALS = {
     l.rstrip("\n") for l in read_lines("generated-lists/nonfinals.txt")

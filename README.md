@@ -292,9 +292,6 @@ Argument: compound list file.
 Print a table of noun/verb counts by declension/conjugation, syllable count and
 ending. Argument: CSV file with words (no compounds).
 
-### util.py
-Simple helper functions.
-
 ## Text files
 
 ### compounds.txt

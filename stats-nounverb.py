@@ -1,5 +1,5 @@
 import collections, re, sys
-import countsyll, util
+import countsyll
 
 INTRO = """\
 A table of noun/verb counts by declension/conjugation, syllable count and
@@ -60,60 +60,71 @@ CONJUGATIONS = {
     76: "taitaa", 77: "kumajaa", 78: "kaikaa",
 }
 
-if len(sys.argv) != 2:
-    sys.exit(
-        "Print a table of noun/verb counts by declension/conjugation, "
-        "syllable count and ending. Argument: CSV file with words (no "
-        "compounds)."
+def read_lines(filename):
+    with open(filename, "rt", encoding="utf8") as handle:
+        handle.seek(0)
+        yield from (l.rstrip("\n") for l in handle)
+
+def main():
+    if len(sys.argv) != 2:
+        sys.exit(
+            "Print a table of noun/verb counts by declension/conjugation, "
+            "syllable count and ending. Argument: CSV file with words (no "
+            "compounds)."
+        )
+
+    # word counts by declension/conjugation and ending
+    totalCnts = collections.Counter()
+    monoSyllCnts = collections.Counter()
+    diSyllCnts = collections.Counter()
+    triSyllCnts = collections.Counter()
+    quadSyllCnts = collections.Counter()
+    twoVwlEndCnts = collections.Counter()
+    cnsVwlEndCnts = collections.Counter()
+    cnsEndCnts = collections.Counter()
+
+    for line in read_lines(sys.argv[1]):
+        fields = line.split(",")
+        word = fields[0]
+        conjugations = {int(c, 10) for c in fields[1:]} & set(CONJUGATIONS)
+        conjugations = conjugations if conjugations else {0}  # other/unknown
+
+        totalCnts.update(conjugations)
+
+        syllCnt = countsyll.count_syllables(word)
+        if syllCnt == 1:
+            monoSyllCnts.update(conjugations)
+        elif syllCnt == 2:
+            diSyllCnts.update(conjugations)
+        elif syllCnt == 3:
+            triSyllCnts.update(conjugations)
+        else:
+            quadSyllCnts.update(conjugations)
+
+        if RE_TWO_VOWEL.search(word) is not None:
+            twoVwlEndCnts.update(conjugations)
+        elif RE_CONS_VOWEL.search(word) is not None:
+            cnsVwlEndCnts.update(conjugations)
+        else:
+            cnsEndCnts.update(conjugations)
+
+    counters = (
+        monoSyllCnts,
+        diSyllCnts,
+        triSyllCnts,
+        quadSyllCnts,
+        twoVwlEndCnts,
+        cnsVwlEndCnts,
+        cnsEndCnts,
+        totalCnts,
     )
 
-# word counts by declension/conjugation and ending
-totalCnts = collections.Counter()
-monoSyllCnts = collections.Counter()
-diSyllCnts = collections.Counter()
-triSyllCnts = collections.Counter()
-quadSyllCnts = collections.Counter()
-twoVwlEndCnts = collections.Counter()
-cnsVwlEndCnts = collections.Counter()
-cnsEndCnts = collections.Counter()
+    print(INTRO)
+    for conj in CONJUGATIONS:
+        print(
+            f"{conj:4} {CONJUGATIONS[conj]:9} "
+            + " ".join(f"{c[conj]:5}" for c in counters)
+        )
+    print("     TOTAL    ", " ".join(f"{sum(c.values()):5}" for c in counters))
 
-for line in util.read_lines(sys.argv[1]):
-    fields = line.split(",")
-    word = fields[0]
-    conjugations = {int(c, 10) for c in fields[1:]} & set(CONJUGATIONS)
-    conjugations = conjugations if conjugations else {0}  # other/unknown
-
-    totalCnts.update(conjugations)
-
-    syllCnt = countsyll.count_syllables(word)
-    if syllCnt == 1:
-        monoSyllCnts.update(conjugations)
-    elif syllCnt == 2:
-        diSyllCnts.update(conjugations)
-    elif syllCnt == 3:
-        triSyllCnts.update(conjugations)
-    else:
-        quadSyllCnts.update(conjugations)
-
-    if RE_TWO_VOWEL.search(word) is not None:
-        twoVwlEndCnts.update(conjugations)
-    elif RE_CONS_VOWEL.search(word) is not None:
-        cnsVwlEndCnts.update(conjugations)
-    else:
-        cnsEndCnts.update(conjugations)
-
-counters = (
-    monoSyllCnts,
-    diSyllCnts,
-    triSyllCnts,
-    quadSyllCnts,
-    twoVwlEndCnts,
-    cnsVwlEndCnts,
-    cnsEndCnts,
-    totalCnts,
-)
-
-print(INTRO)
-for conj in CONJUGATIONS:
-    print(f"{conj:4} {CONJUGATIONS[conj]:9}", " ".join(f"{c[conj]:5}" for c in counters))
-print("     TOTAL    ", " ".join(f"{sum(c.values()):5}" for c in counters))
+main()
