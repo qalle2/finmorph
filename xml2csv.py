@@ -1,5 +1,4 @@
 import re, sys
-import util
 
 # a simple line in the XML file:
 #   <st>
@@ -53,32 +52,48 @@ REGEX_NONE = re.compile("""
     <s>([^<]+)</s>
 """, re.VERBOSE)
 
-if len(sys.argv) != 3:
-    sys.exit(
-        "Read Kotus XML file, print distinct words and their declensions/"
-        "conjugations (0-2) in CSV format. Arguments: XML file, which words "
-        "('a' = all, 'g' = only those that consonant gradation applies to)."
-    )
+def read_lines(filename):
+    # generate lines without newlines
 
-getAllWords = {"a": True, "g": False}[sys.argv[2]]
+    with open(filename, "rt", encoding="utf8") as handle:
+        handle.seek(0)
+        for line in handle:
+            line = line.rstrip("\n")
+            assert line.count("</tn>") <= 2
+            yield line
 
-conjugationsByWord = {}  # word: set of declensions/conjugations
+def get_matches(filename, getAllWords):
+    # generate (match, regex) for lines
 
-for line in util.read_lines(sys.argv[1]):
-    assert line.count("</tn>") <= 2
+    for line in read_lines(filename):
+        # detect number of conjugations and consonant gradation
+        for regex in (
+            REGEX_YY, REGEX_YN, REGEX_NY, REGEX_NN,
+            REGEX_Y, REGEX_N,
+            REGEX_NONE
+        ):
+            match = regex.search(line)
+            if match is not None:
+                break
 
-    # detect number of conjugations and consonant gradation
-    for regex in (
-        REGEX_YY, REGEX_YN, REGEX_NY, REGEX_NN,
-        REGEX_Y, REGEX_N,
-        REGEX_NONE
-    ):
-        match = regex.search(line)
-        if match is not None:
-            break
+        if match is not None \
+        and (getAllWords or regex in (REGEX_YY, REGEX_YN, REGEX_NY, REGEX_Y)):
+            yield (match, regex)
 
-    if match is not None \
-    and (getAllWords or regex in (REGEX_YY, REGEX_YN, REGEX_NY, REGEX_Y)):
+def main():
+    if len(sys.argv) != 3:
+        sys.exit(
+            "Read Kotus XML file, print distinct words and their declensions/"
+            "conjugations (0-2) in CSV format. Arguments: XML file, which "
+            "words ('a' = all, 'g' = only those that consonant gradation "
+            "applies to)."
+        )
+    filename = sys.argv[1]
+    getAllWords = {"a": True, "g": False}[sys.argv[2]]
+
+    conjugationsByWord = {}  # {word: set of declensions/conjugations, ...}
+
+    for (match, regex) in get_matches(filename, getAllWords):
         word = match.groups()[0].strip("'- ")
         # save all conjugations or only those with consonant gradation
         if not getAllWords and regex == REGEX_YN:
@@ -90,7 +105,9 @@ for line in util.read_lines(sys.argv[1]):
         conjs = {int(c, 10) for c in conjs}
         conjugationsByWord.setdefault(word, set()).update(conjs)
 
-for word in conjugationsByWord:
-    print(",".join(
-        [word] + [str(c) for c in sorted(conjugationsByWord[word])]
-    ))
+    for word in sorted(conjugationsByWord):
+        print(",".join(
+            [word] + [str(c) for c in sorted(conjugationsByWord[word])]
+        ))
+
+main()
