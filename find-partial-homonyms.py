@@ -108,6 +108,6 @@ def main():
             f"{l} {d}" for (d, l) in sorted(lemmasByInflected[inflected])
         )
 
-        print(f"{allDeclensionsStr:11} {inflected:19} ({lemmasStr})")
+        print(f"{allDeclensionsStr:14} {inflected:19} ({lemmasStr})")
 
 main()
