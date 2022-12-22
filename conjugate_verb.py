@@ -6,6 +6,14 @@ from verbconj import get_conjugations
 
 # - C = any consonant, V = any vowel, A = a/ä, O = o/ö, U = u/y
 # - conjugations (52-76) are from Kotus
+# - the important forms given by Kotus and an example:
+#   - infinitive:                              sano-a
+#   - indicative  present active singular 1st: sano-n
+#   - indicative  past    active singular 3rd: sano-i
+#   - conditional present active singular 3rd: sano-isi
+#   - imperative  present active singular 3rd: sano-koon
+#   - indicative  perfect active singular:     sano-nut
+#   - indicative  past    passive:             sano-ttiin
 
 # enumerate internal names for grammatical moods, tenses, voices, numbers and
 # persons
@@ -114,7 +122,7 @@ def _consonant_gradation(verb, strengthen=False):
             return re.sub(reFrom, reTo, verb)
     sys.exit(f"Failed to apply consonant gradation: {verb=}, {strengthen=}")
 
-def _consonant_gradation_main(verb, conj, mood, tense, voice, person):
+def _consonant_gradation_main(verb, conj, mood, tense, voice, number, person):
     # apply consonant gradation (before doing anything else)
 
     strengthen = conj in _CONJS_STRENGTHEN
@@ -123,6 +131,9 @@ def _consonant_gradation_main(verb, conj, mood, tense, voice, person):
         and (person != P_3 or strengthen)
         or
         mood == M_CON and voice == V_ACT and strengthen
+        or
+        mood == M_IMP and tense == T_PRE and voice == V_ACT
+        and number == N_SG and person == P_2
     ):
         return _consonant_gradation(verb, strengthen)
     return verb
@@ -161,24 +172,28 @@ def _get_variants(verb, infl, conj, mood, tense):
 # - conditional/number/person endings will be added afterwards
 # - for clarity, avoid making changes here that need to be undone later
 
-_CHANGES_IND_PRE_ACT = {
-    52: ("[aä]",      ""),     # sanoa
-    53: ("[aä]",      ""),     # muistaa
-    54: ("[aä]",      ""),     # huutaa
-    55: ("[aä]",      ""),     # soutaa
-    56: ("a",         ""),     # kaivaa
-    57: ("a",         ""),     # saartaa
-    58: ("[aä]",      ""),     # laskea
-    59: ("a",         ""),     # tuntea
-    60: ("ä",         ""),     # lähteä
-    61: ("[aä]",      ""),     # sallia
-    62: ("d[aä]",     ""),     # voida
-    63: ("d[aä]",     ""),     # saada
-    64: ("d[aä]",     ""),     # juoda
-    65: ("d[aä]",     ""),     # käydä
+_CHANGES_IND_IMP = {
+    # common to ind-pre-act and imp-pre-act; a temporary dict
+    52: ("[aä]",  ""),  # sanoa
+    53: ("[aä]",  ""),  # muistaa
+    54: ("[aä]",  ""),  # huutaa
+    55: ("[aä]",  ""),  # soutaa
+    56: ("[aä]",  ""),  # kaivaa
+    57: ("[aä]",  ""),  # saartaa
+    58: ("[aä]",  ""),  # laskea
+    59: ("[aä]",  ""),  # tuntea
+    60: ("[aä]",  ""),  # lähteä
+    61: ("[aä]",  ""),  # sallia
+    62: ("d[aä]", ""),  # voida
+    63: ("d[aä]", ""),  # saada
+    64: ("d[aä]", ""),  # juoda
+    65: ("d[aä]", ""),  # käydä
+    68: ("d[aä]", ""),  # tupakoida
+    76: ("[aä]",  ""),  # taitaa
+}
+_CHANGES_IND_PRE_ACT = _CHANGES_IND_IMP | {
     66: ("t[aä]",     "e"),    # rohkaista
     67: ("[lnr][aä]", "e"),    # tulla
-    68: ("d[aä]",     ""),     # tupakoida
     69: ("t[aä]",     "tse"),  # valita
     70: ("st[aä]",    "kse"),  # juosta
     # 71 nähdä
@@ -186,19 +201,30 @@ _CHANGES_IND_PRE_ACT = {
     73: ("t([aä])",   r"\1"),  # salata
     74: ("t([aä])",   r"\1"),  # katketa
     75: ("t([aä])",   r"\1"),  # selvitä
-    76: ("[aä]",      ""),     # taitaa
 }
+_CHANGES_IMP_PRE_ACT = _CHANGES_IND_IMP | {
+    66: ("t[aä]",     ""),  # rohkaista
+    67: ("[lnr][aä]", ""),  # tulla
+    69: ("[aä]",      ""),  # valita
+    70: ("t[aä]",     ""),  # juosta
+    71: ("d[aä]",     ""),  # nähdä
+    72: ("[aä]",      ""),  # vanheta
+    73: ("[aä]",      ""),  # salata
+    74: ("[aä]",      ""),  # katketa
+    75: ("[aä]",      ""),  # selvitä
+}
+del _CHANGES_IND_IMP
 
 _CHANGES_PAST_COND = {
     # common to ind-pst-act and con-pre-act; a temporary dict
     52: ("[aä]",       ""),    # sanoa
     58: ("e[aä]",      ""),    # laskea
-    60: ("eä",         ""),    # lähteä
+    60: ("e[aä]",      ""),    # lähteä
     61: ("i[aä]",      ""),    # sallia
     62: ("id[aä]",     ""),    # voida
     63: ("[aäy]d[aä]", ""),    # saada
     64: ("[iuy]([eoö])d[aä]", r"\1"),  # juoda
-    65: ("ydä",        "v"),   # käydä
+    65: ("[uy]d[aä]",  "v"),   # käydä
     66: ("t[aä]",      ""),    # rohkaista
     67: ("[lnr][aä]",  ""),    # tulla
     68: ("id[aä]",     ""),    # tupakoida
@@ -211,9 +237,9 @@ _CHANGES_IND_PST_ACT = _CHANGES_PAST_COND | {
     53: ("(aa|ää)",     ""),   # muistaa
     54: ("[st](aa|ää)", "s"),  # huutaa
     55: ("(aa|ää)",     ""),   # soutaa
-    56: ("aa",          "o"),  # kaivaa
+    56: ("(aa|ää)",     "o"),  # kaivaa
     # 57 saartaa
-    59: ("tea",         "s"),  # tuntea
+    59: ("te[aä]",      "s"),  # tuntea
     73: ("t[aä]",       "s"),  # salata
     74: ("t[aä]",       "s"),  # katketa
     75: ("t[aä]",       "s"),  # selvitä
@@ -223,9 +249,9 @@ _CHANGES_CON_PRE_ACT = _CHANGES_PAST_COND | {
     53: ("[aä]",    ""),     # muistaa
     54: ("[aä]",    ""),     # huutaa
     55: ("[aä]",    ""),     # soutaa
-    56: ("a",       ""),     # kaivaa
-    57: ("a",       ""),     # saartaa
-    59: ("ea",      ""),     # tuntea
+    56: ("[aä]",    ""),     # kaivaa
+    57: ("[aä]",    ""),     # saartaa
+    59: ("e[aä]",   ""),     # tuntea
     73: ("t[aä]",   ""),     # salata
     74: ("t[aä]",   ""),     # katketa
     75: ("t([aä])", r"\1"),  # selvitä
@@ -233,7 +259,7 @@ _CHANGES_CON_PRE_ACT = _CHANGES_PAST_COND | {
 }
 del _CHANGES_PAST_COND
 
-def _change_ending(verb, conj, mood, tense, voice):
+def _change_ending(verb, conj, mood, tense, voice, number, person):
     # change the ending of the verb (before applying consonant gradation or
     # adding number/person endings)
 
@@ -246,7 +272,14 @@ def _change_ending(verb, conj, mood, tense, voice):
         else:
             sys.exit("not implemented")
     elif mood == M_CON and voice == V_ACT:
-        changes = _CHANGES_CON_PRE_ACT.get(conj, ())
+        changes = _CHANGES_CON_PRE_ACT.get(conj, None)
+    elif mood == M_IMP and voice == V_ACT:
+        if tense == T_PRE and number == N_SG and person == P_2:
+            changes = _CHANGES_IND_PRE_ACT.get(conj, None)
+        elif tense == T_PRE:
+            changes = _CHANGES_IMP_PRE_ACT.get(conj, None)
+        else:
+            sys.exit("not implemented")
     else:
         sys.exit("not implemented")
 
@@ -262,7 +295,7 @@ def _change_ending(verb, conj, mood, tense, voice):
 
 # -----------------------------------------------------------------------------
 
-_NUMBER_PERSON_ENDINGS = {
+_NUMBER_PERSON_ENDINGS_IND_CON = {
     (N_SG, P_1): "n",
     (N_SG, P_2): "t",
     (N_PL, P_1): "mme",
@@ -277,7 +310,12 @@ def _get_active_forms(inflected, mood, tense, number, person):
     # generate verbs with case/number endings
 
     # use "a" or "ä" in -A endings?
-    aOrAuml = "a" if re.search(r"^[^aou]+$", inflected[0]) is None else "ä"
+    if re.search(r"^[^aou]+$", inflected[0]) is None:
+        aOrAuml = "a"
+        oOrOuml = "o"
+    else:
+        aOrAuml = "ä"
+        oOrOuml = "ö"
 
     if mood == M_IND and tense == T_PRE and number == N_SG and person == P_3:
         # lengthen final vowel if possible
@@ -285,12 +323,26 @@ def _get_active_forms(inflected, mood, tense, number, person):
             i + i[-1] if _IS_FINAL_VOWEL_LONG.search(i) is None else i
             for i in inflected
         )
-    else:
+    elif mood in (M_IND, M_CON) and tense in (T_PRE, T_PST):
         if person == P_3:
             ending = "" if number == N_SG else "v" + aOrAuml + "t"
         else:
-            ending = _NUMBER_PERSON_ENDINGS[(number, person)]
+            ending = _NUMBER_PERSON_ENDINGS_IND_CON[(number, person)]
         yield from (i + ending for i in inflected)
+    elif mood == M_IMP and tense == T_PRE:
+        if number == N_SG and person == P_2:
+            ending = ""
+        elif number == N_SG and person == P_3:
+            ending = "k" + oOrOuml + oOrOuml + "n"
+        elif number == N_PL and person == P_1:
+            ending = "k" + aOrAuml + aOrAuml + "mme"
+        elif number == N_PL and person == P_2:
+            ending = "k" + aOrAuml + aOrAuml
+        elif number == N_PL and person == P_3:
+            ending = "k" + oOrOuml + oOrOuml + "t"
+        yield from (i + ending for i in inflected)
+    else:
+        sys.exit("not implemented")
 
 def conjugate_verb_specific(
     verb, conj, consGrad, mood, tense, voice, number, person
@@ -320,23 +372,30 @@ def conjugate_verb_specific(
     assert (tense == T_PER) == (person is None)
     assert mood != M_IMP or number != N_SG or person != P_1
 
-    if conj == 68:
-        # tupakoida: recursively get the variant "tupakoitsea", a conjugation
-        # 58 (lukea) verb; also proceed with current verb
-        yield from conjugate_verb_specific(
-            re.sub("d([aä])$", r"tse\1", verb),
-            58, consGrad, mood, tense, voice, number, person
-        )
-    elif conj == 71:
-        # nähdä: conjugate like "näkeä", a conjugation 58 (lukea) verb
-        verb = re.sub("hdä$", "keä", verb)
-        conj = 58
-        consGrad = True
+    if verb == "olla" and mood == M_IND and tense == T_PRE and voice == V_ACT \
+    and person == P_3:
+        yield "on" if number == N_SG else "ovat"
+        return
+
+    if mood in (M_IND, M_CON) \
+    or mood == M_IMP and number == N_SG and person == P_2:
+        if conj == 68:
+            # tupakoida: recursively get the variant "tupakoitsea", a
+            # conjugation 58 (lukea) verb; also proceed with current verb
+            yield from conjugate_verb_specific(
+                re.sub("d([aä])$", r"tse\1", verb),
+                58, consGrad, mood, tense, voice, number, person
+            )
+        elif conj == 71:
+            # nähdä: conjugate like "näkeä", a conjugation 58 (lukea) verb
+            verb = re.sub("hdä$", "keä", verb)
+            conj = 58
+            consGrad = True
 
     # apply consonant gradation
     if consGrad:
         inflected = _consonant_gradation_main(
-            verb, conj, mood, tense, voice, person
+            verb, conj, mood, tense, voice, number, person
         )
     else:
         inflected = verb
@@ -346,7 +405,8 @@ def conjugate_verb_specific(
 
     # change ending (without adding case/number endings)
     inflected = tuple(
-        _change_ending(i, conj, mood, tense, voice) for i in inflected
+        _change_ending(i, conj, mood, tense, voice, number, person)
+        for i in inflected
     )
 
     # add the ending that's common to all conjugations
@@ -423,12 +483,19 @@ ALL_FORMS = (
     (M_IND, T_PST, V_ACT, N_PL, P_1),
     (M_IND, T_PST, V_ACT, N_PL, P_2),
     (M_IND, T_PST, V_ACT, N_PL, P_3),
+
     (M_CON, T_PRE, V_ACT, N_SG, P_1),
     (M_CON, T_PRE, V_ACT, N_SG, P_2),
     (M_CON, T_PRE, V_ACT, N_SG, P_3),
     (M_CON, T_PRE, V_ACT, N_PL, P_1),
     (M_CON, T_PRE, V_ACT, N_PL, P_2),
     (M_CON, T_PRE, V_ACT, N_PL, P_3),
+
+    (M_IMP, T_PRE, V_ACT, N_SG, P_2),
+    (M_IMP, T_PRE, V_ACT, N_SG, P_3),
+    (M_IMP, T_PRE, V_ACT, N_PL, P_1),
+    (M_IMP, T_PRE, V_ACT, N_PL, P_2),
+    (M_IMP, T_PRE, V_ACT, N_PL, P_3),
 )
 
 def _items_to_str(items):

@@ -1,0 +1,501 @@
+# homonyms in lemma form, different conjugation or consonant gradation
+# 69/75
+keritä,keritköön
+# 72/74
+isota,isotkoon
+sietä,sietköön
+tyvetä,tyvetköön
+# 73
+pokata,pokatkoon
+tavata,tavatkoon
+
+# more than one conjugation or optional consonant gradation (same meaning)
+# 52
+lohkoa,lohkokoon
+# 53/54
+sortaa,sortakoon
+vuotaa,vuotakoon
+# 61
+pykiä,pykiköön
+sulkia,sulkikoon
+# 72
+kevetä,kevetköön
+# 72/74
+aueta,auetkoon
+iljetä,iljetköön
+juljeta,juljetkoon
+oieta,oietkoon
+raueta,rauetkoon
+sueta,suetkoon
+# 73
+halvata,halvatkoon
+raakata,raakatkoon
+# 74
+kimmota,kimmotkoon
+
+# conjugation 52
+# -VVA
+hioa,hiokoon
+# -kVA
+aikoa,aikokoon
+ilkkua,ilkkukoon
+halkoa,halkokoon
+jatkua,jatkukoon
+kirkua,kirkukoon
+kärkkyä,kärkkyköön
+mankua,mankukoon
+rikkoa,rikkokoon
+uskoa,uskokoon
+vinkua,vinkukoon
+ähkyä,ähkyköön
+# -pVA
+ampua,ampukoon
+arpoa,arpokoon
+elpyä,elpyköön
+harppoa,harppokoon
+tippua,tippukoon
+yöpyä,yöpyköön
+# -tVA
+pettyä,pettyköön
+pinttyä,pinttyköön
+ruostua,ruostukoon
+talttua,talttukoon
+tarttua,tarttukoon
+tuntua,tuntukoon
+yhtyä,yhtyköön
+yltyä,yltyköön
+äityä,äityköön
+ärtyä,ärtyköön
+# -hVA
+puhua,puhukoon
+# -jVA
+kiljua,kiljukoon
+lahjoa,lahjokoon
+lojua,lojukoon
+ärjyä,ärjyköön
+# -lVA
+kellua,kellukoon
+säilöä,säilököön
+vihloa,vihlokoon
+# -mVA
+ammua,ammukoon
+kermoa,kermokoon
+kuumua,kuumukoon
+vihmoa,vihmokoon
+# -nVA
+hirnua,hirnukoon
+sanoa,sanokoon
+vannoa,vannokoon
+# -rVA
+varoa,varokoon
+# -sVA
+asua,asukoon
+eksyä,eksyköön
+katsoa,katsokoon
+lipsua,lipsukoon
+pensoa,pensokoon
+tylsyä,tylsyköön
+varsoa,varsokoon
+# -vVA
+latvoa,latvokoon
+nivoa,nivokoon
+survoa,survokoon
+ulvoa,ulvokoon
+
+# conjugation 53
+# -tAA
+hirttää,hirttäköön
+inttää,inttäköön
+johtaa,johtakoon
+kyntää,kyntäköön
+muistaa,muistakoon
+polttaa,polttakoon
+vetää,vetäköön
+yrittää,yrittäköön
+# -CAA (not -tAA)
+elää,eläköön
+kuivaa,kuivakoon
+kylvää,kylväköön
+purkaa,purkakoon
+sulaa,sulakoon
+
+# conjugation 54
+# -tAA
+huutaa,huutakoon
+lentää,lentäköön
+murtaa,murtakoon
+puoltaa,puoltakoon
+# -CAA (not -tAA)
+lypsää,lypsäköön
+
+# conjugation 55 (all)
+entää,entäköön
+hyytää,hyytäköön
+häätää,häätäköön
+kiitää,kiitäköön
+liitää,liitäköön
+soutaa,soutakoon
+yltää,yltäköön
+
+# conjugation 56
+# -kAA
+alkaa,alkakoon
+jakaa,jakakoon
+jatkaa,jatkakoon
+virkkaa,virkkakoon
+# -pAA
+tappaa,tappakoon
+# -tAA
+ahtaa,ahtakoon
+antaa,antakoon
+auttaa,auttakoon
+karttaa,karttakoon
+kastaa,kastakoon
+malttaa,malttakoon
+raataa,raatakoon
+# -CAA (not -kAA, -pAA, -tAA)
+ajaa,ajakoon
+jaksaa,jaksakoon
+jauhaa,jauhakoon
+kaivaa,kaivakoon
+nauraa,naurakoon
+painaa,painakoon
+palaa,palakoon
+
+# conjugation 57 (all)
+kaartaa,kaartakoon
+kaataa,kaatakoon
+saartaa,saartakoon
+
+# conjugation 58
+# -keA
+itkeä,itkeköön
+laskea,laskekoon
+lukea,lukekoon
+nylkeä,nylkeköön
+särkeä,särkeköön
+tunkea,tunkekoon
+# -peA
+kylpeä,kylpeköön
+rypeä,rypeköön
+# -teA
+päteä,päteköön
+# -CeA (not -keA, -peA, -teA)
+imeä,imeköön
+kaitsea,kaitsekoon
+
+# conjugation 59 (all)
+tuntea,tuntekoon
+
+# conjugation 60 (all)
+lähteä,lähteköön
+
+# conjugation 61
+# -kiA
+hankkia,hankkikoon
+hylkiä,hylkiköön
+kukkia,kukkikoon
+matkia,matkikoon
+nykiä,nykiköön
+onkia,onkikoon
+pilkkiä,pilkkiköön
+pyrkiä,pyrkiköön
+röhkiä,röhkiköön
+urkkia,urkkikoon
+vihkiä,vihkiköön
+yskiä,yskiköön
+# -piA
+empiä,empiköön
+hörppiä,hörppiköön
+kalppia,kalppikoon
+oppia,oppikoon
+pomppia,pomppikoon
+repiä,repiköön
+silpiä,silpiköön
+särpiä,särpiköön
+# -tiA
+aistia,aistikoon
+miettiä,miettiköön
+sontia,sontikoon
+sotia,sotikoon
+tenttiä,tenttiköön
+vahtia,vahtikoon
+# -CiA (not -kiA, -piA, -tiA)
+fudia,fudikoon
+kyniä,kyniköön
+luovia,luovikoon
+omia,omikoon
+periä,periköön
+pesiä,pesiköön
+sallia,sallikoon
+sohia,sohikoon
+syrjiä,syrjiköön
+
+# conjugation 62
+epäröidä,epäröiköön
+voida,voikoon
+
+# conjugation 63 (all)
+jäädä,jääköön
+myydä,myyköön
+saada,saakoon
+
+# conjugation 64 (all)
+juoda,juokoon
+luoda,luokoon
+lyödä,lyököön
+myödä,myököön
+suoda,suokoon
+syödä,syököön
+tuoda,tuokoon
+viedä,vieköön
+
+# conjugation 65 (all)
+käydä,käyköön
+
+# conjugation 66
+pestä,pesköön
+rohkaista,rohkaiskoon
+
+# conjugation 67
+# -ellA
+ajella,ajelkoon
+anella,anelkoon
+elellä,elelköön
+hypellä,hypelköön
+jaella,jaelkoon
+kannella,kannelkoon
+kartella,kartelkoon
+kierrellä,kierrelköön
+kohdella,kohdelkoon
+kysellä,kyselköön
+kätellä,kätelköön
+kävellä,kävelköön
+nakella,nakelkoon
+niellä,nielköön
+ommella,ommelkoon
+pistellä,pistelköön
+poltella,poltelkoon
+puhella,puhelkoon
+turmella,turmelkoon
+udella,udelkoon
+vaellella,vaellelkoon
+varjella,varjelkoon
+viljellä,viljelköön
+viskellä,viskelköön
+# other (not -ellA)
+mennä,menköön
+olla,olkoon
+piillä,piilköön
+purra,purkoon
+tulla,tulkoon
+
+# conjugation 68
+isännöidä,isännöiköön
+tupakoida,tupakoikoon
+
+# conjugation 69
+merkitä,merkitköön
+valita,valitkoon
+
+# conjugation 70 (all)
+juosta,juoskoon
+piestä,piesköön
+syöstä,syösköön
+
+# conjugation 71 (all)
+nähdä,nähköön
+tehdä,tehköön
+
+# conjugation 72
+# -VVtA
+kyetä,kyetköön
+toeta,toetkoon
+# -CVtA
+edetä,edetköön
+enetä,enetköön
+hapata,hapatkoon
+harveta,harvetkoon
+helpota,helpotkoon
+hiljetä,hiljetköön
+huveta,huvetkoon
+jyrketä,jyrketköön
+kalveta,kalvetkoon
+kiinnetä,kiinnetköön
+koveta,kovetkoon
+kuohketa,kuohketkoon
+loitota,loitotkoon
+lämmetä,lämmetköön
+oheta,ohetkoon
+parata,paratkoon
+rohjeta,rohjetkoon
+selvetä,selvetköön
+synketä,synketköön
+tarjeta,tarjetkoon
+tiuketa,tiuketkoon
+tyhmetä,tyhmetköön
+tylsetä,tylsetköön
+vahveta,vahvetkoon
+valjeta,valjetkoon
+vanheta,vanhetkoon
+yletä,yletköön
+
+# conjugation 73
+# -VAtA
+iätä,iätköön
+maata,maatkoon
+niiata,niiatkoon
+# -bAtA
+lobata,lobatkoon
+sambata,sambatkoon
+# -dAtA
+aidata,aidatkoon
+bodata,bodatkoon
+tähdätä,tähdätköön
+# -fAtA
+golfata,golfatkoon
+# -gAtA
+digata,digatkoon
+hengata,hengatkoon
+joogata,joogatkoon
+vängätä,vängätköön
+# -hAtA
+kyhätä,kyhätköön
+murhata,murhatkoon
+uhata,uhatkoon
+# -jAtA
+harjata,harjatkoon
+hyljätä,hyljätköön
+linjata,linjatkoon
+nojata,nojatkoon
+ohjata,ohjatkoon
+peljätä,peljätköön
+# -kAtA
+donkata,donkatkoon
+hölkätä,hölkätköön
+irkata,irkatkoon
+meuhkata,meuhkatkoon
+safkata,safkatkoon
+tiskata,tiskatkoon
+tykätä,tykätköön
+vatkata,vatkatkoon
+# -lAtA
+tallata,tallatkoon
+tilata,tilatkoon
+tislata,tislatkoon
+tuhlata,tuhlatkoon
+vallata,vallatkoon
+# -mAtA
+hämätä,hämätköön
+pummata,pummatkoon
+surmata,surmatkoon
+temmata,temmatkoon
+# -nAtA
+hinata,hinatkoon
+purnata,purnatkoon
+rynnätä,rynnätköön
+ynnätä,ynnätköön
+# -pAtA
+hörpätä,hörpätköön
+jelpata,jelpatkoon
+kipata,kipatkoon
+vispata,vispatkoon
+ympätä,ympätköön
+# -rAtA
+kerrata,kerratkoon
+pörrätä,pörrätköön
+uhrata,uhratkoon
+varata,varatkoon
+# -sAtA
+osata,osatkoon
+tyssätä,tyssätköön
+# -tAtA
+futata,futatkoon
+kryptata,kryptatkoon
+liftata,liftatkoon
+mitata,mitatkoon
+päntätä,päntätköön
+pultata,pultatkoon
+startata,startatkoon
+testata,testatkoon
+# -vAtA
+kuvata,kuvatkoon
+kaivata,kaivatkoon
+rasvata,rasvatkoon
+kelvata,kelvatkoon
+solvata,solvatkoon
+värvätä,värvätköön
+
+# conjugation 74
+# -VVtA
+koota,kootkoon
+pietä,pietköön
+# -dVtA
+kadota,kadotkoon
+vyyhdetä,vyyhdetköön
+# -gVtA
+ängetä,ängetköön
+# -hVtA
+uhota,uhotkoon
+# -jVtA
+haljeta,haljetkoon
+herjetä,herjetköön
+lohjeta,lohjetkoon
+tajuta,tajutkoon
+tarjota,tarjotkoon
+öljytä,öljytköön
+# -kVtA
+kaikota,kaikotkoon
+katketa,katketkoon
+# -lVtA
+hillota,hillotkoon
+älytä,älytköön
+# -mVtA
+kammeta,kammetkoon
+kammota,kammotkoon
+kumota,kumotkoon
+# -nVtA
+innota,innotkoon
+könytä,könytköön
+# -pVtA
+upota,upotkoon
+pumputa,pumputkoon
+silputa,silputkoon
+# -rVtA
+erota,erotkoon
+irrota,irrotkoon
+# -sVtA
+mesota,mesotkoon
+# -tVtA
+lotota,lototkoon
+ristetä,ristetköön
+# -vVtA
+hävetä,hävetköön
+sivuta,sivutkoon
+turvota,turvotkoon
+
+# conjugation 75
+# -VVtA
+siitä,siitköön
+# -CVtA
+aallota,aallotkoon
+bingota,bingotkoon
+diskota,diskotkoon
+haluta,halutkoon
+hävitä,hävitköön
+kohuta,kohutkoon
+kärytä,kärytköön
+lassota,lassotkoon
+lastuta,lastutkoon
+lyijytä,lyijytköön
+lymytä,lymytköön
+lämmitä,lämmitköön
+muodota,muodotkoon
+peitota,peitotkoon
+pöllytä,pöllytköön
+ryöpytä,ryöpytköön
+selvitä,selvitköön
+
+# conjugation 76 (all)
+taitaa,taitakoon
+tietää,tietäköön

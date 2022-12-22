@@ -32,8 +32,8 @@ Moods: ind/con/pot/imp. Tenses: pre/pst/per. Voices: act/pss. Numbers: sg/pl.
 Persons: 1/2/3. If 1 argument only, print all supported combinations.
 ```
 
-Note: only indicative present active, indicative past active and conditional
-active have been implemented.
+Note: only indicative present active, indicative past active, conditional
+active and imperative active have been implemented.
 
 Example:
 ```
@@ -59,6 +59,11 @@ con-pre-act-sg-3: soutaisi
 con-pre-act-pl-1: soutaisimme
 con-pre-act-pl-2: soutaisitte
 con-pre-act-pl-3: soutaisivat
+imp-pre-act-sg-2: souda
+imp-pre-act-sg-3: soutakoon
+imp-pre-act-pl-1: soutakaamme
+imp-pre-act-pl-2: soutakaa
+imp-pre-act-pl-3: soutakoot
 ```
 
 ### decline_noun.py
