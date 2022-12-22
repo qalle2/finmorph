@@ -139,7 +139,7 @@ Needs `countsyll.py`. Can be tested with `test-nounverb.py`.
 
 ### verb_consgrad.py
 Argument: a Finnish verb (not a compound) in the infinitive. Print the Kotus
-conjugation(s) (52-78) and whether consonant gradation applies.
+conjugation(s) (52-76) and whether consonant gradation applies.
 
 Example:
 ```
@@ -206,7 +206,7 @@ Creates the subdirectory `generated-lists/` and generates these files under it:
     * `nouns-2syll.csv`: disyllabic nouns
     * `nouns-3syll.csv`: trisyllabic nouns
     * `nouns-4syll.csv`: quadrisyllabic and longer nouns
-  * `verbs.csv`: verbs (Kotus conjugations 52&ndash;78) from `words.csv` (~9,400 words)
+  * `verbs.csv`: verbs (Kotus conjugations 52&ndash;76) from `words.csv` (~9,400 words)
     * `verbs-1syll.csv`: monosyllabic verbs
     * `verbs-2syll.csv`: disyllabic verbs
     * `verbs-3syll.csv`: trisyllabic verbs

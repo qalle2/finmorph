@@ -1,231 +1,176 @@
 """Count the number of syllables in a Finnish word."""
 
+# Note: A = a/ä, O = o/ö, U = u/y, V = any vowel, C = one or more consonants.
+
 import re, sys
 
-# syllable counts for some words; reasons:
-#   - I like to keep foreign vowel letters ("àáâåèéêîôû") out of the rules
-#   - I like to keep foreign diphthongs (e.g. "ay") out of the rules
-#   - some words have fewer pronounced than written syllables (e.g. "house")
-#   - punctuation (excl. "'")
-#   - acronym
-_EXCEPTIONS = {
-    "aerobic": 3,
-    "à la carte": 3,
-    "baseball": 2,
-    "beauty box": 3,
-    "bébé": 2,
-    "becquerel": 3,
-    "best man": 2,
-    "bordeaux": 2,
-    "bouillabaisse": 3,
-    "bouquet": 2,
-    "boutique": 2,
-    "boyfriend": 2,
-    "brasserie": 3,
-    "bridge": 1,
-    "business": 2,
-    "byte": 1,
-    "CD-ROM": 3,
-    "cha-cha-cha": 3,
-    "charlotte russe": 3,
-    "cheerleader": 3,
-    "chippendale": 3,
-    "clearing": 2,
-    "coupé": 2,
-    "cowboy": 2,
-    "crème fraîche": 2,
-    "crêpe": 2,
-    "csárdás": 2,
-    "cum laude": 3,
-    "deadline": 2,
-    "dealer": 2,
-    "drive-in": 2,
-    "duchesse": 2,
-    "duo": 2,
-    "entrecôte": 3,
-    "fan club": 2,
-    "folklore": 2,
-    "fondue": 2,
-    "force majeure": 3,
-    "freestyle": 2,
-    "gay": 1,
-    "ginger ale": 3,
-    "go-go": 2,
-    "grape": 1,
-    "gray": 1,
-    "gruyère": 2,
-    "hardware": 2,
-    "hereford": 2,
-    "hi-hat": 2,
-    "hioa": 3,      # won't make the 3-syll. regex more complex because of this
-    "high tech": 2,
-    "hi-tec": 2,
-    "hi-tech": 2,
-    "hot dog": 2,
-    "house": 1,
-    "jacquard": 2,
-    "jam session": 3,
-    "jet lag": 2,
-    "jet set": 2,
-    "jive": 1,
-    "joystick": 2,
-    "jukebox": 2,
-    "knock-out": 2,
-    "know-how": 2,
-    "kung-fu": 2,
-    "ladylike": 3,
-    "layout": 2,
-    "leasing": 2,
-    "loafer": 2,
-    "lotion": 2,
-    "madame": 2,
-    "mainstream": 2,
-    "make-up": 2,
-    "mangrove": 2,
-    "maya": 2,
-    "milk shake": 2,
-    "moiré": 2,
-    "non-food": 2,
-    "non-iron": 3,
-    "non-woven": 3,
-    "open house": 3,
-    "passepartout": 3,
-    "petanque": 2,
-    "pick-up": 2,
-    "playback": 2,
-    "playboy": 2,
-    "playoff": 2,
-    "poplore": 2,
-    "port salut": 3,
-    "poste restante": 3,
-    "quenelle": 2,
-    "quiche": 1,
-    "ragoût": 2,
-    "ragtime": 2,
-    "ratatouille": 3,
-    "rave": 1,
-    "reggae": 2,
-    "rock and roll": 3,
-    "roll-on": 2,
-    "rosé": 2,
-    "royalty": 3,
-    "self-made man": 3,
-    "skinhead": 2,
-    "soft ice": 2,
-    "software": 2,
-    "speedway": 2,
-    "spray": 1,
-    "squash": 1,
-    "striptease": 2,
-    "tax-free": 2,
-    "trance": 1,
-    "treasury": 3,
-    "trenchcoat": 2,
-    "vaudeville": 2,
-    "vinaigrette": 3,
-    "ångström": 2,
-}
+# regex snippets from which the rules are assembled
 
-# regex for monosyllabic words, e.g. "yö", "snacks"
-# (C)V(C)
-_RE_1SYLL = re.compile(
-    r"""^
-    [b-df-hj-np-tv-xzšž]*
-    ( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö | ie | uo | yö )
-    [b-df-hj-np-tv-xzšž]*
-    $""",
-    re.IGNORECASE | re.VERBOSE
+# zero or more consonants
+_CON_OPT = "[b-df-hj-np-tv-xzšž]*"
+# one or more consonants
+_CON_REQ = "[b-df-hj-np-tv-xzšž]+"
+# any short vowel, long vowel or diphthong, in stressed/unstressed syllables
+# (ie & UO in stressed syllables only)
+_VOW_STR \
+= "( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö | ie | uo | yö )"
+_VOW_UNSTR \
+= "( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö )"
+# any two vowels in hiatus (syllable break between), in stressed/unstressed
+# syllables (ie & UO in unstressed syllables only)
+_HIA_STR = (
+    "("
+        "[äeioöuy]a"
+        "| [aeioöuy]ä"
+        "| [aäoöuy]e"
+        "| [aäeiöy]o"
+        "| [aäeiou]ö"
+        "| [aeiouyäö]{3,4}"
+        "| [aeiou](a'a|i'i|u'u)"
+    ")"
+)
+_HIA_UNSTR = (
+    "("
+        "[äeioöuy]a"
+        "| [aeioöuy]ä"
+        "| [aäoöuyi]e"
+        "| [aäeiöyu]o"
+        "| [aäeiouy]ö"
+        "| [aeiouyäö]{3,4}"
+        "| [aeiou](a'a|i'i|u'u)"
+    ")"
 )
 
-# regex for disyllabic words, e.g. "aie", "äes", "stretching"
-# (C)VCV(C) or (C)V'V(C)
-_RE_2SYLL = re.compile(
-    r"""^
-    [b-df-hj-np-tv-xzšž]*
-    (
-        ( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö | ie | uo | yö )
-        [b-df-hj-np-tv-xzšž]+
-        ( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö )
-        |
-        (
-            [äeioöuy]a
-            | [aeioöuy]ä
-            | [aäoöuy]e
-            | [aäeiöy]o
-            | [aäeiou]ö
-            | [aeiouyäö]{3,4}
-        )
-    )
-    [b-df-hj-np-tv-xzšž]*
-    $""",
+# These rules (regexes) and exceptions specify how to count the number of
+# syllables in a word.
+# Notes - rules:
+#   - No foreign vowel letters ("àáâåèéêîôû").
+#   - No foreign diphthongs (e.g. "ay").
+#   - No punctuation except for "'".
+#   - The rules are case insensitive.
+# Notes - exceptions:
+#   - Start a new line when the first letter changes.
+
+# monosyllabic words: (C)V(C)
+# examples: "yö", "snacks"
+_REGEX_1SYLL = re.compile(
+    "^" + _CON_OPT + _VOW_STR + _CON_OPT + "$",
     re.IGNORECASE | re.VERBOSE
 )
+_EXCEPTIONS_1SYLL = frozenset((
+    "bridge", "byte",
+    "gay", "grape", "gray",
+    "house",
+    "jive",
+    "quiche",
+    "rave",
+    "spray", "squash",
+    "trance",
+))
 
-# regex for trisyllabic words, e.g. "alue", "ioni", "liu'uttaa"
-# (C)VCVCV(C), (C)VCV'V(C) or (C)V'VCV(C)
+# disyllabic words: (C)VCV(C), (C)V'V(C)
+# examples: "aho", "aie", "äes", "stretching"
+_REGEX_2SYLL = re.compile(
+    "^" + _CON_OPT + "("
+        + _VOW_STR + _CON_REQ + _VOW_UNSTR
+    + "|"
+        + _HIA_STR
+    + ")" + _CON_OPT + "$",
+    re.IGNORECASE | re.VERBOSE
+)
+_EXCEPTIONS_2SYLL = frozenset((
+    "baseball", "bébé", "best man", "bordeaux", "bouquet", "boutique",
+    "boyfriend", "business",
+    "clearing", "coupé", "cowboy", "crème fraîche", "crêpe", "csárdás",
+    "deadline", "dealer", "drive-in", "duchesse", "duo",
+    "fan club", "folklore", "fondue", "freestyle",
+    "go-go", "gruyère",
+    "hardware", "hereford", "hi-hat", "high tech", "hi-tec", "hi-tech",
+    "hot dog",
+    "jacquard", "jet lag", "jet set", "joystick", "jukebox",
+    "knock-out", "know-how", "kung-fu",
+    "layout", "leasing", "loafer", "lotion",
+    "madame", "mainstream", "make-up", "mangrove", "maya", "milk shake",
+    "moiré",
+    "non-food",
+    "petanque", "pick-up", "playback", "playboy", "playoff", "poplore",
+    "quenelle",
+    "ragoût", "ragtime", "reggae", "roll-on", "rosé",
+    "skinhead", "soft ice", "software", "speedway", "striptease",
+    "tax-free", "trenchcoat",
+    "vaudeville",
+    "ångström",
+))
+
+# trisyllabic words: (C)VCVCV(C), (C)VCV'V(C), (C)V'VCV(C)
+# examples: "epeli", "alue", "ioni", "liu'uttaa"
 # note: "hioa" is handled as an exception
-_RE_3SYLL = re.compile(
-    r"""^
-    [b-df-hj-np-tv-xzšž]*
-    (
-        ( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö | ie | uo | yö )
-        [b-df-hj-np-tv-xzšž]+
-        (
-            ( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö )
-            [b-df-hj-np-tv-xzšž]+
-            ( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö )
-            |
-            (
-                | [äeioöuy]a
-                | [aeioöuy]ä
-                | [aäioöuy]e
-                | [aäeiöuy]o
-                | [aäeiouy]ö
-                | [aeiouyäö]{3,4}
-            )
-        )
-        |
-        (
-            [äeioöuy]a
-            | [aeioöuy]ä
-            | [aäoöuy]e
-            | [aäeiöy]o
-            | [aäeiou]ö
-            | [aeiouyäö]{3,4}
-            | [aeiou](a'a|i'i|u'u)
-        )
-        [b-df-hj-np-tv-xzšž]+
-        ( [aeiou][iu]? | [äeiöy][iy]? | aa | ää | ee | oo | öö )
-    )
-    [b-df-hj-np-tv-xzšž]*
-    $""",
+_REGEX_3SYLL = re.compile(
+    "^" + _CON_OPT + "("
+        + _VOW_STR + _CON_REQ + _VOW_UNSTR + _CON_REQ + _VOW_UNSTR
+    + "|"
+        + _VOW_STR + _CON_REQ + _HIA_UNSTR
+    + "|"
+        + _HIA_STR + _CON_REQ + _VOW_UNSTR
+    + ")" + _CON_OPT + "$",
     re.IGNORECASE | re.VERBOSE
 )
+_EXCEPTIONS_3SYLL = frozenset((
+    "aerobic", "à la carte",
+    "beauty box", "becquerel", "bouillabaisse", "brasserie",
+    "CD-ROM", "cha-cha-cha", "charlotte russe", "cheerleader", "chippendale",
+    "cum laude", "entrecôte", "force majeure", "ginger ale",
+    "hioa",  # a native word
+    "jam session",
+    "ladylike",
+    "non-iron", "non-woven",
+    "open house",
+    "passepartout", "port salut", "poste restante",
+    "ratatouille", "rock and roll", "royalty",
+    "self-made man",
+    "treasury",
+    "vinaigrette",
+))
 
 def count_syllables(word, useExceptions=True):
-    """word: a Finnish word
-    return: number of syllables (1-4; note: 4 = 4 or more syllables or an
-    unknown word)"""
+    """Count the number of syllables in a Finnish word.
+    word:          the word
+    useExceptions: use True except for testing purposes
+    return:        the number of syllables (1-4; 4 means 4 or more syllables
+                   or an unknown word)"""
 
     if useExceptions:
-        try:
-            return _EXCEPTIONS[word]
-        except KeyError:
-            pass
+        if word in _EXCEPTIONS_1SYLL:
+            return 1
+        if word in _EXCEPTIONS_2SYLL:
+            return 2
+        if word in _EXCEPTIONS_3SYLL:
+            return 3
 
     word = word.strip("-")
-    for (i, regex) in enumerate((_RE_1SYLL, _RE_2SYLL, _RE_3SYLL)):
-        if regex.search(word) is not None:
-            return i + 1
+
+    if _REGEX_1SYLL.search(word) is not None:
+        return 1
+    if _REGEX_2SYLL.search(word) is not None:
+        return 2
+    if _REGEX_3SYLL.search(word) is not None:
+        return 3
     return 4
 
-def _check_redundant_exceptions():
-    for word in _EXCEPTIONS:
-        if count_syllables(word, False) == _EXCEPTIONS[word]:
-            print(f'Redundant exception: "{word}"')
+def _get_redundant_exceptions():
+    # generate words that are unnecessarily on the exceptions list
+    for excList in (_EXCEPTIONS_1SYLL, _EXCEPTIONS_2SYLL, _EXCEPTIONS_3SYLL):
+        for word in excList:
+            syllCnt = count_syllables(word, False)
+            if syllCnt == 1 and word in _EXCEPTIONS_1SYLL \
+            or syllCnt == 2 and word in _EXCEPTIONS_2SYLL \
+            or syllCnt == 3 and word in _EXCEPTIONS_3SYLL:
+                yield word
 
 def main():
-    #_check_redundant_exceptions()
+    for word in _get_redundant_exceptions():
+        if re.search("[ao]y", word) is None:
+            print(f"Redundant exception: '{word}'", file=sys.stderr)
 
     if len(sys.argv) != 2:
         sys.exit(
