@@ -1,13 +1,13 @@
-"""Get the Kotus conjugation of a Finnish verb."""
+"""Get the conjugations of a Finnish verb."""
 
-# note: A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant
+# Note: A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant.
 
 import re, sys
 from countsyll import count_syllables
 
-# a typical verb in each conjugation;
-# forms: infinitive, 1SG present, 3SG past, 3SG conditional, 3SG imperative,
-# singular perfect, passive past
+# A typical verb in each conjugation.
+# Forms: infinitive, 1SG present, 3SG past, 3SG conditional, 3SG imperative,
+# singular perfect, passive past.
 CONJUGATION_DESCRIPTIONS = {
     52: "sano|a, -n, -i, -isi, -koon, -nut, -ttiin",
     53: "muis|taa, -tan, -ti, -taisi, -takoon, -tanut, -tettiin",
@@ -36,68 +36,60 @@ CONJUGATION_DESCRIPTIONS = {
     76: "tai|taa, -dan, -si, -taisi, -takoon, -nnut/-tanut, -dettiin",
 }
 
-# key = verb, value = tuple of conjugations
+# Verbs that have two conjugations instead of one. Notes:
+# - Format: verb: tuple of conjugations in ascending order.
+# - Start a new line when conjugation changes.
 _MULTI_CONJUGATION_VERBS = {
     # different meanings
     "maistaa": (53, 56),
-    #
     "keritä": (69, 75),
-    #
-    "isota": (72, 74),
-    "sietä": (72, 74),
-    "tyvetä": (72, 74),
+    "isota": (72, 74), "sietä": (72, 74), "tyvetä": (72, 74),
 
     # same meanings
-    "sortaa": (53, 54),
-    "vuotaa": (53, 54),
-    #
-    "aueta": (72, 74),
-    "iljetä": (72, 74),
-    "juljeta": (72, 74),
-    "oieta": (72, 74),
-    "raueta": (72, 74),
-    "sueta": (72, 74),
+    "sortaa": (53, 54), "vuotaa": (53, 54),
+    "aueta": (72, 74), "iljetä": (72, 74), "juljeta": (72, 74),
+    "oieta": (72, 74), "raueta": (72, 74), "sueta": (72, 74),
 }
 
 # These rules and exceptions specify how to detect the conjugation of a verb,
 # based on how many syllables the verb has (3 means 3 or more).
 # Notes - rules:
-#   - Format: (declension, regex); the first matching regex will determine the
-#     declension.
+#   - Format: (conjugation, regex); the first matching regex will determine the
+#     conjugation.
 #   - "$" is automatically appended to the regexes, so put the whole regex in
 #     parentheses if necessary.
-#   - No more than one rule per declension per ending (e.g. -VV).
+#   - No more than one rule per conjugation per ending (e.g. -VV).
 #   - Under each ending (e.g. -VV), if rules don't depend on each other, sort
-#     them by declension.
+#     them by conjugation.
 #   - Don't hunt for any single verb. If the regex is e.g. [AB]C, each of AC
 #     and BC must match 2 verbs or more. Exception: if [AB] forms a logical
 #     group, like all the vowels, then only [AB]C needs to match 2 verbs or
 #     more.
 # Notes - exceptions:
-#   - Format: verb: declension.
-#   - Order: first by ending, then by declension.
-#   - Begin a new line when declension changes.
+#   - Format: verb: conjugation.
+#   - Order: first by ending, then by conjugation.
+#   - Start a new line when conjugation changes.
 
 # rules and exceptions for disyllabic verbs
-_RULES_2SYLL = tuple((c, re.compile(r, re.VERBOSE)) for (c, r) in (
+_RULES_2SYLL = tuple((c, re.compile(r + "$", re.VERBOSE)) for (c, r) in (
     # -AA
-    (57, "aartaa$"),
-    (54, "( [lnr]taa | sää | [lnr]tää )$"),  # must be after 57
-    (55, "iitää$"),
-    (56, "( [^t] | at | a[iu]?[hst]t | [lr]tt )aa$"),
-    (53, "(aa|ää)$"),  # must be the last one
+    (57, "aartaa"),
+    (54, "( [lnr]taa | sää | [lnr]tää )"),  # must be after 57
+    (55, "iitää"),
+    (56, "( [^t] | at | a[iu]?[hst]t | [lr]tt )aa"),
+    (53, "(aa|ää)"),  # must be the last one
 
     # -dA
-    (62, "ida$"),
-    (63, "(aa|ää|yy) d[aä]$"),
-    (64, "(ie|uo|yö) d[aä]$"),
-    (71, "hdä$"),
+    (62, "ida"),
+    (63, "(aa|ää|yy) d[aä]"),
+    (64, "(ie|uo|yö) d[aä]"),
+    (71, "hdä"),
 
     # -CA (not -dA)
-    (70, "(ie|uo|yö) st[aä]$"),
-    (66, "st[aä]$"),  # must be after 70
-    (67, "(ll|nn|rr) [aä]$"),
-    (73, "ata$"),
+    (70, "(ie|uo|yö) st[aä]"),
+    (66, "st[aä]"),  # must be after 70
+    (67, "(ll|nn|rr) [aä]"),
+    (73, "ata"),
 ))
 _EXCEPTIONS_2SYLL = {
     # -AA
@@ -117,28 +109,28 @@ _EXCEPTIONS_2SYLL = {
 }
 
 # rules and exceptions for trisyllabic and longer verbs
-_RULES_3SYLL = tuple((c, re.compile(r, re.VERBOSE)) for (c, r) in (
+_RULES_3SYLL = tuple((c, re.compile(r + "$", re.VERBOSE)) for (c, r) in (
     # -VA
-    (52, "[oöuy][aä]$"),
-    (53, "[hst]t(aa|ää)$"),
-    (54, "[lnr]t(aa|ää)$"),
-    (58, "e[aä]$"),
-    (61, "i[aä]$"),
+    (52, "[oöuy][aä]"),
+    (53, "[hst]t(aa|ää)"),
+    (54, "[lnr]t(aa|ää)"),
+    (58, "e[aä]"),
+    (61, "i[aä]"),
 
     # -dA
-    (68, "nnöidä$"),
-    (62, "[aouö]i d[aä]$"),
+    (68, "nnöidä"),
+    (62, "[aouö]i d[aä]"),
 
     # -VtA
-    (69, "(ita|kitä)$"),
-    (74, "( get[aä] | ivetä | [oöu]t[aä] )$"),
-    (72, "et[aä]$"),  # must be after 74
-    (73, "(ata|ätä)$"),
-    (75, "[iy]tä$"),
+    (69, "(ita|kitä)"),
+    (74, "( get[aä] | ivetä | [oöu]t[aä] )"),
+    (72, "et[aä]"),  # must be after 74
+    (73, "(ata|ätä)"),
+    (75, "[iy]tä"),
 
     # -CA (not -VtA)
-    (66, "st[aä]$"),
-    (67, "ll[aä]$"),
+    (66, "st[aä]"),
+    (67, "ll[aä]"),
 ))
 _EXCEPTIONS_3SYLL = {
     # -VA
@@ -177,8 +169,10 @@ _EXCEPTIONS_3SYLL = {
 }
 
 def get_conjugations(verb, useExceptions=True):
-    """verb: a Finnish verb in infinitive
-    return: a tuple of 0-2 Kotus conjugations (each 52-76)"""
+    """Get the Kotus conjugation(s) of a Finnish verb.
+    verb:          the verb in the 1st infinitive
+    useExceptions: use True except for testing purposes
+    return:        a tuple of 0-2 conjugations (each 52-76)"""
 
     verb = verb.strip("'- ")
 
@@ -220,8 +214,8 @@ def _get_redundant_exceptions():
                 yield verb
 
 def main():
-    for noun in _get_redundant_exceptions():
-        print(f"Redundant exception: '{noun}'", file=sys.stderr)
+    for verb in _get_redundant_exceptions():
+        print(f"Redundant exception: '{verb}'", file=sys.stderr)
 
     if len(sys.argv) != 2:
         sys.exit(
@@ -234,8 +228,8 @@ def main():
     if not conjugations:
         sys.exit("Unrecognized verb.")
 
-    for c in sorted(conjugations):
-        print(f'Conjugation {c} (like "{CONJUGATION_DESCRIPTIONS[c]}")')
+    for conj in sorted(conjugations):
+        print(f'Conjugation {conj} (like "{CONJUGATION_DESCRIPTIONS[conj]}")')
 
 if __name__ == "__main__":
     main()

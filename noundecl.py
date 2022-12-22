@@ -3,7 +3,7 @@
 # Note: A = a/ä, O = o/ö, U = u/y, V = any vowel, C = any consonant.
 
 import re, sys
-import countsyll
+from countsyll import count_syllables
 
 # A typical noun in each declension.
 # Forms: nominative sg, genitive sg, genitive pl, partitive sg, partitive pl,
@@ -63,9 +63,9 @@ DECLENSION_DESCRIPTIONS = {
         "-ee(see)n, -(eis)iin/-eihin",
 }
 
-# nouns that have two declensions instead of one
-# - format: noun: tuple of declensions in ascending order
-# - start a new line when declension changes
+# Nouns that have two declensions instead of one. Notes:
+# - Format: noun: tuple of declensions in ascending order.
+# - Start a new line when declension changes.
 _MULTI_DECLENSION_NOUNS = {
     # different meanings
     "lahti": (5, 7), "laki": (5, 7), "palvi": (5, 7), "ripsi": (5, 7),
@@ -99,7 +99,7 @@ _MULTI_DECLENSION_NOUNS = {
 }
 
 # These rules and exceptions specify how to detect the declension of a noun,
-# based on how many syllables the word has (4 means 4 or more).
+# based on how many syllables the noun has (4 means 4 or more).
 # Notes - rules:
 #   - Format: (declension, regex); the first matching regex will determine the
 #     declension.
@@ -108,18 +108,18 @@ _MULTI_DECLENSION_NOUNS = {
 #   - No more than one rule per declension per ending (e.g. -VV).
 #   - Under each ending (e.g. -VV), if rules don't depend on each other, sort
 #     them by declension.
-#   - Don't hunt for any single word. If the regex is e.g. [AB]C, each of AC
-#     and BC must match 2 words or more. Exception: if [AB] forms a logical
-#     group, like all the vowels, then only [AB]C needs to match 2 words or
+#   - Don't hunt for any single noun. If the regex is e.g. [AB]C, each of AC
+#     and BC must match 2 nouns or more. Exception: if [AB] forms a logical
+#     group, like all the vowels, then only [AB]C needs to match 2 nouns or
 #     more.
-#   - Don't use capital letters or punctuation in rules; handle those words as
+#   - Don't use capital letters or punctuation in rules; handle those nouns as
 #     exceptions.
 # Notes - exceptions:
-#   - Format: word: declension.
+#   - Format: noun: declension.
 #   - Order: first by ending, then by declension.
-#   - Begin a new line when declension changes.
+#   - Start a new line when declension changes.
 
-# rules and exceptions for monosyllabic words
+# rules and exceptions for monosyllabic nouns
 _RULES_1SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
     # -VV
     (18, r"([aeiouyäö]) (\1|i|u)"),
@@ -153,7 +153,7 @@ _EXCEPTIONS_1SYLL = {
     "show": 22,
 }
 
-# rules and exceptions for disyllabic words
+# rules and exceptions for disyllabic nouns
 _RULES_2SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
     # -VV
     (17, "(aa|oo|uu)"),
@@ -346,7 +346,7 @@ _EXCEPTIONS_2SYLL = {
     "auer": 49, "penger": 49, "seppel": 49, "udar": 49,
 }
 
-# rules and exceptions for trisyllabic words
+# rules and exceptions for trisyllabic nouns
 _RULES_3SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
     # -VV
     ( 3, "(ie|oe|ao|eo|io|yo|iö)"),
@@ -586,7 +586,7 @@ _EXCEPTIONS_3SYLL = {
     "passepartout": 22, "port salut": 22,
 }
 
-# rules and exceptions for quadrisyllabic and longer words
+# rules and exceptions for quadrisyllabic and longer nouns
 _RULES_4SYLL = tuple((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
     # -VV
     ( 3, "i[oö]"),
@@ -698,7 +698,7 @@ def get_declensions(noun, useExceptions=True):
     except KeyError:
         pass
 
-    syllCnt = countsyll.count_syllables(noun)
+    syllCnt = count_syllables(noun)
 
     if useExceptions:
         if syllCnt == 1:
@@ -729,7 +729,7 @@ def get_declensions(noun, useExceptions=True):
     return ()
 
 def _get_redundant_exceptions():
-    # generate words that are unnecessarily on the exceptions list
+    # generate nouns that are unnecessarily on the exceptions list
     for excList in (
         _EXCEPTIONS_1SYLL, _EXCEPTIONS_2SYLL, _EXCEPTIONS_3SYLL,
         _EXCEPTIONS_4SYLL
@@ -755,8 +755,8 @@ def main():
     if not declensions:
         sys.exit("Unrecognized noun.")
 
-    for d in sorted(declensions):
-        print(f'Declension {d} (like "{DECLENSION_DESCRIPTIONS[d]}")')
+    for decl in sorted(declensions):
+        print(f'Declension {decl} (like "{DECLENSION_DESCRIPTIONS[decl]}")')
 
 if __name__ == "__main__":
     main()
