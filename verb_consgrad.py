@@ -3,125 +3,73 @@
 import re, sys
 from verbconj import get_conjugations, CONJUGATION_DESCRIPTIONS
 
-# exceptions to rules;
-# (conjugation, noun): does_consonant_gradation_apply
-_EXCEPTIONS = {
-    (52, "lohkoa"): True,
-    (52, "paapoa"): False,
-    (52, "tutua"): False,
-    (52, "tuutua"): False,
-    (59, "tuntea"): True,  # the only verb in its conjugation
-    (60, "lähteä"): True,  # the only verb in its conjugation
-    (61, "futia"): False,
-    (61, "pyyhkiä"): True,
-    (61, "tutia"): False,
-    (61, "vihkiä"): True,
-    (66, "häväistä"): True,
-    (66, "rangaista"): True,
-    (66, "vavista"): True,
-    (72, "halveta"): True,
-    (72, "hiljetä"): False,
-    (72, "huveta"): True,
-    (72, "kalveta"): True,
-    (72, "karjeta"): True,
-    (72, "kaveta"): True,
-    (72, "kevetä"): True,
-    (72, "lämmetä"): True,
-    (72, "rohjeta"): True,
-    (72, "tarjeta"): True,
-    (72, "ulota"): True,
-    (72, "urjeta"): True,
-    (72, "väljetä"): False,
-    (73, "bodata"): False,
-    (73, "bongata"): False,
-    (73, "buuata"): False,
-    (73, "dekoodata"): False,
-    (73, "dokata"): False,
-    (73, "evätä"): True,
-    (73, "fudata"): False,
-    (73, "futata"): False,
-    (73, "halvata"): True,
-    (73, "hengata"): False,
-    (73, "huovata"): True,
-    (73, "hylätä"): True,
-    (73, "kaivata"): True,
-    (73, "kammata"): True,
-    (73, "karata"): True,
-    (73, "kellata"): True,
-    (73, "kelvata"): True,
-    (73, "kerrata"): True,
-    (73, "koodata"): False,
-    (73, "kullata"): True,
-    (73, "laata"): False,
-    (73, "levätä"): True,
-    (73, "luvata"): True,
-    (73, "mokata"): False,
-    (73, "mullata"): True,
-    (73, "niiata"): False,
-    (73, "pelätä"): True,
-    (73, "perata"): True,
-    (73, "petata"): False,
-    (73, "prakata"): False,
-    (73, "pykätä"): False,
-    (73, "riiata"): False,
-    (73, "roudata"): False,
-    (73, "rynnätä"): True,
-    (73, "salvata"): True,
-    (73, "suunnata"): True,
-    (73, "svengata"): False,
-    (73, "sännätä"): True,
-    (73, "tavata"): True,
-    (73, "temmata"): True,
-    (73, "trokata"): False,
-    (73, "tsiikata"): False,
-    (73, "uhata"): True,
-    (73, "vallata"): True,
-    (73, "verrata"): True,
-    (73, "virrata"): True,
-    (74, "herjetä"): True,
-    (74, "hirvetä"): False,
-    (74, "hävetä"): True,
-    (74, "kammota"): False,
-    (74, "kavuta"): True,
-    (74, "keretä"): True,
-    (74, "kerjetä"): True,
-    (74, "kiivetä"): True,
-    (74, "kivuta"): True,
-    (74, "livetä"): True,
-    (74, "revetä"): True,
-    (74, "ruveta"): True,
-    (74, "totota"): False,
-    (74, "virota"): True,
-    (74, "vivuta"): True,
-    (75, "keritä"): True,
-    (75, "pöllytä"): False,
-    (75, "selitä"): True,
-}
+# Exceptions to rules. Notes:
+#   - Format: {(conjugation, verb), ...}.
+#   - Order: first by conjugation, then alphabetically.
+#   - Start a new line when conjugation changes.
+_EXCEPTIONS_NO = frozenset((
+    (52, "paapoa"), (52, "tutua"), (52, "tuutua"),
+    (56, "jatkaa"),
+    (61, "futia"), (61, "tutia"),
+    (72, "hiljetä"), (72, "väljetä"),
+    (73, "bodata"), (73, "bongata"), (73, "buuata"), (73, "dekoodata"),
+    (73, "dokata"), (73, "fudata"), (73, "futata"), (73, "hengata"),
+    (73, "koodata"), (73, "laata"), (73, "mokata"), (73, "niiata"),
+    (73, "petata"), (73, "prakata"), (73, "pykätä"), (73, "riiata"),
+    (73, "roudata"), (73, "svengata"), (73, "trokata"), (73, "tsiikata"),
+    (74, "hirvetä"), (74, "kammota"), (74, "totota"),
+))
+_EXCEPTIONS_YES = frozenset((
+    (52, "lohkoa"),
+    (53, "purkaa"),
+    (59, "tuntea"),
+    (60, "lähteä"),
+    (61, "pyyhkiä"), (61, "vihkiä"),
+    (66, "häväistä"), (66, "rangaista"), (66, "vavista"),
+    (67, "jaella"), (67, "ommella"),
+    (72, "halveta"), (72, "huveta"), (72, "kalveta"), (72, "karjeta"),
+    (72, "kaveta"), (72, "kevetä"), (72, "kiinnetä"), (72, "loitota"),
+    (72, "lämmetä"), (72, "rohjeta"), (72, "tarjeta"), (72, "ulota"),
+    (72, "urjeta"),
+    (73, "evätä"), (73, "halvata"), (73, "huovata"), (73, "hylätä"),
+    (73, "kaivata"), (73, "kammata"), (73, "karata"), (73, "kellata"),
+    (73, "kelvata"), (73, "kerrata"), (73, "kullata"), (73, "levätä"),
+    (73, "luvata"), (73, "mullata"), (73, "pelätä"), (73, "perata"),
+    (73, "rynnätä"), (73, "salvata"), (73, "suunnata"), (73, "sännätä"),
+    (73, "tavata"), (73, "temmata"), (73, "uhata"), (73, "vallata"),
+    (73, "verrata"), (73, "virrata"),
+    (74, "herjetä"), (74, "hävetä"), (74, "kavuta"), (74, "keretä"),
+    (74, "kerjetä"), (74, "kiivetä"), (74, "kivuta"), (74, "livetä"),
+    (74, "revetä"), (74, "ruveta"), (74, "virota"), (74, "vivuta"),
+    (75, "aallota"), (75, "hellitä"), (75, "keritä"), (75, "lämmitä"),
+    (75, "muodota"), (75, "peitota"), (75, "ryöpytä"), (75, "selitä"),
+    (75, "siitä"),
+))
 
-# consonant gradation applies to a verb if it matches the regex of its
-# conjugation; if the conjugation is not listed, consonant gradation does not
-# apply; key = conjugation, value = compiled regex
-_RULES = dict((c, re.compile(r, re.VERBOSE)) for (c, r) in (
-    (52, "( [aeiouyäölr][kpt] | [kn]k | [mp]p | [hnt]t )[ouy][aä]$"),
-    (53, "( [aeiouyäö][kt] | rk | [hnrt]t )(aa|ää)$"),
-    (54, "[aeiouyäölnr]t(aa|ää)$"),
-    (55, "[aeiouyäöln]t(aa|ää)$"),
-    (56, "( [akl]k | pp | [ahnt]t )aa$"),
-    (57, "[ar]t(aa|ää)$"),
-    (58, "( [aeiouyäölr][kpt] | nk )e[aä]$"),
-    (61, "( [aeiouyäö][kpt] | [klnr]k | [lmpr]p | [hnt]t )[iy][aä]$"),
-    (67, "( [adpr] | [ai]k | ll | mm | nn | [aeiouyäölr]t )ell[aä]$"),
-    (72, "( nn | hd | lj | nk | rk | lp | [aeiouyäö][dkpt]? )[aeoä]t[aä]$"),
-    (73, """
-        ( hd | ng | lj | [lnr]k | [lmr]p | [lnr]t | [aeiouyäö][dkpt]? )
-        (ata|ätä)$
-    """),
-    (74, """
-        ( hd | ng | [hl]j | rk | mm | nn | [lm]p | rr | rv | [aeiou][dkpt]? )
-        [eou]t[aä]$
-    """),
-    (75, "( i | ll | mm | [ioö][dpt] )[ioy]t[aä]$"),
-    (76, "t(aa|ää)$"),
+assert _EXCEPTIONS_NO.isdisjoint(_EXCEPTIONS_YES)
+
+# These rules specify which verbs consonant gradation applies to in each
+# conjugation. Notes:
+#   - Format: {conjugation: compiledRegex, ...}.
+#   - If the conjugation is not listed, consonant gradation does not apply.
+#   - Don't hunt for any single verb. If the regex is e.g. [AB]C, each of AC
+#     and BC must match 2 verbs or more. Exception: if [AB] forms a logical
+#     group, like all the vowels, then only [AB]C needs to match 2 verbs or
+#     more.
+_RULES = dict((c, re.compile(r + "$", re.VERBOSE)) for (c, r) in (
+    (52, "( [^hst]k | p | [^s]t )[oöuy][aä]"),
+    (53, "[^s]t(aa|ää)"),
+    (54, "t(aa|ää)"),
+    (55, "t(aa|ää)"),
+    (56, "( k | p | [^s]t )aa"),
+    (57, "t(aa|ää)"),
+    (58, "( [^st]k | p | t )e[aä]"),
+    (61, "( [^hst]k | p | [^s]t )[iy][aä]"),
+    (67, "( [dpr] | [^s][kt] | ll | nn )ell[aä]"),
+    (72, "( d | lj | [^ht]k | p | [aeiouyäö] )[aeiouyäö]t[aä]"),
+    (73, "( [^n]d | ng | lj | [^fhpst][kpt] | [aeiouyäö] ) (ata|ätä)"),
+    (74, "( [aeioudg] | [hl]j | [^hst][kpt] | mm | nn | rr | rv ) [eou]t[aä]"),
+    (76, "t(aa|ää)"),
 ))
 
 def get_consonant_gradation(verb, conj, useExceptions=True):
@@ -132,21 +80,32 @@ def get_consonant_gradation(verb, conj, useExceptions=True):
     useExceptions: bool; should be True except for testing purposes
     return:        does consonant gradation apply? (bool)"""
 
-    if useExceptions and (conj, verb) in _EXCEPTIONS:
-        return _EXCEPTIONS[(conj, verb)]
+    if useExceptions:
+        if (conj, verb) in _EXCEPTIONS_NO:
+            return False
+        if (conj, verb) in _EXCEPTIONS_YES:
+            return True
+
     if conj not in _RULES:
         return False
+
     return re.search(_RULES[conj], verb) is not None
 
+def _get_redundant_exceptions():
+    # generate verbs that are unnecessarily listed as exceptions
+    for (conj, verb) in _EXCEPTIONS_NO:
+        if not get_consonant_gradation(verb, conj, False):
+            yield (conj, verb)
+    for (conj, verb) in _EXCEPTIONS_YES:
+        if get_consonant_gradation(verb, conj, False):
+            yield (conj, verb)
+
 def main():
-    # print warnings for redundant exceptions
-    for (conj, verb) in sorted(_EXCEPTIONS):
-        if _EXCEPTIONS[(conj, verb)] \
-        == get_consonant_gradation(verb, conj, False):
-            print(
-                f"Redundant exception: '{verb}' in conjugation {conj}",
-                file=sys.stderr
-            )
+    for (conj, verb) in _get_redundant_exceptions():
+        print(
+            f"Redundant exception: '{verb}' in conjugation {conj}",
+            file=sys.stderr
+        )
 
     if len(sys.argv) != 2:
         sys.exit(
