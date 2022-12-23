@@ -3,164 +3,88 @@
 import re, sys
 from noundecl import get_declensions, DECLENSION_DESCRIPTIONS
 
-# exceptions to rules;
-# (declension, noun): does_consonant_gradation_apply
-_EXCEPTIONS = {
-    ( 1, "allegretto"): False,
-    ( 1, "ampu"): False,
-    ( 1, "apartamento"): False,
-    ( 1, "auto"): False,
-    ( 1, "bantu"): False,
-    ( 1, "city"): False,
-    ( 1, "deeku"): False,
-    ( 1, "doku"): False,
-    ( 1, "esperanto"): False,
-    ( 1, "foto"): False,
-    ( 1, "hutu"): False,
-    ( 1, "hötö"): False,
-    ( 1, "kopu"): True,
-    ( 1, "kupo"): True,
-    ( 1, "kupu"): True,
-    ( 1, "kurko"): False,
-    ( 1, "laku"): False,
-    ( 1, "lito"): False,
-    ( 1, "mezzotinto"): False,
-    ( 1, "moderato"): False,
-    ( 1, "moto"): False,
-    ( 1, "naku"): False,
-    ( 1, "näpy"): False,
-    ( 1, "party"): False,
-    ( 1, "patu"): False,
-    ( 1, "pipo"): False,
-    ( 1, "pirtu"): False,
-    ( 1, "pizzicato"): False,
-    ( 1, "platy"): False,
-    ( 1, "plootu"): False,
-    ( 1, "proto"): False,
-    ( 1, "ropo"): True,
-    ( 1, "royalty"): False,
-    ( 1, "rubato"): False,
-    ( 1, "saku"): False,
-    ( 1, "šinto"): False,
-    ( 1, "sopu"): True,
-    ( 1, "sotu"): False,
-    ( 1, "sökö"): False,
-    ( 1, "teku"): False,
-    ( 1, "telefoto"): False,
-    ( 1, "tempo"): False,
-    ( 1, "tipu"): False,
-    ( 1, "toto"): False,
-    ( 1, "vibrato"): False,
-    ( 1, "vihko"): True,
-    ( 1, "zloty"): False,
-    ( 5, "alpi"): False,
-    ( 5, "graffiti"): False,
-    ( 5, "hanti"): False,
-    ( 5, "helpi"): False,
-    ( 5, "hupi"): True,
-    ( 5, "jämtti"): False,
-    ( 5, "laki"): True,
-    ( 5, "liti"): False,
-    ( 5, "luti"): False,
-    ( 5, "pelti"): True,
-    ( 5, "pieti"): False,
-    ( 5, "pop"): True,
-    ( 5, "preteriti"): False,
-    ( 5, "raati"): True,
-    ( 5, "satikuti"): False,
-    ( 5, "toti"): False,
-    ( 5, "vapiti"): False,
-    ( 5, "vati"): True,
-    ( 8, "raclette"): False,
-    ( 9, "akvatinta"): False,
-    ( 9, "basilika"): False,
-    ( 9, "data"): False,
-    ( 9, "delta"): False,
-    ( 9, "emerita"): False,
-    ( 9, "hieta"): True,
-    ( 9, "inka"): False,
-    ( 9, "lieka"): True,
-    ( 9, "nahka"): True,
-    ( 9, "pampa"): False,
-    ( 9, "prostata"): False,
-    ( 9, "taata"): False,
-    ( 9, "tanka"): False,
-    ( 9, "toccata"): False,
-    (10, "dorka"): False,
-    (10, "jytä"): False,
-    (10, "meikä"): False,
-    (10, "moka"): False,
-    (10, "nuuka"): False,
-    (10, "perestroika"): False,
-    (10, "poka"): False,
-    (10, "pökä"): False,
-    (10, "toka"): False,
-    (10, "tuhka"): True,
-    (10, "uhka"): True,
-    (28, "jälsi"): True,  # the only noun with cons. grad. in its decl.
-    (32, "ien"): True,  # the only -n noun with cons. grad. in its decl.
-    (33, "hapan"): True,
-    (33, "kaivin"): False,
-    (33, "laidun"): True,
-    (33, "näin"): True,
-    (33, "puin"): True,
-    (33, "pyyhin"): True,
-    (33, "särvin"): True,
-    (35, "lämmin"): True,  # the only noun in its declension
-    (41, "havas"): True,
-    (41, "rynnäs"): True,
-    (41, "seiväs"): True,
-    (41, "varas"): True,
-    (41, "varvas"): True,
-    (43, "immyt"): True,  # the only noun with cons. grad. in its decl.
-    (48, "aave"): False,
-    (48, "alje"): False,
-    (48, "haave"): False,
-    (48, "helve"): True,
-    (48, "hie"): False,
-    (48, "hyve"): False,
-    (48, "lumme"): True,
-    (48, "ohje"): False,
-    (48, "pue"): True,
-    (48, "pyyhe"): True,
-    (48, "ruhje"): False,
-    (48, "rynte"): False,
-    (48, "rääpe"): False,
-    (48, "toive"): False,
-    (48, "turve"): True,
-    (48, "vihje"): False,
-    (48, "väive"): False,
-    (49, "kannel"): True,
-}
+# Exceptions to rules. Notes:
+#   - Format: {(declension, noun), ...}.
+#   - Order: first by declension, then alphabetically.
+#   - Start a new line when declension changes.
+_EXCEPTIONS_NO = frozenset((
+    (1, "allegretto"), (1, "ampu"), (1, "apartamento"), (1, "auto"),
+    (1, "bantu"), (1, "city"), (1, "deeku"), (1, "doku"), (1, "esperanto"),
+    (1, "foto"), (1, "hutu"), (1, "hötö"), (1, "kurko"), (1, "laku"),
+    (1, "lito"), (1, "mezzotinto"), (1, "moderato"), (1, "moto"), (1, "naku"),
+    (1, "näpy"), (1, "party"), (1, "patu"), (1, "pipo"), (1, "pirtu"),
+    (1, "pizzicato"), (1, "platy"), (1, "plootu"), (1, "proto"),
+    (1, "royalty"), (1, "rubato"), (1, "saku"), (1, "šinto"), (1, "sotu"),
+    (1, "sökö"), (1, "teku"), (1, "telefoto"), (1, "tempo"), (1, "tipu"),
+    (1, "toto"), (1, "vibrato"), (1, "zloty"),
+    (5, "graffiti"), (5, "hanti"), (5, "jämtti"), (5, "liti"), (5, "luti"),
+    (5, "pieti"), (5, "preteriti"), (5, "satikuti"), (5, "toti"),
+    (5, "vapiti"),
+    (8, "raclette"),
+    (9, "akvatinta"), (9, "basilika"), (9, "data"), (9, "delta"),
+    (9, "emerita"), (9, "inka"), (9, "pampa"), (9, "prostata"), (9, "taata"),
+    (9, "tanka"), (9, "toccata"),
+    (10, "dorka"), (10, "jytä"), (10, "meikä"), (10, "moka"), (10, "nuuka"),
+    (10, "perestroika"), (10, "poka"), (10, "pökä"), (10, "toka"),
+    (34, "alaston"),
+    (48, "rääpe"), (48, "toive"), (48, "väive"),
+))
+_EXCEPTIONS_YES = frozenset((
+    (1, "kopu"), (1, "kupo"), (1, "kupu"), (1, "ropo"), (1, "sopu"),
+    (1, "vihko"),
+    (5, "hupi"), (5, "laki"), (5, "pelti"), (5, "pop"), (5, "raati"),
+    (5, "vati"),
+    (9, "hieta"), (9, "lieka"), (9, "nahka"),
+    (10, "tuhka"), (10, "uhka"),
+    (28, "jälsi"),
+    (32, "ien"),
+    (33, "hapan"), (33, "kerroin"), (33, "laidun"), (33, "näin"),
+    (33, "poltin"), (33, "puin"), (33, "pyyhin"), (33, "särvin"),
+    (35, "lämmin"),
+    (41, "altis"), (41, "havas"), (41, "kinnas"), (41, "kiuas"), (41, "oas"),
+    (41, "raitis"), (41, "rynnäs"), (41, "ryväs"), (41, "seiväs"),
+    (41, "vannas"), (41, "varas"), (41, "varvas"),
+    (43, "immyt"),
+    (48, "aie"), (48, "hanke"), (48, "helve"), (48, "hiue"), (48, "hynte"),
+    (48, "koe"), (48, "kynte"), (48, "lumme"), (48, "pohje"), (48, "pue"),
+    (48, "pyyhe"), (48, "säe"), (48, "säie"), (48, "turve"), (48, "vehje"),
+    (49, "auer"), (49, "ommel"), (49, "penger"), (49, "säen"), (49, "taival"),
+    (49, "udar"), (49, "vemmel"),
+))
 
-# consonant gradation applies to a noun if it matches the regex of its
-# declension; if the declension is not listed, consonant gradation does not
-# apply; key = declension, value = compiled regex
-_RULES = dict((d, re.compile(r, re.VERBOSE)) for (d, r) in (
-    (1,  "( [aeiouyäölnr][kt] | kk | [aäeilmpr]p | [ht]t )[oöuy]$"),
-    (4,  "kk[oö]$"),
-    (5,  "( [äey][kp] | [eiouyäö]t | [kn]k | [lp]p | [hnt]t )i$"),
-    (7,  "( [aeiouyäöklnr]k | p | t )i$"),
-    (8,  "( kk | pp | tt )e$"),
-    (9,  "( [aiouyäölr][kpt] | [kn]k | [mp]p | [hnt]t )[aä]$"),
-    (10, "( [aeiouyäölr][kpt] | [kn]k | [mp]p | [hnt]t )[aä]$"),
-    (14, "( kk | pp | tt )[aä]$"),
-    (16, "mpi$"),
-    (32, "[nt][aä]r$"),
-    (33, "( [aeiouyäö][tv] | d | lj | ll | mm | nn | rro? | lt )in$"),
-    (34, "[aeiouyäö]t[oö]n$"),
-    (41, """
-        ( [aeiouyäölr][dkpt] | hd | ng | ll | mm | [ai]nn | o | rr | iu | yv )
-        [aä]s$
-        | ( [iä]e | [tu]i | [uy] )s$
-    """),
+assert _EXCEPTIONS_NO.isdisjoint(_EXCEPTIONS_YES)
+
+# These rules specify which nouns consonant gradation applies to in each
+# declension. Notes:
+#   - Format: {declension: compiledRegex, ...}.
+#   - If the declension is not listed, consonant gradation does not apply.
+#   - Don't hunt for any single noun. If the regex is e.g. [AB]C, each of AC
+#     and BC must match 2 nouns or more. Exception: if [AB] forms a logical
+#     group, like all the vowels, then only [AB]C needs to match 2 nouns or
+#     more.
+_RULES = dict((d, re.compile(r + "$", re.VERBOSE)) for (d, r) in (
+    ( 1, "( [aeiouyäölnr][kt] | kk | [aäeilmpr]p | [ht]t )[oöuy]"),
+    ( 4, "kk[oö]"),
+    ( 5, "( [kn]k | pp | [eiouyäöhnt]t )i"),
+    ( 7, "( [^st]k | p | t )i"),
+    ( 8, "(kk|pp|tt) e"),
+    ( 9, "( [aiulr][kpt]a | [kn]ka | [mp]pa | [hnt]ta | ntä )"),
+    (10, "( [aeiouyäölr][kpt] | [kn]k | [mp]p | [hnt]t )[aä]"),
+    (14, "(kk|pp|tt)[aä]"),
+    (16, "mpi"),
+    (32, "t[aä]r"),
+    (33, "( [aeiouyäö]t | d | j | ll | nn | rr | av )in"),
+    (34, "t[oö]n"),
+    (41, """(
+        ( [aeiouyäölr][kpt] | d | g | ll | mm | rr )[aä]
+        | [iuä][ei] | [uy]
+    )s"""),
     (48, """
         (
-        [aäio] | [aeiouyäö][dkptv] | [lnr][kt] | hd | [hl]j | ll | nn | mp
-        | rr | iu | arv
-        )e$
+        a | d | (ah|l)j | [aeiouyäölr][kt] | ll | nn | p | rr | (ar|e|i|o|u)v
+        )e
     """),
-    (49, "( (va|mme)l | äen | [dn]ar | [gnu]er )$"),
+    (49, "nn[ae][lr]"),
 ))
 
 def get_consonant_gradation(noun, decl, useExceptions=True):
@@ -171,21 +95,32 @@ def get_consonant_gradation(noun, decl, useExceptions=True):
     useExceptions: bool; should be True except for testing purposes
     return:        does consonant gradation apply? (bool)"""
 
-    if useExceptions and (decl, noun) in _EXCEPTIONS:
-        return _EXCEPTIONS[(decl, noun)]
+    if useExceptions:
+        if (decl, noun) in _EXCEPTIONS_NO:
+            return False
+        if (decl, noun) in _EXCEPTIONS_YES:
+            return True
+
     if decl not in _RULES:
         return False
+
     return re.search(_RULES[decl], noun) is not None
 
+def _get_redundant_exceptions():
+    # generate words that are unnecessarily listed as exceptions
+    for (decl, noun) in _EXCEPTIONS_NO:
+        if not get_consonant_gradation(noun, decl, False):
+            yield (decl, noun)
+    for (decl, noun) in _EXCEPTIONS_YES:
+        if get_consonant_gradation(noun, decl, False):
+            yield (decl, noun)
+
 def main():
-    # print warnings for redundant exceptions
-    for (decl, noun) in sorted(_EXCEPTIONS):
-        if _EXCEPTIONS[(decl, noun)] \
-        == get_consonant_gradation(noun, decl, False):
-            print(
-                f"Redundant exception: '{noun}' in declension {decl}",
-                file=sys.stderr
-            )
+    for (decl, noun) in _get_redundant_exceptions():
+        print(
+            f"Redundant exception: '{noun}' in declension {decl}",
+            file=sys.stderr
+        )
 
     if len(sys.argv) != 2:
         sys.exit(

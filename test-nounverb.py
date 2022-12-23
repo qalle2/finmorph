@@ -93,6 +93,7 @@ def get_cons_grad_data(test):
 
     # fix errors in the source data
     if test == "ng":
+        conjsByWord["alje"] = {48}
         conjsByWord["auer"] = {49}
         conjsByWord["harre"] = {48}
         conjsByWord["hynte"] = {48}
