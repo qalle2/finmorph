@@ -10,6 +10,7 @@ FORMS = (
     # mood, tense, voice, number/None, person/None
     (M_IND, T_PRE, V_ACT, N_SG, P_1),
     (M_IND, T_PRE, V_ACT, N_SG, P_3),
+    (M_IND, T_PRE, V_ACT, N_PL, P_3),
     (M_IND, T_PST, V_ACT, N_SG, P_1),
     (M_IND, T_PST, V_ACT, N_SG, P_3),
 
