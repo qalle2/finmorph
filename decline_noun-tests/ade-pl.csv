@@ -1,5 +1,32 @@
-jalka,jaloilla
+# declension 24/27
 kuusi,kuusilla
-esine,esineillä
-kymmenen,kymmenillä
+
+# declension 1
+koko,ko'oilla
+luoko,luo'oilla
+ruoko,ruo'oilla
 valo,valoilla
+
+# declension 5
+pop,popeilla
+
+# declension 7
+veli,veljillä
+
+# declension 9
+jalka,jaloilla
+
+# declension 10
+ikä,i'illä
+reikä,rei'illä
+
+# declension 32
+kymmenen,kymmenillä
+
+# declension 41
+paras,parhailla
+
+# declension 48
+esine,esineillä
+häive,häipeillä,häiveillä
+viive,viipeillä,viiveillä

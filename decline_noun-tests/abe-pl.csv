@@ -1,5 +1,32 @@
-jalka,jaloitta
+# declension 24/27
 kuusi,kuusitta
-esine,esineittä
-kymmenen,kymmenittä
+
+# declension 1
+koko,ko'oitta
+luoko,luo'oitta
+ruoko,ruo'oitta
 valo,valoitta
+
+# declension 5
+pop,popeitta
+
+# declension 7
+veli,veljittä
+
+# declension 9
+jalka,jaloitta
+
+# declension 10
+ikä,i'ittä
+reikä,rei'ittä
+
+# declension 32
+kymmenen,kymmenittä
+
+# declension 41
+paras,parhaitta
+
+# declension 48
+esine,esineittä
+häive,häipeittä,häiveittä
+viive,viipeittä,viiveittä

@@ -1,5 +1,32 @@
-jalka,jaloista
+# declension 24/27
 kuusi,kuusista
-esine,esineistä
-kymmenen,kymmenistä
+
+# declension 1
+koko,ko'oista
+luoko,luo'oista
+ruoko,ruo'oista
 valo,valoista
+
+# declension 5
+pop,popeista
+
+# declension 7
+veli,veljistä
+
+# declension 9
+jalka,jaloista
+
+# declension 10
+ikä,i'istä
+reikä,rei'istä
+
+# declension 32
+kymmenen,kymmenistä
+
+# declension 41
+paras,parhaista
+
+# declension 48
+esine,esineistä
+häive,häipeistä,häiveistä
+viive,viipeistä,viiveistä

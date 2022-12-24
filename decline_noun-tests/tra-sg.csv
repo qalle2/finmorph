@@ -1,4 +1,32 @@
+# declension 24/27
 kuusi,kuudeksi,kuuseksi
-esine,esineeksi
-kymmenen,kymmeneksi
+
+# declension 1
+koko,kooksi
+luoko,luo'oksi
+ruoko,ruo'oksi
 valo,valoksi
+
+# declension 5
+pop,popiksi
+
+# declension 7
+veli,veljeksi
+
+# declension 9
+jalka,jalaksi
+
+# declension 10
+ikä,iäksi
+reikä,reiäksi
+
+# declension 32
+kymmenen,kymmeneksi
+
+# declension 41
+paras,parhaaksi
+
+# declension 48
+esine,esineeksi
+häive,häipeeksi,häiveeksi
+viive,viipeeksi,viiveeksi

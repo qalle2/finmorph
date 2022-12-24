@@ -1,4 +1,32 @@
+# declension 24/27
 kuusi,kuudet,kuuset
-esine,esineet
-kymmenen,kymmenet
+
+# declension 1
+koko,koot
+luoko,luo'ot
+ruoko,ruo'ot
 valo,valot
+
+# declension 5
+pop,popit
+
+# declension 7
+veli,veljet
+
+# declension 9
+jalka,jalat
+
+# declension 10
+ikä,iät
+reikä,reiät
+
+# declension 32
+kymmenen,kymmenet
+
+# declension 41
+paras,parhaat
+
+# declension 48
+esine,esineet
+häive,häipeet,häiveet
+viive,viipeet,viiveet

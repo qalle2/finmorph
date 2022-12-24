@@ -233,6 +233,7 @@ _CONS_GRAD_STRENGTHEN = tuple((re.compile(f + "$"), t) for (f, t) in (
 ))
 
 _CONS_GRAD_WEAKEN_EXCEPTIONS = {
+    # "koko" is handled elsewhere
     "aika":  "aja",
     "aiko":  "ajo",   # aika
     "hik":   "hi'",   # hiki
@@ -291,7 +292,7 @@ def _consonant_gradation_main(word, inflected, decl, consGrad, case, number):
             return inflected  # not yet
         elif consGrad and decl <= 16 or decl in _DECL_GEN_SG_ALWAYS_WEAKEN:
             if word == "koko" and (case, number) in _CASES_LIKE_INE_PL:
-                return "ko"
+                return "ko'o"
             elif word == "pop":
                 return inflected
             return _consonant_gradation(inflected)

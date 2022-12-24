@@ -1,5 +1,32 @@
-jalka,jalalta
+# declension 24/27
 kuusi,kuudelta,kuuselta
-esine,esineeltä
-kymmenen,kymmeneltä
+
+# declension 1
+koko,koolta
+luoko,luo'olta
+ruoko,ruo'olta
 valo,valolta
+
+# declension 5
+pop,popilta
+
+# declension 7
+veli,veljeltä
+
+# declension 9
+jalka,jalalta
+
+# declension 10
+ikä,iältä
+reikä,reiältä
+
+# declension 32
+kymmenen,kymmeneltä
+
+# declension 41
+paras,parhaalta
+
+# declension 48
+esine,esineeltä
+häive,häipeeltä,häiveeltä
+viive,viipeeltä,viiveeltä

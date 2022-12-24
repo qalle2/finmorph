@@ -1,5 +1,32 @@
-jalka,jaloin
+# declension 24/27
 kuusi,kuusin
-esine,esinein
-kymmenen,kymmenin
+
+# declension 1
+koko,ko'oin
+luoko,luo'oin
+ruoko,ruo'oin
 valo,valoin
+
+# declension 5
+pop,popein
+
+# declension 7
+veli,veljin
+
+# declension 9
+jalka,jaloin
+
+# declension 10
+ikä,i'in
+reikä,rei'in
+
+# declension 32
+kymmenen,kymmenin
+
+# declension 41
+paras,parhain
+
+# declension 48
+esine,esinein
+häive,häipein,häivein
+viive,viipein,viivein

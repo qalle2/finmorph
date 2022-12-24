@@ -1,5 +1,32 @@
-jalka,jalalle
+# declension 24/27
 kuusi,kuudelle,kuuselle
-esine,esineelle
-kymmenen,kymmenelle
+
+# declension 1
+koko,koolle
+luoko,luo'olle
+ruoko,ruo'olle
 valo,valolle
+
+# declension 5
+pop,popille
+
+# declension 7
+veli,veljelle
+
+# declension 9
+jalka,jalalle
+
+# declension 10
+ikä,iälle
+reikä,reiälle
+
+# declension 32
+kymmenen,kymmenelle
+
+# declension 41
+paras,parhaalle
+
+# declension 48
+esine,esineelle
+häive,häipeelle,häiveelle
+viive,viipeelle,viiveelle
