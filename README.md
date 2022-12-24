@@ -113,6 +113,18 @@ Find partially homonymous inflected nouns and verbs. Slow.
 
 `partial-homonyms.txt` was generated with this program.
 
+### inflected_by_length.py
+Print lemma and inflected forms of nouns and verbs with specified length.
+Arguments: minimumLength maximumLength
+
+Example:
+```
+$ python3 inflected_by_length.py 22 22
+kansalaisuudettomuudet
+suunnittelemattomuudet
+...
+```
+
 ### noun_consgrad.py
 Argument: a Finnish noun (including adjectives/pronouns/numerals, excluding
 compounds) in nominative singular. Print the Kotus declension(s) (1-49) and
