@@ -46,6 +46,12 @@ def group_verb_lemmas(lemmas, lemmasByInflected):
     # group verb lemmas by inflected forms
     # lemmasByInflected/return: {inflected: {(conjugation, lemma), ...}, ...}
 
+    # lemma forms
+    for lemma in lemmas:
+        for conj in get_conjugations(lemma):
+            lemmasByInflected.setdefault(lemma, set()).add((conj, lemma))
+
+    # inflected forms
     for form in ALL_FORMS:
         # (mood, tense, voice, number, person)
         status_msg(
