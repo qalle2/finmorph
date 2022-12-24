@@ -105,6 +105,11 @@ def main():
         conjs = {int(c, 10) for c in conjs}
         conjugationsByWord.setdefault(word, set()).update(conjs)
 
+    # add some useful words (names of letters)
+    if getAllWords:
+        for word in ("koo", "see", "vee", "öö"):
+            conjugationsByWord.setdefault(word, set()).add(18)
+
     for word in sorted(conjugationsByWord):
         print(",".join(
             [word] + [str(c) for c in sorted(conjugationsByWord[word])]

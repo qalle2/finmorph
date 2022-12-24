@@ -38,7 +38,7 @@ Conj Word      1syll 2syll 3syll 4syll   -VV   -CV    -C Total
   15 korkea        0     0   169     0   169     0     0   169
   16 vanhempi      0     1    21     0     0    20     2    22
   17 vapaa         0    38     0     0    38     0     0    38
-  18 maa          32     9    16     0    55     1     1    57
+  18 maa          36     9    16     0    59     1     1    61
   19 suo           6     0     0     0     6     0     0     6
   20 filee         0    37     7     2    45     1     0    46
   21 rosé          5    15     2     0    15     7     0    22
@@ -97,4 +97,4 @@ Conj Word      1syll 2syll 3syll 4syll   -VV   -CV    -C Total
   76 taitaa        0     2     0     0     2     0     0     2
   77 kumajaa       0     0     3     0     3     0     0     3
   78 kaikaa        0    32     0     0    32     0     0    32
-     TOTAL       242  7461 17638 15745  7169 21345 12572 41086
+     TOTAL       246  7461 17638 15745  7173 21345 12572 41090
