@@ -51,6 +51,13 @@ ITEM_NAMES = {
     P_3:   "3",
 }
 
+def set_vowel_frontness(word):
+    # replace "A"/"O"/"U" with "a"/"o"/"u" or "ä"/"ö"/"y" according to vowel
+    # harmony
+    if re.search(r"^[^aou]+$", word) is None:
+        return word.replace("A", "a").replace("O", "o").replace("U", "u")
+    return word.replace("A", "ä").replace("O", "ö").replace("U", "y")
+
 # -----------------------------------------------------------------------------
 
 # consonant gradation is weak to strong in these conjugations
@@ -123,12 +130,16 @@ def _consonant_gradation(verb, strengthen=False):
             return re.sub(reFrom, reTo, verb)
     sys.exit(f"Failed to apply consonant gradation: {verb=}, {strengthen=}")
 
+# conjugations that are -tVA in infinitive and (only) -si in past
+_CONJS_TVA_SI = frozenset((54, 59, 76))  # huutaa, tuntea, taitaa
+
 def _consonant_gradation_main(verb, conj, mood, tense, voice, number, person):
     # apply consonant gradation (after deleting infinitive -A/-CA ending)
 
     strengthen = conj in _CONJS_STRENGTHEN
     if (
-        mood == M_IND and tense in (T_PRE, T_PST) and voice == V_ACT
+        mood == M_IND and voice == V_ACT
+        and (tense == T_PRE or tense == T_PST and conj not in _CONJS_TVA_SI)
         and (person != P_3 or strengthen)
         or
         mood == M_CON and voice == V_ACT and strengthen
@@ -159,8 +170,7 @@ def _get_variants(verb, infl, conj, mood, tense):
     if mood == M_CON:
         if conj == 74:
             # katketa
-            aOrAuml = "a" if re.search(r"^[^aou]+$", infl) is None else "ä"
-            return (infl, infl + aOrAuml)
+            return (infl, set_vowel_frontness(infl + "A"))
 
     return (infl,)  # no change
 
@@ -173,7 +183,8 @@ def _get_variants(verb, infl, conj, mood, tense):
 # - consonant gradation has already been applied
 # - variant forms have already been added
 # - conditional/number/person endings will be added afterwards
-# - for clarity, avoid making changes here that need to be undone later
+# - "A"/"O"/"U" will be replaced with "a"/"o"/"u" or "ä"/"ö"/"y" afterwards
+# - conjugation 71 (nähdä) is not here; it's handled as an exception
 
 _CHANGES_IND_PRE_ACT = {
     # - indicative present active
@@ -261,13 +272,15 @@ def _change_ending(verb, conj, mood, tense, voice, number, person):
     if re.search(regexFrom, verb) is not None:
         verb = re.sub(regexFrom, regexTo, verb)
 
-    aOrAuml = "a" if re.search(r"^[^aou]+$", verb) is None else "ä"
-    return verb.replace("A", aOrAuml)
+    return set_vowel_frontness(verb)
 
 # -----------------------------------------------------------------------------
 
-_LONG_FINAL_VOWEL = re.compile("(aa|ee|oo|uu|yy|ää|öö|[aeiouyäö]i|ie|uo|yö)$")
+_LONG_FINAL_VOWEL = re.compile(
+    "(aa|ee|oo|ää|öö|[aeiouyäö]i|[aeiou]u|[äeiöy]y|ie|uo|yö)$"
+)
 
+# "A"/"O"/"U" will be replaced with "a"/"o"/"u" or "ä"/"ö"/"y"
 _NUMBER_PERSON_ENDINGS_IND_CON = {
     (N_SG, P_1): "n",
     (N_SG, P_2): "t",
@@ -276,7 +289,6 @@ _NUMBER_PERSON_ENDINGS_IND_CON = {
     (N_PL, P_2): "tte",
     (N_PL, P_3): "vAt",
 }
-
 _NUMBER_PERSON_ENDINGS_IMP = {
     (N_SG, P_2): "",
     (N_SG, P_3): "kOOn",
@@ -288,14 +300,6 @@ _NUMBER_PERSON_ENDINGS_IMP = {
 def _get_active_forms(inflected, mood, tense, number, person):
     # generate verbs with case/number endings
 
-    # use "a" or "ä" in -A endings?
-    if re.search(r"^[^aou]+$", inflected[0]) is None:
-        aOrAuml = "a"
-        oOrOuml = "o"
-    else:
-        aOrAuml = "ä"
-        oOrOuml = "ö"
-
     if mood == M_IND and tense == T_PRE and number == N_SG and person == P_3:
         # lengthen final vowel if possible
         yield from (
@@ -303,13 +307,11 @@ def _get_active_forms(inflected, mood, tense, number, person):
             for i in inflected
         )
     elif mood in (M_IND, M_CON) and tense in (T_PRE, T_PST):
-        ending = _NUMBER_PERSON_ENDINGS_IND_CON[(number, person)] \
-        .replace("A", aOrAuml)
-        yield from (i + ending for i in inflected)
+        ending = _NUMBER_PERSON_ENDINGS_IND_CON[(number, person)]
+        yield from (set_vowel_frontness(i + ending) for i in inflected)
     elif mood == M_IMP and tense == T_PRE:
-        ending = _NUMBER_PERSON_ENDINGS_IMP[(number, person)] \
-        .replace("A", aOrAuml).replace("O", oOrOuml)
-        yield from (i + ending for i in inflected)
+        ending = _NUMBER_PERSON_ENDINGS_IMP[(number, person)]
+        yield from (set_vowel_frontness(i + ending) for i in inflected)
     else:
         sys.exit("not implemented")
 
