@@ -1,9 +1,12 @@
 """Test decline_noun.py by comparing the output to test files."""
 
 import os, sys
-from decline_noun import decline_noun, CASES, NUMBERS
+from decline_noun import *
 
 _TEST_DIR = "decline_noun-tests"  # read test files from here
+
+def format_test_name(case, number):
+    return "-".join(ITEM_NAMES[i] for i in (case, number))
 
 def _read_csv(case, number):
     # Read test cases from CSV file.
@@ -12,7 +15,7 @@ def _read_csv(case, number):
     # return: {NomSg: (inflected, ...), ...}
 
     words = {}
-    path = os.path.join(_TEST_DIR, f"{case}-{number}.csv")
+    path = os.path.join(_TEST_DIR, format_test_name(case, number) + ".csv")
     with open(path, "rt", encoding="utf8") as handle:
         handle.seek(0)
         for line in handle:
@@ -26,13 +29,13 @@ def _read_csv(case, number):
 
 def run_test(case, number):
     """Run a test for one case and number.
-    case:   e.g. 'gen'
-    number: e.g. 'sg'
+    case:   e.g. C_GEN
+    number: e.g. N_SG
     return: number of words tested"""
 
-    if case == "nom" and number == "sg":
+    if case == C_NOM and number == N_SG:
         # {NomSg: (NomSg,), ...}
-        words = dict((w, (w,)) for w in _read_csv("gen", "sg"))
+        words = dict((w, (w,)) for w in _read_csv(C_GEN, N_SG))
     else:
         # {NomSg: (inflected, ...), ...}
         words = _read_csv(case, number)
@@ -41,8 +44,8 @@ def run_test(case, number):
         result = tuple(sorted(decline_noun(word, case, number)))
         if result != words[word]:
             sys.exit("{}{} of {}: expected {}, got {}".format(
-                case.title(),
-                number.title(),
+                ITEM_NAMES[case],
+                ITEM_NAMES[number],
                 word,
                 "/".join(words[word]),
                 "/".join(result),
@@ -54,12 +57,12 @@ def run_all_tests(verbose=False):
     """Run tests for all cases and numbers."""
 
     for case in CASES:
-        for number in (("pl",) if case == "ins" else NUMBERS):
+        for number in ((N_PL,) if case == C_INS else NUMBERS):
             wordCnt = run_test(case, number)
             if verbose:
                 print(
-                    f"{case.title()}{number.title()} test passed "
-                    f"({wordCnt:3} words)."
+                    format_test_name(case, number)
+                    + f": test passed ({wordCnt:3} words)."
                 )
 
 def main():

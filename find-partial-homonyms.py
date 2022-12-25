@@ -5,8 +5,10 @@ from noundecl import get_declensions
 from verbconj import get_conjugations
 from noun_consgrad import get_consonant_gradation as get_noun_cons_grad
 from verb_consgrad import get_consonant_gradation as get_verb_cons_grad
-from decline_noun import decline_noun_specific, CASES, NUMBERS
-from conjugate_verb import conjugate_verb_specific, ALL_FORMS, ITEM_NAMES
+from decline_noun import decline_noun_specific, \
+ALL_FORMS as ALL_NOUN_FORMS, ITEM_NAMES as NOUN_ITEM_NAMES
+from conjugate_verb import conjugate_verb_specific, \
+ALL_FORMS as ALL_VERB_FORMS, ITEM_NAMES as VERB_ITEM_NAMES
 
 def status_msg(msg):
     # print a status message to stderr (won't be redirected to output file)
@@ -22,14 +24,12 @@ def group_noun_lemmas(lemmas, lemmasByInflected):
     # group noun lemmas by inflected forms
     # lemmasByInflected/return: {inflected: {(declension, lemma), ...}, ...}
 
-    forms = tuple(
-        (c, n) for c in CASES for n in NUMBERS
-        if not (c == "ins" and n == "sg")
-    )
-
-    for form in forms:
+    for form in ALL_NOUN_FORMS:
         # (case, number)
-        status_msg("Generating forms: " + "-".join(form) + "...")
+        status_msg(
+            "Generating forms: " + "-".join(NOUN_ITEM_NAMES[i] for i in form)
+            + "..."
+        )
         for lemma in lemmas:
             for decl in get_declensions(lemma):
                 consGrad = get_noun_cons_grad(lemma, decl)
@@ -52,10 +52,10 @@ def group_verb_lemmas(lemmas, lemmasByInflected):
             lemmasByInflected.setdefault(lemma, set()).add((conj, lemma))
 
     # inflected forms
-    for form in ALL_FORMS:
+    for form in ALL_VERB_FORMS:
         # (mood, tense, voice, number, person)
         status_msg(
-            "Generating forms: " + "-".join(ITEM_NAMES[i] for i in form)
+            "Generating forms: " + "-".join(VERB_ITEM_NAMES[i] for i in form)
             + "..."
         )
         for lemma in lemmas:

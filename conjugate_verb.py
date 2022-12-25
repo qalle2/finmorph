@@ -51,7 +51,7 @@ ITEM_NAMES = {
     P_3:   "3",
 }
 
-def set_vowel_frontness(word):
+def _set_vowel_frontness(word):
     # replace "A"/"O"/"U" with "a"/"o"/"u" or "ä"/"ö"/"y" according to vowel
     # harmony
     if re.search(r"^[^aou]+$", word) is None:
@@ -165,7 +165,7 @@ def _get_variants(verb, infl, conj, mood, tense):
             return (infl, "läks")
     if mood == M_CON:
         if conj == 74:  # katketa
-            return (infl, set_vowel_frontness(infl + "A"))
+            return (infl, _set_vowel_frontness(infl + "A"))
     if mood == M_POT:
         if conj == 76:  # taitaa
             return (infl, re.sub("t[aä]$", "n", verb))
@@ -205,6 +205,7 @@ _CHANGES_IMP_PRE_ACT = {
     75: ("", "t"),  # selvitä
 }
 _CHANGES_POT_PRE_ACT = {
+    # - potential present active
     69: ("", "n"),  # valita
     72: ("", "n"),  # vanheta
     73: ("", "n"),  # salata
@@ -212,7 +213,7 @@ _CHANGES_POT_PRE_ACT = {
     75: ("", "n"),  # selvitä
 }
 
-_CHANGES_PAST_COND = {
+_CHANGES_PST_CON = {
     # common to ind-pst-act and con-pre-act; a temporary dict
     58: ("e",            ""),     # laskea
     60: ("e",            ""),     # lähteä
@@ -226,7 +227,7 @@ _CHANGES_PAST_COND = {
     70: ("s",            "ks"),   # juosta
     72: ("",             "n"),    # vanheta
 }
-_CHANGES_IND_PST_ACT = _CHANGES_PAST_COND | {
+_CHANGES_IND_PST_ACT = _CHANGES_PST_CON | {
     # - indicative past active
     53: ("[aä]",     ""),   # muistaa
     54: ("[st][aä]", "s"),  # huutaa
@@ -238,12 +239,12 @@ _CHANGES_IND_PST_ACT = _CHANGES_PAST_COND | {
     75: ("",         "s"),  # selvitä
     76: ("t[aä]",    "s"),  # taitaa
 }
-_CHANGES_CON_PRE_ACT = _CHANGES_PAST_COND | {
+_CHANGES_CON_PRE_ACT = _CHANGES_PST_CON | {
     # - conditional active
     59: ("e", ""),   # tuntea
     75: ("",  "A"),  # selvitä
 }
-del _CHANGES_PAST_COND
+del _CHANGES_PST_CON
 
 def _change_ending(verb, conj, mood, tense, voice, number, person):
     # change the ending of the verb (after consonant gradation)
@@ -279,7 +280,7 @@ def _change_ending(verb, conj, mood, tense, voice, number, person):
     if re.search(regexFrom, verb) is not None:
         verb = re.sub(regexFrom, regexTo, verb)
 
-    return set_vowel_frontness(verb)
+    return _set_vowel_frontness(verb)
 
 def _append_pot_suffix(verb):
     # append potential mood suffix to verb (e.g. sano -> sanone, tul -> tulle)
@@ -322,10 +323,10 @@ def _get_active_forms(inflected, mood, tense, number, person):
         )
     elif mood in (M_IND, M_CON, M_POT) and tense in (T_PRE, T_PST):
         ending = _NUMBER_PERSON_ENDINGS_IND_CON_POT[(number, person)]
-        yield from (set_vowel_frontness(i + ending) for i in inflected)
+        yield from (_set_vowel_frontness(i + ending) for i in inflected)
     elif mood == M_IMP and tense == T_PRE:
         ending = _NUMBER_PERSON_ENDINGS_IMP[(number, person)]
-        yield from (set_vowel_frontness(i + ending) for i in inflected)
+        yield from (_set_vowel_frontness(i + ending) for i in inflected)
     else:
         sys.exit("not implemented")
 
