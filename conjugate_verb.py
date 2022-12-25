@@ -157,21 +157,19 @@ def _get_variants(verb, infl, conj, mood, tense):
     # infl: verb with consonant gradation, e.g. souta or souda
 
     if mood == M_IND and tense == T_PST:
-        if conj == 55:
-            # soutaa
+        if conj == 55:  # soutaa
             return (infl, re.sub("t([aä])$", r"s\1", verb))
-        if conj == 57:
-            # saartaa
+        if conj == 57:  # saartaa
             return (re.sub("a$", r"o", infl), re.sub("ta$", "s", verb))
-        if conj == 60:
-            # lähteä
+        if conj == 60:  # lähteä
             return (infl, "läks")
-
     if mood == M_CON:
-        if conj == 74:
-            # katketa
+        if conj == 74:  # katketa
             return (infl, set_vowel_frontness(infl + "A"))
-
+    if mood == M_POT:
+        if conj == 76:  # taitaa
+            return (infl, re.sub("t[aä]$", "n", verb))
+            exit()
     return (infl,)  # no change
 
 # -----------------------------------------------------------------------------
@@ -205,6 +203,13 @@ _CHANGES_IMP_PRE_ACT = {
     73: ("", "t"),  # salata
     74: ("", "t"),  # katketa
     75: ("", "t"),  # selvitä
+}
+_CHANGES_POT_PRE_ACT = {
+    69: ("", "n"),  # valita
+    72: ("", "n"),  # vanheta
+    73: ("", "n"),  # salata
+    74: ("", "n"),  # katketa
+    75: ("", "n"),  # selvitä
 }
 
 _CHANGES_PAST_COND = {
@@ -253,6 +258,8 @@ def _change_ending(verb, conj, mood, tense, voice, number, person):
             sys.exit("not implemented")
     elif mood == M_CON and voice == V_ACT:
         changes = _CHANGES_CON_PRE_ACT.get(conj, None)
+    elif mood == M_POT and voice == V_ACT:
+        changes = _CHANGES_POT_PRE_ACT.get(conj, None)
     elif mood == M_IMP and voice == V_ACT:
         if tense == T_PRE and number == N_SG and person == P_2:
             changes = _CHANGES_IND_PRE_ACT.get(conj, None)
@@ -274,6 +281,12 @@ def _change_ending(verb, conj, mood, tense, voice, number, person):
 
     return set_vowel_frontness(verb)
 
+def _append_pot_suffix(verb):
+    # append potential mood suffix to verb (e.g. sano -> sanone, tul -> tulle)
+    if re.search("[lrs]$", verb) is not None:
+        return re.sub("(.)$", r"\1\1e", verb)
+    return verb + "ne"
+
 # -----------------------------------------------------------------------------
 
 _LONG_FINAL_VOWEL = re.compile(
@@ -281,7 +294,7 @@ _LONG_FINAL_VOWEL = re.compile(
 )
 
 # "A"/"O"/"U" will be replaced with "a"/"o"/"u" or "ä"/"ö"/"y"
-_NUMBER_PERSON_ENDINGS_IND_CON = {
+_NUMBER_PERSON_ENDINGS_IND_CON_POT = {
     (N_SG, P_1): "n",
     (N_SG, P_2): "t",
     (N_SG, P_3): "",
@@ -300,14 +313,15 @@ _NUMBER_PERSON_ENDINGS_IMP = {
 def _get_active_forms(inflected, mood, tense, number, person):
     # generate verbs with case/number endings
 
-    if mood == M_IND and tense == T_PRE and number == N_SG and person == P_3:
+    if mood in (M_IND, M_POT) and tense == T_PRE \
+    and number == N_SG and person == P_3:
         # lengthen final vowel if possible
         yield from (
             i + i[-1] if _LONG_FINAL_VOWEL.search(i) is None else i
             for i in inflected
         )
-    elif mood in (M_IND, M_CON) and tense in (T_PRE, T_PST):
-        ending = _NUMBER_PERSON_ENDINGS_IND_CON[(number, person)]
+    elif mood in (M_IND, M_CON, M_POT) and tense in (T_PRE, T_PST):
+        ending = _NUMBER_PERSON_ENDINGS_IND_CON_POT[(number, person)]
         yield from (set_vowel_frontness(i + ending) for i in inflected)
     elif mood == M_IMP and tense == T_PRE:
         ending = _NUMBER_PERSON_ENDINGS_IMP[(number, person)]
@@ -343,22 +357,27 @@ def conjugate_verb_specific(
     assert (tense == T_PER) == (person is None)
     assert mood != M_IMP or number != N_SG or person != P_1
 
-    if verb == "olla" and mood == M_IND and tense == T_PRE and voice == V_ACT \
-    and person == P_3:
-        yield "on" if number == N_SG else "ovat"
-        return
+    if verb == "olla" and tense == T_PRE and voice == V_ACT:
+        if mood == M_IND and person == P_3:
+            # return irregular form
+            yield "on" if number == N_SG else "ovat"
+            return
+        if mood == M_POT:
+            # conjugate like another, juoda-type verb
+            verb = "liedä"
+            conj = 64
 
     if mood in (M_IND, M_CON) \
-    or mood == M_IMP and number == N_SG and person == P_2:
+    or (mood == M_IMP and number == N_SG and person == P_2):
         if conj == 68:
-            # tupakoida: recursively get the variant "tupakoitsea", a
-            # conjugation 58 (lukea) verb; also proceed with current verb
+            # tupakoida: recursively get the lukea-type variant "tupakoitsea";
+            # also proceed with current verb
             yield from conjugate_verb_specific(
                 re.sub("d([aä])$", r"tse\1", verb),
                 58, consGrad, mood, tense, voice, number, person
             )
         elif conj == 71:
-            # nähdä: conjugate like "näkeä", a conjugation 58 (lukea) verb
+            # nähdä: conjugate like a lukea-type verb
             verb = re.sub("hdä$", "keä", verb)
             conj = 58
             consGrad = True
@@ -388,6 +407,8 @@ def conjugate_verb_specific(
         inflected = tuple(i + "i" for i in inflected)
     elif mood == M_CON and tense == T_PRE and voice == V_ACT:
         inflected = tuple(i + "isi" for i in inflected)
+    elif mood == M_POT and tense == T_PRE and voice == V_ACT:
+        inflected = tuple(_append_pot_suffix(i) for i in inflected)
 
     #print(f"{inflected=} {conj=} {consGrad=}")
 
@@ -464,6 +485,13 @@ ALL_FORMS = (
     (M_CON, T_PRE, V_ACT, N_PL, P_1),
     (M_CON, T_PRE, V_ACT, N_PL, P_2),
     (M_CON, T_PRE, V_ACT, N_PL, P_3),
+
+    (M_POT, T_PRE, V_ACT, N_SG, P_1),
+    (M_POT, T_PRE, V_ACT, N_SG, P_2),
+    (M_POT, T_PRE, V_ACT, N_SG, P_3),
+    (M_POT, T_PRE, V_ACT, N_PL, P_1),
+    (M_POT, T_PRE, V_ACT, N_PL, P_2),
+    (M_POT, T_PRE, V_ACT, N_PL, P_3),
 
     (M_IMP, T_PRE, V_ACT, N_SG, P_2),
     (M_IMP, T_PRE, V_ACT, N_SG, P_3),

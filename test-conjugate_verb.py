@@ -18,6 +18,9 @@ FORMS = (
     (M_CON, T_PRE, V_ACT, N_SG, P_3),
     (M_CON, T_PRE, V_ACT, N_PL, P_1),
 
+    (M_POT, T_PRE, V_ACT, N_SG, P_3),
+    (M_POT, T_PRE, V_ACT, N_PL, P_1),
+
     (M_IMP, T_PRE, V_ACT, N_SG, P_2),
     (M_IMP, T_PRE, V_ACT, N_SG, P_3),
     (M_IMP, T_PRE, V_ACT, N_PL, P_1),
