@@ -6,6 +6,7 @@ from noundecl import get_declensions
 
 # - C = any consonant, V = any vowel, A = a/ä, O = o/ö, U = u/y
 # - declensions (1-49) are from Kotus
+# TODO: do consonant gradation before changing endings?
 
 # -----------------------------------------------------------------------------
 
@@ -43,33 +44,45 @@ ITEM_NAMES = {
 }
 
 # combinations of case/number by which one they behave like
-_CASES_LIKE_GEN_SG = frozenset((
-    (C_NOM, N_PL),  # padat
-    (C_GEN, N_SG),  # padan
-    (C_TRA, N_SG),  # padaksi
-    (C_INE, N_SG),  # padassa
-    (C_ELA, N_SG),  # padasta
-    (C_ADE, N_SG),  # padalla
-    (C_ABL, N_SG),  # padalta
-    (C_ALL, N_SG),  # padalle
-    (C_ABE, N_SG),  # padatta
+# TODO: describe how exactly
+_CASES_LIKE_GEN_SG = frozenset((  # e.g. pata:pada-
+    (C_NOM, N_PL),
+    (C_GEN, N_SG),
+    (C_TRA, N_SG),
+    (C_INE, N_SG),
+    (C_ELA, N_SG),
+    (C_ADE, N_SG),
+    (C_ABL, N_SG),
+    (C_ALL, N_SG),
+    (C_ABE, N_SG),
 ))
-_CASES_LIKE_INE_PL = frozenset((
-    (C_TRA, N_PL),  # padoiksi
-    (C_INE, N_PL),  # padoissa
-    (C_ELA, N_PL),  # padoista
-    (C_ADE, N_PL),  # padoilla
-    (C_ABL, N_PL),  # padoilta
-    (C_ALL, N_PL),  # padoille
-    (C_ABE, N_PL),  # padoitta
-    (C_INS, N_PL),  # padoin
+_CASES_LIKE_INE_PL = frozenset((  # e.g. pata:pado-
+    (C_TRA, N_PL),
+    (C_INE, N_PL),
+    (C_ELA, N_PL),
+    (C_ADE, N_PL),
+    (C_ABL, N_PL),
+    (C_ALL, N_PL),
+    (C_ABE, N_PL),
+    (C_INS, N_PL),
 ))
-_CASES_LIKE_PAR_PL = frozenset((
-    (C_ESS, N_PL),  # patoina
-    (C_PAR, N_PL),  # patoja
-    (C_ILL, N_PL),  # patoihin
+_CASES_LIKE_PAR_PL = frozenset((  # e.g. pata:pato-
+    (C_PAR, N_PL),
+    (C_ESS, N_PL),
+    (C_ILL, N_PL),
 ))
-# not listed above: EssSg, ParSg, IllSg, GenPl
+# not listed above:
+# - genitive plural (e.g. pata:patojen)
+# - partitive singular (e.g. pata:pataa)
+# - essive singular (e.g. pata:patana)
+# - illative singular (e.g. pata:pataan)
+
+# -----------------------------------------------------------------------------
+
+# cases/numbers whose ending changes like genitive singular / inessive plural
+# (genitive plural and partitive singular belong to neither)
+_CASES_END_CHG_GEN_SG = _CASES_LIKE_GEN_SG | {(C_ESS, N_SG), (C_ILL, N_SG)}
+_CASES_END_CHG_INE_PL = _CASES_LIKE_INE_PL | _CASES_LIKE_PAR_PL
 
 # rules for changing endings of words
 # - format: declension: ((regex_from, regex_to), ...)
@@ -78,15 +91,15 @@ _CASES_LIKE_PAR_PL = frozenset((
 # - consonant gradation and case/number endings will be applied afterwards
 # - for clarity, avoid making changes here that need to be undone later
 
-_CHANGES_SINGULAR_COMMON = {  # a temporary dict
+_CHANGES_GEN_SG_PAR_SG = {  # a temporary dict
     5:  (("([^aeiouyäö])", r"\1i"),),   # risti, rock
     6:  (("([^aeiouyäö])", r"\1i"),),   # paperi, nylon
     7:  (("i",             "e"),),      # ovi
     10: (("n",             ""),),       # koira, kahdeksan
     16: (("^([^aou]+)i", r"\1ä"), ("i", "a")),  # vanhempi
 }
-_CHANGES_GEN_SG = _CHANGES_SINGULAR_COMMON | {
-    # also _CASES_LIKE_GEN_SG, EssSg, IllSg
+_CHANGES_GEN_SG = _CHANGES_GEN_SG_PAR_SG | {
+    # for _CASES_END_CHG_GEN_SG
     23: (("i",             "e"),),      # tiili
     24: (("i",             "e"),),      # uni
     25: (("i",             "e"),),      # toimi
@@ -115,7 +128,8 @@ _CHANGES_GEN_SG = _CHANGES_SINGULAR_COMMON | {
     48: (("([aeiouyäö])",  r"\1\1"),),  # hame
     49: (("",              "e"),),      # askel, askele
 }
-_CHANGES_PAR_SG = _CHANGES_SINGULAR_COMMON | {
+_CHANGES_PAR_SG = _CHANGES_GEN_SG_PAR_SG | {
+    # partitive singular
     23: (("i",      ""),),   # tiili
     24: (("i",      ""),),   # uni
     25: (("i",      ""),),   # toimi
@@ -130,9 +144,9 @@ _CHANGES_PAR_SG = _CHANGES_SINGULAR_COMMON | {
     40: (("s",      "t"),),  # kalleus
     45: (("s",      "t"),),  # kahdeksas
 }
-del _CHANGES_SINGULAR_COMMON
+del _CHANGES_GEN_SG_PAR_SG
 
-_CHANGES_PLURAL_COMMON = {  # a temporary dict
+_CHANGES_GEN_PL_INE_PL = {  # a temporary dict
     7:  (("i",          ""),),     # ovi
     9:  (("a", "o"), ("ä", "ö")),  # kala
     10: (("[aä]n?",     ""),),     # koira, kahdeksan
@@ -164,12 +178,13 @@ _CHANGES_PLURAL_COMMON = {  # a temporary dict
     45: (("s",          "ns"),),   # kahdeksas
     47: (("[uy]t",      "e"),),    # kuollut
 }
-_CHANGES_GEN_PL = _CHANGES_PLURAL_COMMON | {
+_CHANGES_GEN_PL = _CHANGES_GEN_PL_INE_PL | {
+    # genitive plural
     5:  (("i", ""),),  # risti, rock
     6:  (("i", ""),),  # paperi, nylon
 }
-_CHANGES_PAR_PL = _CHANGES_PLURAL_COMMON | {
-    # also _CASES_LIKE_PAR_PL, _CASES_LIKE_INE_PL
+_CHANGES_INE_PL = _CHANGES_GEN_PL_INE_PL | {
+    # for _CASES_END_CHG_INE_PL
     5:  (("i", "e"), ("([^aeiouyäö])", r"\1e")),  # risti, rock
     6:  (("i", "e"), ("([^aeiouyäö])", r"\1e")),  # paperi, nylon
     33: (("n", "m"),),   # kytkin
@@ -180,7 +195,7 @@ _CHANGES_PAR_PL = _CHANGES_PLURAL_COMMON | {
     42: (("s", "h"),),   # mies
     46: (("t", "ns"),),  # tuhat
 }
-del _CHANGES_PLURAL_COMMON
+del _CHANGES_GEN_PL_INE_PL
 
 def _change_ending(word, decl, case, number):
     # change the ending of the word (before applying consonant gradation or
@@ -193,16 +208,14 @@ def _change_ending(word, decl, case, number):
         word = "velji"
 
     # get regexes to apply
-    if (case, number) in _CASES_LIKE_GEN_SG \
-    or case in (C_ESS, C_ILL) and number == N_SG:
+    if (case, number) in _CASES_END_CHG_GEN_SG:
         changes = _CHANGES_GEN_SG.get(decl, ())
-    elif case == C_PAR and number == N_SG:
-        changes = _CHANGES_PAR_SG.get(decl, ())
+    elif (case, number) in _CASES_END_CHG_INE_PL:
+        changes = _CHANGES_INE_PL.get(decl, ())
     elif case == C_GEN and number == N_PL:
         changes = _CHANGES_GEN_PL.get(decl, ())
-    elif (case, number) in _CASES_LIKE_INE_PL \
-    or (case, number) in _CASES_LIKE_PAR_PL:
-        changes = _CHANGES_PAR_PL.get(decl, ())
+    elif case == C_PAR and number == N_SG:
+        changes = _CHANGES_PAR_SG.get(decl, ())
     else:
         sys.exit("error")
 
@@ -214,6 +227,12 @@ def _change_ending(word, decl, case, number):
     return word
 
 # -----------------------------------------------------------------------------
+
+# cases/numbers whose consonant gradation happens like genitive singular /
+# partitive plural
+# (genitive plural and partitive singular belong to neither)
+_CASES_CONS_GRAD_GEN_SG = _CASES_LIKE_GEN_SG | _CASES_LIKE_INE_PL
+_CASES_CONS_GRAD_PAR_PL = _CASES_LIKE_PAR_PL | {(C_ESS, N_SG), (C_ILL, N_SG)}
 
 # rules for consonant gradation
 # - format: (regex_from, regex_to)
@@ -289,15 +308,29 @@ def _consonant_gradation(word, strengthen=False):
             return re.sub(reFrom, reTo, word)
     return word
 
-# apply consonant gradation whenever possible in these cases/numbers, ignoring
-# source data
-_DECL_GEN_SG_ALWAYS_WEAKEN = frozenset((
+# declensions in which consonant gradation can happen
+_DECL_WEAKEN = frozenset((
+    # strong to weak in _CASES_CONS_GRAD_GEN_SG, if indicated by source data
+    # valo, laatikko, risti, ovi, nalle, kala, koira, solakka, vanhempi
+    1, 4, 5, 7, 8, 9, 10, 14, 16
+))
+_DECL_ALWAYS_WEAKEN = frozenset((
+    # strong to weak in _CASES_CONS_GRAD_GEN_SG, regardless of source data
     27, 28, 31, 40, 45, 46  # käsi, kynsi, kaksi, kalleus, kahdeksas, tuhat
 ))
-_DECL_ESS_SG_ALWAYS_STRENGTHEN = frozenset((36, 37))  # sisin, vasen
+_DECL_STRENGTHEN = frozenset((
+    # weak to strong in _CASES_CONS_GRAD_GEN_SG and _CASES_CONS_GRAD_PAR_PL,
+    # if indicated by source data
+    # sisar, kytkin, onneton, lämmin, vieras, ohut, hame, askel
+    32, 33, 34, 35, 41, 43, 48, 49
+))
+_DECL_ALWAYS_STRENGTHEN = frozenset((
+    # weak to strong in _CASES_CONS_GRAD_PAR_PL, regardless of source data
+    36, 37  # sisin, vasen
+))
 
-# words with optional consonant gradation in _CASES_LIKE_GEN_SG
-_OPTIONAL_CONS_GRAD_GEN_SG = frozenset((
+# words with optional consonant gradation in _CASES_CONS_GRAD_GEN_SG
+_WORDS_OPT_CONS_GRAD_GEN_SG = frozenset((
     "bourette",
     "haiku", "huti",
     "koto", "kuti",
@@ -316,20 +349,20 @@ def _consonant_gradation_main(word, inflected, decl, consGrad, case, number):
     # apply consonant gradation to the word (before appending case/number
     # endings)
 
-    if (case, number) in _CASES_LIKE_GEN_SG \
-    or (case, number) in _CASES_LIKE_INE_PL:
-        if word in _OPTIONAL_CONS_GRAD_GEN_SG:
+    if (case, number) in _CASES_CONS_GRAD_GEN_SG:
+        if word in _WORDS_OPT_CONS_GRAD_GEN_SG:
             return inflected  # not yet
-        elif consGrad and decl <= 16 or decl in _DECL_GEN_SG_ALWAYS_WEAKEN:
+        elif consGrad and decl in _DECL_WEAKEN or decl in _DECL_ALWAYS_WEAKEN:
             if word == "koko" and (case, number) in _CASES_LIKE_INE_PL:
                 return "ko'o"
-            elif word == "pop":
+            if word == "pop":
                 return inflected
             return _consonant_gradation(inflected)
-        elif consGrad and decl >= 32:
+        elif consGrad and decl in _DECL_STRENGTHEN:
             return _consonant_gradation(inflected, True)
-    elif (case, number) in _CASES_LIKE_PAR_PL or case in (C_ESS, C_ILL):
-        if consGrad and decl >= 32 or decl in _DECL_ESS_SG_ALWAYS_STRENGTHEN:
+    elif (case, number) in _CASES_CONS_GRAD_PAR_PL:
+        if consGrad and decl in _DECL_STRENGTHEN \
+        or decl in _DECL_ALWAYS_STRENGTHEN:
             return _consonant_gradation(inflected, True)
     elif case == C_GEN and number == N_PL:
         if consGrad and decl == 35:  # lämmin
@@ -337,27 +370,23 @@ def _consonant_gradation_main(word, inflected, decl, consGrad, case, number):
 
     return inflected  # no consonant gradation
 
-# -----------------------------------------------------------------------------
-
 def _get_word_variant(word, inflected, decl, case, number):
     # return a variant of inflected word or None
 
     # a variant with/without consonant gradation
-    if word in _OPTIONAL_CONS_GRAD_GEN_SG and (
-        (case, number) in _CASES_LIKE_GEN_SG
-        or (case, number) in _CASES_LIKE_INE_PL
-    ):
+    if word in _WORDS_OPT_CONS_GRAD_GEN_SG \
+    and (case, number) in _CASES_CONS_GRAD_GEN_SG:
         return _consonant_gradation(inflected)
     elif word in ("häive", "viive"):
         if not (case == C_PAR and number == N_SG):
             return _consonant_gradation(inflected, True)
     elif word == "pop":
-        if (case, number) in _CASES_LIKE_PAR_PL:
-            return "poppe"
-        if case in (C_ESS, C_PAR, C_ILL):
-            return "poppi"
         if case == C_GEN and number == N_PL:
             return "popp"
+        if (case, number) in _CASES_LIKE_PAR_PL:
+            return "poppe"
+        if case in (C_PAR, C_ESS, C_ILL) and number == N_SG:
+            return "poppi"
     elif decl in (4, 14):  # laatikko, solakka
         if case in (C_ESS, C_ILL) and number == N_PL:
             return _consonant_gradation(inflected)
@@ -399,28 +428,24 @@ def _get_a_or_auml(word, decl, parSg=False):
     return ("ä",)
 
 # cases/numbers with only one possible ending
-# (all except GenPl, ParSg, ParPl, IllSg, IllPl)
+# (all except genitive plural, partitive, illative)
 _SIMPLE_ENDINGS = {
     (C_NOM, N_PL): "t",
     (C_GEN, N_SG): "n",
-    (C_ESS, N_SG): "nA",
-    (C_ESS, N_PL): "inA",
-    (C_TRA, N_SG): "ksi",
-    (C_TRA, N_PL): "iksi",
-    (C_INE, N_SG): "ssA",
-    (C_INE, N_PL): "issA",
-    (C_ELA, N_SG): "stA",
-    (C_ELA, N_PL): "istA",
-    (C_ADE, N_SG): "llA",
-    (C_ADE, N_PL): "illA",
-    (C_ABL, N_SG): "ltA",
-    (C_ABL, N_PL): "iltA",
-    (C_ALL, N_SG): "lle",
-    (C_ALL, N_PL): "ille",
-    (C_ABE, N_SG): "ttA",
-    (C_ABE, N_PL): "ittA",
+    (C_ESS, N_SG): "nA",  (C_ESS, N_PL): "inA",
+    (C_TRA, N_SG): "ksi", (C_TRA, N_PL): "iksi",
+    (C_INE, N_SG): "ssA", (C_INE, N_PL): "issA",
+    (C_ELA, N_SG): "stA", (C_ELA, N_PL): "istA",
+    (C_ADE, N_SG): "llA", (C_ADE, N_PL): "illA",
+    (C_ABL, N_SG): "ltA", (C_ABL, N_PL): "iltA",
+    (C_ALL, N_SG): "lle", (C_ALL, N_PL): "ille",
+    (C_ABE, N_SG): "ttA", (C_ABE, N_PL): "ittA",
     (C_INS, N_PL): "in",
 }
+
+def _final_a_to_o(word):
+    # -A -> -O
+    return re.sub("a$", "o", re.sub("ä$", "ö", word))
 
 def _get_results_simple(word, infl, decl, case, number):
     # generate results for cases/numbers with only one possible ending
@@ -434,10 +459,7 @@ def _get_results_simple(word, infl, decl, case, number):
     if decl == 11 and \
     ((case, number) in _CASES_LIKE_INE_PL or case == C_ESS and number == N_PL):
         # omena
-        yield from (
-            re.sub("a$", "o", re.sub("ä$", "ö", i)) + e
-            for i in infl for e in endings
-        )
+        yield from (_final_a_to_o(i) + e for i in infl for e in endings)
         yield from (re.sub("[aä]$", "", i) + e for i in infl for e in endings)
     else:
         yield from (i + e for i in infl for e in endings)
@@ -572,9 +594,7 @@ def _get_results_gen_pl(word, infl, decl, consGrad):
     # -jen
     if decl in _DECL_GEN_PL_JEN:
         if decl == 11:  # omena
-            yield from (
-                re.sub("a$", "o", re.sub("ä$", "ö", i)) + "jen" for i in infl
-            )
+            yield from (_final_a_to_o(i) + "jen" for i in infl)
         else:
             yield from (i + "jen" for i in infl)
 
@@ -583,7 +603,7 @@ def _get_results_gen_pl(word, infl, decl, consGrad):
         if decl == 6:  # paperi
             infl2 = (i + "e" for i in infl)
         elif decl == 11:  # omena
-            infl2 = (re.sub("a$", "o", re.sub("ä$", "ö", i)) for i in infl)
+            infl2 = (_final_a_to_o(i) for i in infl)
         else:
             infl2 = infl
         #
@@ -643,8 +663,7 @@ def _get_results_par_pl(word, infl, decl, consGrad):
     if decl in _DECL_GEN_PL_JEN or decl in (5, 6):
         if decl == 11:  # omena
             yield from (
-                re.sub("a$", "o", re.sub("ä$", "ö", i)) + "j" + a
-                for i in infl for a in aOrAuml
+                _final_a_to_o(i) + "j" + a for i in infl for a in aOrAuml
             )
         else:
             yield from (i + "j" + a for i in infl for a in aOrAuml)
@@ -652,7 +671,7 @@ def _get_results_par_pl(word, infl, decl, consGrad):
     # -itA
     if decl in _DECL_GEN_PL_IDEN or isDecl49b:
         if decl == 11:  # omena
-            infl2 = (re.sub("a$", "o", re.sub("ä$", "ö", i)) for i in infl)
+            infl2 = (_final_a_to_o(i) for i in infl)
         elif consGrad and decl in (4, 14):  # laatikko, solakka
             infl2 = (_consonant_gradation(i) for i in infl)
         else:
@@ -690,9 +709,7 @@ def _get_results_ill_pl(word, infl, decl):
     # -ihin
     if decl in _DECL_ILL_PL_IHIN or isDecl49b:
         if decl == 11:  # omena
-            yield from (
-                re.sub("a$", "o", re.sub("ä$", "ö", i)) + "ihin" for i in infl
-            )
+            yield from (_final_a_to_o(i) + "ihin" for i in infl)
         else:
             yield from (i + "ihin" for i in infl)
 
@@ -710,31 +727,20 @@ def _get_results_ill_pl(word, infl, decl):
 # -----------------------------------------------------------------------------
 
 # all supported combinations of case and number
+# (all except instructive singular; conjugate_verb.py has a similar list)
 ALL_FORMS = (
-    (C_NOM, N_SG),
-    (C_NOM, N_PL),
-    (C_GEN, N_SG),
-    (C_GEN, N_PL),
-    (C_PAR, N_SG),
-    (C_PAR, N_PL),
-    (C_ESS, N_SG),
-    (C_ESS, N_PL),
-    (C_TRA, N_SG),
-    (C_TRA, N_PL),
-    (C_INE, N_SG),
-    (C_INE, N_PL),
-    (C_ELA, N_SG),
-    (C_ELA, N_PL),
-    (C_ILL, N_SG),
-    (C_ILL, N_PL),
-    (C_ADE, N_SG),
-    (C_ADE, N_PL),
-    (C_ABL, N_SG),
-    (C_ABL, N_PL),
-    (C_ALL, N_SG),
-    (C_ALL, N_PL),
-    (C_ABE, N_SG),
-    (C_ABE, N_PL),
+    (C_NOM, N_SG), (C_NOM, N_PL),
+    (C_GEN, N_SG), (C_GEN, N_PL),
+    (C_PAR, N_SG), (C_PAR, N_PL),
+    (C_ESS, N_SG), (C_ESS, N_PL),
+    (C_TRA, N_SG), (C_TRA, N_PL),
+    (C_INE, N_SG), (C_INE, N_PL),
+    (C_ELA, N_SG), (C_ELA, N_PL),
+    (C_ILL, N_SG), (C_ILL, N_PL),
+    (C_ADE, N_SG), (C_ADE, N_PL),
+    (C_ABL, N_SG), (C_ABL, N_PL),
+    (C_ALL, N_SG), (C_ALL, N_PL),
+    (C_ABE, N_SG), (C_ABE, N_PL),
     (C_INS, N_PL),
 )
 

@@ -1,32 +1,9 @@
 """Test conjugate_verb.py by comparing the output to test files."""
 
 import os, sys
-from conjugate_verb import *
+from conjugate_verb import ALL_FORMS, ITEM_NAMES, conjugate_verb
 
 TEST_DIR = "conjugate_verb-tests"  # read test files from here
-
-# verb forms to test
-FORMS = (
-    # mood, tense, voice, number/None, person/None
-    (M_IND, T_PRE, V_ACT, N_SG, P_1),
-    (M_IND, T_PRE, V_ACT, N_SG, P_3),
-    (M_IND, T_PRE, V_ACT, N_PL, P_3),
-    (M_IND, T_PST, V_ACT, N_SG, P_1),
-    (M_IND, T_PST, V_ACT, N_SG, P_3),
-    (M_IND, T_PST, V_ACT, N_PL, P_3),
-
-    (M_CON, T_PRE, V_ACT, N_SG, P_3),
-    (M_CON, T_PRE, V_ACT, N_PL, P_1),
-
-    (M_POT, T_PRE, V_ACT, N_SG, P_3),
-    (M_POT, T_PRE, V_ACT, N_PL, P_1),
-
-    (M_IMP, T_PRE, V_ACT, N_SG, P_2),
-    (M_IMP, T_PRE, V_ACT, N_SG, P_3),
-    (M_IMP, T_PRE, V_ACT, N_PL, P_1),
-    (M_IMP, T_PRE, V_ACT, N_PL, P_2),
-    (M_IMP, T_PRE, V_ACT, N_PL, P_3),
-)
 
 def format_test_name(verbForm):
     # verbForm: a tuple from FORMS
@@ -41,6 +18,10 @@ def read_csv(verbForm):
 
     filename = format_test_name(verbForm) + ".csv"
     path = os.path.join(TEST_DIR, filename)
+    if not os.path.isfile(path):
+        print(f"Warning: {filename} not found, skipping", file=sys.stderr)
+        return {}
+
     verbs = {}
 
     with open(path, "rt", encoding="utf8") as handle:
@@ -55,31 +36,39 @@ def read_csv(verbForm):
     return verbs
 
 def run_test(verbForm):
-    # Run a test. Return number of verbs tested.
-    # verbForm: a tuple from FORMS
+    # run a test
+    # verbForm: a tuple from ALL_FORMS
+    # return: (verb_count, error_count)
 
     verbs = read_csv(verbForm)  # {NomSg: (inflected, ...), ...}
+    errorCnt = 0
 
     for verb in verbs:
         result = tuple(sorted(conjugate_verb(verb, *verbForm)))
         if result != verbs[verb]:
-            sys.exit(
-                format_test_name(verbForm) + " of "
-                + verb + ": expected " + "/".join(verbs[verb]) + ", got "
-                + "/".join(result)
+            print(
+                f"Error: {format_test_name(verbForm)} of '{verb}': "
+                "expected '" + "/".join(verbs[verb]) + "', got '"
+                + "/".join(result) + "'",
+                file=sys.stderr
             )
+            errorCnt += 1
 
-    return len(verbs)
+    return (len(verbs), errorCnt)
 
 def main():
     print("Testing conjugate_verb.py...")
+    totalVerbCnt = totalErrorCnt = 0
 
-    for verbForm in FORMS:
-        verbCnt = run_test(verbForm)
-        print(
-            format_test_name(verbForm) + f" test passed ({verbCnt:3} verbs)."
-        )
+    for verbForm in ALL_FORMS:
+        (verbCnt, errorCnt) = run_test(verbForm)
+        totalVerbCnt += verbCnt
+        totalErrorCnt += errorCnt
 
-    print("All tests passed.")
+    print(
+        f"Tested {len(ALL_FORMS)} verb form(s) (except if file not found) "
+        f"and {totalVerbCnt} verb(s)."
+    )
+    print(f"Detected {totalErrorCnt} error(s).")
 
 main()
