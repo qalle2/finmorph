@@ -3,6 +3,7 @@
 import os, sys
 from decline_noun \
 import ALL_FORMS, C_NOM, C_GEN, ITEM_NAMES, N_SG, decline_noun
+from noundecl import get_declensions
 
 TEST_DIR = "decline_noun-tests"  # read test files from here
 
@@ -48,10 +49,11 @@ def run_test(case, number):
         result = tuple(sorted(decline_noun(word, case, number)))
         if result != words[word]:
             print(
-                f"Error: {ITEM_NAMES[case]}-{ITEM_NAMES[number]} of '{word}': "
-                "expected '" + "/".join(words[word]) + "', got '"
-                + "/".join(result) + "'",
-                file=sys.stderr
+                f"Error: {ITEM_NAMES[case]}-{ITEM_NAMES[number]} of "
+                f"'{word}' ("
+                + "/".join(str(d) for d in get_declensions(word))
+                + "): expected '" + "/".join(words[word]) + "', got '"
+                + "/".join(result) + "'"
             )
             errorCnt += 1
 
