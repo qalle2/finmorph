@@ -265,9 +265,6 @@ Test `splitcomp.py` against known single words and compounds.
 
 Requires `generated-lists/words.csv` which can be generated with `extract.sh`.
 
-### validate-compounds.py
-Validate `compounds.txt` and `generated-lists/words.csv`.
-
 ## Programs even less interesting to the end user
 
 These are only meant to be used by `extract.sh`.
@@ -318,7 +315,7 @@ ending. Argument: CSV file with words (no compounds).
 ## Text files
 
 ### compounds.txt
-A list of compounds on the Kotus word list.
+A list of compounds on the Kotus word list. Creating this list involved a lot of manual work.
 
 Notes:
 * One compound per line.
