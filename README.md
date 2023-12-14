@@ -338,11 +338,6 @@ Notes:
   * e.g. `all stars -_joukkue` becomes `all stars` and `joukkue`
 * The GPLv3 license does not apply to this file (I think) because it is largely based on the Kotus wordlist.
 
-### nonfinals.txt
-Uninflected words that only occur as non-final parts of compounds, not finally
-or alone. E.g. `hassel` (as in `hasselpähkinä`) but not `hevos`, `pään` or
-`pää`. Under construction (vowel-final words still missing).
-
 ### partial-homonyms.txt
 A list of partially homonymous inflected nouns and verbs. Automatically
 generated with `find-partial-homonyms.py`.
