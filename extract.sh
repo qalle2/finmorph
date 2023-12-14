@@ -58,6 +58,5 @@ python3 compositives.py compounds.txt generated-lists/words.csv | sort \
 echo "generated-lists/:"
 ls -l generated-lists/
 
-echo "Writing stats-*.txt..."
-python3 stats-compound.py compounds.txt > stats-compound.txt
+echo "Writing stats-nounverb.txt..."
 python3 stats-nounverb.py generated-lists/words.csv > stats-nounverb.txt

@@ -244,8 +244,7 @@ Creates the subdirectory `generated-lists/` and generates these files under it:
 * `nonfinals.txt`: words that occur as non-final parts of compounds (not finally but possibly alone) (~5,300 words)
 * `compositives.txt`: words that occur as non-final parts of compounds (not finally or alone) (~2,900 words)
 
-Also generates `stats-compound.txt` and `stats-nounverb.txt` under the current
-directory (see [text files](#text-files)).
+Also generates `stats-nounverb.txt` under the current directory (see [text files](#text-files)).
 
 ### test-conjugate_verb.py
 Test `conjugate_verb.py`. No arguments.
@@ -312,10 +311,6 @@ Argument: compound list file
 Print words that only occur as non-final parts of compounds (not final or
 alone). Arguments: compound list file, word CSV file
 
-### stats-compound.py
-Print a table of compound counts by number of parts and number of letters.
-Argument: compound list file.
-
 ### stats-nounverb.py
 Print a table of noun/verb counts by declension/conjugation, syllable count and
 ending. Argument: CSV file with words (no compounds).
@@ -362,10 +357,6 @@ Notes:
 * Two fields on each line: a word in plural and its singular form (e.g. `sakset,saksi`).
 * No compounds (e.g. `seppeleensitojaiset`).
 * Includes words that only occur as the final part of a compound, not alone (e.g. `sitojaiset`).
-
-### stats-compound.txt
-A table of compound counts by number of parts and number of letters.
-Automatically generated.
 
 ### stats-nounverb.txt
 A table of noun/verb counts by declension/conjugation, syllable count and
