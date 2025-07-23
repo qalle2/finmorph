@@ -1,4 +1,6 @@
 # finmorph
+*This project has been moved to [Codeberg](https://codeberg.org/qalle/finmorph). This version will no longer be updated.*
+
 Tools regarding the morphology of the Finnish language.
 
 I have used [the Finnish wordlist by Kotus](https://kaino.kotus.fi/sanat/nykysuomi/) when creating the programs.
